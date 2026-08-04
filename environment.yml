@@ -1,0 +1,16 @@
+name: bc
+channels:
+  - conda-forge
+dependencies:
+  - matplotlib
+  - numpy
+  - openpyxl
+  - pandas
+  - pip
+  - pyarrow
+  - python=3.11
+  - scikit-learn
+  - scipy
+  - statsmodels
+
+prefix: "/home/aljaroaa/micromamba/envs/bc"
