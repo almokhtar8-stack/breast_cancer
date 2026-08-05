@@ -282,3 +282,48 @@ This amendment is being documented now, after the first label build,
 because the correction itself was not added to this document at the time
 it was discovered and implemented — it is recorded here for an accurate
 paper trail, not as a claim that this amendment predates the first result.
+
+**Amendment 2026-08-05 (Phase 2 data audit, written before any Phase 2
+result is calculated):** a read-only audit of the two feature-source
+datasets named in §6 (GSE118713, GSE111151) found the following, which
+governs how Phase 2A prepares these files:
+
+- GSE118713 is transcript-level TPM, not gene-level expression, despite
+  §6's summary description. Gene-level TPM will be calculated separately
+  for each of the nine replicate columns (three replicates each for
+  MCF7, TAMR, FASR) by summing transcript TPM values that share the same
+  unversioned Ensembl gene ID. The file's supplied group-mean TPM columns
+  (`TAMR.mean.TPM`, `FASR.mean.TPM`, `MCF7.mean.TPM`) will not be used
+  for analysis — they average over replicates of a single transcript,
+  not over the transcripts of a gene, and are not a substitute for the
+  replicate-level gene-level sums above.
+- Unversioned Ensembl gene ID is the primary identifier for GSE118713.
+  Gene symbols are annotation only and must never be used to collapse or
+  aggregate rows, because a symbol can be shared by more than one Ensembl
+  gene ID. Ambiguous gene-ID-to-symbol mappings (more than one distinct
+  nonblank symbol observed for one gene ID) or missing mappings (zero
+  valid symbols observed) are reported as flags, not silently resolved
+  by picking one symbol.
+- GSE111151 contains raw counts, published (uncorrected) log2 CPM, and a
+  separately batch-corrected log2 CPM in every one of its 11 sample
+  files, not counts alone as §6 states. Published uncorrected `CPM
+  (log2)` is the primary expression value used for the cell-line-only
+  resistant-versus-parental comparisons this project makes. Raw counts
+  are retained for QC only (e.g. confirming per-sample library
+  composition), not as the prepared expression matrix. `CPM_batch
+  (log2)` will not be used: that column's batch correction was applied
+  by the original authors for integrating this cell-line dataset with a
+  separate patient-derived dataset, which is not part of this analysis,
+  and applying a correction fit for a different integration problem to
+  this cell-line-only comparison is not defensible.
+- GSE111151 has no biological replicates (n=1 per condition, as already
+  stated in §6). `Tam1` and `Tam2`, where both exist for a line, are
+  distinct resistant derivative clones of the same parental line, not
+  replicates of one derivative. Ordinary replicated differential-
+  expression testing across "replicates" remains prohibited for this
+  dataset, per §6's existing point-estimate caveat.
+
+This amendment records the audit's findings and the preparation rules
+they imply. It is written before Phase 2A calculates any gene-level
+table, and before any differential-expression, pathway, or modelling
+step on these two datasets is run.

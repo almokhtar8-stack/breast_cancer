@@ -1,0 +1,12 @@
+gsm	sample_id	parental_line	status	derivative_id	paired_parental_sample_id
+GSM3024053	MCF-7	MCF-7	parental		
+GSM3024054	MCF-7_Tam1	MCF-7	resistant	Tam1	MCF-7
+GSM3024055	T-47D	T-47D	parental		
+GSM3024056	T-47D_Tam1	T-47D	resistant	Tam1	T-47D
+GSM3024057	T-47D_Tam2	T-47D	resistant	Tam2	T-47D
+GSM3024058	ZR-75-1	ZR-75-1	parental		
+GSM3024059	ZR-75-1_Tam1	ZR-75-1	resistant	Tam1	ZR-75-1
+GSM3024060	ZR-75-1_Tam2	ZR-75-1	resistant	Tam2	ZR-75-1
+GSM3024061	BT-474	BT-474	parental		
+GSM3024062	BT-474_Tam1	BT-474	resistant	Tam1	BT-474
+GSM3024063	BT-474_Tam2	BT-474	resistant	Tam2	BT-474

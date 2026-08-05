@@ -26,3 +26,11 @@ restores sensitivity.
 the rest of `data/processed/*` (gitignored). It is the frozen per-gene
 label table that every downstream analysis reads from, so its history
 needs to be reviewable the same way code is.
+
+`data/processed/gse118713_gene_tpm.parquet` and
+`data/processed/gse111151_log2cpm.parquet` are likewise force-added. They
+are the frozen, checksum-verified gene-level expression matrices (see
+`results/tables/gse118713_preparation_qc.tsv` and
+`results/tables/gse111151_preparation_qc.tsv` for provenance) that every
+downstream Phase 2 analysis reads from, so they need the same reviewable
+history as the labels.

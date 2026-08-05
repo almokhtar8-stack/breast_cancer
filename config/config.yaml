@@ -2,10 +2,59 @@ data:
   raw:
     hany_data_s1: /ibex/scratch/aljaroaa/tamoxifen-data/hany/add3685_Data_S1.txt
     ceg2_supplementary_archive: /ibex/scratch/aljaroaa/tamoxifen-data/ceg2/hart2017_g3_supplementary.zip
+    gse118713_transcript_tpm: /ibex/scratch/aljaroaa/tamoxifen-data/rnaseq/GSE118713_TRANSCRIPT_TAMR_FASR_MCF7_expression_data.tsv.gz
+    gse111151_sample_dir: /ibex/scratch/aljaroaa/tamoxifen-data/rnaseq/GSE111151
   reference:
     ceg2_gene_list: data/reference/hart2017_ceg2_684.tsv
   processed_dir: data/processed
   results_tables_dir: results/tables
+  qc_tables_dir: results/tables
+
+# GSE118713: MCF7 parental / TAMR / FASR, transcript-level TPM, n=3 per group.
+# See PREANALYSIS.md's 2026-08-05 Phase 2 data-audit amendment: gene-level
+# TPM is calculated by summing transcript TPM within each of these nine
+# replicate columns by unversioned Ensembl gene ID; the group-mean columns
+# below are never read as sample data.
+gse118713:
+  output:
+    gene_tpm_parquet: data/processed/gse118713_gene_tpm.parquet
+    sample_metadata_tsv: results/tables/gse118713_sample_metadata.tsv
+    qc_tsv: results/tables/gse118713_preparation_qc.tsv
+  samples:
+    - {column: Rep1.MCF7.TPM, sample_id: MCF7_Rep1, group: MCF7, replicate: 1}
+    - {column: Rep2.MCF7.TPM, sample_id: MCF7_Rep2, group: MCF7, replicate: 2}
+    - {column: Rep3.MCF7.TPM, sample_id: MCF7_Rep3, group: MCF7, replicate: 3}
+    - {column: Rep1.TAMR.TPM, sample_id: TAMR_Rep1, group: TAMR, replicate: 1}
+    - {column: Rep2.TAMR.TPM, sample_id: TAMR_Rep2, group: TAMR, replicate: 2}
+    - {column: Rep3.TAMR.TPM, sample_id: TAMR_Rep3, group: TAMR, replicate: 3}
+    - {column: Rep1.FASR.TPM, sample_id: FASR_Rep1, group: FASR, replicate: 1}
+    - {column: Rep2.FASR.TPM, sample_id: FASR_Rep2, group: FASR, replicate: 2}
+    - {column: Rep3.FASR.TPM, sample_id: FASR_Rep3, group: FASR, replicate: 3}
+  excluded_mean_columns: [MCF7.mean.TPM, TAMR.mean.TPM, FASR.mean.TPM]
+
+# GSE111151: 4 parental lines, 7 TamR derivatives, n=1 per sample (no
+# biological replicates). Tam1/Tam2 are distinct resistant derivative
+# clones of the same parental line, not replicates of one derivative -- see
+# PREANALYSIS.md's 2026-08-05 Phase 2 data-audit amendment. This table is
+# the single source of sample/pairing metadata; loader code must not
+# re-derive it from filenames.
+gse111151:
+  output:
+    log2cpm_parquet: data/processed/gse111151_log2cpm.parquet
+    sample_metadata_tsv: results/tables/gse111151_sample_metadata.tsv
+    qc_tsv: results/tables/gse111151_preparation_qc.tsv
+  samples:
+    - {gsm: GSM3024053, filename: GSM3024053_MCF-7.txt.gz, sample_id: MCF-7, parental_line: MCF-7, status: parental, derivative_id: null, paired_parental_sample_id: null}
+    - {gsm: GSM3024054, filename: GSM3024054_MCF-7_Tam1.txt.gz, sample_id: MCF-7_Tam1, parental_line: MCF-7, status: resistant, derivative_id: Tam1, paired_parental_sample_id: MCF-7}
+    - {gsm: GSM3024055, filename: GSM3024055_T-47D.txt.gz, sample_id: T-47D, parental_line: T-47D, status: parental, derivative_id: null, paired_parental_sample_id: null}
+    - {gsm: GSM3024056, filename: GSM3024056_T-47D_Tam1.txt.gz, sample_id: T-47D_Tam1, parental_line: T-47D, status: resistant, derivative_id: Tam1, paired_parental_sample_id: T-47D}
+    - {gsm: GSM3024057, filename: GSM3024057_T-47D_Tam2.txt.gz, sample_id: T-47D_Tam2, parental_line: T-47D, status: resistant, derivative_id: Tam2, paired_parental_sample_id: T-47D}
+    - {gsm: GSM3024058, filename: GSM3024058_ZR-75-1.txt.gz, sample_id: ZR-75-1, parental_line: ZR-75-1, status: parental, derivative_id: null, paired_parental_sample_id: null}
+    - {gsm: GSM3024059, filename: GSM3024059_ZR-75-1_Tam1.txt.gz, sample_id: ZR-75-1_Tam1, parental_line: ZR-75-1, status: resistant, derivative_id: Tam1, paired_parental_sample_id: ZR-75-1}
+    - {gsm: GSM3024060, filename: GSM3024060_ZR-75-1_Tam2.txt.gz, sample_id: ZR-75-1_Tam2, parental_line: ZR-75-1, status: resistant, derivative_id: Tam2, paired_parental_sample_id: ZR-75-1}
+    - {gsm: GSM3024061, filename: GSM3024061_BT-474.txt.gz, sample_id: BT-474, parental_line: BT-474, status: parental, derivative_id: null, paired_parental_sample_id: null}
+    - {gsm: GSM3024062, filename: GSM3024062_BT-474_Tam1.txt.gz, sample_id: BT-474_Tam1, parental_line: BT-474, status: resistant, derivative_id: Tam1, paired_parental_sample_id: BT-474}
+    - {gsm: GSM3024063, filename: GSM3024063_BT-474_Tam2.txt.gz, sample_id: BT-474_Tam2, parental_line: BT-474, status: resistant, derivative_id: Tam2, paired_parental_sample_id: BT-474}
 
 gate1:
   labels_path: data/processed/labels.parquet
