@@ -1,7 +1,9 @@
 name: bc
 channels:
   - conda-forge
+  - bioconda
 dependencies:
+  - bioconductor-limma=3.66.0
   - matplotlib
   - numpy
   - openpyxl
@@ -11,6 +13,8 @@ dependencies:
   - python=3.11
   - pytest
   - pyyaml
+  - r-base=4.5.3
+  - r-statmod=1.5.2
   - scikit-learn
   - scipy
   - statsmodels
