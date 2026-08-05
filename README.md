@@ -34,3 +34,9 @@ are the frozen, checksum-verified gene-level expression matrices (see
 `results/tables/gse111151_preparation_qc.tsv` for provenance) that every
 downstream Phase 2 analysis reads from, so they need the same reviewable
 history as the labels.
+
+`data/processed/gse118713_gene_tpm_filtered.tsv.gz` is also force-added.
+It is frozen because it is the exact statistical input used for the
+committed Phase 2B limma analysis (see
+`results/tables/gse118713_expression_filtering.tsv` for the filtering
+record and gene counts that produced it).

@@ -327,3 +327,39 @@ This amendment records the audit's findings and the preparation rules
 they imply. It is written before Phase 2A calculates any gene-level
 table, and before any differential-expression, pathway, or modelling
 step on these two datasets is run.
+
+**Amendment 2026-08-05 (Phase 2B statistical plan for GSE118713, written
+before any Phase 2B result is calculated):** GSE118713 (frozen at
+`data/processed/gse118713_gene_tpm.parquet`, per the Phase 2 data-audit
+amendment above) contains gene-level TPM, not counts. The following plan
+governs its differential-expression analysis:
+
+- Values are transformed as `log2(TPM + 1)`. No count-based normalisation
+  or dispersion model is applicable to TPM, so DESeq2 and edgeR will not
+  be used anywhere in this analysis.
+- Genes are retained if TPM >= 1 in at least 3 of the 9 samples; all
+  other genes are dropped before modelling.
+- The three groups are MCF7, TAMR and FASR, with 3 replicates each.
+  Replicate numbers (Rep1/Rep2/Rep3) are not matched blocks across
+  groups -- this is an unpaired three-group design, not a paired or
+  blocked one.
+- No sample will be removed on the basis of PCA or clustering alone;
+  QC is descriptive only at this stage.
+- Differential expression uses limma linear models with
+  empirical-Bayes-moderated statistics (`lmFit` / `contrasts.fit` /
+  `eBayes`) on the filtered, log2-transformed matrix.
+- Primary contrasts, each a simple two-group difference within the
+  fitted model: `TAMR_vs_MCF7`, `FASR_vs_MCF7`, `TAMR_vs_FASR`.
+- Benjamini-Hochberg FDR correction is applied separately within each
+  contrast, not pooled across contrasts.
+- A nonsignificant FASR result is not evidence of TAMR specificity.
+  TAMR specificity is established only by the direct `TAMR_vs_FASR`
+  contrast, which is fit and reported explicitly rather than inferred
+  from the other two contrasts.
+- Continuous effect sizes and test statistics are retained for every
+  filtered gene in every contrast, not only for genes passing a
+  significance threshold.
+
+This amendment is written before the limma models are fit and before any
+Phase 2B differential-expression, specificity, or summary table is
+produced.

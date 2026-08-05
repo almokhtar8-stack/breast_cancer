@@ -31,6 +31,43 @@ gse118713:
     - {column: Rep2.FASR.TPM, sample_id: FASR_Rep2, group: FASR, replicate: 2}
     - {column: Rep3.FASR.TPM, sample_id: FASR_Rep3, group: FASR, replicate: 3}
   excluded_mean_columns: [MCF7.mean.TPM, TAMR.mean.TPM, FASR.mean.TPM]
+  frozen_gene_tpm_sha256: 82e9d8c0a6eb7eded61463963e00f36515825aeb25c04775db977389d8b26bb9
+
+# Phase 2B: QC and limma differential expression on the frozen GSE118713
+# gene-level TPM matrix. See PREANALYSIS.md's 2026-08-05 Phase 2B
+# statistical-plan amendment for the full preregistered rule set.
+gse118713_phase2b:
+  expected_n_genes: 60155
+  expected_n_samples: 9
+  expected_groups: [MCF7, TAMR, FASR]
+  expected_replicates_per_group: 3
+  filtering:
+    min_tpm: 1.0
+    min_samples: 3
+    filtered_gene_tpm_tsv: data/processed/gse118713_gene_tpm_filtered.tsv.gz
+    filtering_summary_tsv: results/tables/gse118713_expression_filtering.tsv
+  qc:
+    n_pca_genes: 2000
+    sample_qc_tsv: results/tables/gse118713_sample_qc.tsv
+    sample_correlations_tsv: results/tables/gse118713_sample_correlations.tsv
+    pca_coordinates_tsv: results/tables/gse118713_pca_coordinates.tsv
+    pca_figure_pdf: results/figures/gse118713_pca.pdf
+    correlation_figure_pdf: results/figures/gse118713_sample_correlation.pdf
+  limma:
+    script: scripts/analysis/gse118713_limma.R
+    contrasts: [TAMR_vs_MCF7, FASR_vs_MCF7, TAMR_vs_FASR]
+    differential_expression_tsv_gz: results/tables/gse118713_differential_expression.tsv.gz
+  specificity:
+    output_tsv_gz: results/tables/gse118713_tamr_specificity.tsv.gz
+  summary:
+    output_tsv: results/tables/gse118713_de_summary.tsv
+  # Preregistered blind positive controls (PREANALYSIS.md S5; CLAUDE.md hard
+  # rule). Held out of every generated result table until the model is
+  # frozen: fit on the full gene set like every other gene, then withheld at
+  # the reporting stage only, after all statistics/FDR are finalized.
+  blinding:
+    blinded_gene_ids: [ENSG00000089902, ENSG00000004487]  # RCOR1, KDM1A
+    redaction_record_tsv: results/tables/gse118713_blinding_redaction.tsv
 
 # GSE111151: 4 parental lines, 7 TamR derivatives, n=1 per sample (no
 # biological replicates). Tam1/Tam2 are distinct resistant derivative

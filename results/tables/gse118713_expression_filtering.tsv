@@ -1,0 +1,2 @@
+genes_in	genes_retained	genes_removed	min_tpm_threshold	min_samples_threshold	MCF7_Rep1_genes_detected	MCF7_Rep2_genes_detected	MCF7_Rep3_genes_detected	TAMR_Rep1_genes_detected	TAMR_Rep2_genes_detected	TAMR_Rep3_genes_detected	FASR_Rep1_genes_detected	FASR_Rep2_genes_detected	FASR_Rep3_genes_detected
+60155	14838	45317	1.0	3	13922	13661	13573	14032	13558	13489	14146	13199	13433
