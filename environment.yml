@@ -3,6 +3,7 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
+  - bioconductor-edger=4.8.2
   - bioconductor-limma=3.66.0
   - matplotlib
   - numpy
