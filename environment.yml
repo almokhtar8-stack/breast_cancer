@@ -9,6 +9,8 @@ dependencies:
   - pip
   - pyarrow
   - python=3.11
+  - pytest
+  - pyyaml
   - scikit-learn
   - scipy
   - statsmodels

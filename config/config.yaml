@@ -1,0 +1,5 @@
+data:
+  raw:
+    hany_data_s1: /ibex/scratch/aljaroaa/tamoxifen-data/hany/add3685_Data_S1.txt
+  processed_dir: data/processed
+  results_tables_dir: results/tables

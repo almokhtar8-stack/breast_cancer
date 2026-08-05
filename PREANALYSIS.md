@@ -33,8 +33,9 @@ expression features, not as outcome data; see §5).
 
 - **Source:** Hany et al. 2023, *Science Advances* 9:eadd3685, Data S1.
   DOI: [10.1126/sciadv.add3685](https://doi.org/10.1126/sciadv.add3685).
-- **Contrast:** E2 + 4-OHT vs. E2 alone (the tamoxifen-treated vs.
-  vehicle-control arm of the screen).
+- **Contrast:** E2 + 4-OHT versus E2 alone. Oestradiol is present in both
+  arms, so the contrast isolates the effect of tamoxifen with hormone
+  stimulation held constant.
 - **Statistic:** gene-by-treatment interaction term, estimated from raw
   sgRNA counts (not from pre-computed fold-changes or the paper's own
   gene-level summary statistic, so that guide-level filtering in §3 can be
@@ -261,4 +262,6 @@ readability; every amendment from this point forward goes at the bottom.
 
 ### Amendments log
 
-*(none yet — first analysis not yet run)*
+**Amendment 2026-08-05:** corrected description of the E2 arm; it is a
+hormone-treated comparator, not a vehicle control. The contrast itself is
+unchanged.
