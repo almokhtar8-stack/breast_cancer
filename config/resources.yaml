@@ -1,0 +1,29 @@
+# Registry of external data sources used by this project: accession/DOI,
+# version or release, retrieval date, and local path. Content hashes for
+# these same files are recorded separately in data/checksums/raw.sha256.
+#
+# retrieved_note: no download log exists yet under scripts/ (see
+# CLAUDE.md — downloads should live there). The retrieved dates below are
+# inferred from filesystem change-time (ctime) on /ibex/scratch, which
+# matches when this project's data directories were created; they are not
+# from an authoritative download record. Once scripts/ has a real fetch
+# script, replace this note and these dates with what it logs.
+
+sources:
+  - name: Hany et al. 2023, Data S1 (sgRNA screen counts, MAGeCK-VISPR normalised)
+    accession_or_doi: "10.1126/sciadv.add3685"
+    version_or_release: "Science Advances 9:eadd3685, 2023"
+    retrieved: "2026-08-04"
+    local_path: /ibex/scratch/aljaroaa/tamoxifen-data/hany/add3685_Data_S1.txt
+
+  - name: GSE118713 (RNA-seq, TAMR/FASR MCF7 endocrine-resistant lines)
+    accession_or_doi: "GSE118713"
+    version_or_release: "public 2019-12-11, last updated 2020-01-19"
+    retrieved: "2026-08-04"
+    local_path: /ibex/scratch/aljaroaa/tamoxifen-data/rnaseq/GSE118713_TRANSCRIPT_TAMR_FASR_MCF7_expression_data.tsv.gz
+
+  - name: GSE111151 (RNA-seq, tamoxifen-resistant/-sensitive breast cancer lines)
+    accession_or_doi: "GSE111151"
+    version_or_release: "public 2018-08-30, last updated 2019-03-27"
+    retrieved: "2026-08-04"
+    local_path: /ibex/scratch/aljaroaa/tamoxifen-data/rnaseq/GSE111151_RAW.tar

@@ -1,40 +1,44 @@
 """Guide- and gene-level tamoxifen-response labels from the Hany screen.
 
-Source: Hany et al. 2023, *Science Advances* 9:eadd3685, Data S1.
-DOI: 10.1126/sciadv.add3685.
+Source: normalised sgRNA counts from Hany 2023 Data S1, median-ratio
+normalised by MAGeCK-VISPR. DOI: 10.1126/sciadv.add3685.
 
-Reads the paper's guide-level raw sgRNA count matrix, restricts it to the
-E2-alone and E2 + 4-OHT arms (PREANALYSIS.md §1-§3), filters out unstable
-guides and genes, and estimates a gene-by-treatment interaction term
-(PREANALYSIS.md §2).
+Reads Data S1's guide-level MAGeCK-VISPR-normalised sgRNA count matrix,
+restricts it to the E2-alone and E2 + 4-OHT arms (PREANALYSIS.md §1-§3),
+filters out unstable guides and genes, and estimates a gene-by-treatment
+interaction term (PREANALYSIS.md §2).
 
-Normalisation: counts-per-million (CPM) per sample column. Each sample's
-library size is the sum of raw guide counts for that column over the full
-arm-restricted matrix, computed *before* any guide/gene filtering, so the
-scaling factor is not distorted by which guides happen to survive
-downstream QC. The modelled response is log2(CPM + 0.5) (a 0.5 pseudocount
-keeps zero counts finite on the log scale).
+Normalisation: none is applied here beyond what Data S1 already carries.
+The counts are already median-ratio normalised across samples by the
+original authors' MAGeCK-VISPR pipeline, so a second total-count rescaling
+(e.g. counts-per-million) would be redundant and cannot be defended — it
+would rescale an already between-sample-comparable matrix a second time,
+on top of whatever scaling MAGeCK-VISPR already chose. The modelled
+response is log2(normalised_count + 1) (``LOG2_PSEUDOCOUNT``): a
+pseudocount of 1 keeps zero and near-zero counts finite on the log scale
+while being negligible relative to the observed count magnitudes (median
+~170 across the modelled arms in this file).
 
-Interaction model: Data S1's values are non-integer (already library-scale
-adjusted by the original authors, not raw integer read counts), which
+Interaction model: Data S1's values are non-integer (median-ratio
+normalised by the original authors, not raw integer read counts), which
 makes a discrete-count negative-binomial GLM a poor fit. This module
 therefore uses the moderated-linear-model option named in PREANALYSIS.md
-§2: for each gene, a guide-blocked linear model is fit on log2-CPM
-(``log2cpm ~ guide + treatment``), so the treatment coefficient reflects
-within-guide 4-OHT-vs-E2 change with between-guide baseline differences
-removed, rather than a simple difference of raw means. Per-gene residual
-variances are then shrunk toward a common prior via an empirical-Bayes
-moment estimator (Smyth 2004; the method behind ``limma::eBayes``),
-borrowing strength across genes before computing moderated t-statistics
-and p-values.
+§2: for each gene, a guide-blocked linear model is fit on log2-normalised
+counts (``log2norm ~ guide + treatment``), so the treatment coefficient
+reflects within-guide 4-OHT-vs-E2 change with between-guide baseline
+differences removed, rather than a simple difference of raw means. Per-gene
+residual variances are then shrunk toward a common prior via an
+empirical-Bayes moment estimator (Smyth 2004; the method behind
+``limma::eBayes``), borrowing strength across genes before computing
+moderated t-statistics and p-values.
 
 Sign convention (PREANALYSIS.md §2): ``effect_size`` is the treatment
-coefficient for E2 + 4-OHT relative to E2 alone, on the log2-CPM scale.
-Negative = more depleted under 4-OHT (candidate knockout sensitises cells
-to tamoxifen, i.e. cells need that gene to tolerate the drug). Positive =
-enriched under 4-OHT (candidate knockout confers a growth advantage under
-tamoxifen). This sign must be carried through unchanged in every
-downstream table, figure, and model output.
+coefficient for E2 + 4-OHT relative to E2 alone, on the log2-normalised-
+count scale. Negative = more depleted under 4-OHT (candidate knockout
+sensitises cells to tamoxifen, i.e. cells need that gene to tolerate the
+drug). Positive = enriched under 4-OHT (candidate knockout confers a
+growth advantage under tamoxifen). This sign must be carried through
+unchanged in every downstream table, figure, and model output.
 """
 
 from __future__ import annotations
@@ -61,7 +65,7 @@ ARM_E2_4OHT = "E2 + 4-OHT"
 REQUIRED_ARMS: tuple[str, ...] = (CONTROL_T0, ARM_E2, ARM_E2_4OHT)
 MODELLED_ARMS: tuple[str, ...] = (ARM_E2, ARM_E2_4OHT)
 MIN_GUIDES_PER_GENE = 3
-LOG2CPM_PSEUDOCOUNT = 0.5
+LOG2_PSEUDOCOUNT = 1.0
 
 
 @dataclass(frozen=True)
@@ -145,9 +149,9 @@ def _validate_header(columns: list[str]) -> None:
 def _validate_values(df: pd.DataFrame, sample_cols: list[str]) -> None:
     """Check id and count columns are usable before any arithmetic runs on them.
 
-    Non-finite or negative counts would silently corrupt CPM library sizes
-    (``Series.sum`` skips NaNs) and the zero-at-T0 filter (``NaN == 0`` is
-    False, so a missing count would pass QC as if it were nonzero). Null or
+    Non-finite or negative counts would silently corrupt the zero-at-T0
+    filter (``NaN == 0`` is False, so a missing count would pass QC as if
+    it were nonzero) and any downstream log/model arithmetic. Null or
     duplicate identifiers would silently vanish from ``groupby("Gene")``
     (which drops NaN keys by default) or make sgRNA-based guide counts
     ambiguous. All of these are checked once, here, rather than trusted
@@ -165,7 +169,7 @@ def _validate_values(df: pd.DataFrame, sample_cols: list[str]) -> None:
         raise ValueError("negative counts in Data S1 sample columns")
 
 
-def load_raw_counts(path: str | Path) -> pd.DataFrame:
+def load_normalised_counts(path: str | Path) -> pd.DataFrame:
     """Load Data S1 into a tidy wide frame with clean column names.
 
     Data S1 is tab-separated with two header rows: row 0 gives the
@@ -177,22 +181,22 @@ def load_raw_counts(path: str | Path) -> pd.DataFrame:
     reshuffled source file fails loudly instead of silently mis-aligning.
     """
     path = Path(path)
-    raw = pd.read_csv(path, sep="\t", header=[0, 1])
+    counts = pd.read_csv(path, sep="\t", header=[0, 1])
 
     flat_columns = []
-    for level0, level1 in raw.columns:
+    for level0, level1 in counts.columns:
         if level1 in ("sgRNA", "Gene"):
             flat_columns.append(level1)
         else:
             flat_columns.append(f"{_clean_condition(level1)}__{level0}")
-    raw.columns = flat_columns
+    counts.columns = flat_columns
     _validate_header(flat_columns)
 
     sample_cols = [c for c in flat_columns if c not in ("sgRNA", "Gene")]
-    _validate_values(raw, sample_cols)
+    _validate_values(counts, sample_cols)
 
-    logger.info("load_raw_counts: read %d rows from %s", len(raw), path)
-    return raw
+    logger.info("load_normalised_counts: read %d rows from %s", len(counts), path)
+    return counts
 
 
 def select_arms(df: pd.DataFrame) -> pd.DataFrame:
@@ -221,30 +225,29 @@ def select_arms(df: pd.DataFrame) -> pd.DataFrame:
     return selected
 
 
-def add_log2_cpm(
-    df: pd.DataFrame, sample_cols: list[str], pseudocount: float = LOG2CPM_PSEUDOCOUNT
+def add_log2_normalised(
+    df: pd.DataFrame, sample_cols: list[str], pseudocount: float = LOG2_PSEUDOCOUNT
 ) -> pd.DataFrame:
-    """Add per-sample log2(CPM + pseudocount) columns.
+    """Add per-sample log2(normalised count + pseudocount) columns.
 
-    Library size for each sample column is the sum of its raw guide counts
-    over all rows passed in (i.e. computed before guide/gene filtering, so
-    later QC exclusions do not perturb the normalisation factor).
+    No further rescaling (e.g. counts-per-million) is applied here: Data
+    S1's counts are already median-ratio normalised across samples by
+    MAGeCK-VISPR (see module docstring), so a second total-count
+    normalisation on top of an already-normalised matrix is unjustified.
     """
     out = df.copy()
     for col in sample_cols:
-        library_size = df[col].sum()
-        cpm = df[col] / library_size * 1e6
-        out[f"log2cpm_{col}"] = np.log2(cpm + pseudocount)
-        logger.info("add_log2_cpm: %s library size = %.1f", col, library_size)
+        out[f"log2norm_{col}"] = np.log2(df[col] + pseudocount)
     return out
 
 
 def filter_zero_at_t0(df: pd.DataFrame) -> tuple[pd.DataFrame, FilterStep]:
-    """Drop guides with a zero raw count in either Control T0 replicate.
+    """Drop guides with a zero count in either Control T0 replicate.
 
-    PREANALYSIS.md §3: "any guide with zero raw counts in the T0
-    (plasmid/day-0) reference is excluded — a zero baseline makes any
-    fold-change or interaction estimate for that guide undefined/unstable."
+    PREANALYSIS.md §3 (quoted verbatim; that document's own wording, not
+    edited here): "any guide with zero raw counts in the T0 (plasmid/day-0)
+    reference is excluded — a zero baseline makes any fold-change or
+    interaction estimate for that guide undefined/unstable."
     """
     t0_cols = [f"{CONTROL_T0}__{rep}" for rep in REPLICATES]
     zero_at_t0 = (df[t0_cols] == 0).any(axis=1)
@@ -291,14 +294,14 @@ def _to_long(df: pd.DataFrame) -> pd.DataFrame:
     parts = []
     for arm, treatment in ((ARM_E2, 0), (ARM_E2_4OHT, 1)):
         for rep in REPLICATES:
-            col = f"log2cpm_{arm}__{rep}"
+            col = f"log2norm_{arm}__{rep}"
             parts.append(
                 pd.DataFrame(
                     {
                         "Gene": df["Gene"].to_numpy(),
                         "sgRNA": df["sgRNA"].to_numpy(),
                         "treatment": treatment,
-                        "log2cpm": df[col].to_numpy(),
+                        "log2norm": df[col].to_numpy(),
                     }
                 )
             )
@@ -306,7 +309,7 @@ def _to_long(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def fit_gene_treatment_effects(long_df: pd.DataFrame) -> pd.DataFrame:
-    """Fit a guide-blocked linear model per gene: log2cpm ~ guide + treatment.
+    """Fit a guide-blocked linear model per gene: log2norm ~ guide + treatment.
 
     Returns one row per gene with the raw (pre-moderation) treatment
     coefficient, its OLS residual variance, residual degrees of freedom,
@@ -332,7 +335,7 @@ def fit_gene_treatment_effects(long_df: pd.DataFrame) -> pd.DataFrame:
             design[row_i, guide_index[guide_id]] = 1.0
         design[:, -1] = treatment
 
-        y = g["log2cpm"].to_numpy()
+        y = g["log2norm"].to_numpy()
         beta_hat, _, rank, _ = np.linalg.lstsq(design, y, rcond=None)
         residual_df = n_obs - rank
         if residual_df <= 0:
@@ -454,13 +457,13 @@ def build_labels(config_path: str | Path = "config/config.yaml") -> pd.DataFrame
     processed_dir = Path(config["data"].get("processed_dir", "data/processed"))
     results_tables_dir = Path(config["data"].get("results_tables_dir", "results/tables"))
 
-    raw = load_raw_counts(raw_path)
-    selected = select_arms(raw)
+    counts = load_normalised_counts(raw_path)
+    selected = select_arms(counts)
 
     modelled_sample_cols = [f"{arm}__{rep}" for arm in MODELLED_ARMS for rep in REPLICATES]
-    normalised = add_log2_cpm(selected, modelled_sample_cols)
+    logged = add_log2_normalised(selected, modelled_sample_cols)
 
-    filtered_t0, step_t0 = filter_zero_at_t0(normalised)
+    filtered_t0, step_t0 = filter_zero_at_t0(logged)
     filtered_genes, step_genes = filter_low_representation_genes(filtered_t0)
 
     long_df = _to_long(filtered_genes)
@@ -489,12 +492,12 @@ def build_labels(config_path: str | Path = "config/config.yaml") -> pd.DataFrame
 
     summary_rows = [
         {
-            "step": "raw_input",
+            "step": "normalised_input",
             "rows_in": None,
-            "rows_out": len(raw),
+            "rows_out": len(counts),
             "rows_lost": None,
             "genes_in": None,
-            "genes_out": raw["Gene"].nunique(),
+            "genes_out": counts["Gene"].nunique(),
         },
         step_t0.as_record(),
         step_genes.as_record(),

@@ -12,32 +12,32 @@ from src.labels import (
     REQUIRED_ARMS,
     _validate_header,
     _validate_values,
-    add_log2_cpm,
+    add_log2_normalised,
     compute_effect_table,
     filter_low_representation_genes,
     fit_gene_treatment_effects,
-    load_raw_counts,
+    load_normalised_counts,
 )
 
 CONFIG_PATH = Path(__file__).parent.parent / "config" / "config.yaml"
 
 
-def _raw_data_path() -> Path:
+def _data_path() -> Path:
     with open(CONFIG_PATH) as f:
         config = yaml.safe_load(f)
     return Path(config["data"]["raw"]["hany_data_s1"])
 
 
-def test_raw_input_row_count():
-    raw = load_raw_counts(_raw_data_path())
-    assert len(raw) == 76_441
+def test_input_row_count():
+    counts = load_normalised_counts(_data_path())
+    assert len(counts) == 76_441
 
 
 def test_target_conditions_present():
-    raw = load_raw_counts(_raw_data_path())
+    counts = load_normalised_counts(_data_path())
     for arm in (ARM_E2, ARM_E2_4OHT):
         for rep in REPLICATES:
-            assert f"{arm}__{rep}" in raw.columns
+            assert f"{arm}__{rep}" in counts.columns
 
 
 def test_sign_convention_negative_for_depleted_gene():
@@ -65,11 +65,11 @@ def test_sign_convention_negative_for_depleted_gene():
     df = pd.DataFrame(rows, columns=columns)
 
     sample_cols = [f"{arm}__{rep}" for arm in (ARM_E2, ARM_E2_4OHT) for rep in REPLICATES]
-    normalised = add_log2_cpm(df, sample_cols)
+    logged = add_log2_normalised(df, sample_cols)
 
     from src.labels import _to_long
 
-    long_df = _to_long(normalised)
+    long_df = _to_long(logged)
     gene_fits = fit_gene_treatment_effects(long_df)
     effect_table = compute_effect_table(gene_fits).set_index("gene")
 
