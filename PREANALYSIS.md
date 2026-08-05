@@ -363,3 +363,63 @@ governs its differential-expression analysis:
 This amendment is written before the limma models are fit and before any
 Phase 2B differential-expression, specificity, or summary table is
 produced.
+
+**Amendment 2026-08-06 (GSE111151 normalization sensitivity audit, written
+before any GSE111151 gene-level result is calculated or inspected):** a
+read-only technical audit reconstructed the published GSE111151 `CPM
+(log2)` matrix using official Bioconductor edgeR (TMM normalisation +
+`cpm(log=TRUE)`), and separately recomputed TMM normalisation factors with
+mitochondrial genes (symbol prefix `MT-`) excluded from factor estimation
+only (applied to the complete, undeleted count matrix). Findings:
+
+- Global expression structure is similar across the published uncorrected
+  log2 CPM, standard all-gene TMM log2 CPM, and mitochondrial-excluded TMM
+  log2 CPM (high rank correlation and a population-median resistant-minus-
+  parental effect of ~0 under every method).
+- However, for several derivatives the individual-gene resistant-minus-
+  parental effect direction is sensitive to this defensible normalisation
+  choice: the perturbation from excluding mitochondrial genes during
+  factor estimation is, for a majority of the seven derivatives,
+  comparable in size to the typical gene-level effect itself, and gene
+  sign agreement between the standard and mitochondrial-excluded
+  normalisations drops close to chance for several derivatives.
+
+This changes GSE111151's role in the project, effective immediately:
+
+1. GSE111151 will no longer contribute discovery features or training
+   inputs to the predictive model in §6-§7. No feature table constructed
+   from GSE111151 will be used for model fitting, feature selection, or
+   candidate ranking.
+2. **GSE118713** (§6, §7, and the Phase 2B statistical plan amendment
+   above) becomes the primary replicated resistance dataset for feature
+   construction — it has biological replicates (n=3 per group), unlike
+   GSE111151 (n=1 per condition).
+3. GSE111151 is reserved as an **independent post-model confirmation
+   dataset**, consulted only after candidate rankings and the model (§7,
+   §8) are frozen — never before, and never to inform feature choice,
+   model choice, or candidate selection.
+4. A candidate is described as **"supported by GSE111151"** only if both
+   of the following hold, checked at confirmation time, after freezing:
+   - its lineage-level direction (per the four-lineage design: MCF-7,
+     T-47D, ZR-75-1, BT-474, averaging Tam1/Tam2 within a lineage where
+     both exist) is consistent across at least 3 of the 4 parental
+     lineages;
+   - the majority direction is the same using the published uncorrected
+     `CPM (log2)` and the mitochondrial-excluded TMM sensitivity
+     normalisation from this audit.
+   No ordinary replicated differential-expression p-value or FDR is
+   calculated on GSE111151 for this or any other purpose — per the
+   existing n=1 point-estimate caveat (§6) and the data-audit amendment
+   above.
+5. A candidate failing the rule in point 4 is labelled **inconclusive**
+   with respect to GSE111151, not contradictory — GSE111151's own
+   normalisation sensitivity means a failed check reflects the dataset's
+   measurement limits at least as much as it reflects the candidate.
+6. No GSE111151 gene-level result (individual gene value, ranking, or
+   direction) has been inspected in the course of this audit or this
+   amendment. The audit was conducted entirely on aggregate/technical
+   comparisons (correlations, median absolute differences, sign-agreement
+   fractions, normalisation factors) — never on named genes.
+
+This amendment is written before any GSE111151-based feature table,
+confirmation check, or gene-level output is produced.

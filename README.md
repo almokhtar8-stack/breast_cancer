@@ -10,9 +10,9 @@ Computational only. Public data. No wet lab.
 
 | Source | Role |
 |---|---|
-| Hany 2023, Sci Adv 9:eadd3685 | Labels: raw sgRNA counts, E2 vs E2+4-OHT |
-| GSE118713 | MCF7 parental / TAMR / FASR, TPM, n=3 |
-| GSE111151 | 4 lines, 7 TamR derivatives, counts, n=1 |
+| Hany 2023, Sci Adv 9:eadd3685 | Labels: MAGeCK-VISPR median-ratio-normalised sgRNA abundance; E2+4-OHT versus E2 |
+| GSE118713 | Transcript-level TPM aggregated to gene level; MCF7 / TAMR / FASR, n=3 per group; primary replicated resistance dataset for feature construction |
+| GSE111151 | Raw counts plus published uncorrected log2 CPM; 4 parental lines and 7 TamR derivatives, n=1 per condition; independent post-model confirmation only and excluded from model training |
 
 ## Claim
 
