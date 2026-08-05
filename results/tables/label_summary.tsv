@@ -1,0 +1,5 @@
+step	rows_in	rows_out	rows_lost	genes_in	genes_out	genes_lost
+normalised_input		76441			19112	
+zero_count_at_t0	76441.0	76278	163.0	19112.0	19112	0.0
+min_3_guides_per_gene	76278.0	76261	17.0	19112.0	19103	9.0
+gene_model_fit	76261.0	76261	0.0	19103.0	19103	0.0
