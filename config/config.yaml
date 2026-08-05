@@ -1,5 +1,23 @@
 data:
   raw:
     hany_data_s1: /ibex/scratch/aljaroaa/tamoxifen-data/hany/add3685_Data_S1.txt
+    ceg2_supplementary_archive: /ibex/scratch/aljaroaa/tamoxifen-data/ceg2/hart2017_g3_supplementary.zip
+  reference:
+    ceg2_gene_list: data/reference/hart2017_ceg2_684.tsv
   processed_dir: data/processed
   results_tables_dir: results/tables
+
+gate1:
+  labels_path: data/processed/labels.parquet
+  fdr_threshold: 0.1
+  n_fitted_genes_expected: 19103
+  branch_thresholds:
+    classifier_min: 30
+    continuous_min: 10
+  decision_output: results/tables/gate1_decision.tsv
+  essentiality:
+    tested_set_size: 50
+    output: results/tables/gate1_essentiality_summary.tsv
+  direction_sanity:
+    genes: [PIK3CA, AKT1, ESR1, MAP2K1, ERBB2, RB1, TP53]
+    output: results/tables/gate1_direction_sanity.tsv

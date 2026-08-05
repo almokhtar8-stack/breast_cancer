@@ -27,3 +27,33 @@ sources:
     version_or_release: "public 2018-08-30, last updated 2019-03-27"
     retrieved: "2026-08-04"
     local_path: /ibex/scratch/aljaroaa/tamoxifen-data/rnaseq/GSE111151_RAW.tar
+
+  - name: Hart et al. 2017, Table S2 (Core Essential Genes 2.0 / CEG2 gene list, n=684)
+    accession_or_doi: "10.1534/g3.117.041277"
+    version_or_release: "G3 (Bethesda) 7(8):2719-2727, 2017; PMC5555476"
+    source_url: "https://www.ebi.ac.uk/europepmc/webservices/rest/PMC5555476/supplementaryFiles"
+    archive_member: "2719TableS2.txt"
+    retrieved: "2026-08-05"
+    retrieved_by: scripts/download/download_ceg2.py
+    local_path: /ibex/scratch/aljaroaa/tamoxifen-data/ceg2/hart2017_g3_supplementary.zip
+    archive_sha256: "92ba2a515b709041b39b1ca6587a11d6b1fc0d6b78d1dea8948f7d27048ea6d4"
+    archive_sha256_note: >-
+      Europe PMC regenerates this ZIP per request with a fresh internal
+      timestamp, so the outer archive's SHA256 is not stable across
+      re-downloads even though its contents are. Verified by two
+      independent fetches on 2026-08-05: the outer zip hash differed
+      (85361fa9795571cdd3f49f967b699cee4e862d00e2f8fa4218505b8784306501 vs.
+      the archive_sha256 above) but the extracted 2719TableS2.txt member
+      was byte-identical both times (sha256
+      20e71364e6361126dfc5202a871428d8fc39862ebc9006421cfcb36f6e8e153c).
+      The extracted_reference fields below are the reproducible checkpoint.
+    archive_member_sha256: "20e71364e6361126dfc5202a871428d8fc39862ebc9006421cfcb36f6e8e153c"
+    archive_member_sha256_note: >-
+      SHA256 of the raw bytes of the 2719TableS2.txt member itself (not the
+      outer zip). Stable across re-downloads (verified twice on
+      2026-08-05) and enforced programmatically by
+      scripts/download/download_ceg2.py before the reference file is
+      written.
+    extracted_reference_path: data/reference/hart2017_ceg2_684.tsv
+    extracted_reference_sha256: "8bd2695f7c50f9307c38b23c5a62a404a34d64e6ae6f4ebbf3376d0c8bd36c90"
+    extracted_reference_gene_count: 684

@@ -19,3 +19,10 @@ Computational only. Public data. No wet lab.
 The screen was run in a drug-tolerant parental clone, not an acquired
 resistant derivative. The claim is *modulates tamoxifen response*, not
 restores sensitivity.
+
+## Version-controlled outputs
+
+`data/processed/labels.parquet` is force-added and tracked in git, unlike
+the rest of `data/processed/*` (gitignored). It is the frozen per-gene
+label table that every downstream analysis reads from, so its history
+needs to be reviewable the same way code is.

@@ -1,0 +1,2 @@
+fitted_gene_universe_size	ceg2_genes_in_universe	tested_set_size	observed_ceg2_overlap	expected_ceg2_overlap	enrichment_observed_over_expected	hypergeometric_p_value_one_sided	ceg2_symbols_absent_from_universe
+19103	680	50	3	1.7798251583520912	1.6855588235294119	0.2627827876802624	4

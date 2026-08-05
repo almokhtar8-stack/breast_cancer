@@ -265,3 +265,20 @@ readability; every amendment from this point forward goes at the bottom.
 **Amendment 2026-08-05:** corrected description of the E2 arm; it is a
 hormone-treated comparator, not a vehicle control. The contrast itself is
 unchanged.
+
+**Amendment 2026-08-05 (methodological correction, documented post hoc):**
+Data S1 was confirmed to contain non-integer MAGeCK-VISPR median-ratio-
+normalised values, not raw sgRNA counts, as §2 above states. The implemented
+model therefore uses `log2(normalised + 1)` on these already-normalised
+values. No CPM or other library-size normalisation is applied on top of the
+published normalisation — a second total-count rescaling of an
+already-between-sample-comparable matrix would be redundant and cannot be
+defended. This correction was implemented in commit `4407078` (which
+renamed `load_raw_counts` to `load_normalised_counts` and removed a
+redundant `add_log2_cpm()` step), before the first recorded Gate 1 result
+in commit `5009e78`. The contrast, sign convention, FDR threshold, and
+preregistered branch thresholds (§2, §4) are unchanged by this correction.
+This amendment is being documented now, after the first label build,
+because the correction itself was not added to this document at the time
+it was discovered and implemented — it is recorded here for an accurate
+paper trail, not as a claim that this amendment predates the first result.
