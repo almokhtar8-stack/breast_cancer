@@ -107,3 +107,17 @@ gate1:
   direction_sanity:
     genes: [PIK3CA, AKT1, ESR1, MAP2K1, ERBB2, RB1, TP53]
     output: results/tables/gate1_direction_sanity.tsv
+
+# Poster-pivot master integration table (PREANALYSIS.md 2026-08-10
+# amendment): joins the Gate-1 FDR<0.1 CRISPR hits above to GSE118713
+# resistance expression. Reads labels/GSE118713 paths from the gate1,
+# gse118713, and gse118713_phase2b sections above; no raw paths duplicated
+# here.
+crispr_gse118713_integration:
+  expected_n_hits: 28
+  output:
+    master_table_tsv: results/tables/crispr_gse118713_master_table.tsv
+    master_table_csv: results/tables/crispr_gse118713_master_table.csv
+    master_table_parquet: results/tables/crispr_gse118713_master_table.parquet
+    qc_summary_tsv: results/tables/crispr_gse118713_integration_qc.tsv
+    qc_summary_md: results/tables/crispr_gse118713_integration_qc.md
