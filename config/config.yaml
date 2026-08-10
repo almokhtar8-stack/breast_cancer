@@ -152,3 +152,63 @@ candidate_evidence_summary:
     plot_crispr_effects_tsv: results/tables/plot_input_crispr_effects.tsv
     plot_gse118713_contrasts_tsv: results/tables/plot_input_gse118713_contrasts.tsv
     plot_shortlist_matrix_tsv: results/tables/plot_input_shortlist_matrix.tsv
+
+# NEBULA poster figures (candidate-prioritisation phase). Plotting only --
+# reads exclusively the frozen tables written by
+# src.candidate_evidence_summary, src.gse118713_qc, the frozen limma
+# differential-expression table, and the checksum-pinned filtered GSE118713
+# TPM matrix. No CRISPR/limma/PCA/candidate recomputation.
+nebula_plots:
+  output_dir: results/figures/nebula
+  plot_input_dir: results/tables/nebula_plot_inputs
+  rna_significance_fdr: 0.05
+  qc:
+    expected_n_hits: 28
+    expected_n_sensitising: 13
+    expected_n_tolerance: 15
+    expected_n_samples: 9
+    expected_primary_gene: USP34
+  style:
+    poster_background: "#0B0B12"
+    panel_background: "#F8FAFC"
+    palette:
+      nebula_purple: "#6E44FF"
+      soft_lilac: "#B799FF"
+      cosmic_magenta: "#D946EF"
+      rose_pink: "#F472B6"
+      neutral_grey: "#94A3B8"
+    group_colors:
+      MCF7: "#B799FF"
+      TAMR: "#6E44FF"
+      FASR: "#F472B6"
+    direction_colors:
+      sensitising_knockout: "#6E44FF"
+      tolerance_associated_knockout: "#F472B6"
+  figures:
+    crispr_landscape:
+      png: results/figures/nebula/fig1_crispr_hit_landscape.png
+      png_transparent: results/figures/nebula/fig1_crispr_hit_landscape_transparent.png
+      pdf: results/figures/nebula/fig1_crispr_hit_landscape.pdf
+      plot_input_tsv: results/tables/nebula_plot_inputs/fig1_crispr_hit_landscape_input.tsv
+      paics_inset_tsv: results/tables/nebula_plot_inputs/fig1_paics_inset_input.tsv
+    pca:
+      png: results/figures/nebula/fig2_gse118713_pca.png
+      png_transparent: results/figures/nebula/fig2_gse118713_pca_transparent.png
+      pdf: results/figures/nebula/fig2_gse118713_pca.pdf
+      plot_input_tsv: results/tables/nebula_plot_inputs/fig2_gse118713_pca_input.tsv
+    volcano:
+      png: results/figures/nebula/fig3_tamr_vs_mcf7_volcano.png
+      png_transparent: results/figures/nebula/fig3_tamr_vs_mcf7_volcano_transparent.png
+      pdf: results/figures/nebula/fig3_tamr_vs_mcf7_volcano.pdf
+      plot_input_tsv: results/tables/nebula_plot_inputs/fig3_tamr_vs_mcf7_volcano_input.tsv
+    evidence_matrix:
+      png: results/figures/nebula/fig4_sensitising_evidence_matrix.png
+      png_transparent: results/figures/nebula/fig4_sensitising_evidence_matrix_transparent.png
+      pdf: results/figures/nebula/fig4_sensitising_evidence_matrix.pdf
+      plot_input_tsv: results/tables/nebula_plot_inputs/fig4_sensitising_evidence_matrix_input.tsv
+    usp34_panel:
+      png: results/figures/nebula/fig5_usp34_panel.png
+      png_transparent: results/figures/nebula/fig5_usp34_panel_transparent.png
+      pdf: results/figures/nebula/fig5_usp34_panel.pdf
+      summary_plot_input_tsv: results/tables/nebula_plot_inputs/fig5_usp34_summary_input.tsv
+      expression_plot_input_tsv: results/tables/nebula_plot_inputs/fig5_usp34_expression_input.tsv

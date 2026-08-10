@@ -1,0 +1,2 @@
+gene_symbol	crispr_effect_size	crispr_fdr	tamr_vs_mcf7_log2fc	tamr_vs_mcf7_fdr	tamr_vs_fasr_log2fc	tamr_vs_fasr_fdr	mcf7_baseline_log2_tpm_plus1
+USP34	-1.3912980676838431	0.0416851803622835	0.590437436807219	0.0073136129571408	0.0195025681205152	0.911804815437693	5.109054966421399

@@ -1,0 +1,2 @@
+gene_symbol	crispr_effect_size	crispr_fdr	crispr_direction	benchmark_label
+PAICS	-0.2968412855925857	0.8527230919186876	sensitising_knockout	published_benchmark_not_gate1_hit
