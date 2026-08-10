@@ -492,3 +492,64 @@ Effective as of this amendment:
 This amendment is written and committed as a standalone commit before any
 RCOR1/KDM1A gene-level value is computed, inspected, or written to any
 output file in this repository.
+
+**Amendment 2026-08-10 (correction of the immediately preceding
+amendment's provenance claim; written before any RCOR1/KDM1A GSE118713
+gene-level value is inspected or exported):**
+
+The 2026-08-10 amendment directly above stated: "RCOR1 and KDM1A have not
+been inspected, computed on, or reported at the gene level ... before this
+amendment was written and committed." The phrase "computed on" in that
+sentence was inaccurate. Per §12, the original amendment's text is left
+unedited above; this correction is appended below it instead.
+
+Accurate provenance:
+
+- The CRISPR gene-by-treatment interaction fit (`src.labels.build_labels`)
+  fits every gene passing the §3 filters, including RCOR1 and KDM1A, and
+  writes their `effect_size`/`se`/`p_value`/`fdr` to the frozen
+  `data/processed/labels.parquet` alongside every other fitted gene.
+  `src.gate1_checks` enforces the blind only at the reporting stage: no
+  function in that module returns, logs, or writes a gene-level value for
+  either gene, but the computed values themselves have been present in the
+  frozen labels table since that file was written.
+- The GSE118713 differential-expression pipeline
+  (`scripts/analysis/gse118713_limma.R` / `gse118713_limma_lib.R`)
+  likewise fits every filtered gene, including RCOR1 and KDM1A, computes
+  their per-contrast log2FC/moderated-t/p-value, and applies
+  Benjamini-Hochberg correction within the complete fitted-gene universe
+  (`run_limma_de()`) before `redact_blinded_genes()` removes the two
+  configured rows from the table written to disk. Their statistics were
+  therefore computed and BH-corrected identically to every other gene;
+  only the export step withheld them.
+
+So "not ... computed on" was wrong: both pipelines compute the two genes'
+statistics as part of the full fit. What is accurate, and is the corrected
+claim this amendment makes, is that their computed values were withheld
+before any exported table, and -- based on this repository's own
+governance record and commit history -- had not been intentionally
+inspected or reported by anyone before the 2026-08-10 blind-retirement
+amendment above was written and committed.
+
+This correction does not change any other statement in the 2026-08-10
+amendment above: the project-direction change, the model's downgrade to
+optional future work, the formal retirement of the blind for
+candidate-prioritisation purposes, and GSE111151's unaffected
+post-selection-confirmation-only role all stand as written.
+
+Because the predictive-model holdout has already been retired (2026-08-10
+amendment above) and modelling is no longer required for the primary
+poster, the withheld GSE118713 rows for RCOR1 and KDM1A may now be
+released using the exact frozen GSE118713 analysis -- same input matrix,
+same expression filter, same `log2(TPM + 1)` transform, same design, same
+three contrasts, same limma fit and empirical-Bayes settings, same
+BH-correction universe -- with only the export-stage redaction step
+disabled. This release must not change any modelling, filtering, or
+statistical choice from the frozen Phase 2B specification (this
+document's 2026-08-05 Phase 2B statistical-plan amendment), and must be
+performed as a reproducible, versioned derivative that preserves the
+original redacted outputs rather than overwriting them.
+
+GSE111151 remains reserved for post-selection independent confirmation
+only, per the 2026-08-06 amendment above; it is unaffected by this
+correction.

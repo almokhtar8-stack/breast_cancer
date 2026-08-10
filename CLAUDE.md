@@ -22,10 +22,14 @@ docstrings, or documentation.
 - Nothing derived from the CRISPR screen may enter the feature table. The
   screen supplies labels only; features come from transcriptomics and
   public annotation.
-- RCOR1 and KDM1A blinding was retired 2026-08-10 (PREANALYSIS.md amendment
-  2026-08-10): the predictive model became optional future work rather than
-  the primary poster deliverable, so the two genes may now be inspected and
-  reported like any other CRISPR hit.
+- RCOR1 and KDM1A blinding was retired 2026-08-10 (PREANALYSIS.md
+  amendments log, entries dated 2026-08-10): the predictive model became
+  optional future work rather than the primary poster deliverable, so the
+  two genes may now be inspected and reported like any other CRISPR hit.
+  Read the full amendments log, not a single entry in isolation -- a
+  provenance detail in the first 2026-08-10 amendment (a claim that the
+  two genes' values had not been "computed on") was inaccurate and was
+  corrected by a second, later 2026-08-10 amendment appended below it.
 - Thresholds are declared in `PREANALYSIS.md` before results are seen.
 - Paths come from `config/config.yaml`, never hardcoded.
 - Figures are generated from output files, never with hand-typed numbers.
