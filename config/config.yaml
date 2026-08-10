@@ -77,6 +77,7 @@ gse118713_phase2b:
   # versioned derivative rather than overwriting the redacted outputs above.
   unredaction:
     differential_expression_unredacted_tsv_gz: results/tables/gse118713_differential_expression_unredacted.tsv.gz
+    frozen_differential_expression_unredacted_sha256: ff174187764b9e281c507b2a5e3b83c1d97941aa201d4868f805e46496462abe
     redaction_record_unredacted_tsv: results/tables/gse118713_blinding_redaction_unredacted.tsv
     specificity_unredacted_tsv_gz: results/tables/gse118713_tamr_specificity_unredacted.tsv.gz
     frozen_specificity_unredacted_sha256: f88c0767ba97277c97994cda30866a1e602a0c17d6ab73b890a63963ff982cf2

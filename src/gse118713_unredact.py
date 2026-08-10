@@ -23,6 +23,7 @@ added.
 
 from __future__ import annotations
 
+import hashlib
 import logging
 from dataclasses import dataclass
 from pathlib import Path
@@ -59,6 +60,52 @@ def _load_config(config_path: str | Path) -> dict:
         return yaml.safe_load(f)
 
 
+def _sha256_file(path: str | Path) -> str:
+    digest = hashlib.sha256()
+    with open(path, "rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _verify_checksum(path: str | Path, expected_sha256: str, label: str) -> None:
+    actual = _sha256_file(path)
+    if actual != expected_sha256:
+        raise ValueError(f"{label} checksum mismatch at {path}: expected {expected_sha256}, got {actual}")
+
+
+def _load_filtered_gene_ids(path: str | Path) -> set[str]:
+    df = pd.read_csv(path, sep="\t")
+    if "gene_id" not in df.columns:
+        raise ValueError(f"filtered GSE118713 matrix missing 'gene_id' column: {path}")
+    if df["gene_id"].duplicated().any():
+        raise ValueError(f"{int(df['gene_id'].duplicated().sum())} duplicate gene_id values in {path}")
+    return set(df["gene_id"])
+
+
+def _validate_de_table_keys(df: pd.DataFrame, label: str) -> None:
+    """Require exactly the expected contrasts, unique (contrast, gene_id)
+    keys, and equal per-contrast row counts, before any comparison indexes
+    on gene_id within a contrast."""
+    present = set(df["contrast"].unique())
+    missing = set(REQUIRED_CONTRASTS) - present
+    if missing:
+        raise ValueError(f"{label}: missing required contrasts: {sorted(missing)}")
+    extra = present - set(REQUIRED_CONTRASTS)
+    if extra:
+        raise ValueError(f"{label}: unexpected contrasts: {sorted(extra)}")
+
+    for contrast in REQUIRED_CONTRASTS:
+        gene_ids = df.loc[df["contrast"] == contrast, "gene_id"]
+        if gene_ids.duplicated().any():
+            n_dup = int(gene_ids.duplicated().sum())
+            raise ValueError(f"{label}: {n_dup} duplicate (contrast={contrast!r}, gene_id) pair(s)")
+
+    counts = df["contrast"].value_counts()
+    if counts.nunique() != 1:
+        raise ValueError(f"{label}: per-contrast row counts differ: {counts.to_dict()}")
+
+
 @dataclass(frozen=True)
 class UnredactionConfig:
     """Resolved, config-driven paths. No hardcoded paths."""
@@ -68,6 +115,7 @@ class UnredactionConfig:
     limma_script: Path
     old_de_tsv_gz: Path
     new_de_tsv_gz: Path
+    frozen_de_unredacted_sha256: str
     new_redaction_record_tsv: Path
     new_specificity_tsv_gz: Path
     comparison_tsv: Path
@@ -84,6 +132,7 @@ class UnredactionConfig:
             limma_script=Path(phase2b["limma"]["script"]),
             old_de_tsv_gz=Path(phase2b["limma"]["differential_expression_tsv_gz"]),
             new_de_tsv_gz=Path(unred["differential_expression_unredacted_tsv_gz"]),
+            frozen_de_unredacted_sha256=unred["frozen_differential_expression_unredacted_sha256"],
             new_redaction_record_tsv=Path(unred["redaction_record_unredacted_tsv"]),
             new_specificity_tsv_gz=Path(unred["specificity_unredacted_tsv_gz"]),
             comparison_tsv=Path(unred["comparison_tsv"]),
@@ -113,8 +162,34 @@ def run_unredacted_limma(cfg: UnredactionConfig) -> None:
 
 
 def build_unredacted_specificity(cfg: UnredactionConfig) -> pd.DataFrame:
+    """Build the post-unblinding specificity table and verify it exactly
+    covers the filtered GSE118713 gene universe -- not just the 28 CRISPR
+    hits, every filtered gene. A missing or an unexpected extra gene ID
+    raises rather than being silently absorbed downstream."""
+    _verify_checksum(cfg.new_de_tsv_gz, cfg.frozen_de_unredacted_sha256, "unredacted GSE118713 DE table")
     de_df = load_de_table(cfg.new_de_tsv_gz)
+    _validate_de_table_keys(de_df, "unredacted DE table")
     specificity_df = build_specificity_table(de_df)
+
+    filtered_ids = _load_filtered_gene_ids(cfg.filtered_gene_tpm_tsv)
+    specificity_ids = set(specificity_df["gene_id"])
+    missing = filtered_ids - specificity_ids
+    extra = specificity_ids - filtered_ids
+    if missing:
+        raise ValueError(
+            f"{len(missing)} filtered GSE118713 gene(s) missing from the unredacted "
+            f"specificity table: {sorted(missing)[:10]}{'...' if len(missing) > 10 else ''}"
+        )
+    if extra:
+        raise ValueError(
+            f"{len(extra)} gene(s) in the unredacted specificity table are not in the "
+            f"filtered universe: {sorted(extra)[:10]}{'...' if len(extra) > 10 else ''}"
+        )
+    logger.info(
+        "build_unredacted_specificity: %d genes exactly match the filtered universe",
+        len(specificity_ids),
+    )
+
     write_specificity_table(
         specificity_df,
         SpecificityConfig(
@@ -137,8 +212,11 @@ def compare_redacted_vs_unredacted(cfg: UnredactionConfig) -> pd.DataFrame:
     zero, since BH correction was already finalized on the complete gene
     set before either export.
     """
+    _verify_checksum(cfg.new_de_tsv_gz, cfg.frozen_de_unredacted_sha256, "unredacted GSE118713 DE table")
     old_df = load_de_table(cfg.old_de_tsv_gz)
     new_df = load_de_table(cfg.new_de_tsv_gz)
+    _validate_de_table_keys(old_df, "redacted DE table")
+    _validate_de_table_keys(new_df, "unredacted DE table")
     expected_added = set(cfg.blinded_gene_ids)
 
     records: list[dict[str, object]] = []

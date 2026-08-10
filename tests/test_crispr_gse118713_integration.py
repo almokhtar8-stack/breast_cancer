@@ -23,8 +23,11 @@ from src.crispr_gse118713_integration import (
     compute_qc_summary,
     load_crispr_hits,
     load_gse118713_annotation,
+    load_gse118713_filtered_ids,
     load_gse118713_specificity,
     run_integration,
+    validate_filtered_ids_in_annotation,
+    validate_specificity_covers_filtered_universe,
 )
 
 REPO_ROOT = Path(__file__).parent.parent
@@ -458,10 +461,21 @@ class TestLoadGse118713Annotation:
         pd.DataFrame(rows).to_parquet(path, index=False)
         return path
 
-    def test_duplicate_gene_id_raises(self, tmp_path):
+    def test_identical_duplicate_rows_are_silently_collapsed(self, tmp_path):
         path = self._write(tmp_path, [_annotation_row("G1", "SYM1", "resolved"), _annotation_row("G1", "SYM1", "resolved")])
         cfg = _integration_cfg(tmp_path, gene_tpm_parquet=path, frozen_gene_tpm_sha256=_sha256_file(path))
-        with pytest.raises(ValueError, match="duplicate gene_id"):
+        df = load_gse118713_annotation(cfg)
+        assert len(df) == 1
+
+    def test_conflicting_duplicate_gene_id_raises(self, tmp_path):
+        # Same gene_id, but a different symbol -- a genuine data conflict,
+        # not a harmless duplicate row.
+        path = self._write(
+            tmp_path,
+            [_annotation_row("G1", "SYM1", "resolved"), _annotation_row("G1", "SYM1_CONFLICT", "resolved")],
+        )
+        cfg = _integration_cfg(tmp_path, gene_tpm_parquet=path, frozen_gene_tpm_sha256=_sha256_file(path))
+        with pytest.raises(ValueError, match="conflicting"):
             load_gse118713_annotation(cfg)
 
     def test_negative_tpm_raises(self, tmp_path):
@@ -535,6 +549,38 @@ class TestLoadGse118713Specificity:
         assert len(df) == 1
 
 
+# --- global coverage validation: whole-universe, not just the 28 hits ----
+
+
+class TestValidateFilteredIdsInAnnotation:
+    def test_filtered_id_missing_from_annotation_raises(self):
+        annotation = pd.DataFrame([_annotation_row("G1", "SYM1", "resolved")])
+        with pytest.raises(ValueError, match="absent from the full annotation"):
+            validate_filtered_ids_in_annotation({"G1", "G2"}, annotation)
+
+    def test_full_coverage_succeeds(self):
+        annotation = pd.DataFrame(
+            [_annotation_row("G1", "SYM1", "resolved"), _annotation_row("G2", "SYM2", "resolved")]
+        )
+        validate_filtered_ids_in_annotation({"G1", "G2"}, annotation)  # must not raise
+
+
+class TestValidateSpecificityCoversFilteredUniverse:
+    def test_missing_filtered_gene_raises(self):
+        specificity = pd.DataFrame([_specificity_row("G1")])
+        with pytest.raises(ValueError, match="missing from the specificity table"):
+            validate_specificity_covers_filtered_universe(specificity, {"G1", "G2"})
+
+    def test_unexpected_extra_gene_raises(self):
+        specificity = pd.DataFrame([_specificity_row("G1"), _specificity_row("G2")])
+        with pytest.raises(ValueError, match="not in the filtered universe"):
+            validate_specificity_covers_filtered_universe(specificity, {"G1"})
+
+    def test_exact_match_succeeds(self):
+        specificity = pd.DataFrame([_specificity_row("G1"), _specificity_row("G2")])
+        validate_specificity_covers_filtered_universe(specificity, {"G1", "G2"})  # must not raise
+
+
 # --- real-repository integration: exact deliverable shape, isolated I/O --
 
 
@@ -597,3 +643,18 @@ class TestRunIntegrationAgainstRealConfig:
         written = pd.read_csv(tmp_path / "qc.tsv", sep="\t").iloc[0].to_dict()
         for key, value in recomputed.items():
             assert written[key] == value, f"QC field {key!r} not reproducible from the master table"
+
+    def test_real_specificity_table_exactly_covers_the_real_filtered_universe(self, tmp_path):
+        # run_integration() already calls this internally and would raise
+        # if it failed; this test exercises the same real files directly
+        # so the invariant is checked explicitly, not only as a side
+        # effect of a successful full run.
+        with open(CONFIG_PATH) as f:
+            config = yaml.safe_load(f)
+        cfg = IntegrationConfig.from_config(config)
+        annotation_df = load_gse118713_annotation(cfg)
+        filtered_ids = load_gse118713_filtered_ids(cfg)
+        specificity_df = load_gse118713_specificity(cfg)
+
+        validate_filtered_ids_in_annotation(filtered_ids, annotation_df)
+        validate_specificity_covers_filtered_universe(specificity_df, filtered_ids)  # must not raise

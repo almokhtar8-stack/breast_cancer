@@ -255,10 +255,15 @@ def load_crispr_hits(cfg: IntegrationConfig) -> pd.DataFrame:
 def load_gse118713_annotation(cfg: IntegrationConfig) -> pd.DataFrame:
     """Load and checksum-verify the full (pre-filter) GSE118713 gene table.
 
-    Validates: required columns present; ``gene_id`` unique (a duplicated
-    gene ID would make the mapping and the MCF7-baseline lookup
-    ambiguous); every TPM sample column finite and non-negative (required
-    before ``log2(TPM + 1)`` is ever taken).
+    Validates: required columns present; every TPM sample column finite
+    and non-negative (required before ``log2(TPM + 1)`` is ever taken).
+
+    Duplicate row handling: a ``gene_id`` duplicated across rows that are
+    otherwise byte-identical is a harmless duplicate (e.g. a repeated
+    annotation row) and is silently collapsed to one row. A ``gene_id``
+    duplicated across rows that DISAGREE on any other column is a
+    genuine data conflict and raises -- it is never guessed at or
+    silently resolved by picking one row.
     """
     _verify_checksum(cfg.gene_tpm_parquet, cfg.frozen_gene_tpm_sha256, "GSE118713 full annotation")
     df = pd.read_parquet(cfg.gene_tpm_parquet)
@@ -266,8 +271,19 @@ def load_gse118713_annotation(cfg: IntegrationConfig) -> pd.DataFrame:
     missing = [c for c in ANNOTATION_ID_COLUMNS if c not in df.columns]
     if missing:
         raise ValueError(f"GSE118713 annotation missing expected columns: {missing}")
+
+    rows_before = len(df)
+    df = df.drop_duplicates().reset_index(drop=True)
+    if len(df) != rows_before:
+        logger.info(
+            "load_gse118713_annotation: collapsed %d exact-duplicate row(s)", rows_before - len(df)
+        )
     if df["gene_id"].duplicated().any():
-        raise ValueError(f"{int(df['gene_id'].duplicated().sum())} duplicate gene_id values in GSE118713 annotation")
+        conflicting = sorted(df.loc[df["gene_id"].duplicated(keep=False), "gene_id"].unique())
+        raise ValueError(
+            f"{len(conflicting)} gene_id(s) have conflicting (non-identical) duplicate rows in "
+            f"GSE118713 annotation: {conflicting[:10]}{'...' if len(conflicting) > 10 else ''}"
+        )
 
     missing_mcf7 = [c for c in MCF7_REPLICATE_COLUMNS if c not in df.columns]
     if missing_mcf7:
@@ -326,6 +342,52 @@ def load_gse118713_specificity(cfg: IntegrationConfig) -> pd.DataFrame:
         cfg.specificity_tsv_gz,
     )
     return df
+
+
+def validate_filtered_ids_in_annotation(filtered_ids: set[str], annotation_df: pd.DataFrame) -> None:
+    """Every expression-filtered gene ID must exist in the full annotation.
+
+    Checked globally over the whole filtered universe, not only the 28
+    CRISPR hits actually used downstream -- a gap here means the two
+    frozen GSE118713 tables have drifted apart from each other.
+    """
+    annotation_ids = set(annotation_df["gene_id"])
+    missing = filtered_ids - annotation_ids
+    if missing:
+        raise ValueError(
+            f"{len(missing)} filtered GSE118713 gene(s) absent from the full annotation: "
+            f"{sorted(missing)[:10]}{'...' if len(missing) > 10 else ''}"
+        )
+    logger.info("validate_filtered_ids_in_annotation: all %d filtered gene IDs present in annotation", len(filtered_ids))
+
+
+def validate_specificity_covers_filtered_universe(specificity_df: pd.DataFrame, filtered_ids: set[str]) -> None:
+    """The specificity table's gene set must exactly equal the filtered universe.
+
+    Checked globally, not only the 28 CRISPR hits: a missing gene means a
+    filtered gene has no DE result for a reason other than a configured
+    historical blind (which ``build_master_table`` also refuses to
+    silently assume); an unexpected extra gene means the specificity
+    table includes something outside the frozen filtered matrix used to
+    fit it.
+    """
+    specificity_ids = set(specificity_df["gene_id"])
+    missing = filtered_ids - specificity_ids
+    extra = specificity_ids - filtered_ids
+    if missing:
+        raise ValueError(
+            f"{len(missing)} filtered GSE118713 gene(s) missing from the specificity table: "
+            f"{sorted(missing)[:10]}{'...' if len(missing) > 10 else ''}"
+        )
+    if extra:
+        raise ValueError(
+            f"{len(extra)} gene(s) in the specificity table are not in the filtered universe: "
+            f"{sorted(extra)[:10]}{'...' if len(extra) > 10 else ''}"
+        )
+    logger.info(
+        "validate_specificity_covers_filtered_universe: %d genes exactly match the filtered universe",
+        len(specificity_ids),
+    )
 
 
 def build_symbol_index(annotation_df: pd.DataFrame) -> dict[str, list[str]]:
@@ -574,6 +636,9 @@ def run_integration(config_path: str | Path = "config/config.yaml") -> pd.DataFr
     annotation_df = load_gse118713_annotation(cfg)
     filtered_ids = load_gse118713_filtered_ids(cfg)
     specificity_df = load_gse118713_specificity(cfg)
+
+    validate_filtered_ids_in_annotation(filtered_ids, annotation_df)
+    validate_specificity_covers_filtered_universe(specificity_df, filtered_ids)
 
     master_df = build_master_table(hits_df, annotation_df, filtered_ids, specificity_df, cfg.blinded_gene_ids)
     if len(master_df) != cfg.expected_n_hits:

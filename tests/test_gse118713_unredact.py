@@ -1,7 +1,19 @@
+import hashlib
+from dataclasses import replace
+
 import pandas as pd
 import pytest
 
-from src.gse118713_unredact import NUMERIC_ATOL, UnredactionConfig, compare_redacted_vs_unredacted
+from src.gse118713_unredact import (
+    NUMERIC_ATOL,
+    UnredactionConfig,
+    build_unredacted_specificity,
+    compare_redacted_vs_unredacted,
+)
+
+
+def _sha256_file(path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
 def _de_row(gene_id, gene_symbol, contrast, log2fc=1.0, se=0.1, p_value=0.01, fdr=0.02, ave_expr=5.0):
@@ -31,13 +43,16 @@ def _write_de_table(path, gene_specs):
     pd.DataFrame(rows).to_csv(path, sep="\t", index=False, compression="gzip")
 
 
-def _cfg(tmp_path, old_path, new_path, blinded_gene_ids=("BLIND1", "BLIND2")):
+def _cfg(tmp_path, old_path, new_path, blinded_gene_ids=("BLIND1", "BLIND2"), frozen_de_unredacted_sha256=None):
+    if frozen_de_unredacted_sha256 is None:
+        frozen_de_unredacted_sha256 = _sha256_file(new_path)
     return UnredactionConfig(
         filtered_gene_tpm_tsv=tmp_path / "unused_filtered.tsv.gz",
         sample_metadata_tsv=tmp_path / "unused_meta.tsv",
         limma_script=tmp_path / "unused.R",
         old_de_tsv_gz=old_path,
         new_de_tsv_gz=new_path,
+        frozen_de_unredacted_sha256=frozen_de_unredacted_sha256,
         new_redaction_record_tsv=tmp_path / "unused_record.tsv",
         new_specificity_tsv_gz=tmp_path / "unused_specificity.tsv.gz",
         comparison_tsv=tmp_path / "comparison.tsv",
@@ -141,6 +156,78 @@ class TestCompareRedactedVsUnredacted:
         cfg = _cfg(tmp_path, old_path, new_path)
         with pytest.raises(ValueError, match="gene_symbol"):
             compare_redacted_vs_unredacted(cfg)
+
+    def test_duplicate_contrast_gene_id_in_old_de_raises(self, tmp_path):
+        old_path = tmp_path / "old.tsv.gz"
+        new_path = tmp_path / "new.tsv.gz"
+        # G1 written twice per contrast -- duplicate (contrast, gene_id) key
+        _write_de_table(old_path, [("G1", "SYM1", {}), ("G1", "SYM1", {})])
+        _write_de_table(new_path, [("G1", "SYM1", {}), ("BLIND1", "RCOR1", {}), ("BLIND2", "KDM1A", {})])
+        cfg = _cfg(tmp_path, old_path, new_path)
+        with pytest.raises(ValueError, match="duplicate"):
+            compare_redacted_vs_unredacted(cfg)
+
+    def test_duplicate_contrast_gene_id_in_unredacted_de_raises(self, tmp_path):
+        old_path = tmp_path / "old.tsv.gz"
+        new_path = tmp_path / "new.tsv.gz"
+        _write_de_table(old_path, [("G1", "SYM1", {})])
+        _write_de_table(
+            new_path,
+            [("G1", "SYM1", {}), ("G1", "SYM1", {}), ("BLIND1", "RCOR1", {}), ("BLIND2", "KDM1A", {})],
+        )
+        cfg = _cfg(tmp_path, old_path, new_path)
+        with pytest.raises(ValueError, match="duplicate"):
+            compare_redacted_vs_unredacted(cfg)
+
+    def test_unredacted_de_checksum_mismatch_raises(self, tmp_path):
+        old_path = tmp_path / "old.tsv.gz"
+        new_path = tmp_path / "new.tsv.gz"
+        _write_de_table(old_path, [("G1", "SYM1", {})])
+        _write_de_table(new_path, [("G1", "SYM1", {}), ("BLIND1", "RCOR1", {}), ("BLIND2", "KDM1A", {})])
+        cfg = _cfg(tmp_path, old_path, new_path, frozen_de_unredacted_sha256="0" * 64)
+        with pytest.raises(ValueError, match="checksum mismatch"):
+            compare_redacted_vs_unredacted(cfg)
+
+
+class TestBuildUnredactedSpecificity:
+    def _write_filtered(self, path, gene_ids):
+        pd.DataFrame({"gene_id": gene_ids}).to_csv(path, sep="\t", index=False, compression="gzip")
+
+    def test_specificity_exactly_covers_filtered_universe_succeeds(self, tmp_path):
+        new_path = tmp_path / "new.tsv.gz"
+        _write_de_table(new_path, [("G1", "SYM1", {}), ("G2", "SYM2", {})])
+        filtered_path = tmp_path / "filtered.tsv.gz"
+        self._write_filtered(filtered_path, ["G1", "G2"])
+        cfg = replace(
+            _cfg(tmp_path, old_path=tmp_path / "unused_old.tsv.gz", new_path=new_path),
+            filtered_gene_tpm_tsv=filtered_path,
+        )
+        specificity_df = build_unredacted_specificity(cfg)
+        assert set(specificity_df["gene_id"]) == {"G1", "G2"}
+
+    def test_missing_filtered_gene_in_specificity_raises(self, tmp_path):
+        new_path = tmp_path / "new.tsv.gz"
+        _write_de_table(new_path, [("G1", "SYM1", {})])  # G2 never fitted/exported
+        filtered_path = tmp_path / "filtered.tsv.gz"
+        self._write_filtered(filtered_path, ["G1", "G2"])
+        cfg = replace(
+            _cfg(tmp_path, old_path=tmp_path / "unused_old.tsv.gz", new_path=new_path),
+            filtered_gene_tpm_tsv=filtered_path,
+        )
+        with pytest.raises(ValueError, match="missing from the unredacted"):
+            build_unredacted_specificity(cfg)
+
+    def test_unexpected_extra_gene_in_specificity_raises(self, tmp_path):
+        new_path = tmp_path / "new.tsv.gz"
+        _write_de_table(new_path, [("G1", "SYM1", {}), ("G2", "SYM2", {})])
+        filtered_path = tmp_path / "filtered.tsv.gz"
+        self._write_filtered(filtered_path, ["G1"])  # G2 not part of the filtered universe
+        cfg = replace(
+            _cfg(tmp_path, old_path=tmp_path / "unused_old.tsv.gz", new_path=new_path),
+            filtered_gene_tpm_tsv=filtered_path,
+        )
+        with pytest.raises(ValueError, match="not in the filtered universe"):
+            build_unredacted_specificity(cfg)
 
 
 class TestRealUnredactionOutputs:
