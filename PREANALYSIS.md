@@ -612,3 +612,17 @@ withheld GSE118713 rows (RCOR1, KDM1A) were added.
 GSE111151 remains reserved for post-selection independent confirmation
 only, per the 2026-08-06 amendment above; it is unaffected by this
 clarification.
+
+**Amendment 2026-08-10 (gene-vs-row terminology clarification; changes no
+analysis, result, interpretation, or governance decision):**
+
+Where prior amendments above referred to "two rows" being withheld or
+restored, the precise meaning is:
+
+- two genes, RCOR1 and KDM1A, were withheld from the GSE118713 exported
+  DE/specificity results while the blind was active;
+- in the contrast-long differential-expression table this corresponds to
+  those two genes across each of the three contrasts (TAMR_vs_MCF7,
+  FASR_vs_MCF7, TAMR_vs_FASR);
+- the controlled unredaction restored those two genes without changing
+  any previously exported shared-gene result.
