@@ -1,0 +1,2 @@
+gene_symbol	crispr_effect_size	crispr_fdr	crispr_n_guides	crispr_direction	tamr_vs_mcf7_log2fc	tamr_vs_mcf7_fdr	tamr_vs_fasr_log2fc	tamr_vs_fasr_fdr	benchmark_label
+PAICS	-0.2968412855925857	0.8527230919186876	4	sensitising_knockout	-0.323553577588319	0.0793933881436724	0.714910647970002	0.0008312251381707	published_benchmark_not_gate1_hit
