@@ -1,42 +1,60 @@
 """Master integration table: Gate-1 CRISPR hits joined to GSE118713 expression.
 
 Source A: the frozen Hany et al. 2023 gene-by-treatment interaction table
-written by ``src.labels.build_labels`` (config ``gate1.labels_path``),
-restricted here to the Gate-1 FDR<``gate1.fdr_threshold`` hit set already
-decided by ``src.gate1_checks.decide_gate1`` (config
-``gate1.decision_output``).
+written by ``src.labels.build_labels`` (config ``gate1.labels_path``,
+checksum-pinned by ``gate1.frozen_labels_sha256``), restricted here to the
+Gate-1 FDR<``gate1.fdr_threshold`` hit set. The full Gate-1 decision
+(``gate1.decision_output``) is reproduced from the frozen labels via
+``src.gate1_checks.decide_gate1`` and cross-checked field by field, not
+just on ``n_passing``.
 
 Source B: the frozen GSE118713 gene-level TPM matrix written by
 ``src.gse118713_prep.prepare_gse118713`` (config
 ``gse118713.output.gene_tpm_parquet``, checksum-pinned by
 ``gse118713.frozen_gene_tpm_sha256``), the Phase 2B expression-filtered
 subset written by ``src.gse118713_expression_filter`` (config
-``gse118713_phase2b.filtering.filtered_gene_tpm_tsv``), and the
-TAMR-specificity table written by ``src.gse118713_tamr_specificity``
-(config ``gse118713_phase2b.specificity.output_tsv_gz``).
+``gse118713_phase2b.filtering.filtered_gene_tpm_tsv``, checksum-pinned by
+``gse118713_phase2b.filtering.frozen_filtered_gene_tpm_sha256``), and the
+post-unblinding TAMR-specificity table written by
+``src.gse118713_unredact.build_unredacted_specificity`` (config
+``gse118713_phase2b.unredaction.specificity_unredacted_tsv_gz``,
+checksum-pinned by
+``gse118713_phase2b.unredaction.frozen_specificity_unredacted_sha256``).
 
 This module performs no differential expression, pathway analysis, or
 candidate scoring -- it only joins already-computed, already-frozen
-results. Per PREANALYSIS.md's 2026-08-10 amendment, the RCOR1/KDM1A blind
-is retired for this analysis, so both genes are treated like any other
-Gate-1 hit here; however, their GSE118713 TAMR_vs_MCF7/TAMR_vs_FASR values
-were never computed (the limma pipeline redacted them before writing any
-output -- see ``scripts/analysis/gse118713_limma_lib.R``'s
-``redact_blinded_genes``) and are reported here as
-``gse118713_de_na_reason == "blinded_at_source_not_recomputed"`` rather
-than silently rerunning limma.
+results. Per PREANALYSIS.md's 2026-08-10 amendments (blind retirement and
+its provenance correction), RCOR1/KDM1A are treated like any other Gate-1
+hit here, and their GSE118713 values come from the post-unblinding
+specificity table (``src.gse118713_unredact``), which recovers them from
+the exact frozen limma fit with only export-stage redaction disabled --
+see that module's docstring for the controlled-unredaction procedure and
+its row-for-row provenance comparison against the original redacted
+output.
+
+Historical-blind compatibility: if this module is ever pointed at an
+older, still-redacted specificity table (config
+``gse118713_phase2b.specificity.output_tsv_gz``) instead of the current
+post-unblinding one, a uniquely-mapped, filter-passing gene absent from
+that table is accepted as an expected gap ONLY when its gene ID is one of
+the configured ``gse118713_phase2b.blinding.blinded_gene_ids`` -- any
+other unexplained absence raises immediately rather than being assumed to
+be a blind. This module never silently infers blinding from a merely
+missing row.
 
 Mapping rule (no silent alias substitution, per PREANALYSIS.md's Phase 2
 data-audit amendment): a CRISPR gene symbol is joined to a GSE118713
-Ensembl gene ID only when exactly one gene ID in the full (pre-filter)
-GSE118713 annotation has ``symbol_mapping_status == "resolved"`` and that
-resolved symbol equals the CRISPR gene symbol. A symbol resolved by more
-than one distinct gene ID is reported as ``ambiguous`` and excluded from
-the RNA fields (not silently resolved by picking one). A symbol resolved
-by zero gene IDs is reported as ``unmatched``. Every one of the 28 CRISPR
-hits is kept as one master-table row regardless of mapping outcome --
-missing RNA fields are ``NA`` with an explicit reason column, never a
-dropped row.
+Ensembl gene ID only when exactly one DISTINCT gene ID in the full
+(pre-filter) GSE118713 annotation has ``symbol_mapping_status ==
+"resolved"`` and that resolved symbol equals the CRISPR gene symbol.
+Duplicate annotation rows carrying the identical (gene_id, symbol) pair
+collapse to one candidate and do not manufacture false ambiguity; a
+symbol resolved by more than one DISTINCT gene ID is reported as
+``ambiguous`` and excluded from the RNA fields (not silently resolved by
+picking one). A symbol resolved by zero gene IDs is reported as
+``unmatched``. Every one of the 28 CRISPR hits is kept as one
+master-table row regardless of mapping outcome -- missing RNA fields are
+``NA`` with an explicit reason column, never a dropped row.
 """
 
 from __future__ import annotations
@@ -50,7 +68,7 @@ import numpy as np
 import pandas as pd
 import yaml
 
-from src.gate1_checks import load_and_validate_labels
+from src.gate1_checks import decide_gate1, load_and_validate_labels
 
 logger = logging.getLogger(__name__)
 
@@ -61,9 +79,15 @@ MAPPING_UNMATCHED = "unmatched"
 
 DE_NA_NOT_MAPPED = "not_uniquely_mapped"
 DE_NA_FILTERED_OUT = "filtered_out_no_de_fit"
-DE_NA_BLINDED = "blinded_at_source_not_recomputed"
+# Only ever assigned when the missing gene ID is one of the configured
+# gse118713_phase2b.blinding.blinded_gene_ids -- see the module docstring's
+# "Historical-blind compatibility" note. Not expected to be assigned at all
+# when specificity_tsv_gz points at the current post-unblinding table,
+# since that table has no blinding-related gaps.
+DE_NA_HISTORICALLY_BLINDED = "withheld_from_export_before_blind_retirement"
 
 MCF7_REPLICATE_COLUMNS: tuple[str, ...] = ("MCF7_Rep1", "MCF7_Rep2", "MCF7_Rep3")
+ANNOTATION_ID_COLUMNS: tuple[str, ...] = ("gene_id", "gene_symbol", "symbol_mapping_status")
 
 MASTER_TABLE_COLUMNS: tuple[str, ...] = (
     "gene_symbol",
@@ -97,19 +121,31 @@ def _sha256_file(path: str | Path) -> str:
     return digest.hexdigest()
 
 
+def _verify_checksum(path: str | Path, expected_sha256: str, label: str) -> None:
+    actual = _sha256_file(path)
+    if actual != expected_sha256:
+        raise ValueError(f"{label} checksum mismatch at {path}: expected {expected_sha256}, got {actual}")
+
+
 @dataclass(frozen=True)
 class IntegrationConfig:
     """Resolved, config-driven paths. No hardcoded paths."""
 
     labels_path: Path
+    frozen_labels_sha256: str
     fdr_threshold: float
     n_fitted_genes_expected: int
+    classifier_min: int
+    continuous_min: int
     gate1_decision_tsv: Path
     expected_n_hits: int
     gene_tpm_parquet: Path
     frozen_gene_tpm_sha256: str
     filtered_gene_tpm_tsv: Path
+    frozen_filtered_gene_tpm_sha256: str
     specificity_tsv_gz: Path
+    frozen_specificity_sha256: str
+    blinded_gene_ids: tuple[str, ...]
     master_table_tsv: Path
     master_table_csv: Path
     master_table_parquet: Path
@@ -121,17 +157,24 @@ class IntegrationConfig:
         gate1 = config["gate1"]
         gse = config["gse118713"]
         phase2b = config["gse118713_phase2b"]
+        unred = phase2b["unredaction"]
         integ = config["crispr_gse118713_integration"]
         return cls(
             labels_path=Path(gate1["labels_path"]),
+            frozen_labels_sha256=gate1["frozen_labels_sha256"],
             fdr_threshold=float(gate1["fdr_threshold"]),
             n_fitted_genes_expected=int(gate1["n_fitted_genes_expected"]),
+            classifier_min=int(gate1["branch_thresholds"]["classifier_min"]),
+            continuous_min=int(gate1["branch_thresholds"]["continuous_min"]),
             gate1_decision_tsv=Path(gate1["decision_output"]),
             expected_n_hits=int(integ["expected_n_hits"]),
             gene_tpm_parquet=Path(gse["output"]["gene_tpm_parquet"]),
             frozen_gene_tpm_sha256=gse["frozen_gene_tpm_sha256"],
             filtered_gene_tpm_tsv=Path(phase2b["filtering"]["filtered_gene_tpm_tsv"]),
-            specificity_tsv_gz=Path(phase2b["specificity"]["output_tsv_gz"]),
+            frozen_filtered_gene_tpm_sha256=phase2b["filtering"]["frozen_filtered_gene_tpm_sha256"],
+            specificity_tsv_gz=Path(unred["specificity_unredacted_tsv_gz"]),
+            frozen_specificity_sha256=unred["frozen_specificity_unredacted_sha256"],
+            blinded_gene_ids=tuple(phase2b["blinding"]["blinded_gene_ids"]),
             master_table_tsv=Path(integ["output"]["master_table_tsv"]),
             master_table_csv=Path(integ["output"]["master_table_csv"]),
             master_table_parquet=Path(integ["output"]["master_table_parquet"]),
@@ -143,34 +186,65 @@ class IntegrationConfig:
 def load_crispr_hits(cfg: IntegrationConfig) -> pd.DataFrame:
     """Load the frozen labels table and extract the Gate-1 FDR<threshold hits.
 
-    Reuses ``load_and_validate_labels`` rather than reimplementing the
-    label-table validation, so the hit count here cannot silently drift
-    from a malformed or unexpected labels table. Raises if the recomputed
-    FDR<threshold count does not match both ``gate1_decision_tsv`` (on
-    disk) and ``expected_n_hits`` (config) -- a mismatch means the frozen
-    labels table or the gate has changed since this table was
-    preregistered as Phase-3 input, which must not pass silently.
+    Verifies the labels file's checksum, reuses ``load_and_validate_labels``
+    for structural validation, and reproduces the FULL Gate-1 decision via
+    ``decide_gate1`` -- not just ``n_passing`` -- cross-checking every
+    field recorded in ``gate1_decision.tsv`` (total fitted genes, FDR
+    threshold, threshold band, branch decision, labels input path, labels
+    checksum) against what is actually recomputed from the frozen labels
+    file. Any mismatch means the frozen labels table, the gate, or the
+    decision record have drifted apart since this integration was
+    preregistered, which must not pass silently.
     """
+    _verify_checksum(cfg.labels_path, cfg.frozen_labels_sha256, "labels input")
+
     labels_df = load_and_validate_labels(cfg.labels_path, cfg.n_fitted_genes_expected)
-    n_passing = int((labels_df["fdr"] < cfg.fdr_threshold).sum())
+    decision = decide_gate1(
+        labels_df,
+        fdr_threshold=cfg.fdr_threshold,
+        classifier_min=cfg.classifier_min,
+        continuous_min=cfg.continuous_min,
+    )
 
     recorded = pd.read_csv(cfg.gate1_decision_tsv, sep="\t")
-    recorded_n_passing = int(recorded.loc[0, "n_passing"])
-    if n_passing != recorded_n_passing:
+    if len(recorded) != 1:
+        raise ValueError(f"expected exactly one row in {cfg.gate1_decision_tsv}, got {len(recorded)}")
+    recorded_row = recorded.iloc[0]
+
+    mismatches: dict[str, tuple[object, object]] = {}
+    for field in ("total_fitted_genes", "fdr_threshold", "n_passing", "threshold_band", "branch_decision"):
+        recomputed_value = decision[field]
+        recorded_value = recorded_row[field]
+        if isinstance(recomputed_value, float):
+            equal = np.isclose(float(recomputed_value), float(recorded_value), rtol=0, atol=1e-12)
+        else:
+            equal = recomputed_value == recorded_value
+        if not equal:
+            mismatches[field] = (recomputed_value, recorded_value)
+
+    recorded_labels_path = str(recorded_row["labels_input_path"])
+    if recorded_labels_path != str(cfg.labels_path):
+        mismatches["labels_input_path"] = (str(cfg.labels_path), recorded_labels_path)
+
+    recorded_labels_sha256 = str(recorded_row["labels_file_sha256"])
+    if recorded_labels_sha256 != cfg.frozen_labels_sha256:
+        mismatches["labels_file_sha256"] = (cfg.frozen_labels_sha256, recorded_labels_sha256)
+
+    if mismatches:
         raise ValueError(
-            f"recomputed Gate-1 hit count ({n_passing}) does not match the committed "
-            f"decision record ({recorded_n_passing}) at {cfg.gate1_decision_tsv}"
+            f"recomputed Gate-1 decision does not match the committed decision record "
+            f"at {cfg.gate1_decision_tsv}: {mismatches}"
         )
-    if n_passing != cfg.expected_n_hits:
+    if decision["n_passing"] != cfg.expected_n_hits:
         raise ValueError(
-            f"Gate-1 hit count ({n_passing}) does not match config expected_n_hits "
-            f"({cfg.expected_n_hits})"
+            f"Gate-1 hit count ({decision['n_passing']}) does not match config "
+            f"expected_n_hits ({cfg.expected_n_hits})"
         )
 
     hits = labels_df.loc[labels_df["fdr"] < cfg.fdr_threshold].copy()
     hits = hits.sort_values(["fdr", "gene"], ascending=[True, True]).reset_index(drop=True)
     logger.info(
-        "load_crispr_hits: %d of %d fitted genes pass fdr < %s (matches gate1_decision.tsv and config)",
+        "load_crispr_hits: %d of %d fitted genes pass fdr < %s (full Gate-1 decision record verified)",
         len(hits),
         len(labels_df),
         cfg.fdr_threshold,
@@ -179,58 +253,104 @@ def load_crispr_hits(cfg: IntegrationConfig) -> pd.DataFrame:
 
 
 def load_gse118713_annotation(cfg: IntegrationConfig) -> pd.DataFrame:
-    """Load and checksum-verify the full (pre-filter) GSE118713 gene table."""
-    actual_sha256 = _sha256_file(cfg.gene_tpm_parquet)
-    if actual_sha256 != cfg.frozen_gene_tpm_sha256:
-        raise ValueError(
-            f"GSE118713 gene TPM checksum mismatch: expected {cfg.frozen_gene_tpm_sha256}, "
-            f"got {actual_sha256}"
-        )
+    """Load and checksum-verify the full (pre-filter) GSE118713 gene table.
+
+    Validates: required columns present; ``gene_id`` unique (a duplicated
+    gene ID would make the mapping and the MCF7-baseline lookup
+    ambiguous); every TPM sample column finite and non-negative (required
+    before ``log2(TPM + 1)`` is ever taken).
+    """
+    _verify_checksum(cfg.gene_tpm_parquet, cfg.frozen_gene_tpm_sha256, "GSE118713 full annotation")
     df = pd.read_parquet(cfg.gene_tpm_parquet)
-    missing = [c for c in ("gene_id", "gene_symbol", "symbol_mapping_status") if c not in df.columns]
+
+    missing = [c for c in ANNOTATION_ID_COLUMNS if c not in df.columns]
     if missing:
         raise ValueError(f"GSE118713 annotation missing expected columns: {missing}")
+    if df["gene_id"].duplicated().any():
+        raise ValueError(f"{int(df['gene_id'].duplicated().sum())} duplicate gene_id values in GSE118713 annotation")
+
     missing_mcf7 = [c for c in MCF7_REPLICATE_COLUMNS if c not in df.columns]
     if missing_mcf7:
         raise ValueError(f"GSE118713 annotation missing MCF7 replicate columns: {missing_mcf7}")
-    logger.info("load_gse118713_annotation: read %d gene rows (checksum verified)", len(df))
+
+    sample_cols = [c for c in df.columns if c not in ANNOTATION_ID_COLUMNS]
+    tpm = df[sample_cols].to_numpy(dtype=float)
+    if not np.isfinite(tpm).all():
+        raise ValueError("non-finite TPM value in GSE118713 annotation")
+    if (tpm < 0).any():
+        raise ValueError("negative TPM value in GSE118713 annotation")
+
+    logger.info("load_gse118713_annotation: read %d gene rows (checksum + uniqueness + finiteness verified)", len(df))
     return df
 
 
 def load_gse118713_filtered_ids(cfg: IntegrationConfig) -> set[str]:
+    _verify_checksum(cfg.filtered_gene_tpm_tsv, cfg.frozen_filtered_gene_tpm_sha256, "GSE118713 filtered matrix")
     df = pd.read_csv(cfg.filtered_gene_tpm_tsv, sep="\t")
     if "gene_id" not in df.columns:
         raise ValueError(f"GSE118713 filtered matrix missing 'gene_id' column: {cfg.filtered_gene_tpm_tsv}")
+    if df["gene_id"].duplicated().any():
+        raise ValueError(f"{int(df['gene_id'].duplicated().sum())} duplicate gene_id values in GSE118713 filtered matrix")
     ids = set(df["gene_id"])
-    logger.info("load_gse118713_filtered_ids: %d genes passed the Phase 2B expression filter", len(ids))
+    logger.info("load_gse118713_filtered_ids: %d genes passed the Phase 2B expression filter (checksum verified)", len(ids))
     return ids
 
 
 def load_gse118713_specificity(cfg: IntegrationConfig) -> pd.DataFrame:
+    """Load and validate the TAMR-specificity table used as the DE source.
+
+    Validates: required columns; unique ``gene_id``; every present logFC/
+    FDR value finite; every present FDR in ``[0, 1]``.
+    """
+    _verify_checksum(cfg.specificity_tsv_gz, cfg.frozen_specificity_sha256, "GSE118713 specificity table")
     df = pd.read_csv(cfg.specificity_tsv_gz, sep="\t")
     required = {"gene_id", "tamr_vs_mcf7_log2fc", "tamr_vs_mcf7_fdr", "tamr_vs_fasr_log2fc", "tamr_vs_fasr_fdr"}
     missing = required - set(df.columns)
     if missing:
         raise ValueError(f"GSE118713 specificity table missing required columns: {sorted(missing)}")
-    logger.info("load_gse118713_specificity: read %d genes (blinded genes already withheld)", len(df))
+    if df["gene_id"].duplicated().any():
+        raise ValueError(f"{int(df['gene_id'].duplicated().sum())} duplicate gene_id values in GSE118713 specificity table")
+
+    numeric_cols = ["tamr_vs_mcf7_log2fc", "tamr_vs_mcf7_fdr", "tamr_vs_fasr_log2fc", "tamr_vs_fasr_fdr"]
+    values = df[numeric_cols].to_numpy(dtype=float)
+    if not np.isfinite(values).all():
+        raise ValueError("non-finite logFC/FDR value in GSE118713 specificity table")
+
+    fdr_cols = df[["tamr_vs_mcf7_fdr", "tamr_vs_fasr_fdr"]].to_numpy(dtype=float)
+    if ((fdr_cols < 0) | (fdr_cols > 1)).any():
+        raise ValueError("FDR value outside [0, 1] in GSE118713 specificity table")
+
+    logger.info(
+        "load_gse118713_specificity: read %d genes from %s (checksum + uniqueness + range verified)",
+        len(df),
+        cfg.specificity_tsv_gz,
+    )
     return df
 
 
 def build_symbol_index(annotation_df: pd.DataFrame) -> dict[str, list[str]]:
-    """Map each resolved gene symbol to every distinct gene ID that resolves to it.
+    """Map each resolved gene symbol to every DISTINCT gene ID that resolves to it.
 
     Only ``symbol_mapping_status == "resolved"`` rows are indexed -- an
     ambiguous or missing gene ID never contributes a candidate symbol, per
-    PREANALYSIS.md's Phase 2 data-audit amendment.
+    PREANALYSIS.md's Phase 2 data-audit amendment. Candidates are built
+    from distinct (gene_id, symbol) pairs, so a duplicated annotation row
+    carrying the identical pair twice does not manufacture false
+    ambiguity; only genuinely distinct gene IDs sharing a symbol count as
+    more than one candidate.
     """
-    resolved = annotation_df.loc[annotation_df["symbol_mapping_status"] == "resolved"]
+    resolved = annotation_df.loc[annotation_df["symbol_mapping_status"] == "resolved", ["gene_id", "gene_symbol"]]
+    distinct_pairs = resolved.drop_duplicates()
+
     index: dict[str, list[str]] = {}
-    for gene_id, symbol in zip(resolved["gene_id"], resolved["gene_symbol"]):
+    for gene_id, symbol in zip(distinct_pairs["gene_id"], distinct_pairs["gene_symbol"]):
         index.setdefault(symbol, []).append(gene_id)
     logger.info(
-        "build_symbol_index: %d resolved gene IDs indexed under %d distinct symbols",
-        len(resolved),
+        "build_symbol_index: %d distinct (gene_id, symbol) pairs indexed under %d distinct symbols "
+        "(%d raw resolved rows before dedup)",
+        len(distinct_pairs),
         len(index),
+        len(resolved),
     )
     return index
 
@@ -248,15 +368,20 @@ def build_master_table(
     annotation_df: pd.DataFrame,
     filtered_ids: set[str],
     specificity_df: pd.DataFrame,
+    blinded_gene_ids: tuple[str, ...] = (),
 ) -> pd.DataFrame:
     """Join every Gate-1 hit to GSE118713, keeping exactly one row per hit.
 
-    No CRISPR hit is ever dropped: a mapping failure, filter failure, or
-    blinded-at-source DE gap becomes an ``NA`` RNA value plus an explicit
-    status/reason column, never a removed row.
+    No CRISPR hit is ever dropped: a mapping failure or filter failure
+    becomes an ``NA`` RNA value plus an explicit status/reason column,
+    never a removed row. A uniquely mapped, filter-passing gene absent
+    from ``specificity_df`` is NOT assumed to be blinded: it raises
+    immediately unless its gene ID is in ``blinded_gene_ids`` (see the
+    module docstring's "Historical-blind compatibility" note).
     """
     symbol_index = build_symbol_index(annotation_df)
     specificity_by_id = specificity_df.set_index("gene_id")
+    blinded_gene_id_set = set(blinded_gene_ids)
 
     rows: list[dict[str, object]] = []
     for record in hits_df.itertuples(index=False):
@@ -296,12 +421,15 @@ def build_master_table(
             tamr_vs_mcf7_fdr = float(de_row["tamr_vs_mcf7_fdr"])
             tamr_vs_fasr_log2fc = float(de_row["tamr_vs_fasr_log2fc"])
             tamr_vs_fasr_fdr = float(de_row["tamr_vs_fasr_fdr"])
+        elif gene_id in blinded_gene_id_set:
+            de_na_reason = DE_NA_HISTORICALLY_BLINDED
         else:
-            # Uniquely mapped and filter-passing, but absent from the
-            # specificity table: only RCOR1/KDM1A can land here, since the
-            # limma pipeline redacts blinded genes before writing any DE
-            # output (scripts/analysis/gse118713_limma_lib.R).
-            de_na_reason = DE_NA_BLINDED
+            raise ValueError(
+                f"gene_id={gene_id!r} (symbol={symbol!r}) is uniquely mapped and passed the "
+                f"expression filter, but is absent from the specificity table and is not a "
+                f"configured historical blind ID -- this is an unexplained gap and must not be "
+                f"silently assumed to be blinding"
+            )
 
         rows.append(
             {
@@ -361,7 +489,7 @@ def compute_qc_summary(df: pd.DataFrame) -> dict[str, object]:
     n_unique_filtered_out = int((df["mapping_status"] == MAPPING_UNIQUE_FILTERED_OUT).sum())
     n_ambiguous = int((df["mapping_status"] == MAPPING_AMBIGUOUS).sum())
     n_unmatched = int((df["mapping_status"] == MAPPING_UNMATCHED).sum())
-    n_blinded_gap = int((df["gse118713_de_na_reason"] == DE_NA_BLINDED).sum())
+    n_historically_blinded_gap = int((df["gse118713_de_na_reason"] == DE_NA_HISTORICALLY_BLINDED).sum())
 
     mcf7_fdr = pd.to_numeric(df["tamr_vs_mcf7_fdr"], errors="coerce")
     fasr_fdr = pd.to_numeric(df["tamr_vs_fasr_fdr"], errors="coerce")
@@ -372,6 +500,7 @@ def compute_qc_summary(df: pd.DataFrame) -> dict[str, object]:
     n_both_sig = int((has_mcf7_sig.fillna(False) & has_fasr_sig.fillna(False)).sum())
 
     de_available = df["gse118713_de_na_reason"].isna()
+    n_de_available = int(de_available.sum())
     log2fc_mcf7 = pd.to_numeric(df.loc[de_available, "tamr_vs_mcf7_log2fc"], errors="coerce")
     log2fc_fasr = pd.to_numeric(df.loc[de_available, "tamr_vs_fasr_log2fc"], errors="coerce")
     n_up_mcf7 = int((log2fc_mcf7 > 0).sum())
@@ -385,7 +514,8 @@ def compute_qc_summary(df: pd.DataFrame) -> dict[str, object]:
         "n_mapped_unique_but_filtered_out": n_unique_filtered_out,
         "n_mapping_ambiguous": n_ambiguous,
         "n_mapping_unmatched": n_unmatched,
-        "n_de_gap_blinded_at_source": n_blinded_gap,
+        "n_de_gap_historically_blinded": n_historically_blinded_gap,
+        "n_de_available": n_de_available,
         "n_tamr_vs_mcf7_fdr_lt_0_05": n_mcf7_sig,
         "n_tamr_vs_fasr_fdr_lt_0_05": n_fasr_sig,
         "n_significant_in_both_comparisons": n_both_sig,
@@ -417,8 +547,10 @@ def write_qc_summary(summary: dict[str, object], cfg: IntegrationConfig) -> None
         f"- Ambiguous mapping (excluded from RNA fields): {summary['n_mapping_ambiguous']}",
         f"- Unmatched (no GSE118713 gene ID resolves to this symbol): "
         f"{summary['n_mapping_unmatched']}",
-        f"- Mapped and filter-passing but DE unavailable (RCOR1/KDM1A blinded "
-        f"at source, not recomputed): {summary['n_de_gap_blinded_at_source']}",
+        f"- Mapped and filter-passing but DE unavailable (historical blind gap, "
+        f"expected to be zero when reading the post-unblinding specificity table): "
+        f"{summary['n_de_gap_historically_blinded']}",
+        f"- DE values available: {summary['n_de_available']}",
         f"- TAMR_vs_MCF7 FDR<0.05: {summary['n_tamr_vs_mcf7_fdr_lt_0_05']}",
         f"- TAMR_vs_FASR FDR<0.05: {summary['n_tamr_vs_fasr_fdr_lt_0_05']}",
         f"- Significant in both comparisons: {summary['n_significant_in_both_comparisons']}",
@@ -443,7 +575,7 @@ def run_integration(config_path: str | Path = "config/config.yaml") -> pd.DataFr
     filtered_ids = load_gse118713_filtered_ids(cfg)
     specificity_df = load_gse118713_specificity(cfg)
 
-    master_df = build_master_table(hits_df, annotation_df, filtered_ids, specificity_df)
+    master_df = build_master_table(hits_df, annotation_df, filtered_ids, specificity_df, cfg.blinded_gene_ids)
     if len(master_df) != cfg.expected_n_hits:
         raise ValueError(f"expected exactly {cfg.expected_n_hits} master rows, got {len(master_df)}")
     write_master_table(master_df, cfg)

@@ -45,6 +45,7 @@ gse118713_phase2b:
     min_tpm: 1.0
     min_samples: 3
     filtered_gene_tpm_tsv: data/processed/gse118713_gene_tpm_filtered.tsv.gz
+    frozen_filtered_gene_tpm_sha256: 5898febf286f39838f3b69b7e578de03b1c6a049c5d4375e72adcd29cc0ea152
     filtering_summary_tsv: results/tables/gse118713_expression_filtering.tsv
   qc:
     n_pca_genes: 2000
@@ -78,6 +79,7 @@ gse118713_phase2b:
     differential_expression_unredacted_tsv_gz: results/tables/gse118713_differential_expression_unredacted.tsv.gz
     redaction_record_unredacted_tsv: results/tables/gse118713_blinding_redaction_unredacted.tsv
     specificity_unredacted_tsv_gz: results/tables/gse118713_tamr_specificity_unredacted.tsv.gz
+    frozen_specificity_unredacted_sha256: f88c0767ba97277c97994cda30866a1e602a0c17d6ab73b890a63963ff982cf2
     comparison_tsv: results/tables/gse118713_unredaction_comparison.tsv
 
 # GSE111151: 4 parental lines, 7 TamR derivatives, n=1 per sample (no
@@ -106,6 +108,7 @@ gse111151:
 
 gate1:
   labels_path: data/processed/labels.parquet
+  frozen_labels_sha256: f296505647262a01dc8728ea82ff1a8e7b8984906bcb242d4704dc105faaa3a0
   fdr_threshold: 0.1
   n_fitted_genes_expected: 19103
   branch_thresholds:
