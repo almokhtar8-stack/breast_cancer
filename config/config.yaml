@@ -212,3 +212,33 @@ nebula_plots:
       pdf: results/figures/nebula/fig5_usp34_panel.pdf
       summary_plot_input_tsv: results/tables/nebula_plot_inputs/fig5_usp34_summary_input.tsv
       expression_plot_input_tsv: results/tables/nebula_plot_inputs/fig5_usp34_expression_input.tsv
+
+# NEBULA final poster figures -- the visually-approved, frozen-appearance
+# figure set (Figures 1-3 = approved v6 design, Figures 4-5 = approved v8
+# design), produced by the single stable module src/nebula_plots_final.py.
+# Reads exclusively the frozen, committed plot-input tables already
+# referenced above (nebula_plots.figures, gse118713_phase2b.filtering,
+# gse118713.output) -- no new data source, no recomputation, no changed
+# threshold, no changed candidate membership or ordering. The experimental
+# nebula_plots_v2..v8 iteration modules/configs/outputs that led to this
+# approved appearance have been retired.
+nebula_plots_final:
+  output_dir: results/figures/nebula_final
+  contact_sheet_png: results/figures/nebula_final/poster_figure_contact_sheet.png
+  manifest_tsv: results/figures/nebula_final/figure_manifest.tsv
+  figures:
+    crispr_landscape:
+      png: results/figures/nebula_final/fig1_crispr_landscape.png
+      pdf: results/figures/nebula_final/fig1_crispr_landscape.pdf
+    pca:
+      png: results/figures/nebula_final/fig2_pca.png
+      pdf: results/figures/nebula_final/fig2_pca.pdf
+    volcano:
+      png: results/figures/nebula_final/fig3_volcano.png
+      pdf: results/figures/nebula_final/fig3_volcano.pdf
+    evidence_matrix:
+      png: results/figures/nebula_final/fig4_candidate_expression_heatmap.png
+      pdf: results/figures/nebula_final/fig4_candidate_expression_heatmap.pdf
+    usp34_panel:
+      png: results/figures/nebula_final/fig5_usp34_expression.png
+      pdf: results/figures/nebula_final/fig5_usp34_expression.pdf
