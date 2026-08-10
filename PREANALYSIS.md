@@ -423,3 +423,72 @@ This changes GSE111151's role in the project, effective immediately:
 
 This amendment is written before any GSE111151-based feature table,
 confirmation check, or gene-level output is produced.
+
+**Amendment 2026-08-10 (project-direction change and formal retirement of
+the RCOR1/KDM1A blind, written before RCOR1 or KDM1A is inspected or
+reported anywhere in this project):**
+
+Following discussion with the supervisor, the primary poster deliverable no
+longer requires the predictive model described in §7-§8. The primary
+poster is now:
+
+1. genome-wide CRISPR discovery of genes that modulate tamoxifen response
+   (§1-§4 of this document, unchanged);
+2. validation/prioritisation of the Gate-1 significant gene set using bulk
+   RNA-seq resistance biology (GSE118713, per §6);
+3. later human single-cell validation (not yet started);
+4. later pathway/mechanistic interpretation (not yet started);
+5. later druggability/inhibitor search (not yet started);
+6. later normal-tissue expression assessment, with particular attention to
+   skeletal muscle, nerve, bone and joint-related tissues, feeding the
+   tolerability layer in §9 (not yet started; any resulting claim is
+   "predicted to spare" or "lower normal-tissue expression," never a
+   proven reduction in patient-reported symptoms);
+7. final prioritisation of approximately 3-5 candidates for the poster.
+
+The feature-based predictive model of §7, and Gate 2 of §8, are downgraded
+to optional future work: they remain fully specified and may still be run
+later, but are no longer required for, or blocking, the primary poster.
+
+The blind holdout on RCOR1 and KDM1A (§5; CLAUDE.md hard rules) was
+designed specifically to let the model's recovery of these two positive
+controls (§10) serve as unbiased evidence of predictive validity once a
+model was built and frozen. Because the model is no longer the primary
+deliverable, that evaluation purpose no longer applies to the primary
+poster's critical path, and continuing to withhold RCOR1/KDM1A from a
+CRISPR-discovery-and-validation analysis that never scores or ranks by a
+model would serve no remaining preregistered purpose while blocking two
+screen hits from ordinary interpretation.
+
+RCOR1 and KDM1A have not been inspected, computed on, or reported at the
+gene level for the candidate-prioritisation analysis introduced by this
+amendment, or for any other purpose, before this amendment was written and
+committed. (`src/gate1_checks.py`'s existing design already enforces this
+structurally for Gate 1: no function in that module returns a gene-level
+value for either gene.)
+
+Effective as of this amendment:
+
+- The RCOR1/KDM1A blind is formally retired for the CRISPR-discovery-and-
+  validation analysis described in points 1-2 above. Both genes may be
+  inspected and reported like any other gene in the 28-gene Gate-1
+  FDR<0.1 hit set from this point forward.
+- All 28 Gate-1 FDR<0.1 CRISPR hits (`results/tables/gate1_decision.tsv`)
+  may be evaluated in the master integration table only after this
+  amendment exists as a committed, standalone governance commit -- no
+  unblinding or candidate-table generation precedes it.
+- The blind's original purpose is preserved as a record: if the optional
+  future-work model (§7) is ever built, this amendment, not a fresh ad hoc
+  decision, is the citable reason RCOR1/KDM1A can no longer serve as blind
+  (pre-registered, unseen) evaluation controls for that model. Any future
+  model evaluation must say so explicitly and rely on other validity
+  evidence instead.
+- GSE111151 is unaffected by this amendment and remains reserved for
+  post-selection independent confirmation only, per the 2026-08-06
+  amendment above -- it is not inspected at gene level by this amendment
+  or by the integration analysis it authorises, and does not become a
+  feature/discovery input.
+
+This amendment is written and committed as a standalone commit before any
+RCOR1/KDM1A gene-level value is computed, inspected, or written to any
+output file in this repository.
