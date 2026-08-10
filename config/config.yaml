@@ -68,6 +68,17 @@ gse118713_phase2b:
   blinding:
     blinded_gene_ids: [ENSG00000089902, ENSG00000004487]  # RCOR1, KDM1A
     redaction_record_tsv: results/tables/gse118713_blinding_redaction.tsv
+  # Controlled unredaction (PREANALYSIS.md's 2026-08-10 provenance-correction
+  # amendment): reruns gse118713_limma.R on the exact same frozen inputs
+  # (filtered TPM matrix, sample metadata, script) with blinded_gene_ids
+  # explicitly empty -- only the export-stage redaction is disabled, no
+  # modelling/filtering/statistical choice changes. Writes a separate,
+  # versioned derivative rather than overwriting the redacted outputs above.
+  unredaction:
+    differential_expression_unredacted_tsv_gz: results/tables/gse118713_differential_expression_unredacted.tsv.gz
+    redaction_record_unredacted_tsv: results/tables/gse118713_blinding_redaction_unredacted.tsv
+    specificity_unredacted_tsv_gz: results/tables/gse118713_tamr_specificity_unredacted.tsv.gz
+    comparison_tsv: results/tables/gse118713_unredaction_comparison.tsv
 
 # GSE111151: 4 parental lines, 7 TamR derivatives, n=1 per sample (no
 # biological replicates). Tam1/Tam2 are distinct resistant derivative
