@@ -553,3 +553,62 @@ original redacted outputs rather than overwriting them.
 GSE111151 remains reserved for post-selection independent confirmation
 only, per the 2026-08-06 amendment above; it is unaffected by this
 correction.
+
+**Amendment 2026-08-10 (further clarification of the GSE118713 export
+blind's scope, following independent review; describes only the
+withholding period before the later controlled unredaction already
+recorded in this repository's commit history):**
+
+The immediately preceding correction (above) stated that RCOR1 and
+KDM1A's "computed values were withheld before any exported table." That
+phrasing was too broad: it did not distinguish between the two different
+exported tables involved, and read as though no exported table anywhere
+in this repository contained their values, which is not correct for one
+of the two.
+
+Correct provenance, stated precisely:
+
+- RCOR1 and KDM1A's CRISPR results (`effect_size`, `se`, `p_value`,
+  `fdr` from the Hany-screen gene-by-treatment fit) DO exist in an
+  exported table: the frozen `data/processed/labels.parquet`, alongside
+  every other fitted gene. This was never withheld from that export; it
+  was withheld only from *reporting* -- `src.gate1_checks` never
+  returns, logs, or writes a gene-level value for either gene, per §5.
+- RCOR1 and KDM1A's GSE118713 differential-expression rows (log2FC,
+  moderated t, p-value, FDR, AveExpr per contrast) were withheld
+  specifically from the GSE118713 DE and TAMR-specificity EXPORTS
+  (`results/tables/gse118713_differential_expression.tsv.gz`,
+  `results/tables/gse118713_tamr_specificity.tsv.gz`) while the
+  model-evaluation holdout was active. Their statistics were already
+  computed as part of the full limma fit and Benjamini-Hochberg
+  correction on the complete fitted-gene universe (`run_limma_de()`),
+  before `redact_blinded_genes()` removed their two rows at export time
+  only -- as already described in the amendment above.
+
+So the earlier "withheld before any exported table" should be read, and
+is hereby clarified to mean, specifically: withheld from the GSE118713
+DE/specificity exports. It was never true of the CRISPR labels export,
+and this document did not intend to claim otherwise.
+
+On intentional inspection: this repository's own governance record
+(commit history, PREANALYSIS.md, CLAUDE.md, and the structural design of
+`src.gate1_checks`, which never surfaces a gene-level value for either
+gene) provides no evidence that the withheld GSE118713 gene-level values
+were intentionally inspected or reported before the blind was formally
+retired. This is a claim about what the repository's record shows, not
+an independently provable fact about every person who may have had
+access to the underlying data; it is stated with that qualification, not
+as proof.
+
+The later controlled unredaction (commit `f56cc86`,
+`src/gse118713_unredact.py`) changed no modelling, filtering, or
+statistical choice: it reran the identical frozen limma fit on the
+identical frozen input with only the export-stage redaction argument set
+to empty, and its row-for-row comparison confirmed that all 14,836
+previously-exported genes are numerically unchanged (within
+floating-point reproducibility tolerance) and that only the two formerly
+withheld GSE118713 rows (RCOR1, KDM1A) were added.
+
+GSE111151 remains reserved for post-selection independent confirmation
+only, per the 2026-08-06 amendment above; it is unaffected by this
+clarification.
