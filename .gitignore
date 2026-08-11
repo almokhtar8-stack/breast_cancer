@@ -7,3 +7,17 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .snakemake/
+
+# Superseded / intermediate generated figures: kept locally (regenerate via
+# the scripts in scripts/analysis/ or src/), not tracked in git. Canonical
+# showcase figures remain tracked -- see docs/CODE_MAP.md.
+results/figures/nebula/
+results/figures/gse245601_preprocessing/01_qc_distributions_post_filter.pdf
+results/figures/gse245601_preprocessing/01b_qc_cells_before_after.pdf
+results/figures/gse245601_preprocessing/03_umap_by_patient.pdf
+results/figures/gse245601_preprocessing/04_umap_by_treatment.pdf
+results/figures/gse245601_preprocessing/05_umap_epithelial.pdf
+results/figures/gse245601_preprocessing/06_infercnv_diagnostic_scatter.pdf
+
+# Local export folder for SCP to laptop -- not tracked in git.
+exports/

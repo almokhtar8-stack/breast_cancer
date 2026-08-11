@@ -118,6 +118,64 @@ No result in this repository should be read as "validated therapeutic
 target," "restores sensitivity," or "safe target" — none of those claims
 is established by the analyses completed so far.
 
+## How to read the candidate results
+
+This section is for a researcher or student looking at the project
+quickly. It explains the columns in
+[`results/tables/candidate_evidence_summary.tsv`](results/tables/candidate_evidence_summary.tsv)
+and [`candidate_sensitisation_candidates.tsv`](results/tables/candidate_sensitisation_candidates.tsv).
+
+| Column / evidence | Simple meaning |
+|---|---|
+| **CRISPR effect_size** | Negative = knockout made cells more sensitive to 4-OHT/tamoxifen. Positive = knockout was relatively enriched (tolerance-associated). For an inhibition strategy, **negative** is the direction of interest. |
+| **CRISPR FDR** (false discovery rate) | Smaller = stronger statistical evidence. Frozen Gate-1 threshold = FDR < 0.10. This is not the same thing as effect size — a small FDR does not mean a large effect. |
+| **TAMR vs MCF7 log2FC** (log2 fold-change) | Positive = higher expression in tamoxifen-resistant TAMR cells. Negative = lower expression in TAMR cells. This is an expression **association**, not causality. |
+| **TAMR vs MCF7 bulk FDR** | Smaller = stronger evidence of an expression difference. FDR < 0.05 is the frozen significant bulk-RNA threshold. |
+| **TAMR vs FASR** | Secondary endocrine-resistance context only — **not** proof of tamoxifen specificity. |
+| **crispr_direction** | `sensitising_knockout` (negative CRISPR effect — the direction of interest) or `tolerance_associated_knockout` (positive effect — not an inhibition candidate for sensitisation). |
+| **evidence_class** | Only assigned for `sensitising_knockout` genes (see below); `tolerance_associated_knockout` genes are marked `not_applicable_not_a_sensitising_knockout` because they are not scored for the inhibition-target question. |
+
+**Evidence classes, in plain terms** (sensitising knockouts only):
+
+- `PRIMARY_RESISTANCE_SUPPORT` — sensitising CRISPR hit **and** significant TAMR-vs-MCF7 bulk support (the strongest combination).
+- `SECONDARY_CONTEXT_SUPPORT` — sensitising CRISPR hit, but only TAMR-vs-FASR support (secondary context, not tamoxifen-specific).
+- `NO_SIGNIFICANT_RNA_SUPPORT` — sensitising CRISPR hit, but no significant bulk-RNA support in either contrast.
+- `RNA_UNAVAILABLE` — bulk expression data unavailable for that gene (filtered out upstream).
+
+### How do we choose a candidate?
+
+1. **Start with a negative CRISPR effect** — knockout increased drug sensitivity.
+2. **Prefer genes with TAMR-vs-MCF7 bulk-RNA support** — this connects the functional CRISPR result with resistance-associated expression.
+3. **Add independent/human evidence** — single-cell, external validation, mechanism, druggability, and normal-tissue expression.
+
+No single column chooses the winner.
+
+**Example — USP34:**
+- CRISPR effect ≈ −1.39, FDR ≈ 0.0417
+- TAMR vs MCF7 log2FC ≈ +0.59, FDR ≈ 0.00731
+- Evidence class: `PRIMARY_RESISTANCE_SUPPORT`
+- Therefore USP34 currently has the strongest combined CRISPR + primary
+  bulk-RNA support among the 13 candidates.
+
+USP34 is **not** validated, safe, or therapeutically proven by this —
+it is the current top candidate by the evidence collected so far.
+
+**Single-cell (GSE245601) candidate columns — not yet populated:**
+Candidate-level GSE245601 single-cell analysis has **not yet been
+performed.** No such column, table, or value exists in this repository
+today. When that analysis is eventually run, the key candidate columns
+will approximately mean:
+
+- **single-cell treatment logFC** — positive = higher expression after
+  tamoxifen; negative = lower expression after tamoxifen.
+- **single-cell FDR** — statistical evidence for the paired human-tumor
+  treatment effect.
+- **n_pairs** — number of eligible paired tumors contributing to that
+  analysis.
+
+These are described here only so the meaning is clear once that analysis
+exists — no such values are reported anywhere in this repository yet.
+
 ## Repository Guide — Where is the code?
 
 | Task | Main code | Main outputs | Notes |
@@ -141,9 +199,11 @@ is established by the analyses completed so far.
 ## Key Figures
 
 1. **[`results/figures/nebula_final/fig1_crispr_landscape.png`](results/figures/nebula_final/fig1_crispr_landscape.png)** — CRISPR hit landscape: all 28 Gate-1 hits, sensitising vs tolerance-associated, with the PAICS benchmark inset.
-2. **[`results/figures/gse245601_preprocessing/02_umap_broad_cell_type.pdf`](results/figures/gse245601_preprocessing/02_umap_broad_cell_type.pdf)** — GSE245601 broad cell-type UMAP (epithelial, fibroblast, myeloid, endothelial, B/plasma, T/NK) across all 20 primary tumor samples.
-3. **[`results/figures/gse245601_preprocessing/07_umap_malignant_vs_nonmalignant.pdf`](results/figures/gse245601_preprocessing/07_umap_malignant_vs_nonmalignant.pdf)** — Malignant vs. non-malignant epithelial cells, InferCNV-derived primary classification.
-4. **[`results/figures/gse245601_preprocessing/08_malignant_counts_by_patient_condition.pdf`](results/figures/gse245601_preprocessing/08_malignant_counts_by_patient_condition.pdf)** — Malignant-cell counts per patient x condition, with the frozen ≥50-cell eligibility line — shows directly why only 3/10 tumor pairs currently qualify for pseudobulk analysis.
+2. **[`results/figures/nebula_final/fig3_volcano.png`](results/figures/nebula_final/fig3_volcano.png)** — GSE118713 bulk-RNA result: TAMR-vs-MCF7 differential expression volcano plot.
+3. **[`results/figures/gse245601_preprocessing/02_umap_broad_cell_type.pdf`](results/figures/gse245601_preprocessing/02_umap_broad_cell_type.pdf)** — GSE245601 broad cell-type UMAP (epithelial, fibroblast, myeloid, endothelial, B/plasma, T/NK) across all 20 primary tumor samples.
+4. **[`results/figures/gse245601_preprocessing/07_umap_malignant_vs_nonmalignant.pdf`](results/figures/gse245601_preprocessing/07_umap_malignant_vs_nonmalignant.pdf)** — Malignant vs. non-malignant epithelial cells, InferCNV-derived primary classification.
+5. **[`results/figures/gse245601_preprocessing/08_malignant_counts_by_patient_condition.pdf`](results/figures/gse245601_preprocessing/08_malignant_counts_by_patient_condition.pdf)** — Malignant-cell counts per patient x condition, with the frozen ≥50-cell eligibility line — shows directly why only 3/10 tumor pairs currently qualify for pseudobulk analysis.
+6. **[`results/figures/gse245601_preprocessing/09_malignancy_concordance.pdf`](results/figures/gse245601_preprocessing/09_malignancy_concordance.pdf)** — InferCNV-vs-CopyKAT concordance per sample, shown transparently because it is highly variable (see [Limitations](#limitations--current-methodological-question)).
 
 InferCNV supplied the **primary** malignant-cell classification; CopyKAT
 was run as an **independent sensitivity check** on the same cells, not as

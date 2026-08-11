@@ -149,8 +149,8 @@ prioritization results.
 recomputation, plotting only.
 
 **Outputs:**
-- [`results/figures/nebula_final/`](../results/figures/nebula_final/) — current poster figure set + `figure_manifest.tsv` + contact sheet
-- [`results/figures/nebula/`](../results/figures/nebula/) — earlier figure set
+- [`results/figures/nebula_final/`](../results/figures/nebula_final/) — current poster figure set + `figure_manifest.tsv` + contact sheet (tracked in git)
+- `results/figures/nebula/` — earlier figure set, superseded by `nebula_final/`; regenerated locally by `src/nebula_plots.py`, not tracked in git
 
 **Tests:** [`tests/test_nebula_plots_final.py`](../tests/test_nebula_plots_final.py),
 [`tests/test_nebula_plots.py`](../tests/test_nebula_plots.py)
