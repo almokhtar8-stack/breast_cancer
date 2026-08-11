@@ -1,0 +1,7 @@
+sample_id	patient	condition	n_contributing_cells	total_library_size	n_detected_genes
+Tumor_02_Control	Tumor_02	Control	134	8340565	18031
+Tumor_02_Tamoxifen	Tumor_02	Tamoxifen	183	11595504	19052
+Tumor_03_Control	Tumor_03	Control	276	13687682	19584
+Tumor_03_Tamoxifen	Tumor_03	Tamoxifen	582	18908726	18944
+Tumor_07_Control	Tumor_07	Control	80	3397189	16790
+Tumor_07_Tamoxifen	Tumor_07	Tamoxifen	146	8697423	18009

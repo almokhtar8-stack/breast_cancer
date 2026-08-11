@@ -178,6 +178,225 @@ gse245601:
     - {gsm: GSM7845570, srx: SRX20211408, biosample: SAMN33549153, subject: Tumor_10, sample_type: tumor, patient: Tumor_10, condition: Control, h5: GSM7845570_Tumor_10_Control.h5, primary_analysis: true}
     - {gsm: GSM7845571, srx: SRX20211409, biosample: SAMN33549174, subject: Tumor_10, sample_type: tumor, patient: Tumor_10, condition: Tamoxifen, h5: GSM7845571_Tumor_10_Tamoxifen.h5, primary_analysis: true}
 
+# InferCNV-vs-CopyKAT quantitative comparison for the 20 primary tumor
+# samples (docs/CNV_METHOD_AUDIT.md Point 1 follow-up). Reads only the
+# already-frozen per-cell label tables below -- no InferCNV/CopyKAT rerun,
+# no candidate gene read anywhere in this module.
+gse245601_cnv_method_comparison:
+  inputs:
+    infercnv_labels_tsv: results/tables/gse245601_malignant_cell_labels.tsv
+    infercnv_sample_summary_tsv: results/tables/gse245601_malignant_summary_per_sample.tsv
+    copykat_labels_tsv: results/tables/gse245601_copykat_sensitivity_labels.tsv
+  output:
+    by_sample_tsv: results/tables/cnv_method_comparison_by_sample.tsv
+    by_tumor_tsv: results/tables/cnv_method_comparison_by_tumor.tsv
+    figure_png: results/figures/gse245601_cnv_method_comparison.png
+    figure_pdf: results/figures/gse245601_cnv_method_comparison.pdf
+
+# Matched, same-cell InferCNV-vs-CopyKAT heatmap comparison for 6 priority
+# tumors (docs/CNV_METHOD_AUDIT.md Point 1 follow-up, visualization step).
+# Reads only already-frozen InferCNV (run.final.infercnv_obj) and CopyKAT
+# (raw_results_gene_by_cell.txt) outputs, plus the frozen per-cell label
+# tables and cnv_method_comparison_by_sample.tsv -- no rerun of either
+# method, no relabeling, no candidate gene read anywhere.
+gse245601_cnv_heatmap_comparison:
+  # Tumor_02/Tumor_03 = best agreement controls; Tumor_01/04/08/10 =
+  # priority disagreement cases (per cnv_method_comparison_by_sample.tsv).
+  # Order is deliberate: grouped by tumor, Control immediately followed by
+  # Tamoxifen, so paired-arm differences are adjacent everywhere this list
+  # is used (contact sheet, tests).
+  selected_samples: &gse245601_priority_tumor_samples
+    - Tumor_01_Control
+    - Tumor_01_Tamoxifen
+    - Tumor_02_Control
+    - Tumor_02_Tamoxifen
+    - Tumor_03_Control
+    - Tumor_03_Tamoxifen
+    - Tumor_04_Control
+    - Tumor_04_Tamoxifen
+    - Tumor_08_Control
+    - Tumor_08_Tamoxifen
+    - Tumor_10_Control
+    - Tumor_10_Tamoxifen
+  inputs:
+    infercnv_dir: data/processed/gse245601/infercnv
+    copykat_dir: data/processed/gse245601/copykat
+    infercnv_labels_tsv: results/tables/gse245601_malignant_cell_labels.tsv
+    copykat_labels_tsv: results/tables/gse245601_copykat_sensitivity_labels.tsv
+    method_comparison_by_sample_tsv: results/tables/cnv_method_comparison_by_sample.tsv
+  # Compact per-sample matrices written by
+  # scripts/analysis/gse245601_10_extract_cnv_comparison_matrices.R --
+  # derived working data, gitignored, not a result in its own right.
+  working_dir: data/processed/gse245601/cnv_heatmap_comparison
+  extraction_r_script: scripts/analysis/gse245601_10_extract_cnv_comparison_matrices.R
+  micromamba_binary: /home/aljaroaa/.local/bin/micromamba
+  micromamba_env: sc245601
+  output:
+    figures_dir: results/figures/gse245601_cnv_heatmap_comparison
+    tables_dir: results/tables/gse245601_cnv_heatmap_comparison
+    summary_tsv: results/tables/gse245601_cnv_heatmap_comparison/summary_per_sample.tsv
+    gene_exclusion_tsv: results/tables/gse245601_cnv_heatmap_comparison/gene_exclusion_report.tsv
+    contact_sheet_png: results/figures/gse245601_cnv_heatmap_comparison/contact_sheet.png
+
+# InferCNV malignant-classification threshold diagnostics (docs/
+# CNV_METHOD_AUDIT.md Point 1 follow-up). Reads only the already-frozen
+# gse245601_malignant_cell_labels.tsv (which already contains each
+# epithelial cell's cnv_score, cnv_correlation_to_seed, threshold_group,
+# and primary_malignancy_label) and recomputes the PREANALYSIS.md section
+# 9 / amendment 3 threshold formula from those frozen values -- no
+# InferCNV rerun, no label change, no candidate gene read anywhere. The
+# rule constants below are copied from that frozen procedure, not
+# reinvented here.
+gse245601_infercnv_threshold_diagnostics:
+  selected_samples: *gse245601_priority_tumor_samples
+  disagreement_tumors: &gse245601_disagreement_tumors [Tumor_01, Tumor_04, Tumor_08]
+  good_control_tumors: &gse245601_good_control_tumors [Tumor_02, Tumor_03]
+  signal_quality_tumors: &gse245601_signal_quality_tumors [Tumor_10]
+  inputs:
+    infercnv_labels_tsv: results/tables/gse245601_malignant_cell_labels.tsv
+    copykat_labels_tsv: results/tables/gse245601_copykat_sensitivity_labels.tsv
+  # PREANALYSIS.md section 9 (paper+code, [A+B]) and amendment 3 ([C],
+  # small-cluster pooling only -- already reflected in the frozen
+  # threshold_group column, not re-derived here).
+  rule:
+    seed_top_fraction: 0.05
+    min_seed_cells: 2
+    cnv_score_sd_multiplier: 2.0
+    cnv_score_clamp: [0.01, 0.05]
+    correlation_sd_multiplier: 1.5
+    correlation_clamp: [0.2, 0.4]
+  # Diagnostic-only sensitivity sweep (Point 5): a fixed grid -- not a
+  # search for a better cutoff, not informed by CopyKAT agreement.
+  # Correlation is swept across exactly the rule's own pre-declared clamp
+  # bounds ([0.2, 0.4]). CNV score is swept across [0.0, 0.05]: 0.0 is the
+  # metric's own natural lower bound (cnv_score = mean of squared
+  # deviations, which cannot be negative), extended slightly below the
+  # rule's clamp floor (0.01) purely so the sweep is visible on both sides
+  # of the actual operating point -- the empirical finding below is that
+  # cnv_score_threshold sits AT that floor for every group in all 20
+  # samples, so a sweep confined to [0.01, 0.05] would only show the
+  # (uninformative) direction moving away from where the real cells are.
+  sensitivity_grid:
+    cnv_score_sweep_range: [0.0, 0.05]
+    cnv_score_grid_points: 11
+    correlation_sweep_range: [0.2, 0.4]
+    correlation_grid_points: 9
+  output:
+    diagnostics_tsv: results/tables/gse245601_infercnv_threshold_diagnostics.tsv
+    sensitivity_grid_tsv: results/tables/gse245601_infercnv_threshold_sensitivity_grid.tsv
+    local_score_sensitivity_tsv: results/tables/gse245601_infercnv_local_score_sensitivity.tsv
+    figures_dir: results/figures/gse245601_infercnv_threshold_diagnostics
+
+# Whole-genome CNV-score metric diagnostics (docs/CNV_METHOD_AUDIT.md
+# Point 1 follow-up). Reads only the already-frozen run.final.infercnv_obj
+# per sample (a read-only reload of InferCNV's own saved output, NOT a
+# rerun) plus the frozen per-cell label tables -- no InferCNV/CopyKAT
+# rerun, no label change, no candidate gene read anywhere. Diagnostic
+# metrics only; never used to build or select a replacement classifier.
+gse245601_infercnv_score_metric_diagnostics:
+  selected_samples: *gse245601_priority_tumor_samples
+  disagreement_tumors: *gse245601_disagreement_tumors
+  good_control_tumors: *gse245601_good_control_tumors
+  signal_quality_tumors: *gse245601_signal_quality_tumors
+  inputs:
+    infercnv_dir: data/processed/gse245601/infercnv
+    infercnv_labels_tsv: results/tables/gse245601_malignant_cell_labels.tsv
+    copykat_labels_tsv: results/tables/gse245601_copykat_sensitivity_labels.tsv
+  # Round, pre-declared absolute-deviation bands (|expr-1|) spanning the
+  # dynamic range InferCNV's own output typically shows (its heatmap color
+  # scale in this project's runs spans roughly 0.8-1.2, i.e. deviations up
+  # to ~0.2). Not tuned to any classification outcome, not informed by
+  # CopyKAT agreement.
+  deviation_levels: [0.05, 0.10, 0.15]
+  # A chromosome counts as "affected" for a cell when that chromosome's
+  # own mean absolute deviation (across its genes, for that cell) exceeds
+  # a deviation level -- evaluated at each of the three levels above.
+  extraction_r_script: scripts/analysis/gse245601_11_extract_cnv_score_metric_diagnostics.R
+  micromamba_binary: /home/aljaroaa/.local/bin/micromamba
+  micromamba_env: sc245601
+  output:
+    diagnostics_tsv: results/tables/gse245601_infercnv_score_metric_diagnostics.tsv
+    figures_dir: results/figures/gse245601_infercnv_score_metric_diagnostics
+
+# GSE245601 pseudobulk single-cell validation (docs/CNV_METHOD_AUDIT.md
+# follow-up; docs/gse245601_PREANALYSIS.md section 13). Reads only the
+# frozen Seurat object (raw counts layer) and frozen InferCNV/eligibility
+# tables -- no InferCNV/CopyKAT rerun, no malignancy label change, no
+# candidate expression inspected before Phase 2's audit table is written.
+# Two pre-specified tracks: Track A (all epithelial cells, all 10 paired
+# tumors) answers an epithelial-compartment question; Track B (frozen
+# strict InferCNV-malignant cells, only the 3 tumor pairs already meeting
+# the frozen >=50-malignant-cells-per-arm rule) answers a more
+# tumor-specific but n=3 exploratory question. The classifier/threshold is
+# not modified after this point regardless of candidate results.
+gse245601_pseudobulk:
+  inputs:
+    seurat_object: data/processed/gse245601/seurat_clustered/annotated.rds
+    infercnv_labels_tsv: results/tables/gse245601_malignant_cell_labels.tsv
+    malignant_summary_tsv: results/tables/gse245601_malignant_summary_per_sample.tsv
+    pair_eligibility_tsv: results/tables/gse245601_pair_eligibility.tsv
+    sample_manifest_tsv: results/tables/gse245601_sample_manifest.tsv
+  candidates:
+    thirteen:
+      [USP34, CTDNEP1, EIF4ENIF1, HMGB1, KDM1A, PET117, TADA2B, VEZF1, TLK2, ICK, SUPT4H1, TSR3, USP17L29]
+    paics: PAICS
+  # Copied from the already-frozen PREANALYSIS.md section 11 rule and the
+  # already-frozen gse245601_pair_eligibility.tsv it produced -- not
+  # re-derived or re-chosen here. Cross-checked, not assumed, in Phase 2.
+  min_malignant_cells_per_arm: 50
+  track_b_eligible_patients: [Tumor_02, Tumor_03, Tumor_07]
+  # Reuses the SAME threshold value as above, but applied to a different,
+  # separate, non-preregistered grouping (per patient, pooled across both
+  # treatment arms) for the Phase 8 malignant-vs-nonmalignant secondary
+  # comparison only -- this is not the frozen Track B rule and does not
+  # gate Track A/B eligibility.
+  malignant_vs_nonmalignant_min_pooled_cells: 50
+  micromamba_binary: /home/aljaroaa/.local/bin/micromamba
+  micromamba_env: sc245601
+  design_audit_script: scripts/analysis/gse245601_12_pseudobulk_design_audit.R
+  build_pseudobulk_script: scripts/analysis/gse245601_13_build_pseudobulk.R
+  edger_script: scripts/analysis/gse245601_15_pseudobulk_edger.R
+  malignant_vs_nonmalignant_script: scripts/analysis/gse245601_16_malignant_vs_nonmalignant.R
+  output:
+    design_audit_tsv: results/tables/gse245601_pseudobulk/design_eligibility_audit.tsv
+    track_a:
+      counts_tsv: results/tables/gse245601_pseudobulk/track_a_epithelial_counts.tsv.gz
+      metadata_tsv: results/tables/gse245601_pseudobulk/track_a_epithelial_metadata.tsv
+    track_b:
+      counts_tsv: results/tables/gse245601_pseudobulk/track_b_malignant_counts.tsv.gz
+      metadata_tsv: results/tables/gse245601_pseudobulk/track_b_malignant_metadata.tsv
+    qc:
+      track_a_qc_tsv: results/tables/gse245601_pseudobulk/track_a_qc_summary.tsv
+      track_b_qc_tsv: results/tables/gse245601_pseudobulk/track_b_qc_summary.tsv
+      track_a_correlation_tsv: results/tables/gse245601_pseudobulk/track_a_sample_correlation.tsv
+      track_b_correlation_tsv: results/tables/gse245601_pseudobulk/track_b_sample_correlation.tsv
+      track_a_pca_tsv: results/tables/gse245601_pseudobulk/track_a_pca_coordinates.tsv
+      track_b_pca_tsv: results/tables/gse245601_pseudobulk/track_b_pca_coordinates.tsv
+      figures_dir: results/figures/gse245601_pseudobulk
+    de:
+      track_a_genomewide_tsv: results/tables/gse245601_pseudobulk/track_a_genomewide_de.tsv.gz
+      track_b_genomewide_tsv: results/tables/gse245601_pseudobulk/track_b_genomewide_de.tsv.gz
+      track_a_edger_summary_tsv: results/tables/gse245601_pseudobulk/track_a_edger_filtering_summary.tsv
+      track_b_edger_summary_tsv: results/tables/gse245601_pseudobulk/track_b_edger_filtering_summary.tsv
+    malignant_vs_nonmalignant:
+      counts_tsv: results/tables/gse245601_pseudobulk/malignant_vs_nonmalignant_counts.tsv.gz
+      metadata_tsv: results/tables/gse245601_pseudobulk/malignant_vs_nonmalignant_metadata.tsv
+      cell_level_summary_tsv: results/tables/gse245601_pseudobulk/malignant_vs_nonmalignant_cell_level_summary.tsv
+      figures_dir: results/figures/gse245601_pseudobulk
+
+gse245601_candidate_integration:
+  inputs:
+    master_table_tsv: results/tables/crispr_gse118713_master_table.tsv
+    evidence_summary_tsv: results/tables/candidate_evidence_summary.tsv
+    paics_benchmark_tsv: results/tables/candidate_paics_benchmark.tsv
+  output:
+    track_a_candidates_tsv: results/tables/gse245601_candidate_integration/track_a_13candidates.tsv
+    track_b_candidates_tsv: results/tables/gse245601_candidate_integration/track_b_13candidates.tsv
+    paics_singlecell_tsv: results/tables/gse245601_candidate_integration/paics_singlecell_benchmark.tsv
+    malignant_vs_nonmalignant_candidates_tsv: results/tables/gse245601_candidate_integration/malignant_vs_nonmalignant_candidates.tsv
+    integrated_master_tsv: results/tables/gse245601_candidate_integration/integrated_crispr_bulk_singlecell_candidates.tsv
+    figures_dir: results/figures/gse245601_candidate_integration
+
 crispr_gse118713_integration:
   expected_n_hits: 28
   output:

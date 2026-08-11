@@ -26,18 +26,38 @@ single-cell pre-analysis plan and blinding rule referenced below.
   pair-eligibility flags computed per tumor (pseudobulk aggregation itself
   has not been run)
 
+## COMPLETE (continued)
+
+- GSE245601 InferCNV/CopyKAT method audit and CNV-score-metric diagnostic
+  (`docs/CNV_METHOD_AUDIT.md`,
+  `docs/GSE245601_INFERCNV_THRESHOLD_DIAGNOSTIC.md`,
+  `docs/GSE245601_INFERCNV_SCORE_METRIC_DIAGNOSTIC.md`): established that
+  InferCNV/CopyKAT disagreement is real and sample-dependent, and that the
+  InferCNV downstream classifier's whole-genome CNV score is
+  extent-weighted with an effectively fixed 0.01 floor -- a known,
+  documented limitation, not a coding error. CNV-method optimization is
+  stopped; the frozen InferCNV labels remain the primary malignant-cell
+  definition (`gse245601_PREANALYSIS.md` section 13).
+- Two-track pseudobulk design frozen (section 13): Track A
+  (epithelial-compartment, all 10 paired tumors) and Track B (strict
+  malignant, Tumor_02/03/07 only, n=3, exploratory) -- decided before any
+  pseudobulk aggregation or candidate expression was inspected.
+- GSE245601 pseudobulk aggregation, QC, edgeR differential expression
+  (Track A and Track B), 13-candidate + PAICS extraction, patient-level
+  visualization, malignant-vs-non-malignant epithelial context check, and
+  integration with the frozen CRISPR/bulk-RNA candidate evidence.
+
 ## CURRENT
 
-- Deciding the statistical design for the GSE245601 candidate-level
-  analysis, given that only 3/10 paired tumors (Tumor_02, Tumor_03,
-  Tumor_07) currently meet the frozen ≥50-malignant-cell-per-arm
-  eligibility rule, and InferCNV/CopyKAT concordance is highly variable
-  between samples (mean ~56%, range ~0-100%).
+- Reviewing the integrated single-cell + CRISPR + bulk-RNA candidate
+  evidence for next steps (see the GSE245601 pseudobulk candidate
+  integration report for current findings).
 
 ## NEXT
 
-- GSE245601 pseudobulk aggregation and candidate-level differential
-  expression (blocked on the statistical-design decision above)
+- GSE111151 independent confirmation, pathway-level analysis,
+  druggability, normal-tissue expression context, and poster redesign
+  (explicitly out of scope for the pseudobulk phase just completed).
 - Single-cell candidate ranking
 
 ## LATER

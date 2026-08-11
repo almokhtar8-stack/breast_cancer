@@ -1,0 +1,11 @@
+sample_id	patient	malignancy_status	n_contributing_cells	total_library_size	n_detected_genes
+Tumor_02_malignant	Tumor_02	malignant	317	19936069	20156
+Tumor_02_nonmalignant	Tumor_02	nonmalignant	363	14211699	20282
+Tumor_03_malignant	Tumor_03	malignant	858	32596408	20935
+Tumor_03_nonmalignant	Tumor_03	nonmalignant	760	28172818	21871
+Tumor_07_malignant	Tumor_07	malignant	226	12094612	19055
+Tumor_07_nonmalignant	Tumor_07	nonmalignant	580	29428062	21654
+Tumor_09_malignant	Tumor_09	malignant	167	3946571	16853
+Tumor_09_nonmalignant	Tumor_09	nonmalignant	3676	83386051	23458
+Tumor_10_malignant	Tumor_10	malignant	63	2289751	17006
+Tumor_10_nonmalignant	Tumor_10	nonmalignant	631	13794184	21702

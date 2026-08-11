@@ -1,0 +1,15 @@
+gene	is_paics_benchmark	tested	mean_delta_malignant_minus_nonmalignant	p_value	n_patients	direction	candidate_set_bh_fdr
+USP34	False	True	-0.0664467499282825	0.625	5	down_in_malignant	0.8333333333333334
+CTDNEP1	False	True	-0.543768658872195	0.0625	5	down_in_malignant	0.3
+EIF4ENIF1	False	True	-0.012539182571838215	0.8125	5	down_in_malignant	0.8863636363636364
+HMGB1	False	True	-0.1783760418802217	0.125	5	down_in_malignant	0.3
+KDM1A	False	True	0.014470743235718153	0.8125	5	up_in_malignant	0.8863636363636364
+PET117	False	True	0.4245110687008573	0.125	5	up_in_malignant	0.3
+TADA2B	False	True	0.14528222324761905	0.4375	5	up_in_malignant	0.75
+VEZF1	False	True	0.15319031004875788	1.0	5	up_in_malignant	1.0
+TLK2	False	True	0.39725312726651263	0.125	5	up_in_malignant	0.3
+ICK	False	True	0.18120951372768798	0.625	5	up_in_malignant	0.8333333333333334
+SUPT4H1	False	True	0.14325276940982085	0.3125	5	up_in_malignant	0.625
+TSR3	False	True	0.46048423109016684	0.125	5	up_in_malignant	0.3
+USP17L29	False	True	0.0		5	unchanged	
+PAICS	True	True	0.01758056212399701	1.0	5	up_in_malignant	

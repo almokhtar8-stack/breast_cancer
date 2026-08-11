@@ -1,0 +1,3 @@
+gene	track	benchmark_label	tested	log2fc	avg_log_cpm	p_value	genomewide_fdr	direction	n_patients_up	n_patients_down	n_patients_tested
+PAICS	track_a_epithelial	published_benchmark_not_gate1_hit_not_in_13_candidate_bh_family	True	-0.144405709010067	6.10061967906605	0.0711047421673347	0.403926050766924	down	1	9	10
+PAICS	track_b_malignant	published_benchmark_not_gate1_hit_not_in_13_candidate_bh_family	True	0.0464487106108897	6.39867400488928	0.775515203021079	0.925477714888069	up	1	2	3

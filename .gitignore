@@ -21,3 +21,8 @@ results/figures/gse245601_preprocessing/06_infercnv_diagnostic_scatter.pdf
 
 # Local export folder for SCP to laptop -- not tracked in git.
 exports/
+
+# Cloned official reference repos (inferCNV, copykat) used for the
+# read-only method audit -- external source code, not a project
+# deliverable, not tracked in git.
+external_refs/

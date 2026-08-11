@@ -410,3 +410,77 @@ sample (Tumor_04_Control: 195 aneuploid / 56 diploid cells returned).
 This is a correction to a factual error in this document, not a change to
 which method or which of its documented defaults are used -- default
 parameters throughout remains the frozen intent of section 10.
+
+## 13. Two-track pseudobulk design and known CNV-metric limitation (frozen before pseudobulk aggregation was run)
+
+Following a dedicated diagnostic audit of the InferCNV malignancy
+classifier (`docs/CNV_METHOD_AUDIT.md`,
+`docs/GSE245601_INFERCNV_THRESHOLD_DIAGNOSTIC.md`,
+`docs/GSE245601_INFERCNV_SCORE_METRIC_DIAGNOSTIC.md`), the following is
+frozen before any pseudobulk aggregation or candidate-gene expression is
+inspected:
+
+**[A+B]** InferCNV (section 9's `ng_2021_and_thresholding` procedure)
+remains the **frozen primary malignant-cell definition** for this
+project, for reproducibility with the published study's stated
+methodology. It is not replaced, retuned, or supplemented by CopyKAT.
+
+**[A+B]** CopyKAT (section 10) remains an **independent sensitivity
+check only** -- it has never been and will not be used to relabel,
+override, or validate individual InferCNV malignancy calls, and does not
+alter the frozen `≥50-malignant-cells-per-arm` eligibility rule (section
+11) or which tumor pairs satisfy it.
+
+**[C], diagnostic finding, not a threshold or label change.** The
+diagnostic audit found that the InferCNV downstream classifier's
+whole-genome mean-squared CNV score is, by construction, approximately
+`extent x deviation^2` -- it is extent-weighted, and its adaptive
+threshold's lower clamp (0.01) is, empirically, the binding constraint in
+every (sample, cluster) group across all 20 samples in this cohort, i.e.
+it behaves as a fixed floor rather than a per-sample-adaptive one. This
+can under-call cells whose CNV abnormality is real but affects a smaller
+fraction of the genome (lower "extent") even when individual-gene
+deviation amplitude is comparable to tumors that pass the floor easily.
+Tumor_01, Tumor_04, and Tumor_08 illustrate this limitation; Tumor_10
+additionally shows a separate, low-correlation-to-seed issue not
+explained by the same mechanism; Tumor_02 and Tumor_03 are the strongest
+InferCNV/CopyKAT agreement cases and are not affected by either issue.
+Full detail, evidence, and hedging in the three diagnostic documents
+above.
+
+**[C], frozen decision.** The classifier, its 0.01 floor, and the frozen
+malignant/non-malignant labels are **not modified** as a result of this
+finding, and will **not be modified after candidate-gene results are
+seen**, at any point in this project. No new CNV metric is invented, no
+threshold is tuned, and no classifier is selected based on how many
+malignant cells it yields. This finding is recorded here as a documented,
+known limitation of the strict-malignant analysis, motivating the
+two-track design below -- not as a reason to alter the frozen definition.
+
+**[C], frozen design, decided before pseudobulk was run.** Because only
+3 of 10 paired tumors (Tumor_02, Tumor_03, Tumor_07) meet the frozen
+`≥50-malignant-cells-per-arm` rule, strict-malignant pseudobulk is
+underpowered as the sole single-cell analysis. Two pre-specified tracks
+are therefore run in parallel, both using patient as the biological
+replicate (never individual cells):
+
+- **Track A -- epithelial-compartment response.** All epithelial cells
+  (InferCNV malignant + non-malignant epithelial, i.e. every cell with
+  `broad_cell_type == "epithelial"`) from all 10 paired primary tumors,
+  aggregated per patient x treatment. Maximizes patient-level information
+  (n=10 pairs). Answers: "does this candidate change with tamoxifen
+  within the epithelial compartment?" **Must never be described as
+  tumor-cell-specific or malignant-cell-specific** -- non-malignant
+  epithelial cells are included by design.
+- **Track B -- strict malignant response.** Frozen InferCNV-malignant
+  cells only, restricted to the 3 pairs already satisfying the frozen
+  `≥50`-per-arm rule (Tumor_02, Tumor_03, Tumor_07), aggregated per
+  patient x treatment. Answers the more tumor-specific question, but is
+  explicitly **exploratory (n=3 patient pairs)** -- effect direction and
+  magnitude are reported alongside significance, and thresholds are never
+  loosened to manufacture significance at this sample size.
+
+No batch-correction method (Harmony, Seurat integration, ComBat, or
+otherwise) is applied to either track; patient pairing is handled
+statistically in the differential-expression design
+(`~ patient + treatment`), not by an integration step.

@@ -1,0 +1,2 @@
+track	n_patient_pairs	n_pseudobulk_samples	n_genes_before_filterByExpr	n_genes_after_filterByExpr	normalization_method	de_method	design_formula	contrast	residual_df
+track_b_malignant	3	6	33538	13863	TMM	edgeR glmQLFit/glmQLFTest	~ patient + treatment	Tamoxifen vs Control	2

@@ -1,0 +1,13 @@
+sample_id	n_epithelial_cells	n_infercnv_genes	n_infercnv_duplicate_or_invalid_symbol_rows_excluded	n_copykat_genes	n_copykat_duplicate_or_invalid_symbol_rows_excluded	n_shared_genes_final	n_chr_mismatch_infercnv_vs_copykat
+Tumor_01_Control	3334	8294	0	7810	0	6891	0
+Tumor_01_Tamoxifen	2774	8625	0	8184	0	7217	0
+Tumor_02_Control	355	10272	0	9434	0	8327	0
+Tumor_02_Tamoxifen	325	10378	0	9683	0	8540	0
+Tumor_03_Control	513	10081	0	9316	0	8222	0
+Tumor_03_Tamoxifen	1105	9082	0	8487	0	7498	0
+Tumor_04_Control	151	8083	0	7359	0	6517	0
+Tumor_04_Tamoxifen	70	8369	0	7586	0	6722	0
+Tumor_08_Control	906	8682	0	8152	0	7205	0
+Tumor_08_Tamoxifen	984	8255	0	7874	0	6967	0
+Tumor_10_Control	416	8715	0	7890	0	6947	0
+Tumor_10_Tamoxifen	278	8336	0	7478	0	6605	0
