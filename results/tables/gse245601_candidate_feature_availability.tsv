@@ -1,0 +1,15 @@
+gene_symbol	is_paics_benchmark	expected_ensembl_id	n_symbol_matches	n_ensembl_id_matches	matched_ensembl_id	feature_type	status
+USP34	False	ENSG00000115464	1	1	ENSG00000115464	Gene Expression	present
+CTDNEP1	False	ENSG00000175826	1	1	ENSG00000175826	Gene Expression	present
+EIF4ENIF1	False	ENSG00000184708	1	1	ENSG00000184708	Gene Expression	present
+HMGB1	False	ENSG00000189403	1	1	ENSG00000189403	Gene Expression	present
+KDM1A	False	ENSG00000004487	1	1	ENSG00000004487	Gene Expression	present
+PET117	False	ENSG00000232838	1	1	ENSG00000232838	Gene Expression	present
+TADA2B	False	ENSG00000173011	1	1	ENSG00000173011	Gene Expression	present
+VEZF1	False	ENSG00000136451	1	1	ENSG00000136451	Gene Expression	present
+ICK	False	ENSG00000112144	1	1	ENSG00000112144	Gene Expression	present
+SUPT4H1	False	ENSG00000213246	1	1	ENSG00000213246	Gene Expression	present
+TLK2	False	ENSG00000146872	1	1	ENSG00000146872	Gene Expression	present
+TSR3	False	ENSG00000007520	1	1	ENSG00000007520	Gene Expression	present
+USP17L29	False	ENSG00000231637	1	1	ENSG00000231637	Gene Expression	present
+PAICS	True	ENSG00000128050	1	1	ENSG00000128050	Gene Expression	present

@@ -1,0 +1,11 @@
+patient	n_malignant_control	n_malignant_tamoxifen	min_required_per_arm	eligible_for_pseudobulk
+Tumor_01	1	2	50	FALSE
+Tumor_02	134	183	50	TRUE
+Tumor_03	276	582	50	TRUE
+Tumor_04	0	1	50	FALSE
+Tumor_05	22	12	50	FALSE
+Tumor_06	9	19	50	FALSE
+Tumor_07	80	146	50	TRUE
+Tumor_08	17	25	50	FALSE
+Tumor_09	48	119	50	FALSE
+Tumor_10	61	2	50	FALSE

@@ -128,6 +128,56 @@ gate1:
 # resistance expression. Reads labels/GSE118713 paths from the gate1,
 # gse118713, and gse118713_phase2b sections above; no raw paths duplicated
 # here.
+# GSE245601: Kim, Whitman et al. Clin Cancer Res 2023;29(23):4894-4907
+# (PMID 37747807). Primary ER+/HER2- human breast tumors + normal breast
+# tissue + T47D cell line, ex vivo 10 uM tamoxifen vs control media, 12h,
+# 10x Genomics 3' v3.1 scRNA-seq. See docs/gse245601_PREANALYSIS.md for the
+# full, primary-source-verified provenance and frozen processing rules.
+# Sample/patient/condition mapping below independently cross-verified via
+# (a) SRA BioSample XML attributes (NCBI eutils), (b) individual GEO GSM
+# record fetches (4 anchor points), (c) the GEO-provided H5 filenames
+# themselves -- three independent sources agree exactly.
+gse245601:
+  raw_tar_url: https://ftp.ncbi.nlm.nih.gov/geo/series/GSE245nnn/GSE245601/suppl/GSE245601_RAW.tar
+  raw_dir: data/raw/gse245601
+  h5_dir: data/raw/gse245601/h5
+  checksums_sha256: data/raw/gse245601/checksums.sha256
+  expected_n_samples: 26
+  expected_n_tumor_patients: 10
+  expected_n_tumor_samples: 20
+  primary_cohort_patient_prefix: "Tumor_"
+  malignant_cell_min_count: 50
+  output:
+    sample_manifest_tsv: results/tables/gse245601_sample_manifest.tsv
+    feature_availability_tsv: results/tables/gse245601_candidate_feature_availability.tsv
+  samples:
+    - {gsm: GSM7845546, srx: SRX20211384, biosample: SAMN33549175, subject: Normal_01, sample_type: normal_tissue, patient: Normal_01, condition: Control, h5: GSM7845546_Normal_01_Control.h5, primary_analysis: false}
+    - {gsm: GSM7845547, srx: SRX20211385, biosample: SAMN33549164, subject: Normal_01, sample_type: normal_tissue, patient: Normal_01, condition: Tamoxifen, h5: GSM7845547_Normal_01_Tamoxifen.h5, primary_analysis: false}
+    - {gsm: GSM7845548, srx: SRX20211386, biosample: SAMN33549162, subject: Normal_02, sample_type: normal_tissue, patient: Normal_02, condition: Control, h5: GSM7845548_Normal_02_Control.h5, primary_analysis: false}
+    - {gsm: GSM7845549, srx: SRX20211387, biosample: SAMN33549151, subject: Normal_02, sample_type: normal_tissue, patient: Normal_02, condition: Tamoxifen, h5: GSM7845549_Normal_02_Tamoxifen.h5, primary_analysis: false}
+    - {gsm: GSM7845550, srx: SRX20211388, biosample: SAMN33549156, subject: T47D, sample_type: cell_line, patient: T47D, condition: Control, h5: GSM7845550_T47D_Control.h5, primary_analysis: false}
+    - {gsm: GSM7845551, srx: SRX20211389, biosample: SAMN33549154, subject: T47D, sample_type: cell_line, patient: T47D, condition: Tamoxifen, h5: GSM7845551_T47D_Tamoxifen.h5, primary_analysis: false}
+    - {gsm: GSM7845552, srx: SRX20211390, biosample: SAMN33549170, subject: Tumor_01, sample_type: tumor, patient: Tumor_01, condition: Control, h5: GSM7845552_Tumor_01_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845553, srx: SRX20211391, biosample: SAMN33549173, subject: Tumor_01, sample_type: tumor, patient: Tumor_01, condition: Tamoxifen, h5: GSM7845553_Tumor_01_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845554, srx: SRX20211392, biosample: SAMN33549155, subject: Tumor_02, sample_type: tumor, patient: Tumor_02, condition: Control, h5: GSM7845554_Tumor_02_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845555, srx: SRX20211393, biosample: SAMN33549163, subject: Tumor_02, sample_type: tumor, patient: Tumor_02, condition: Tamoxifen, h5: GSM7845555_Tumor_02_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845556, srx: SRX20211394, biosample: SAMN33549171, subject: Tumor_03, sample_type: tumor, patient: Tumor_03, condition: Control, h5: GSM7845556_Tumor_03_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845557, srx: SRX20211395, biosample: SAMN33549152, subject: Tumor_03, sample_type: tumor, patient: Tumor_03, condition: Tamoxifen, h5: GSM7845557_Tumor_03_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845558, srx: SRX20211396, biosample: SAMN33549160, subject: Tumor_04, sample_type: tumor, patient: Tumor_04, condition: Control, h5: GSM7845558_Tumor_04_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845559, srx: SRX20211397, biosample: SAMN33549158, subject: Tumor_04, sample_type: tumor, patient: Tumor_04, condition: Tamoxifen, h5: GSM7845559_Tumor_04_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845560, srx: SRX20211398, biosample: SAMN33549169, subject: Tumor_05, sample_type: tumor, patient: Tumor_05, condition: Control, h5: GSM7845560_Tumor_05_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845561, srx: SRX20211399, biosample: SAMN33549157, subject: Tumor_05, sample_type: tumor, patient: Tumor_05, condition: Tamoxifen, h5: GSM7845561_Tumor_05_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845562, srx: SRX20211400, biosample: SAMN33549166, subject: Tumor_06, sample_type: tumor, patient: Tumor_06, condition: Control, h5: GSM7845562_Tumor_06_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845563, srx: SRX20211401, biosample: SAMN33549176, subject: Tumor_06, sample_type: tumor, patient: Tumor_06, condition: Tamoxifen, h5: GSM7845563_Tumor_06_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845564, srx: SRX20211402, biosample: SAMN33549159, subject: Tumor_07, sample_type: tumor, patient: Tumor_07, condition: Control, h5: GSM7845564_Tumor_07_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845565, srx: SRX20211403, biosample: SAMN33549172, subject: Tumor_07, sample_type: tumor, patient: Tumor_07, condition: Tamoxifen, h5: GSM7845565_Tumor_07_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845566, srx: SRX20211404, biosample: SAMN33549161, subject: Tumor_08, sample_type: tumor, patient: Tumor_08, condition: Control, h5: GSM7845566_Tumor_08_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845567, srx: SRX20211405, biosample: SAMN33549168, subject: Tumor_08, sample_type: tumor, patient: Tumor_08, condition: Tamoxifen, h5: GSM7845567_Tumor_08_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845568, srx: SRX20211406, biosample: SAMN33549167, subject: Tumor_09, sample_type: tumor, patient: Tumor_09, condition: Control, h5: GSM7845568_Tumor_09_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845569, srx: SRX20211407, biosample: SAMN33549165, subject: Tumor_09, sample_type: tumor, patient: Tumor_09, condition: Tamoxifen, h5: GSM7845569_Tumor_09_Tamoxifen.h5, primary_analysis: true}
+    - {gsm: GSM7845570, srx: SRX20211408, biosample: SAMN33549153, subject: Tumor_10, sample_type: tumor, patient: Tumor_10, condition: Control, h5: GSM7845570_Tumor_10_Control.h5, primary_analysis: true}
+    - {gsm: GSM7845571, srx: SRX20211409, biosample: SAMN33549174, subject: Tumor_10, sample_type: tumor, patient: Tumor_10, condition: Tamoxifen, h5: GSM7845571_Tumor_10_Tamoxifen.h5, primary_analysis: true}
+
 crispr_gse118713_integration:
   expected_n_hits: 28
   output:
