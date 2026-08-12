@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 USP34_CLASSIFICATION = {
     "gene": "USP34",
-    "classification": "H_NO_CLEAR_ACUTE_CHANGE; secondary note: weak, non-significant C_MALIGNANT_SPECIFIC_DECREASE trend",
+    "classification": "H_NO_CLEAR_ACUTE_CHANGE; secondary note: a non-unanimous (1up/2down), non-significant lean toward decrease among the 3 reliably-sampled malignant tumors -- too weak and inconsistent to call C_MALIGNANT_SPECIFIC_DECREASE outright",
     "justification": (
         "Frozen Track A (all epithelial): log2FC=-0.033, FDR=0.901 -- provides no evidence of an overall acute "
         "change (a nonsignificant result, not a formal equivalence test). Patient-level direction is an exact "
@@ -33,10 +33,11 @@ USP34_CLASSIFICATION = {
         "malignant (5.8% of high cells vs. 7.7% baseline malignant fraction among Tam cells) -- not "
         "concentrated in one tumor or compartment. Composition-shift correlation is weak (rho~0.24, Phase 20) "
         "-- not the dominant explanation either. "
-        "The one partially-consistent secondary signal: among the 3 tumors with reliable (>=50-cell) malignant "
-        "pseudobulk (Tumor_02/03/07), all three show a small decrease (Phase 6/8), consistent with the frozen "
-        "Track B point estimate (log2FC=-0.181) -- but Track B's own FDR (0.703) means this is not "
-        "statistically significant either, and n=3 tumors cannot establish a robust malignant-specific effect."
+        "Among the 3 tumors with reliable (>=50-cell) malignant pseudobulk (Tumor_02/03/07), the direction is "
+        "1 increase (Tumor_02, +0.15) / 2 decrease (Tumor_03, -0.73; Tumor_07, -0.31) (Phase 6/8) -- a lean "
+        "toward the frozen Track B point estimate direction (log2FC=-0.181) but NOT a unanimous secondary "
+        "signal, and Track B's own FDR (0.703) means none of this is statistically significant; n=3 tumors "
+        "cannot establish a robust malignant-specific effect regardless of direction."
     ),
 }
 
