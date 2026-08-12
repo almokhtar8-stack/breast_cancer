@@ -94,6 +94,32 @@ gse111151:
     log2cpm_parquet: data/processed/gse111151_log2cpm.parquet
     sample_metadata_tsv: results/tables/gse111151_sample_metadata.tsv
     qc_tsv: results/tables/gse111151_preparation_qc.tsv
+    # Additive keys for the independent-validation analysis (Phases 1-15,
+    # docs/GSE111151_PREANALYSIS.md) -- the three keys above predate that
+    # analysis and are left untouched; nothing here renames or removes them.
+    processed_dir: data/processed/gse111151
+    counts_tsv: results/tables/gse111151/counts_matrix.tsv.gz
+    metadata_tsv: results/tables/gse111151/sample_metadata.tsv
+    qc:
+      qc_tsv: results/tables/gse111151/qc_summary.tsv
+      correlation_tsv: results/tables/gse111151/sample_correlation.tsv
+      pca_tsv: results/tables/gse111151/pca_coordinates.tsv
+      figures_dir: results/figures/gse111151
+    de:
+      genomewide_tsv: results/tables/gse111151/genomewide_de.tsv.gz
+      edger_summary_tsv: results/tables/gse111151/edger_filtering_summary.tsv
+      tmm_norm_factors_tsv: results/tables/gse111151/tmm_norm_factors.tsv
+    candidate_table_tsv: results/tables/gse111151/candidate_table.tsv
+    paics_tsv: results/tables/gse111151/paics_benchmark.tsv
+    sample_level_tsv: results/tables/gse111151/candidate_sample_level_log2cpm.tsv
+    classification_tsv: results/tables/gse111151/candidate_classification.tsv
+    candidate_viz:
+      figures_dir: results/figures/gse111151_candidates
+    integration:
+      integrated_tsv: results/tables/gse111151/integrated_evidence_5layer.tsv
+    final_review_dir: results/figures/gse111151/final_review
+  raw:
+    per_sample_dir: data/raw/gse111151/extracted
   samples:
     - {gsm: GSM3024053, filename: GSM3024053_MCF-7.txt.gz, sample_id: MCF-7, parental_line: MCF-7, status: parental, derivative_id: null, paired_parental_sample_id: null}
     - {gsm: GSM3024054, filename: GSM3024054_MCF-7_Tam1.txt.gz, sample_id: MCF-7_Tam1, parental_line: MCF-7, status: resistant, derivative_id: Tam1, paired_parental_sample_id: MCF-7}
@@ -106,6 +132,29 @@ gse111151:
     - {gsm: GSM3024061, filename: GSM3024061_BT-474.txt.gz, sample_id: BT-474, parental_line: BT-474, status: parental, derivative_id: null, paired_parental_sample_id: null}
     - {gsm: GSM3024062, filename: GSM3024062_BT-474_Tam1.txt.gz, sample_id: BT-474_Tam1, parental_line: BT-474, status: resistant, derivative_id: Tam1, paired_parental_sample_id: BT-474}
     - {gsm: GSM3024063, filename: GSM3024063_BT-474_Tam2.txt.gz, sample_id: BT-474_Tam2, parental_line: BT-474, status: resistant, derivative_id: Tam2, paired_parental_sample_id: BT-474}
+  candidates:
+    thirteen:
+      [USP34, CTDNEP1, EIF4ENIF1, HMGB1, KDM1A, PET117, TADA2B, VEZF1, TLK2, ICK, SUPT4H1, TSR3, USP17L29]
+    paics: PAICS
+  candidate_ensembl_ids:
+    USP34: ENSG00000115464
+    CTDNEP1: ENSG00000175826
+    EIF4ENIF1: ENSG00000184708
+    HMGB1: ENSG00000189403
+    KDM1A: ENSG00000004487
+    PET117: ENSG00000232838
+    TADA2B: ENSG00000173011
+    VEZF1: ENSG00000136451
+    ICK: ENSG00000112144
+    SUPT4H1: ENSG00000213246
+    TLK2: ENSG00000146872
+    TSR3: ENSG00000007520
+    USP17L29: ENSG00000231637
+    PAICS: ENSG00000128050
+  micromamba_binary: /home/aljaroaa/.local/bin/micromamba
+  micromamba_env: sc245601
+  build_matrix_script: scripts/analysis/gse111151_01_build_count_matrix.R
+  edger_script: scripts/analysis/gse111151_02_edger.R
 
 gate1:
   labels_path: data/processed/labels.parquet

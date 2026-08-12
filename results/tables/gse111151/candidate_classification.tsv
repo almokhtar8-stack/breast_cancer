@@ -1,0 +1,14 @@
+gene	classification	justification	n_cell_lines_consistent	n_cell_lines_with_both_arms
+USP34	directionally_supportive_but_weak	not candidate-set FDR-significant (FDR=0.936) but nominal p=0.213, 3/4 cell lines consistent	3.0	4.0
+CTDNEP1	neutral_no_additional_support	FDR=0.936, nominal p=0.802, only 2/4 cell lines consistent	2.0	4.0
+EIF4ENIF1	neutral_no_additional_support	FDR=0.936, nominal p=0.322, only 4/4 cell lines consistent	4.0	4.0
+HMGB1	neutral_no_additional_support	FDR=0.936, nominal p=0.454, only 2/4 cell lines consistent	2.0	4.0
+KDM1A	neutral_no_additional_support	FDR=0.936, nominal p=0.685, only 3/4 cell lines consistent	3.0	4.0
+PET117	neutral_no_additional_support	FDR=0.936, nominal p=0.936, only 3/4 cell lines consistent	3.0	4.0
+TADA2B	neutral_no_additional_support	FDR=0.936, nominal p=0.729, only 2/4 cell lines consistent	2.0	4.0
+VEZF1	neutral_no_additional_support	FDR=0.936, nominal p=0.188, only 2/4 cell lines consistent	2.0	4.0
+TLK2	neutral_no_additional_support	FDR=0.936, nominal p=0.530, only 4/4 cell lines consistent	4.0	4.0
+ICK	directionally_supportive_but_weak	not candidate-set FDR-significant (FDR=0.936) but nominal p=0.288, 3/4 cell lines consistent	3.0	4.0
+SUPT4H1	neutral_no_additional_support	FDR=0.936, nominal p=0.916, only 3/4 cell lines consistent	3.0	4.0
+TSR3	neutral_no_additional_support	FDR=0.936, nominal p=0.632, only 2/4 cell lines consistent	2.0	4.0
+USP17L29	untestable	filtered out by edgeR filterByExpr (too lowly expressed to test)		

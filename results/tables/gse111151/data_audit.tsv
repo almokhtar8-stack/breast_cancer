@@ -1,0 +1,12 @@
+sample_id	gsm	cell_line	resistance_status	raw_file	library_size_raw_counts	gene_id_type	n_genes	notes
+MCF-7	GSM3024053	MCF-7	parental	GSM3024053_MCF-7.txt.gz	48419811	Ensembl	60619	one parental sample per cell line, no biological replicate
+MCF-7_Tam1	GSM3024054	MCF-7	resistant	GSM3024054_MCF-7_Tam1.txt.gz	57925533	Ensembl	60619	only resistant subline for this cell line
+T-47D	GSM3024055	T-47D	parental	GSM3024055_T-47D.txt.gz	46929605	Ensembl	60619	one parental sample per cell line, no biological replicate
+T-47D_Tam1	GSM3024056	T-47D	resistant	GSM3024056_T-47D_Tam1.txt.gz	48634372	Ensembl	60619	independently-derived resistant subline 1 of 2
+T-47D_Tam2	GSM3024057	T-47D	resistant	GSM3024057_T-47D_Tam2.txt.gz	49913262	Ensembl	60619	independently-derived resistant subline 2 of 2
+ZR-75-1	GSM3024058	ZR-75-1	parental	GSM3024058_ZR-75-1.txt.gz	50259852	Ensembl	60619	one parental sample per cell line, no biological replicate
+ZR-75-1_Tam1	GSM3024059	ZR-75-1	resistant	GSM3024059_ZR-75-1_Tam1.txt.gz	75013457	Ensembl	60619	independently-derived resistant subline 1 of 2
+ZR-75-1_Tam2	GSM3024060	ZR-75-1	resistant	GSM3024060_ZR-75-1_Tam2.txt.gz	59763367	Ensembl	60619	independently-derived resistant subline 2 of 2
+BT-474	GSM3024061	BT-474	parental	GSM3024061_BT-474.txt.gz	54675181	Ensembl	60619	one parental sample per cell line, no biological replicate; HER2-amplified (molecular subtype differs from the other 3 lines)
+BT-474_Tam1	GSM3024062	BT-474	resistant	GSM3024062_BT-474_Tam1.txt.gz	57324255	Ensembl	60619	independently-derived resistant subline 1 of 2
+BT-474_Tam2	GSM3024063	BT-474	resistant	GSM3024063_BT-474_Tam2.txt.gz	30857748	Ensembl	60619	independently-derived resistant subline 2 of 2; lowest library size in panel but not catastrophic

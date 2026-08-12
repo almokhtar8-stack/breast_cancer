@@ -1,0 +1,2 @@
+label	n_samples	n_cell_lines	n_genes_before_filterByExpr	n_genes_after_filterByExpr	normalization_method	de_method	design_formula	contrast	residual_df
+gse111151_resistant_vs_parental	11	4	60619	27418	TMM	edgeR glmQLFit/glmQLFTest	~ cell_line + resistance_status	resistant vs parental, blocked by cell_line	6

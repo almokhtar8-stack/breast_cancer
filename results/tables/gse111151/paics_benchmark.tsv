@@ -1,0 +1,2 @@
+gene	gene_id	benchmark_label	tested	log2fc	avg_log_cpm	p_value	genomewide_fdr	direction
+PAICS	ENSG00000128050	published_benchmark_not_in_13_candidate_bh_family	True	-0.220626125009531	6.67518060102419	0.19885458186814	0.617731147657262	down_in_resistant
