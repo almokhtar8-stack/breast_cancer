@@ -639,3 +639,47 @@ gse240112:
     integration:
       integrated_tsv: results/tables/gse240112/integrated_evidence_4layer.tsv
     final_review_dir: results/figures/gse240112/final_review
+
+# Cross-dataset genome-wide integration: unbiased search across the
+# union of all genes measurable in any of the five independent evidence
+# sources (CRISPR, GSE118713, GSE245601, GSE240112, GSE111151). See
+# docs/CROSS_DATASET_GENOMEWIDE_DATA_AUDIT.md and
+# docs/CROSS_DATASET_GENOMEWIDE_PREANALYSIS.md. Does not start from, or
+# filter by, any previously-discussed gene list.
+cross_dataset_genomewide:
+  inputs:
+    crispr_labels_parquet: data/processed/labels.parquet
+    gse118713_de_tsv: results/tables/gse118713_differential_expression_unredacted.tsv.gz
+    gse245601_track_a_tsv: results/tables/gse245601_pseudobulk/track_a_genomewide_de.tsv.gz
+    gse245601_track_b_tsv: results/tables/gse245601_pseudobulk/track_b_genomewide_de.tsv.gz
+    gse240112_tumor_cell_tsv: results/tables/gse240112_pseudobulk/tumor_cell_genomewide_de.tsv.gz
+    gse240112_epithelial_tsv: results/tables/gse240112_pseudobulk/epithelial_genomewide_de.tsv.gz
+    gse111151_de_tsv: results/tables/gse111151/genomewide_de.tsv.gz
+  output:
+    tables_dir: results/tables/cross_dataset_genomewide
+    figures_dir: results/figures/cross_dataset_genomewide
+    final_review_dir: results/figures/cross_dataset_genomewide/final_review
+    dataset_inventory_tsv: results/tables/cross_dataset_genomewide/dataset_inventory.tsv
+    full_gene_universe_tsv: results/tables/cross_dataset_genomewide/full_gene_universe.tsv
+    gene_mapping_audit_tsv: results/tables/cross_dataset_genomewide/gene_mapping_audit.tsv
+    evidence_long_tsv: results/tables/cross_dataset_genomewide/evidence_long.tsv
+    wide_matrix_tsv: results/tables/cross_dataset_genomewide/all_genes_cross_dataset_evidence.tsv
+    high_signal_low_coverage_tsv: results/tables/cross_dataset_genomewide/high_signal_low_coverage.tsv
+    resistance_consensus_tsv: results/tables/cross_dataset_genomewide/resistance_consensus_all_genes.tsv
+    crispr_functional_all_genes_tsv: results/tables/cross_dataset_genomewide/crispr_functional_all_genes.tsv
+    human_only_tsv: results/tables/cross_dataset_genomewide/human_only_ranking.tsv
+    rna_only_tsv: results/tables/cross_dataset_genomewide/rna_only_ranking.tsv
+    crispr_nonsignificant_rna_consensus_tsv: results/tables/cross_dataset_genomewide/crispr_nonsignificant_rna_consensus.tsv
+    directional_patterns_tsv: results/tables/cross_dataset_genomewide/directional_patterns.tsv
+    ranking_stability_tsv: results/tables/cross_dataset_genomewide/ranking_stability.tsv
+    top20_global_tsv: results/tables/cross_dataset_genomewide/top20_global.tsv
+    top20_multimodal_tsv: results/tables/cross_dataset_genomewide/top20_multimodal.tsv
+    top20_resistance_consensus_tsv: results/tables/cross_dataset_genomewide/top20_resistance_consensus.tsv
+    top20_rna_only_tsv: results/tables/cross_dataset_genomewide/top20_rna_only.tsv
+    top20_crispr_sensitising_tsv: results/tables/cross_dataset_genomewide/top20_crispr_sensitising.tsv
+    top20_crispr_tolerance_tsv: results/tables/cross_dataset_genomewide/top20_crispr_tolerance.tsv
+    top20_human_tumor_tsv: results/tables/cross_dataset_genomewide/top20_human_tumor.tsv
+    top20_crispr_nonsignificant_rna_tsv: results/tables/cross_dataset_genomewide/top20_crispr_nonsignificant_rna.tsv
+    anonymized_mapping_tsv: results/tables/cross_dataset_genomewide/anonymized_gene_mapping.tsv
+    anonymized_ranking_tsv: results/tables/cross_dataset_genomewide/anonymized_ranking.tsv
+  min_datasets_testable_for_primary_ranking: 3
