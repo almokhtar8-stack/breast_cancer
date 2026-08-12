@@ -709,3 +709,36 @@ evidence_freeze:
     tables_dir: results/tables/evidence_freeze
     figures_dir: results/figures/evidence_freeze
     final_review_dir: results/figures/evidence_freeze/final_review
+
+# GSE245601 candidate deep-dive: exploratory decomposition of the acute
+# 12h-tamoxifen pseudobulk result for the four FROZEN therapeutic
+# candidates (USP34, VEZF1, EML5, CITED2) only. Does not touch the frozen
+# evidence-freeze shortlist/tables/figures/doc, does not rerun QC,
+# clustering, InferCNV/CopyKAT, or the pseudobulk/edgeR pipeline -- reads
+# the already-frozen Seurat object and pseudobulk cell-level summary
+# table read-only. Cells are never used as biological replicates for
+# inference; the tumor/patient remains the unit for any inferential
+# claim.
+gse245601_candidate_deepdive:
+  genes: [USP34, VEZF1, EML5, CITED2]
+  inputs:
+    seurat_object: data/processed/gse245601/seurat_clustered/annotated.rds
+    cell_level_summary_tsv: results/tables/gse245601_pseudobulk/malignant_vs_nonmalignant_cell_level_summary.tsv
+    track_a_counts_tsv: results/tables/gse245601_pseudobulk/track_a_epithelial_counts.tsv.gz
+    track_a_metadata_tsv: results/tables/gse245601_pseudobulk/track_a_epithelial_metadata.tsv
+    track_a_genomewide_de_tsv: results/tables/gse245601_pseudobulk/track_a_genomewide_de.tsv.gz
+    track_b_counts_tsv: results/tables/gse245601_pseudobulk/track_b_malignant_counts.tsv.gz
+    track_b_metadata_tsv: results/tables/gse245601_pseudobulk/track_b_malignant_metadata.tsv
+    track_b_genomewide_de_tsv: results/tables/gse245601_pseudobulk/track_b_genomewide_de.tsv.gz
+    track_a_candidates_tsv: results/tables/gse245601_candidate_integration/track_a_13candidates.tsv
+    track_b_candidates_tsv: results/tables/gse245601_candidate_integration/track_b_13candidates.tsv
+  malignant_cell_min_count: 50
+  track_b_eligible_patients: [Tumor_02, Tumor_03, Tumor_07]
+  extraction_r_script: scripts/analysis/gse245601_18_extract_candidate_deepdive.R
+  micromamba_binary: /home/aljaroaa/.local/bin/micromamba
+  micromamba_env: sc245601
+  output:
+    tables_dir: results/tables/gse245601_candidate_deepdive
+    figures_dir: results/figures/gse245601_candidate_deepdive
+    final_review_dir: results/figures/gse245601_candidate_deepdive/final_review
+    per_cell_tsv: results/tables/gse245601_candidate_deepdive/candidate_per_cell_expression.tsv

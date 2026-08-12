@@ -1,0 +1,13 @@
+metric	value
+n_tam_epithelial_cells	14188
+n_tam_usp34_detectable_cells	9089
+usp34_log_norm_q25_threshold	0.476938823513032
+usp34_log_norm_q75_threshold	0.876847709420356
+n_usp34_high_cells	2271
+pct_high_cells_malignant	5.812417437252312
+pct_high_cells_nonmalignant	94.18758256274768
+pct_all_tam_cells_malignant_for_reference	7.68959684240203
+pct_malignant_tam_cells_that_are_usp34_high	12.098991750687443
+n_patients_contributing_usp34_high_cells	10
+max_single_patient_pct_of_usp34_high_cells	28.489652135623075
+max_contributing_patient	Tumor_06

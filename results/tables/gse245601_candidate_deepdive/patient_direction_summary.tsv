@@ -1,0 +1,5 @@
+gene	n_patients_total	n_patients_increase	n_patients_decrease	n_patients_equal	increasing_patients	decreasing_patients
+CITED2	10	7	3	0	Tumor_03,Tumor_04,Tumor_05,Tumor_06,Tumor_07,Tumor_09,Tumor_10	Tumor_01,Tumor_02,Tumor_08
+EML5	10	7	3	0	Tumor_01,Tumor_04,Tumor_05,Tumor_06,Tumor_07,Tumor_09,Tumor_10	Tumor_02,Tumor_03,Tumor_08
+USP34	10	5	5	0	Tumor_01,Tumor_04,Tumor_05,Tumor_06,Tumor_10	Tumor_02,Tumor_03,Tumor_07,Tumor_08,Tumor_09
+VEZF1	10	4	6	0	Tumor_01,Tumor_04,Tumor_05,Tumor_06	Tumor_02,Tumor_03,Tumor_07,Tumor_08,Tumor_09,Tumor_10
