@@ -1,0 +1,5 @@
+shortlist_rank	gene	axis_a_functional	axis_b_resistance	axis_c_human	resistance_direction_consensus	stability_label	global_rank
+1	VEZF1	STRONG	STRONG	STRONG	majority_up	DATASET_DEPENDENT	1138.0
+2	USP34	STRONG	STRONG	NO_EVIDENCE	all_up	DATASET_DEPENDENT	994.0
+3	EML5	WEAK	VERY_STRONG	STRONG	all_up	DATASET_DEPENDENT	256.0
+4	CITED2	WEAK	STRONG	STRONG	majority_up	DATASET_DEPENDENT	2073.0

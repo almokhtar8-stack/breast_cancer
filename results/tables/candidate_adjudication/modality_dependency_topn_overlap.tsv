@@ -1,0 +1,7 @@
+top_n	comparison_ranking	overlap_with_global	overlap_fraction_of_global
+20	RNA-only	17	0.85
+20	CRISPR-sensitising-and-tolerance	1	0.05
+20	resistance-consensus	6	0.3
+100	RNA-only	39	0.39
+100	CRISPR-sensitising-and-tolerance	2	0.02
+100	resistance-consensus	38	0.38

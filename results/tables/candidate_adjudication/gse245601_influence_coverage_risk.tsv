@@ -1,0 +1,6 @@
+dataset	n_testable_total	n_genes_at_risk_of_coverage_dropout_if_removed
+gse111151	26982	2041
+crispr	19103	1745
+gse245601	17987	1341
+gse240112	18428	962
+gse118713	14701	595

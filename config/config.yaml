@@ -683,3 +683,18 @@ cross_dataset_genomewide:
     anonymized_mapping_tsv: results/tables/cross_dataset_genomewide/anonymized_gene_mapping.tsv
     anonymized_ranking_tsv: results/tables/cross_dataset_genomewide/anonymized_ranking.tsv
   min_datasets_testable_for_primary_ranking: 3
+
+# Candidate adjudication: deep inspection of the actual evidence behind
+# the genome-wide integration above, for the seven MULTIMODAL_STRONG
+# genes and beyond. Purely additive over cross_dataset_genomewide's
+# already-frozen outputs -- reads them read-only, writes nothing back
+# into that directory. No pathway/druggability/literature analysis.
+candidate_adjudication:
+  output:
+    tables_dir: results/tables/candidate_adjudication
+    figures_dir: results/figures/candidate_adjudication
+    final_review_dir: results/figures/candidate_adjudication/final_review
+    sample_level_dir: results/figures/candidate_adjudication/sample_level
+    gene_cards_dir: results/figures/candidate_adjudication/gene_cards
+  multimodal7:
+    genes: [USP34, VEZF1, CUX1, DPP9, LZTR1, SOX2, TFAP2C]

@@ -1,0 +1,3 @@
+gene	coverage_tier	crispr_fdr	n_datasets_fdr05	resistance_fdr05_count	resistance_direction_consensus	missing_condition
+SPRED2	A	0.0783442627744789	1	1	majority_up	has_CRISPR_FDR<0.10_but_only_1_resistance_dataset_FDR<0.05_and_<2_overall
+EML5	A	0.1487732844800642	2	2	all_up	has_resistance_FDR_pattern_but_CRISPR_FDR_in_[0.10,0.20)

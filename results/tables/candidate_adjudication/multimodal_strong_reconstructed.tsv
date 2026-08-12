@@ -1,0 +1,8 @@
+gene	coverage_tier	crispr_fdr	resistance_direction_consensus	n_datasets_testable_reconstructed	low_coverage_reconstructed	n_datasets_fdr05_reconstructed	resistance_fdr05_count_reconstructed	crispr_strong_fdr_lt_010	resistance_fdr05_ge2	resistance_fdr05_ge1_and_overall_fdr05_ge2	is_multimodal_strong
+CUX1	A	0.044987385842584	all_down	5	False	3	2	True	True	True	True
+DPP9	A	0.0416851803622835	majority_up	5	False	2	1	True	False	True	True
+LZTR1	A	0.0124208335090964	all_up	5	False	2	1	True	False	True	True
+SOX2	A	0.012231538169301	all_up	5	False	3	2	True	True	True	True
+TFAP2C	A	0.0482149029216125	all_down	5	False	2	1	True	False	True	True
+USP34	A	0.0416851803622835	all_up	5	False	2	1	True	False	True	True
+VEZF1	A	0.0372575660229722	majority_up	5	False	2	1	True	False	True	True

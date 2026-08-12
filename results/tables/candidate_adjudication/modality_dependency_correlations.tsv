@@ -1,0 +1,4 @@
+comparison	n_genes_compared	spearman_rho	p_value
+global_rank_vs_RNA-only	15255	0.5457460974094172	0.0
+global_rank_vs_CRISPR-only	14418	0.16256790519674127	5.840050592017121e-86
+global_rank_vs_resistance-consensus-only	15255	0.5297550617731106	0.0
