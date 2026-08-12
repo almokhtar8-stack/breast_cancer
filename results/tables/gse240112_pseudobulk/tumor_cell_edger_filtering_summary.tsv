@@ -1,0 +1,2 @@
+label	n_samples	n_genes_before_filterByExpr	n_genes_after_filterByExpr	normalization_method	de_method	design_formula	contrast	residual_df
+tumor_cell_RT_vs_PT	6	27161	18428	TMM	edgeR glmQLFit/glmQLFTest	~ group	RT vs PT (RT - PT), unpaired	4

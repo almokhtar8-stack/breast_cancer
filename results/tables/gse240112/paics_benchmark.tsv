@@ -1,0 +1,2 @@
+gene	benchmark_label	tested	log2fc	avg_log_cpm	p_value	genomewide_fdr	direction	pt_log2cpm_mean	rt_log2cpm_mean
+PAICS	published_benchmark_not_in_13_candidate_bh_family	True	0.126944158534044	7.25666452478507	0.694535888845447	0.793632253961921	up_in_RT	7.1842021183349445	7.2710660402793215

@@ -530,3 +530,63 @@ nebula_plots_final:
     usp34_panel:
       png: results/figures/nebula_final/fig5_usp34_expression.png
       pdf: results/figures/nebula_final/fig5_usp34_expression.pdf
+
+# GSE240112: human primary (PT) vs tamoxifen-treated recurrent (RT) ER+
+# breast tumor scRNA-seq, author-processed h5Seurat objects (see
+# docs/GSE240112_DATA_AUDIT.md and docs/GSE240112_PREANALYSIS.md).
+# Primary tumor-cell population = TTs_cancer_060223.h5seurat, in which
+# cell.annot == "Breast cancer cells" for every cell (Phase 7 Case A,
+# author-provided, marker-based, not CNV-based). Design is unpaired
+# (~ group, contrast RT - PT); see PREANALYSIS.md section C.
+gse240112:
+  raw:
+    nt_h5seurat: data/raw/gse240112/NTs.h5seurat
+    tt_cancer_h5seurat: data/raw/gse240112/TTs_cancer_060223.h5seurat
+    cellranger_dir: data/raw/gse240112/cellranger
+  candidates:
+    thirteen:
+      [USP34, CTDNEP1, EIF4ENIF1, HMGB1, KDM1A, PET117, TADA2B, VEZF1, TLK2, ICK, SUPT4H1, TSR3, USP17L29]
+    paics: PAICS
+  micromamba_binary: /home/aljaroaa/.local/bin/micromamba
+  micromamba_env: sc245601
+  extract_script: scripts/analysis/gse240112_01_extract_h5seurat.R
+  build_pseudobulk_script: scripts/analysis/gse240112_02_build_pseudobulk.R
+  edger_script: scripts/analysis/gse240112_03_pseudobulk_edger.R
+  epithelial_script: scripts/analysis/gse240112_04_cellranger_epithelial.R
+  output:
+    processed_dir: data/processed/gse240112
+    tt_cancer_rds: data/processed/gse240112/tt_cancer_extracted.rds
+    nt_rds: data/processed/gse240112/nt_extracted.rds
+    tt_cancer_metadata_tsv: data/processed/gse240112/tt_cancer_metadata.tsv
+    tt_cancer_candidate_raw_tsv: data/processed/gse240112/tt_cancer_candidate_raw_counts.tsv
+    tt_cancer_candidate_lognorm_tsv: data/processed/gse240112/tt_cancer_candidate_lognorm.tsv
+    tt_cancer_extraction_log_tsv: results/tables/gse240112/extraction_log.tsv
+    tumor_cell:
+      counts_tsv: results/tables/gse240112_pseudobulk/tumor_cell_counts.tsv.gz
+      metadata_tsv: results/tables/gse240112_pseudobulk/tumor_cell_metadata.tsv
+    qc:
+      qc_tsv: results/tables/gse240112_pseudobulk/tumor_cell_qc_summary.tsv
+      correlation_tsv: results/tables/gse240112_pseudobulk/tumor_cell_sample_correlation.tsv
+      pca_tsv: results/tables/gse240112_pseudobulk/tumor_cell_pca_coordinates.tsv
+      figures_dir: results/figures/gse240112_pseudobulk
+    de:
+      genomewide_tsv: results/tables/gse240112_pseudobulk/tumor_cell_genomewide_de.tsv.gz
+      edger_summary_tsv: results/tables/gse240112_pseudobulk/tumor_cell_edger_filtering_summary.tsv
+    candidate_detection_audit_tsv: results/tables/gse240112/candidate_detection_audit.tsv
+    candidate_table_tsv: results/tables/gse240112/candidate_table.tsv
+    paics_tsv: results/tables/gse240112/paics_benchmark.tsv
+    epithelial:
+      counts_tsv: results/tables/gse240112_pseudobulk/epithelial_counts.tsv.gz
+      metadata_tsv: results/tables/gse240112_pseudobulk/epithelial_metadata.tsv
+      genomewide_de_tsv: results/tables/gse240112_pseudobulk/epithelial_genomewide_de.tsv.gz
+      edger_summary_tsv: results/tables/gse240112_pseudobulk/epithelial_edger_filtering_summary.tsv
+      compartment_composition_tsv: results/tables/gse240112/epithelial_compartment_composition.tsv
+      sensitivity_comparison_tsv: results/tables/gse240112/tumor_vs_epithelial_sensitivity.tsv
+    usp34:
+      figures_dir: results/figures/gse240112_usp34
+      per_sample_tsv: results/tables/gse240112/usp34_per_sample_summary.tsv
+    candidate_viz:
+      figures_dir: results/figures/gse240112_candidates
+    integration:
+      integrated_tsv: results/tables/gse240112/integrated_evidence_4layer.tsv
+    final_review_dir: results/figures/gse240112/final_review

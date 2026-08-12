@@ -1,0 +1,3 @@
+object	source_file	n_genes_in_source	n_cells_in_source	n_genes_extracted	n_cells_extracted	n_cells_lost
+tt_cancer	data/raw/gse240112/TTs_cancer_060223.h5seurat	27161	9942	27161	9942	0
+nt	data/raw/gse240112/NTs.h5seurat	25543	7529	25543	7529	0

@@ -1,0 +1,14 @@
+gene	classification	justification
+USP34	neutral_no_additional_support	FDR=0.473, nominal p=0.118, no sizeable cross-track-consistent effect
+CTDNEP1	neutral_no_additional_support	FDR=0.819, nominal p=0.698, no sizeable cross-track-consistent effect
+EIF4ENIF1	neutral_no_additional_support	FDR=0.819, nominal p=0.792, no sizeable cross-track-consistent effect
+HMGB1	neutral_no_additional_support	FDR=0.819, nominal p=0.732, no sizeable cross-track-consistent effect
+KDM1A	neutral_no_additional_support	FDR=0.677, nominal p=0.451, no sizeable cross-track-consistent effect
+PET117	neutral_no_additional_support	FDR=0.677, nominal p=0.429, no sizeable cross-track-consistent effect
+TADA2B	neutral_no_additional_support	FDR=0.580, nominal p=0.242, no sizeable cross-track-consistent effect
+VEZF1	strengthened	candidate-set BH FDR=0.048 < 0.05
+TLK2	neutral_no_additional_support	FDR=0.819, nominal p=0.819, no sizeable cross-track-consistent effect
+ICK	neutral_no_additional_support	FDR=0.596, nominal p=0.298, no sizeable cross-track-consistent effect
+SUPT4H1	directionally_supportive_but_weak	not candidate-set FDR-significant (FDR=0.157) but nominal p=0.026, |log2fc|=1.003, epithelial-track agreement=True
+TSR3	neutral_no_additional_support	FDR=0.580, nominal p=0.241, no sizeable cross-track-consistent effect
+USP17L29	untestable	gene absent from tumor-cell feature space (confirmed genuinely undetected in raw sequencing data, not a symbol-mapping error -- see candidate_detection_audit.tsv)
