@@ -397,6 +397,25 @@ gse245601_candidate_integration:
     integrated_master_tsv: results/tables/gse245601_candidate_integration/integrated_crispr_bulk_singlecell_candidates.tsv
     figures_dir: results/figures/gse245601_candidate_integration
 
+# USP34 expression visualization on the existing GSE245601 UMAP
+# (read-only follow-up; no rerun, no label/eligibility change). Reuses
+# the already-frozen per-cell table from the pseudobulk phase
+# (condition, malignancy_status, UMAP coordinates for all epithelial
+# cells) and adds only USP34's own log-normalized expression value,
+# extracted read-only from the frozen Seurat object.
+gse245601_usp34_expression:
+  gene: USP34
+  inputs:
+    seurat_object: data/processed/gse245601/seurat_clustered/annotated.rds
+    cell_level_summary_tsv: results/tables/gse245601_pseudobulk/malignant_vs_nonmalignant_cell_level_summary.tsv
+  extraction_r_script: scripts/analysis/gse245601_17_extract_usp34_expression.R
+  micromamba_binary: /home/aljaroaa/.local/bin/micromamba
+  micromamba_env: sc245601
+  output:
+    expression_tsv: results/tables/gse245601_usp34_expression/usp34_per_cell_expression.tsv
+    summary_tsv: results/tables/gse245601_usp34_expression/usp34_group_summary.tsv
+    figures_dir: results/figures/gse245601_usp34_expression
+
 crispr_gse118713_integration:
   expected_n_hits: 28
   output:
