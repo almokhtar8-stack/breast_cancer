@@ -1,0 +1,31 @@
+gene	eligible_for_freeze	ineligibility_reason	_crispr_band
+GREB1	False	CRISPR FDR>=0.25 or untestable -- sensitising sign carries no real evidence	
+EPAS1	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	
+CUX1	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	STRONG
+LAMB3	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	
+DMRTA1	False	CRISPR FDR>=0.25 or untestable -- sensitising sign carries no real evidence	
+SOX2	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	STRONG
+HLA-DQB1	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	
+SUSD3	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	
+GFRA1	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	
+SPRY4	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	
+EML5	True		WEAK
+TFAP2C	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	STRONG
+USP34	True		STRONG
+DPP9	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	STRONG
+VEZF1	True		STRONG
+LZTR1	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	STRONG
+CITED2	True		WEAK
+TIPARP	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	WEAK
+MBTPS2	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	WEAK
+KDM1A	False	no resistance-RNA dataset FDR<0.05 and no significant human-tumor support (functional-only -- see List C instead)	VERY_STRONG
+SPRED2	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	MODERATE
+SUPT4H1	False	no resistance-RNA dataset FDR<0.05 and no significant human-tumor support (functional-only -- see List C instead)	STRONG
+EIF4ENIF1	False	no resistance-RNA dataset FDR<0.05 and no significant human-tumor support (functional-only -- see List C instead)	STRONG
+ICK	False	no resistance-RNA dataset FDR<0.05 and no significant human-tumor support (functional-only -- see List C instead)	STRONG
+HMGB1	False	no resistance-RNA dataset FDR<0.05 and no significant human-tumor support (functional-only -- see List C instead)	STRONG
+TLK2	False	no resistance-RNA dataset FDR<0.05 and no significant human-tumor support (functional-only -- see List C instead)	VERY_STRONG
+TADA2B	False	no resistance-RNA dataset FDR<0.05 and no significant human-tumor support (functional-only -- see List C instead)	STRONG
+GABBR2	False	CRISPR direction is tolerance_associated_KO, not sensitising_KO	
+SLC4A10	False	CRISPR FDR>=0.25 or untestable -- sensitising sign carries no real evidence	
+USP17L29	False	no resistance-RNA dataset FDR<0.05 and no significant human-tumor support (functional-only -- see List C instead)	STRONG

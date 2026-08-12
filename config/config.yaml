@@ -698,3 +698,14 @@ candidate_adjudication:
     gene_cards_dir: results/figures/candidate_adjudication/gene_cards
   multimodal7:
     genes: [USP34, VEZF1, CUX1, DPP9, LZTR1, SOX2, TFAP2C]
+
+# Evidence freeze: final evidence-layer cleanup/presentation pass over the
+# already-frozen candidate-adjudication outputs above. Purely additive --
+# reads candidate_adjudication's tables read-only, writes nothing back
+# into that directory. No pathway/druggability/literature/normal-tissue
+# information is used to decide the frozen shortlist.
+evidence_freeze:
+  output:
+    tables_dir: results/tables/evidence_freeze
+    figures_dir: results/figures/evidence_freeze
+    final_review_dir: results/figures/evidence_freeze/final_review

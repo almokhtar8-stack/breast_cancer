@@ -1,0 +1,5 @@
+gene	shortlisted_before_freeze	crispr_effect	crispr_fdr	crispr_direction	eligible_for_inhibition_strategy	reason_for_previous_shortlisting	resistance_support	human_support	main_limitation	freeze_decision
+VEZF1	True	-1.602445388833546	0.0372575660229722	sensitising_KO	True	one of the two MULTIMODAL_STRONG sensitising genes	1/3 FDR<0.05, consensus=majority_up	significant	none	CONFIRMED
+USP34	True	-1.3912980676838431	0.0416851803622835	sensitising_KO	True	one of the two MULTIMODAL_STRONG sensitising genes	1/3 FDR<0.05, consensus=all_up	not_significant	none	CONFIRMED
+EML5	True	-1.058423339442026	0.1487732844800642	sensitising_KO	True	near-miss multimodal gene (sensitising direction + resistance/human RNA support, CRISPR FDR just above the MULTIMODAL_STRONG 0.10 gate)	2/3 FDR<0.05, consensus=all_up	significant	no CRISPR significance	CONFIRMED
+CITED2	True	-1.4953555271062804	0.109955077591718	sensitising_KO	True	near-miss multimodal gene (sensitising direction + resistance/human RNA support, CRISPR FDR just above the MULTIMODAL_STRONG 0.10 gate)	1/3 FDR<0.05, consensus=majority_up	significant	no CRISPR significance	CONFIRMED

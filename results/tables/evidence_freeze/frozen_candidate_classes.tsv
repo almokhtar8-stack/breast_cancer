@@ -1,0 +1,20 @@
+candidate_class	rank_within_class	gene	class_defining_evidence
+A_THERAPEUTIC_INHIBITION_SHORTLIST	1	USP34	CRISPR STRONG (FDR=0.0417, sensitising_KO); resistance STRONG (1/3 FDR<0.05, all_up); stability DATASET_DEPENDENT
+A_THERAPEUTIC_INHIBITION_SHORTLIST	2	VEZF1	CRISPR STRONG (FDR=0.0373, sensitising_KO); resistance STRONG (1/3 FDR<0.05, majority_up); human-tumor support significant; stability DATASET_DEPENDENT
+A_THERAPEUTIC_INHIBITION_SHORTLIST	3	EML5	CRISPR WEAK (FDR=0.149, sensitising_KO); resistance VERY_STRONG (2/3 FDR<0.05, all_up); human-tumor support significant; stability DATASET_DEPENDENT
+A_THERAPEUTIC_INHIBITION_SHORTLIST	4	CITED2	CRISPR WEAK (FDR=0.11, sensitising_KO); resistance STRONG (1/3 FDR<0.05, majority_up); human-tumor support significant; stability DATASET_DEPENDENT
+B_RESISTANCE_BIOMARKER_PATHWAY_LEADERS	1	EPAS1	resistance consensus=all_up, 3/3 FDR<0.05, CRISPR sensitising not required
+B_RESISTANCE_BIOMARKER_PATHWAY_LEADERS	2	GABBR2	resistance consensus=all_up, 3/3 FDR<0.05, CRISPR sensitising not required
+B_RESISTANCE_BIOMARKER_PATHWAY_LEADERS	3	SLC4A10	resistance consensus=all_down, 3/3 FDR<0.05, CRISPR sensitising not required
+B_RESISTANCE_BIOMARKER_PATHWAY_LEADERS	4	DMRTA1	resistance consensus=all_up, 3/3 FDR<0.05, CRISPR sensitising not required
+B_RESISTANCE_BIOMARKER_PATHWAY_LEADERS	5	LAMB3	resistance consensus=all_up, 3/3 FDR<0.05, CRISPR sensitising not required
+C_FUNCTIONAL_SENSITISATION_LEADERS	1	KDM1A	CRISPR FDR=0.000385, sensitising_KO, RNA support not required
+C_FUNCTIONAL_SENSITISATION_LEADERS	2	TLK2	CRISPR FDR=0.00168, sensitising_KO, RNA support not required
+C_FUNCTIONAL_SENSITISATION_LEADERS	3	TADA2B	CRISPR FDR=0.0146, sensitising_KO, RNA support not required
+C_FUNCTIONAL_SENSITISATION_LEADERS	4	USP17L29	CRISPR FDR=0.028, sensitising_KO, RNA support not required
+C_FUNCTIONAL_SENSITISATION_LEADERS	5	VEZF1	CRISPR FDR=0.0373, sensitising_KO, RNA support not required
+D_HUMAN_TUMOR_LEADERS	1	GREB1	human_only_rank=1, 2/2 human datasets FDR<0.05
+D_HUMAN_TUMOR_LEADERS	2	SYTL5	human_only_rank=2, 2/2 human datasets FDR<0.05
+D_HUMAN_TUMOR_LEADERS	3	MYBL1	human_only_rank=3, 2/2 human datasets FDR<0.05
+D_HUMAN_TUMOR_LEADERS	4	LARP6	human_only_rank=4, 2/2 human datasets FDR<0.05
+D_HUMAN_TUMOR_LEADERS	5	FGD3	human_only_rank=5, 2/2 human datasets FDR<0.05
