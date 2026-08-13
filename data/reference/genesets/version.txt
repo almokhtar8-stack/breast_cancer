@@ -1,0 +1,2 @@
+MSigDB release 2024.1.Hs
+Source: https://data.broadinstitute.org/gsea-msigdb/msigdb/release/2024.1.Hs

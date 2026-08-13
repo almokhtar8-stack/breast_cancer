@@ -1,0 +1,8 @@
+module_id	n_genes	genes	candidate_genes_present	crispr_sensitising_genes	resistance_rna_genes_count	note
+0	39	ACVR1;BMP7;CITED2;COL1A1;CREBBP;CSK;CTNNB1;EP300;EPAS1;ERBB2;FN1;FOXO1;FOXO3;HIF1A;HMGB1;ITGA3;KDM1A;KDM6A;KMT2C;LHX2;LOX;LYN;NF1;NF2;PPARG;PTEN;SIX2;SMAD3;SOX2;SPRED1;SRC;TBX3;TFAP2A;TFAP2B;TFAP2C;TGFBR2;TP53;WT1;WWTR1	CITED2	HMGB1,KDM1A	15	algorithmic community (Louvain, structural only) -- not itself a claimed biological pathway
+1	22	ADAM17;CUX1;DLL4;DUSP6;EFNA1;EPHB2;F2RL1;FGFR1;HEY1;ID2;JAG1;LEF1;LRP5;MSX1;PTK7;SPRY1;SPRY2;SPRY4;TRIB1;WNT3;WNT4;WNT5A			19	algorithmic community (Louvain, structural only) -- not itself a claimed biological pathway
+2	21	ANAPC15;ANAPC2;ASH1L;CDC16;H7C0V5_HUMAN;MKLN1;PCGF2;POLA2;PSMB6;PSMB7;PSMC3;PSMC5;RPS27A;SMG1;TRIP12;UBA52;UBB;UBC;UBE2C;USP34;USP9X	USP34	USP34	9	algorithmic community (Louvain, structural only) -- not itself a claimed biological pathway
+3	17	AURKB;BIRC5;BUB1B;CCNB2;CDC20;CDCA5;CDCA8;CENPE;CENPF;DSN1;ESPL1;INCENP;NUF2;PLK1;PTTG1;SMC3;SPC25			17	algorithmic community (Louvain, structural only) -- not itself a claimed biological pathway
+4	2	DLX1;DLX2			2	algorithmic community (Louvain, structural only) -- not itself a claimed biological pathway
+5	2	DMTN;VEZF1	VEZF1	VEZF1	1	algorithmic community (Louvain, structural only) -- not itself a claimed biological pathway
+-1	16	CADM4;DPP9;DUSP10;EIF4ENIF1;EML5;ICK;LZTR1;MEGF8;PET117;PRKD1;RASA2;SMPD1;SUPT4H1;TADA2B;TLK2;USP17L29	EML5		0	isolated nodes (zero edges in the focused network), not part of any community

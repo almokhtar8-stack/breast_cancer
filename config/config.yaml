@@ -742,3 +742,45 @@ gse245601_candidate_deepdive:
     figures_dir: results/figures/gse245601_candidate_deepdive
     final_review_dir: results/figures/gse245601_candidate_deepdive/final_review
     per_cell_tsv: results/tables/gse245601_candidate_deepdive/candidate_per_cell_expression.tsv
+
+# Systems-biology / pathway / network phase: purely additive over every
+# prior phase. Does not modify results/tables/evidence_freeze/ or
+# docs/THERAPEUTIC_SHORTLIST_FREEZE.md (read-only reference for the frozen
+# four candidates below). See docs/SYSTEMS_NETWORK_INPUT_AUDIT.md and
+# docs/SYSTEMS_NETWORK_GENESETS.md for full provenance.
+systems_network:
+  candidates: [USP34, VEZF1, EML5, CITED2]
+  resistance_datasets: [gse118713, gse240112, gse111151]
+  acute_dataset: gse245601
+  inputs:
+    gse118713_de_tsv: results/tables/gse118713_differential_expression_unredacted.tsv.gz
+    gse240112_tumor_cell_tsv: results/tables/gse240112_pseudobulk/tumor_cell_genomewide_de.tsv.gz
+    gse111151_de_tsv: results/tables/gse111151/genomewide_de.tsv.gz
+    gse245601_track_a_tsv: results/tables/gse245601_pseudobulk/track_a_genomewide_de.tsv.gz
+    gse245601_track_b_tsv: results/tables/gse245601_pseudobulk/track_b_genomewide_de.tsv.gz
+    crispr_labels_parquet: data/processed/labels.parquet
+    gene_mapping_audit_tsv: results/tables/cross_dataset_genomewide/gene_mapping_audit.tsv
+  genesets:
+    hallmark_gmt: data/reference/genesets/hallmark.gmt
+    reactome_gmt: data/reference/genesets/reactome.gmt
+    go_bp_gmt: data/reference/genesets/go_bp.gmt
+    min_size: 15
+    max_size: 500
+  gsea:
+    n_permutations: 1000
+    seed: 20260813
+  interactions:
+    string_species: 9606
+    string_required_score: 700
+    string_api_base: https://string-db.org/api
+    string_partners_tsv: data/reference/interactions/string_partners.tsv
+    string_aliases_tsv: data/reference/interactions/string_aliases.tsv
+  network:
+    min_tumors_reserved_note: "network node inclusion rules declared in docs/SYSTEMS_NETWORK_NODE_RULE.md before inspecting candidate-specific results"
+    target_node_range: [50, 300]
+  output:
+    tables_dir: results/tables/systems_network
+    figures_dir: results/figures/systems_network
+    final_review_dir: results/figures/systems_network/final_review
+    networks_dir: results/networks/systems_network
+    cytoscape_dir: results/networks/systems_network/cytoscape

@@ -1,0 +1,2 @@
+source_gene	target_gene	interaction_type	database_source	confidence	pathway	evidence_notes
+DMTN	VEZF1	pathway_co_membership	MSigDB_hallmark		HALLMARK_HEME_METABOLISM	both leading-edge in gse240112

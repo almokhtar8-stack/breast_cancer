@@ -1,0 +1,718 @@
+source_gene	target_gene	interaction_type	database_source	confidence	pathway	evidence_notes
+TFAP2C	TFAP2A	physical_PPI	STRING	0.931		combined_score=0.931; escore=0.292; dscore=0.800; STRING network_type=physical membership=True
+TFAP2C	CITED2	physical_PPI	STRING	0.945		combined_score=0.945; escore=0.482; dscore=0.700; STRING network_type=physical membership=True
+CSK	CTNNB1	functional_association	STRING	0.731		combined_score=0.731; escore=0.098; dscore=0.000; STRING network_type=physical membership=False
+CSK	LYN	functional_association	STRING	0.948		combined_score=0.948; escore=0.334; dscore=0.900; STRING network_type=physical membership=False
+CSK	SRC	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.774; dscore=0.900; STRING network_type=physical membership=True
+WNT3	CTNNB1	physical_PPI	STRING	0.941		combined_score=0.941; escore=0.137; dscore=0.720; STRING network_type=physical membership=True
+WNT3	LRP5	physical_PPI	STRING	0.995		combined_score=0.995; escore=0.095; dscore=0.720; STRING network_type=physical membership=True
+COL1A1	SMAD3	functional_association	STRING	0.773		combined_score=0.773; escore=0.126; dscore=0.000; STRING network_type=physical membership=False
+COL1A1	LOX	functional_association	STRING	0.808		combined_score=0.808; escore=0.270; dscore=0.000; STRING network_type=physical membership=False
+COL1A1	ITGA3	functional_association	STRING	0.848		combined_score=0.848; escore=0.000; dscore=0.650; STRING network_type=physical membership=False
+COL1A1	FN1	physical_PPI	STRING	0.974		combined_score=0.974; escore=0.594; dscore=0.000; STRING network_type=physical membership=True
+LOX	FN1	physical_PPI	STRING	0.931		combined_score=0.931; escore=0.591; dscore=0.000; STRING network_type=physical membership=True
+DLX2	DLX1	functional_association	STRING	0.877		combined_score=0.877; escore=0.072; dscore=0.000; STRING network_type=physical membership=False
+DLL4	CTNNB1	functional_association	STRING	0.713		combined_score=0.713; escore=0.098; dscore=0.000; STRING network_type=physical membership=False
+DLL4	HEY1	functional_association	STRING	0.803		combined_score=0.803; escore=0.071; dscore=0.000; STRING network_type=physical membership=False
+JAG1	SOX2	functional_association	STRING	0.701		combined_score=0.701; escore=0.304; dscore=0.000; STRING network_type=physical membership=False
+JAG1	ADAM17	functional_association	STRING	0.788		combined_score=0.788; escore=0.319; dscore=0.400; STRING network_type=physical membership=False
+JAG1	CTNNB1	functional_association	STRING	0.796		combined_score=0.796; escore=0.098; dscore=0.000; STRING network_type=physical membership=False
+JAG1	HEY1	functional_association	STRING	0.926		combined_score=0.926; escore=0.071; dscore=0.000; STRING network_type=physical membership=False
+TBX3	SOX2	functional_association	STRING	0.907		combined_score=0.907; escore=0.308; dscore=0.000; STRING network_type=physical membership=False
+ESPL1	ANAPC15	functional_association	STRING	0.702		combined_score=0.702; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	SPC25	functional_association	STRING	0.763		combined_score=0.763; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	CCNB2	functional_association	STRING	0.794		combined_score=0.794; escore=0.114; dscore=0.000; STRING network_type=physical membership=False
+ESPL1	NUF2	functional_association	STRING	0.841		combined_score=0.841; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	CDC16	functional_association	STRING	0.873		combined_score=0.873; escore=0.422; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	CENPE	functional_association	STRING	0.905		combined_score=0.905; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	BIRC5	functional_association	STRING	0.917		combined_score=0.917; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	CENPF	functional_association	STRING	0.926		combined_score=0.926; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	UBE2C	functional_association	STRING	0.927		combined_score=0.927; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	CDCA5	functional_association	STRING	0.93		combined_score=0.930; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	INCENP	functional_association	STRING	0.944		combined_score=0.944; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	CDCA8	functional_association	STRING	0.972		combined_score=0.972; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	AURKB	functional_association	STRING	0.985		combined_score=0.985; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	CDC20	functional_association	STRING	0.988		combined_score=0.988; escore=0.095; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	BUB1B	functional_association	STRING	0.989		combined_score=0.989; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	PLK1	functional_association	STRING	0.994		combined_score=0.994; escore=0.746; dscore=0.500; STRING network_type=physical membership=False
+ESPL1	SMC3	functional_association	STRING	0.994		combined_score=0.994; escore=0.135; dscore=0.900; STRING network_type=physical membership=False
+ESPL1	PTTG1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.900; STRING network_type=physical membership=True
+PSMB7	UBC	physical_PPI	STRING	0.929		combined_score=0.929; escore=0.858; dscore=0.500; STRING network_type=physical membership=True
+PSMB7	UBA52	physical_PPI	STRING	0.934		combined_score=0.934; escore=0.853; dscore=0.500; STRING network_type=physical membership=True
+PSMB7	UBB	physical_PPI	STRING	0.934		combined_score=0.934; escore=0.857; dscore=0.500; STRING network_type=physical membership=True
+PSMB7	RPS27A	physical_PPI	STRING	0.959		combined_score=0.959; escore=0.902; dscore=0.500; STRING network_type=physical membership=True
+PSMB7	PSMC5	physical_PPI	STRING	0.997		combined_score=0.997; escore=0.983; dscore=0.000; STRING network_type=physical membership=True
+PSMB7	PSMB6	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.900; STRING network_type=physical membership=True
+PSMB7	PSMC3	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.978; dscore=0.800; STRING network_type=physical membership=True
+KMT2C	UBB	physical_PPI	STRING	0.802		combined_score=0.802; escore=0.800; dscore=0.000; STRING network_type=physical membership=True
+KMT2C	UBC	physical_PPI	STRING	0.809		combined_score=0.809; escore=0.800; dscore=0.000; STRING network_type=physical membership=True
+KMT2C	RPS27A	physical_PPI	STRING	0.809		combined_score=0.809; escore=0.800; dscore=0.000; STRING network_type=physical membership=True
+KMT2C	UBA52	physical_PPI	STRING	0.81		combined_score=0.810; escore=0.800; dscore=0.000; STRING network_type=physical membership=True
+KMT2C	CREBBP	functional_association	STRING	0.822		combined_score=0.822; escore=0.110; dscore=0.000; STRING network_type=physical membership=False
+KMT2C	TP53	functional_association	STRING	0.858		combined_score=0.858; escore=0.292; dscore=0.000; STRING network_type=physical membership=False
+KMT2C	EP300	functional_association	STRING	0.884		combined_score=0.884; escore=0.110; dscore=0.500; STRING network_type=physical membership=False
+KMT2C	KDM6A	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.679; dscore=0.900; STRING network_type=physical membership=True
+CREBBP	KDM6A	functional_association	STRING	0.811		combined_score=0.811; escore=0.102; dscore=0.000; STRING network_type=physical membership=False
+CREBBP	FGFR1	physical_PPI	STRING	0.923		combined_score=0.923; escore=0.779; dscore=0.000; STRING network_type=physical membership=True
+CREBBP	SRC	physical_PPI	STRING	0.94		combined_score=0.940; escore=0.513; dscore=0.000; STRING network_type=physical membership=True
+CREBBP	LEF1	physical_PPI	STRING	0.961		combined_score=0.961; escore=0.125; dscore=0.900; STRING network_type=physical membership=True
+CREBBP	EPAS1	physical_PPI	STRING	0.986		combined_score=0.986; escore=0.400; dscore=0.900; STRING network_type=physical membership=True
+CREBBP	FOXO1	physical_PPI	STRING	0.993		combined_score=0.993; escore=0.810; dscore=0.900; STRING network_type=physical membership=True
+CREBBP	FOXO3	physical_PPI	STRING	0.995		combined_score=0.995; escore=0.971; dscore=0.500; STRING network_type=physical membership=True
+CREBBP	CITED2	physical_PPI	STRING	0.995		combined_score=0.995; escore=0.926; dscore=0.500; STRING network_type=physical membership=True
+CREBBP	SMAD3	physical_PPI	STRING	0.995		combined_score=0.995; escore=0.872; dscore=0.000; STRING network_type=physical membership=True
+CREBBP	PPARG	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.982; dscore=0.500; STRING network_type=physical membership=True
+CREBBP	CTNNB1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.886; dscore=0.900; STRING network_type=physical membership=True
+CREBBP	HIF1A	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.991; dscore=0.900; STRING network_type=physical membership=True
+CREBBP	TP53	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.998; dscore=0.900; STRING network_type=physical membership=True
+CREBBP	EP300	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.782; dscore=0.900; STRING network_type=physical membership=True
+EP300	SOX2	functional_association	STRING	0.705		combined_score=0.705; escore=0.229; dscore=0.000; STRING network_type=physical membership=False
+EP300	HEY1	functional_association	STRING	0.73		combined_score=0.730; escore=0.046; dscore=0.500; STRING network_type=physical membership=False
+EP300	SMC3	functional_association	STRING	0.748		combined_score=0.748; escore=0.074; dscore=0.500; STRING network_type=physical membership=False
+EP300	CDC20	functional_association	STRING	0.75		combined_score=0.750; escore=0.691; dscore=0.000; STRING network_type=physical membership=False
+EP300	UBC	functional_association	STRING	0.791		combined_score=0.791; escore=0.510; dscore=0.500; STRING network_type=physical membership=False
+EP300	TFAP2A	physical_PPI	STRING	0.856		combined_score=0.856; escore=0.512; dscore=0.500; STRING network_type=physical membership=True
+EP300	KDM1A	functional_association	STRING	0.899		combined_score=0.899; escore=0.292; dscore=0.500; STRING network_type=physical membership=False
+EP300	KDM6A	functional_association	STRING	0.902		combined_score=0.902; escore=0.067; dscore=0.500; STRING network_type=physical membership=False
+EP300	SRC	physical_PPI	STRING	0.959		combined_score=0.959; escore=0.299; dscore=0.000; STRING network_type=physical membership=True
+EP300	LEF1	physical_PPI	STRING	0.981		combined_score=0.981; escore=0.354; dscore=0.900; STRING network_type=physical membership=True
+EP300	FOXO1	physical_PPI	STRING	0.984		combined_score=0.984; escore=0.809; dscore=0.500; STRING network_type=physical membership=True
+EP300	FOXO3	physical_PPI	STRING	0.991		combined_score=0.991; escore=0.666; dscore=0.700; STRING network_type=physical membership=True
+EP300	PPARG	physical_PPI	STRING	0.997		combined_score=0.997; escore=0.860; dscore=0.500; STRING network_type=physical membership=True
+EP300	EPAS1	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.690; dscore=0.900; STRING network_type=physical membership=True
+EP300	TP53	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.900; STRING network_type=physical membership=True
+EP300	HIF1A	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.900; STRING network_type=physical membership=True
+EP300	SMAD3	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.926; dscore=0.500; STRING network_type=physical membership=True
+EP300	CTNNB1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.899; dscore=0.900; STRING network_type=physical membership=True
+EP300	CITED2	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.983; dscore=0.500; STRING network_type=physical membership=True
+EPAS1	PSMC3	functional_association	STRING	0.706		combined_score=0.706; escore=0.292; dscore=0.400; STRING network_type=physical membership=False
+EPAS1	TP53	functional_association	STRING	0.736		combined_score=0.736; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+EPAS1	CTNNB1	functional_association	STRING	0.75		combined_score=0.750; escore=0.161; dscore=0.000; STRING network_type=physical membership=False
+EPAS1	CITED2	functional_association	STRING	0.79		combined_score=0.790; escore=0.000; dscore=0.400; STRING network_type=physical membership=False
+EPAS1	SMAD3	functional_association	STRING	0.801		combined_score=0.801; escore=0.598; dscore=0.000; STRING network_type=physical membership=False
+EPAS1	SOX2	functional_association	STRING	0.874		combined_score=0.874; escore=0.095; dscore=0.750; STRING network_type=physical membership=False
+EPAS1	HIF1A	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.331; dscore=0.900; STRING network_type=physical membership=True
+WNT5A	LEF1	functional_association	STRING	0.727		combined_score=0.727; escore=0.129; dscore=0.000; STRING network_type=physical membership=False
+WNT5A	CTNNB1	functional_association	STRING	0.869		combined_score=0.869; escore=0.137; dscore=0.000; STRING network_type=physical membership=False
+WNT5A	WNT4	functional_association	STRING	0.871		combined_score=0.871; escore=0.588; dscore=0.500; STRING network_type=physical membership=False
+WNT5A	PTK7	physical_PPI	STRING	0.983		combined_score=0.983; escore=0.133; dscore=0.000; STRING network_type=physical membership=True
+WNT5A	LRP5	physical_PPI	STRING	0.993		combined_score=0.993; escore=0.095; dscore=0.650; STRING network_type=physical membership=True
+CENPE	CDCA5	functional_association	STRING	0.793		combined_score=0.793; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CENPE	PTTG1	functional_association	STRING	0.796		combined_score=0.796; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CENPE	UBE2C	functional_association	STRING	0.803		combined_score=0.803; escore=0.045; dscore=0.000; STRING network_type=physical membership=False
+CENPE	INCENP	functional_association	STRING	0.811		combined_score=0.811; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CENPE	CCNB2	functional_association	STRING	0.942		combined_score=0.942; escore=0.051; dscore=0.400; STRING network_type=physical membership=False
+CENPE	CDCA8	functional_association	STRING	0.956		combined_score=0.956; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CENPE	BIRC5	physical_PPI	STRING	0.963		combined_score=0.963; escore=0.060; dscore=0.000; STRING network_type=physical membership=True
+CENPE	AURKB	functional_association	STRING	0.975		combined_score=0.975; escore=0.100; dscore=0.000; STRING network_type=physical membership=False
+CENPE	PLK1	functional_association	STRING	0.977		combined_score=0.977; escore=0.066; dscore=0.800; STRING network_type=physical membership=False
+CENPE	CDC20	functional_association	STRING	0.989		combined_score=0.989; escore=0.049; dscore=0.800; STRING network_type=physical membership=False
+CENPE	NUF2	physical_PPI	STRING	0.996		combined_score=0.996; escore=0.484; dscore=0.000; STRING network_type=physical membership=True
+CENPE	BUB1B	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.636; dscore=0.500; STRING network_type=physical membership=True
+CENPE	CENPF	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.230; dscore=0.000; STRING network_type=physical membership=True
+LEF1	LRP5	functional_association	STRING	0.728		combined_score=0.728; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+LEF1	MSX1	functional_association	STRING	0.829		combined_score=0.829; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+LEF1	SMAD3	physical_PPI	STRING	0.978		combined_score=0.978; escore=0.540; dscore=0.000; STRING network_type=physical membership=True
+LEF1	CTNNB1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.996; dscore=0.900; STRING network_type=physical membership=True
+TP53	HEY1	functional_association	STRING	0.703		combined_score=0.703; escore=0.510; dscore=0.000; STRING network_type=physical membership=False
+TP53	KDM6A	functional_association	STRING	0.71		combined_score=0.710; escore=0.292; dscore=0.000; STRING network_type=physical membership=False
+TP53	CITED2	functional_association	STRING	0.723		combined_score=0.723; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+TP53	BUB1B	functional_association	STRING	0.745		combined_score=0.745; escore=0.164; dscore=0.000; STRING network_type=physical membership=False
+TP53	NF2	functional_association	STRING	0.773		combined_score=0.773; escore=0.185; dscore=0.000; STRING network_type=physical membership=False
+TP53	PTTG1	functional_association	STRING	0.775		combined_score=0.775; escore=0.510; dscore=0.000; STRING network_type=physical membership=False
+TP53	UBB	functional_association	STRING	0.799		combined_score=0.799; escore=0.227; dscore=0.500; STRING network_type=physical membership=False
+TP53	NF1	functional_association	STRING	0.88		combined_score=0.880; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+TP53	SOX2	functional_association	STRING	0.883		combined_score=0.883; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+TP53	SRC	functional_association	STRING	0.884		combined_score=0.884; escore=0.292; dscore=0.000; STRING network_type=physical membership=False
+TP53	FOXO1	functional_association	STRING	0.886		combined_score=0.886; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+TP53	PSMC5	physical_PPI	STRING	0.903		combined_score=0.903; escore=0.510; dscore=0.400; STRING network_type=physical membership=True
+TP53	AURKB	physical_PPI	STRING	0.908		combined_score=0.908; escore=0.510; dscore=0.500; STRING network_type=physical membership=True
+TP53	TFAP2A	physical_PPI	STRING	0.913		combined_score=0.913; escore=0.510; dscore=0.000; STRING network_type=physical membership=True
+TP53	UBC	functional_association	STRING	0.921		combined_score=0.921; escore=0.653; dscore=0.500; STRING network_type=physical membership=False
+TP53	CTNNB1	functional_association	STRING	0.927		combined_score=0.927; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+TP53	BIRC5	functional_association	STRING	0.93		combined_score=0.930; escore=0.000; dscore=0.750; STRING network_type=physical membership=False
+TP53	ERBB2	functional_association	STRING	0.935		combined_score=0.935; escore=0.172; dscore=0.000; STRING network_type=physical membership=False
+TP53	KDM1A	functional_association	STRING	0.941		combined_score=0.941; escore=0.726; dscore=0.500; STRING network_type=physical membership=False
+TP53	PPARG	functional_association	STRING	0.949		combined_score=0.949; escore=0.305; dscore=0.500; STRING network_type=physical membership=False
+TP53	SMAD3	physical_PPI	STRING	0.963		combined_score=0.963; escore=0.469; dscore=0.000; STRING network_type=physical membership=True
+TP53	RPS27A	functional_association	STRING	0.971		combined_score=0.971; escore=0.923; dscore=0.500; STRING network_type=physical membership=False
+TP53	PLK1	physical_PPI	STRING	0.981		combined_score=0.981; escore=0.737; dscore=0.000; STRING network_type=physical membership=True
+TP53	WT1	physical_PPI	STRING	0.983		combined_score=0.983; escore=0.626; dscore=0.000; STRING network_type=physical membership=True
+TP53	HMGB1	physical_PPI	STRING	0.997		combined_score=0.997; escore=0.976; dscore=0.000; STRING network_type=physical membership=True
+TP53	FOXO3	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.776; dscore=0.000; STRING network_type=physical membership=True
+TP53	HIF1A	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.847; dscore=0.000; STRING network_type=physical membership=True
+TP53	PTEN	functional_association	STRING	0.999		combined_score=0.999; escore=0.748; dscore=0.900; STRING network_type=physical membership=False
+ERBB2	BIRC5	functional_association	STRING	0.7		combined_score=0.700; escore=0.130; dscore=0.000; STRING network_type=physical membership=False
+ERBB2	PTK7	functional_association	STRING	0.716		combined_score=0.716; escore=0.627; dscore=0.000; STRING network_type=physical membership=False
+ERBB2	FN1	functional_association	STRING	0.724		combined_score=0.724; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+ERBB2	NF2	functional_association	STRING	0.734		combined_score=0.734; escore=0.199; dscore=0.000; STRING network_type=physical membership=False
+ERBB2	FGFR1	functional_association	STRING	0.737		combined_score=0.737; escore=0.621; dscore=0.000; STRING network_type=physical membership=False
+ERBB2	RPS27A	functional_association	STRING	0.743		combined_score=0.743; escore=0.311; dscore=0.500; STRING network_type=physical membership=False
+ERBB2	EFNA1	functional_association	STRING	0.754		combined_score=0.754; escore=0.000; dscore=0.650; STRING network_type=physical membership=False
+ERBB2	NF1	functional_association	STRING	0.771		combined_score=0.771; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+ERBB2	PTEN	functional_association	STRING	0.868		combined_score=0.868; escore=0.070; dscore=0.000; STRING network_type=physical membership=False
+ERBB2	CTNNB1	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.662; dscore=0.900; STRING network_type=physical membership=True
+ERBB2	SRC	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.850; dscore=0.900; STRING network_type=physical membership=True
+PSMB6	UBA52	physical_PPI	STRING	0.942		combined_score=0.942; escore=0.853; dscore=0.500; STRING network_type=physical membership=True
+PSMB6	UBC	physical_PPI	STRING	0.946		combined_score=0.946; escore=0.858; dscore=0.500; STRING network_type=physical membership=True
+PSMB6	UBB	physical_PPI	STRING	0.947		combined_score=0.947; escore=0.857; dscore=0.500; STRING network_type=physical membership=True
+PSMB6	RPS27A	physical_PPI	STRING	0.962		combined_score=0.962; escore=0.901; dscore=0.500; STRING network_type=physical membership=True
+PSMB6	PSMC5	physical_PPI	STRING	0.996		combined_score=0.996; escore=0.978; dscore=0.000; STRING network_type=physical membership=True
+PSMB6	PSMC3	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.990; dscore=0.000; STRING network_type=physical membership=True
+NUF2	INCENP	functional_association	STRING	0.755		combined_score=0.755; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+NUF2	PTTG1	functional_association	STRING	0.81		combined_score=0.810; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+NUF2	PLK1	functional_association	STRING	0.865		combined_score=0.865; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+NUF2	UBE2C	functional_association	STRING	0.887		combined_score=0.887; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+NUF2	CDCA8	functional_association	STRING	0.926		combined_score=0.926; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+NUF2	CDCA5	functional_association	STRING	0.931		combined_score=0.931; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+NUF2	CCNB2	functional_association	STRING	0.932		combined_score=0.932; escore=0.000; dscore=0.400; STRING network_type=physical membership=False
+NUF2	BIRC5	functional_association	STRING	0.949		combined_score=0.949; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+NUF2	AURKB	functional_association	STRING	0.95		combined_score=0.950; escore=0.292; dscore=0.000; STRING network_type=physical membership=False
+NUF2	CENPF	functional_association	STRING	0.952		combined_score=0.952; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+NUF2	CDC20	functional_association	STRING	0.962		combined_score=0.962; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+NUF2	BUB1B	functional_association	STRING	0.98		combined_score=0.980; escore=0.189; dscore=0.500; STRING network_type=physical membership=False
+NUF2	DSN1	physical_PPI	STRING	0.991		combined_score=0.991; escore=0.874; dscore=0.540; STRING network_type=physical membership=True
+NUF2	SPC25	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.995; dscore=0.900; STRING network_type=physical membership=True
+RPS27A	CTNNB1	functional_association	STRING	0.735		combined_score=0.735; escore=0.381; dscore=0.500; STRING network_type=physical membership=False
+RPS27A	PTEN	functional_association	STRING	0.752		combined_score=0.752; escore=0.467; dscore=0.500; STRING network_type=physical membership=False
+RPS27A	UBE2C	physical_PPI	STRING	0.806		combined_score=0.806; escore=0.500; dscore=0.500; STRING network_type=physical membership=True
+RPS27A	ANAPC2	physical_PPI	STRING	0.954		combined_score=0.954; escore=0.900; dscore=0.500; STRING network_type=physical membership=True
+RPS27A	USP34	physical_PPI	STRING	0.961		combined_score=0.961; escore=0.926; dscore=0.400; STRING network_type=physical membership=True
+RPS27A	PSMC5	physical_PPI	STRING	0.975		combined_score=0.975; escore=0.915; dscore=0.500; STRING network_type=physical membership=True
+RPS27A	PSMC3	physical_PPI	STRING	0.975		combined_score=0.975; escore=0.935; dscore=0.500; STRING network_type=physical membership=True
+RPS27A	UBB	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.983; dscore=0.900; STRING network_type=physical membership=True
+RPS27A	UBC	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.986; dscore=0.900; STRING network_type=physical membership=True
+RPS27A	UBA52	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.997; dscore=0.900; STRING network_type=physical membership=True
+CDCA5	INCENP	functional_association	STRING	0.777		combined_score=0.777; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDCA5	PTTG1	functional_association	STRING	0.829		combined_score=0.829; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDCA5	UBE2C	functional_association	STRING	0.835		combined_score=0.835; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDCA5	BUB1B	functional_association	STRING	0.851		combined_score=0.851; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDCA5	CENPF	functional_association	STRING	0.857		combined_score=0.857; escore=0.162; dscore=0.000; STRING network_type=physical membership=False
+CDCA5	PLK1	functional_association	STRING	0.893		combined_score=0.893; escore=0.292; dscore=0.500; STRING network_type=physical membership=False
+CDCA5	CDC20	functional_association	STRING	0.938		combined_score=0.938; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDCA5	BIRC5	functional_association	STRING	0.942		combined_score=0.942; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDCA5	CDCA8	functional_association	STRING	0.961		combined_score=0.961; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDCA5	AURKB	physical_PPI	STRING	0.968		combined_score=0.968; escore=0.000; dscore=0.000; STRING network_type=physical membership=True
+CDCA5	CCNB2	functional_association	STRING	0.969		combined_score=0.969; escore=0.000; dscore=0.400; STRING network_type=physical membership=False
+CDCA5	SMC3	physical_PPI	STRING	0.994		combined_score=0.994; escore=0.834; dscore=0.500; STRING network_type=physical membership=True
+DUSP6	SPRY4	functional_association	STRING	0.752		combined_score=0.752; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+DUSP6	SPRY2	functional_association	STRING	0.829		combined_score=0.829; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+SPC25	CENPF	functional_association	STRING	0.734		combined_score=0.734; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+SPC25	CCNB2	functional_association	STRING	0.738		combined_score=0.738; escore=0.000; dscore=0.400; STRING network_type=physical membership=False
+SPC25	PLK1	functional_association	STRING	0.774		combined_score=0.774; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+SPC25	UBE2C	functional_association	STRING	0.777		combined_score=0.777; escore=0.063; dscore=0.000; STRING network_type=physical membership=False
+SPC25	CDC20	functional_association	STRING	0.802		combined_score=0.802; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+SPC25	BIRC5	functional_association	STRING	0.847		combined_score=0.847; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+SPC25	BUB1B	functional_association	STRING	0.93		combined_score=0.930; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+SPC25	DSN1	physical_PPI	STRING	0.963		combined_score=0.963; escore=0.839; dscore=0.540; STRING network_type=physical membership=True
+BUB1B	PCGF2	physical_PPI	STRING	0.729		combined_score=0.729; escore=0.000; dscore=0.720; STRING network_type=physical membership=True
+BUB1B	DSN1	functional_association	STRING	0.903		combined_score=0.903; escore=0.228; dscore=0.500; STRING network_type=physical membership=False
+BUB1B	INCENP	functional_association	STRING	0.912		combined_score=0.912; escore=0.098; dscore=0.500; STRING network_type=physical membership=False
+BUB1B	PTTG1	functional_association	STRING	0.978		combined_score=0.978; escore=0.336; dscore=0.000; STRING network_type=physical membership=False
+BUB1B	ANAPC15	physical_PPI	STRING	0.978		combined_score=0.978; escore=0.837; dscore=0.720; STRING network_type=physical membership=True
+BUB1B	BIRC5	functional_association	STRING	0.987		combined_score=0.987; escore=0.095; dscore=0.500; STRING network_type=physical membership=False
+BUB1B	UBE2C	physical_PPI	STRING	0.991		combined_score=0.991; escore=0.287; dscore=0.720; STRING network_type=physical membership=True
+BUB1B	CCNB2	physical_PPI	STRING	0.993		combined_score=0.993; escore=0.279; dscore=0.400; STRING network_type=physical membership=True
+BUB1B	CDCA8	functional_association	STRING	0.994		combined_score=0.994; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+BUB1B	PLK1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.845; dscore=0.720; STRING network_type=physical membership=True
+BUB1B	ANAPC2	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.993; dscore=0.720; STRING network_type=physical membership=True
+BUB1B	AURKB	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.327; dscore=0.500; STRING network_type=physical membership=True
+BUB1B	CDC20	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.800; STRING network_type=physical membership=True
+BUB1B	CENPF	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.000; dscore=0.900; STRING network_type=physical membership=True
+BUB1B	CDC16	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.992; dscore=0.720; STRING network_type=physical membership=True
+PPARG	SRC	functional_association	STRING	0.736		combined_score=0.736; escore=0.071; dscore=0.000; STRING network_type=physical membership=False
+PPARG	PTEN	functional_association	STRING	0.83		combined_score=0.830; escore=0.046; dscore=0.000; STRING network_type=physical membership=False
+PPARG	HIF1A	functional_association	STRING	0.854		combined_score=0.854; escore=0.071; dscore=0.000; STRING network_type=physical membership=False
+PPARG	FOXO1	functional_association	STRING	0.856		combined_score=0.856; escore=0.054; dscore=0.000; STRING network_type=physical membership=False
+PPARG	SMAD3	physical_PPI	STRING	0.95		combined_score=0.950; escore=0.512; dscore=0.000; STRING network_type=physical membership=True
+PPARG	CTNNB1	physical_PPI	STRING	0.994		combined_score=0.994; escore=0.735; dscore=0.000; STRING network_type=physical membership=True
+CCNB2	ANAPC2	functional_association	STRING	0.925		combined_score=0.925; escore=0.128; dscore=0.900; STRING network_type=physical membership=False
+CCNB2	CDC16	functional_association	STRING	0.939		combined_score=0.939; escore=0.070; dscore=0.900; STRING network_type=physical membership=False
+CCNB2	UBE2C	functional_association	STRING	0.968		combined_score=0.968; escore=0.072; dscore=0.000; STRING network_type=physical membership=False
+CCNB2	PTTG1	functional_association	STRING	0.97		combined_score=0.970; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CCNB2	CDCA8	functional_association	STRING	0.974		combined_score=0.974; escore=0.000; dscore=0.400; STRING network_type=physical membership=False
+CCNB2	CENPF	functional_association	STRING	0.974		combined_score=0.974; escore=0.000; dscore=0.400; STRING network_type=physical membership=False
+CCNB2	AURKB	physical_PPI	STRING	0.99		combined_score=0.990; escore=0.094; dscore=0.400; STRING network_type=physical membership=True
+CCNB2	BIRC5	functional_association	STRING	0.993		combined_score=0.993; escore=0.098; dscore=0.400; STRING network_type=physical membership=False
+CCNB2	PLK1	functional_association	STRING	0.995		combined_score=0.995; escore=0.278; dscore=0.900; STRING network_type=physical membership=False
+CCNB2	CDC20	functional_association	STRING	0.999		combined_score=0.999; escore=0.312; dscore=0.900; STRING network_type=physical membership=False
+WNT4	PTK7	functional_association	STRING	0.791		combined_score=0.791; escore=0.133; dscore=0.000; STRING network_type=physical membership=False
+WNT4	CTNNB1	functional_association	STRING	0.885		combined_score=0.885; escore=0.137; dscore=0.000; STRING network_type=physical membership=False
+WNT4	LRP5	functional_association	STRING	0.941		combined_score=0.941; escore=0.095; dscore=0.650; STRING network_type=physical membership=False
+LRP5	PTK7	functional_association	STRING	0.726		combined_score=0.726; escore=0.057; dscore=0.000; STRING network_type=physical membership=False
+LRP5	CTNNB1	physical_PPI	STRING	0.992		combined_score=0.992; escore=0.325; dscore=0.720; STRING network_type=physical membership=True
+SPRED1	NF1	physical_PPI	STRING	0.992		combined_score=0.992; escore=0.792; dscore=0.400; STRING network_type=physical membership=True
+PLK1	FOXO3	functional_association	STRING	0.727		combined_score=0.727; escore=0.372; dscore=0.000; STRING network_type=physical membership=False
+PLK1	DSN1	functional_association	STRING	0.73		combined_score=0.730; escore=0.087; dscore=0.500; STRING network_type=physical membership=False
+PLK1	CTNNB1	functional_association	STRING	0.759		combined_score=0.759; escore=0.292; dscore=0.000; STRING network_type=physical membership=False
+PLK1	CDC16	functional_association	STRING	0.792		combined_score=0.792; escore=0.222; dscore=0.500; STRING network_type=physical membership=False
+PLK1	PTEN	functional_association	STRING	0.87		combined_score=0.870; escore=0.571; dscore=0.000; STRING network_type=physical membership=False
+PLK1	SMC3	functional_association	STRING	0.915		combined_score=0.915; escore=0.641; dscore=0.500; STRING network_type=physical membership=False
+PLK1	UBE2C	functional_association	STRING	0.927		combined_score=0.927; escore=0.052; dscore=0.400; STRING network_type=physical membership=False
+PLK1	AURKB	functional_association	STRING	0.939		combined_score=0.939; escore=0.212; dscore=0.500; STRING network_type=physical membership=False
+PLK1	PTTG1	functional_association	STRING	0.956		combined_score=0.956; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+PLK1	CENPF	physical_PPI	STRING	0.973		combined_score=0.973; escore=0.000; dscore=0.800; STRING network_type=physical membership=True
+PLK1	CDCA8	functional_association	STRING	0.974		combined_score=0.974; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+PLK1	INCENP	functional_association	STRING	0.978		combined_score=0.978; escore=0.242; dscore=0.800; STRING network_type=physical membership=False
+PLK1	BIRC5	functional_association	STRING	0.98		combined_score=0.980; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+PLK1	CDC20	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.994; dscore=0.800; STRING network_type=physical membership=True
+BIRC5	PTTG1	functional_association	STRING	0.926		combined_score=0.926; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+BIRC5	CENPF	functional_association	STRING	0.96		combined_score=0.960; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+BIRC5	UBE2C	functional_association	STRING	0.992		combined_score=0.992; escore=0.091; dscore=0.000; STRING network_type=physical membership=False
+BIRC5	CDC20	functional_association	STRING	0.995		combined_score=0.995; escore=0.045; dscore=0.500; STRING network_type=physical membership=False
+BIRC5	AURKB	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.944; dscore=0.800; STRING network_type=physical membership=True
+BIRC5	INCENP	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.928; dscore=0.800; STRING network_type=physical membership=True
+BIRC5	CDCA8	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.943; dscore=0.800; STRING network_type=physical membership=True
+SIX2	WT1	functional_association	STRING	0.735		combined_score=0.735; escore=0.048; dscore=0.000; STRING network_type=physical membership=False
+PSMC5	TRIP12	functional_association	STRING	0.887		combined_score=0.887; escore=0.818; dscore=0.000; STRING network_type=physical membership=False
+PSMC5	UBB	physical_PPI	STRING	0.95		combined_score=0.950; escore=0.879; dscore=0.500; STRING network_type=physical membership=True
+PSMC5	UBA52	physical_PPI	STRING	0.966		combined_score=0.966; escore=0.883; dscore=0.500; STRING network_type=physical membership=True
+PSMC5	UBC	physical_PPI	STRING	0.967		combined_score=0.967; escore=0.920; dscore=0.500; STRING network_type=physical membership=True
+PSMC5	PSMC3	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.998; dscore=0.720; STRING network_type=physical membership=True
+AURKB	SMC3	functional_association	STRING	0.726		combined_score=0.726; escore=0.073; dscore=0.000; STRING network_type=physical membership=False
+AURKB	DSN1	functional_association	STRING	0.829		combined_score=0.829; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+AURKB	CENPF	functional_association	STRING	0.925		combined_score=0.925; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+AURKB	PTTG1	functional_association	STRING	0.949		combined_score=0.949; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+AURKB	UBE2C	functional_association	STRING	0.955		combined_score=0.955; escore=0.053; dscore=0.400; STRING network_type=physical membership=False
+AURKB	CDC20	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.297; dscore=0.500; STRING network_type=physical membership=True
+AURKB	INCENP	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.996; dscore=0.800; STRING network_type=physical membership=True
+AURKB	CDCA8	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.897; dscore=0.800; STRING network_type=physical membership=True
+ANAPC2	PTTG1	physical_PPI	STRING	0.851		combined_score=0.851; escore=0.510; dscore=0.650; STRING network_type=physical membership=True
+ANAPC2	PCGF2	physical_PPI	STRING	0.906		combined_score=0.906; escore=0.091; dscore=0.900; STRING network_type=physical membership=True
+ANAPC2	UBB	physical_PPI	STRING	0.948		combined_score=0.948; escore=0.900; dscore=0.500; STRING network_type=physical membership=True
+ANAPC2	UBA52	physical_PPI	STRING	0.949		combined_score=0.949; escore=0.900; dscore=0.500; STRING network_type=physical membership=True
+ANAPC2	UBC	physical_PPI	STRING	0.961		combined_score=0.961; escore=0.926; dscore=0.500; STRING network_type=physical membership=True
+ANAPC2	ANAPC15	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.976; dscore=0.900; STRING network_type=physical membership=True
+ANAPC2	UBE2C	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.982; dscore=0.900; STRING network_type=physical membership=True
+ANAPC2	CDC16	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.900; STRING network_type=physical membership=True
+ANAPC2	CDC20	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.800; STRING network_type=physical membership=True
+ITGA3	SRC	functional_association	STRING	0.896		combined_score=0.896; escore=0.070; dscore=0.650; STRING network_type=physical membership=False
+ITGA3	FN1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.292; dscore=0.900; STRING network_type=physical membership=True
+USP9X	SOX2	functional_association	STRING	0.747		combined_score=0.747; escore=0.510; dscore=0.000; STRING network_type=physical membership=False
+USP9X	TRIP12	functional_association	STRING	0.749		combined_score=0.749; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+USP9X	USP34	functional_association	STRING	0.793		combined_score=0.793; escore=0.438; dscore=0.000; STRING network_type=physical membership=False
+USP9X	FOXO3	physical_PPI	STRING	0.798		combined_score=0.798; escore=0.000; dscore=0.000; STRING network_type=physical membership=True
+USP9X	UBC	physical_PPI	STRING	0.817		combined_score=0.817; escore=0.582; dscore=0.500; STRING network_type=physical membership=True
+USP9X	CTNNB1	functional_association	STRING	0.88		combined_score=0.880; escore=0.822; dscore=0.000; STRING network_type=physical membership=False
+MKLN1	USP34	functional_association	STRING	0.79		combined_score=0.790; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+SOX2	KDM1A	functional_association	STRING	0.727		combined_score=0.727; escore=0.420; dscore=0.000; STRING network_type=physical membership=False
+SOX2	PTEN	functional_association	STRING	0.743		combined_score=0.743; escore=0.045; dscore=0.000; STRING network_type=physical membership=False
+SOX2	HIF1A	functional_association	STRING	0.758		combined_score=0.758; escore=0.095; dscore=0.400; STRING network_type=physical membership=False
+SOX2	KDM6A	functional_association	STRING	0.79		combined_score=0.790; escore=0.430; dscore=0.000; STRING network_type=physical membership=False
+SOX2	CUX1	functional_association	STRING	0.804		combined_score=0.804; escore=0.692; dscore=0.000; STRING network_type=physical membership=False
+SOX2	SMAD3	physical_PPI	STRING	0.929		combined_score=0.929; escore=0.059; dscore=0.800; STRING network_type=physical membership=True
+SOX2	CTNNB1	physical_PPI	STRING	0.991		combined_score=0.991; escore=0.627; dscore=0.500; STRING network_type=physical membership=True
+SMAD3	FN1	functional_association	STRING	0.73		combined_score=0.730; escore=0.045; dscore=0.000; STRING network_type=physical membership=False
+SMAD3	BMP7	functional_association	STRING	0.811		combined_score=0.811; escore=0.269; dscore=0.000; STRING network_type=physical membership=False
+SMAD3	WWTR1	physical_PPI	STRING	0.881		combined_score=0.881; escore=0.250; dscore=0.800; STRING network_type=physical membership=True
+SMAD3	ACVR1	functional_association	STRING	0.961		combined_score=0.961; escore=0.126; dscore=0.900; STRING network_type=physical membership=False
+SMAD3	HIF1A	physical_PPI	STRING	0.975		combined_score=0.975; escore=0.784; dscore=0.000; STRING network_type=physical membership=True
+SMAD3	FOXO1	physical_PPI	STRING	0.99		combined_score=0.990; escore=0.317; dscore=0.900; STRING network_type=physical membership=True
+SMAD3	FOXO3	physical_PPI	STRING	0.995		combined_score=0.995; escore=0.634; dscore=0.900; STRING network_type=physical membership=True
+SMAD3	TGFBR2	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.091; dscore=0.900; STRING network_type=physical membership=True
+SMAD3	CTNNB1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.768; dscore=0.800; STRING network_type=physical membership=True
+FOXO3	PTEN	functional_association	STRING	0.853		combined_score=0.853; escore=0.099; dscore=0.000; STRING network_type=physical membership=False
+FOXO3	CITED2	functional_association	STRING	0.933		combined_score=0.933; escore=0.000; dscore=0.900; STRING network_type=physical membership=False
+FOXO3	FOXO1	physical_PPI	STRING	0.955		combined_score=0.955; escore=0.000; dscore=0.900; STRING network_type=physical membership=True
+FOXO3	HIF1A	physical_PPI	STRING	0.997		combined_score=0.997; escore=0.311; dscore=0.400; STRING network_type=physical membership=True
+FOXO3	CTNNB1	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.546; dscore=0.360; STRING network_type=physical membership=True
+NF2	CTNNB1	physical_PPI	STRING	0.889		combined_score=0.889; escore=0.095; dscore=0.000; STRING network_type=physical membership=True
+NF2	NF1	functional_association	STRING	0.97		combined_score=0.970; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+FN1	TGFBR2	functional_association	STRING	0.722		combined_score=0.722; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+FN1	BMP7	functional_association	STRING	0.728		combined_score=0.728; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+FN1	CTNNB1	functional_association	STRING	0.85		combined_score=0.850; escore=0.049; dscore=0.000; STRING network_type=physical membership=False
+FN1	SRC	functional_association	STRING	0.945		combined_score=0.945; escore=0.000; dscore=0.400; STRING network_type=physical membership=False
+CDC16	PTTG1	functional_association	STRING	0.806		combined_score=0.806; escore=0.000; dscore=0.650; STRING network_type=physical membership=False
+CDC16	UBC	physical_PPI	STRING	0.9		combined_score=0.900; escore=0.806; dscore=0.500; STRING network_type=physical membership=True
+CDC16	PCGF2	physical_PPI	STRING	0.9		combined_score=0.900; escore=0.000; dscore=0.900; STRING network_type=physical membership=True
+CDC16	UBB	physical_PPI	STRING	0.902		combined_score=0.902; escore=0.806; dscore=0.500; STRING network_type=physical membership=True
+CDC16	UBE2C	physical_PPI	STRING	0.992		combined_score=0.992; escore=0.827; dscore=0.900; STRING network_type=physical membership=True
+CDC16	ANAPC15	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.963; dscore=0.900; STRING network_type=physical membership=True
+CDC16	CDC20	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.800; STRING network_type=physical membership=True
+UBE2C	UBA52	functional_association	STRING	0.765		combined_score=0.765; escore=0.397; dscore=0.500; STRING network_type=physical membership=False
+UBE2C	PCGF2	physical_PPI	STRING	0.907		combined_score=0.907; escore=0.071; dscore=0.900; STRING network_type=physical membership=True
+UBE2C	UBB	physical_PPI	STRING	0.926		combined_score=0.926; escore=0.827; dscore=0.500; STRING network_type=physical membership=True
+UBE2C	CENPF	functional_association	STRING	0.94		combined_score=0.940; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+UBE2C	UBC	physical_PPI	STRING	0.942		combined_score=0.942; escore=0.844; dscore=0.500; STRING network_type=physical membership=True
+UBE2C	CDCA8	functional_association	STRING	0.966		combined_score=0.966; escore=0.068; dscore=0.000; STRING network_type=physical membership=False
+UBE2C	PTTG1	functional_association	STRING	0.98		combined_score=0.980; escore=0.000; dscore=0.400; STRING network_type=physical membership=False
+UBE2C	ANAPC15	physical_PPI	STRING	0.992		combined_score=0.992; escore=0.819; dscore=0.900; STRING network_type=physical membership=True
+UBE2C	CDC20	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.957; dscore=0.540; STRING network_type=physical membership=True
+NF1	PTEN	functional_association	STRING	0.874		combined_score=0.874; escore=0.218; dscore=0.000; STRING network_type=physical membership=False
+TGFBR2	CTNNB1	functional_association	STRING	0.802		combined_score=0.802; escore=0.334; dscore=0.000; STRING network_type=physical membership=False
+TGFBR2	ACVR1	physical_PPI	STRING	0.81		combined_score=0.810; escore=0.259; dscore=0.000; STRING network_type=physical membership=True
+TGFBR2	SRC	physical_PPI	STRING	0.854		combined_score=0.854; escore=0.000; dscore=0.000; STRING network_type=physical membership=True
+CENPF	PTTG1	functional_association	STRING	0.827		combined_score=0.827; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CENPF	CDCA8	functional_association	STRING	0.962		combined_score=0.962; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CENPF	CDC20	functional_association	STRING	0.99		combined_score=0.990; escore=0.000; dscore=0.800; STRING network_type=physical membership=False
+EFNA1	FGFR1	functional_association	STRING	0.741		combined_score=0.741; escore=0.000; dscore=0.650; STRING network_type=physical membership=False
+EFNA1	EPHB2	functional_association	STRING	0.939		combined_score=0.939; escore=0.098; dscore=0.500; STRING network_type=physical membership=False
+PTEN	UBC	functional_association	STRING	0.714		combined_score=0.714; escore=0.354; dscore=0.500; STRING network_type=physical membership=False
+PTEN	HIF1A	functional_association	STRING	0.83		combined_score=0.830; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+PTEN	SRC	functional_association	STRING	0.837		combined_score=0.837; escore=0.094; dscore=0.000; STRING network_type=physical membership=False
+PTEN	FOXO1	functional_association	STRING	0.903		combined_score=0.903; escore=0.099; dscore=0.000; STRING network_type=physical membership=False
+PTEN	CTNNB1	functional_association	STRING	0.943		combined_score=0.943; escore=0.527; dscore=0.000; STRING network_type=physical membership=False
+CDC20	DSN1	functional_association	STRING	0.731		combined_score=0.731; escore=0.099; dscore=0.500; STRING network_type=physical membership=False
+CDC20	UBC	physical_PPI	STRING	0.801		combined_score=0.801; escore=0.554; dscore=0.500; STRING network_type=physical membership=True
+CDC20	INCENP	functional_association	STRING	0.964		combined_score=0.964; escore=0.000; dscore=0.800; STRING network_type=physical membership=False
+CDC20	ANAPC15	physical_PPI	STRING	0.986		combined_score=0.986; escore=0.891; dscore=0.540; STRING network_type=physical membership=True
+CDC20	CDCA8	functional_association	STRING	0.992		combined_score=0.992; escore=0.053; dscore=0.500; STRING network_type=physical membership=False
+CDC20	PTTG1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.923; dscore=0.650; STRING network_type=physical membership=True
+CDCA8	PTTG1	functional_association	STRING	0.893		combined_score=0.893; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDCA8	INCENP	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.900; dscore=0.800; STRING network_type=physical membership=True
+SRC	UBB	functional_association	STRING	0.707		combined_score=0.707; escore=0.092; dscore=0.500; STRING network_type=physical membership=False
+SRC	EPHB2	physical_PPI	STRING	0.871		combined_score=0.871; escore=0.565; dscore=0.500; STRING network_type=physical membership=True
+SRC	HIF1A	functional_association	STRING	0.872		combined_score=0.872; escore=0.632; dscore=0.000; STRING network_type=physical membership=False
+SRC	LYN	physical_PPI	STRING	0.989		combined_score=0.989; escore=0.709; dscore=0.900; STRING network_type=physical membership=True
+SRC	CTNNB1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.539; dscore=0.900; STRING network_type=physical membership=True
+LHX2	MSX1	functional_association	STRING	0.78		combined_score=0.780; escore=0.317; dscore=0.000; STRING network_type=physical membership=False
+LHX2	CITED2	physical_PPI	STRING	0.895		combined_score=0.895; escore=0.292; dscore=0.000; STRING network_type=physical membership=True
+SPRY2	SPRY1	functional_association	STRING	0.767		combined_score=0.767; escore=0.479; dscore=0.400; STRING network_type=physical membership=False
+KDM6A	KDM1A	functional_association	STRING	0.82		combined_score=0.820; escore=0.075; dscore=0.000; STRING network_type=physical membership=False
+WT1	CITED2	functional_association	STRING	0.711		combined_score=0.711; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+FOXO1	CITED2	functional_association	STRING	0.816		combined_score=0.816; escore=0.000; dscore=0.750; STRING network_type=physical membership=False
+FOXO1	HIF1A	functional_association	STRING	0.859		combined_score=0.859; escore=0.068; dscore=0.400; STRING network_type=physical membership=False
+FOXO1	CTNNB1	physical_PPI	STRING	0.985		combined_score=0.985; escore=0.113; dscore=0.000; STRING network_type=physical membership=True
+TRIP12	USP34	functional_association	STRING	0.723		combined_score=0.723; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+TRIP12	UBC	functional_association	STRING	0.752		combined_score=0.752; escore=0.715; dscore=0.000; STRING network_type=physical membership=False
+ASH1L	USP34	functional_association	STRING	0.822		combined_score=0.822; escore=0.045; dscore=0.000; STRING network_type=physical membership=False
+TFAP2B	CITED2	physical_PPI	STRING	0.88		combined_score=0.880; escore=0.482; dscore=0.500; STRING network_type=physical membership=True
+TFAP2B	TFAP2A	physical_PPI	STRING	0.968		combined_score=0.968; escore=0.695; dscore=0.800; STRING network_type=physical membership=True
+PTTG1	INCENP	functional_association	STRING	0.719		combined_score=0.719; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+PTTG1	ANAPC15	functional_association	STRING	0.749		combined_score=0.749; escore=0.000; dscore=0.500; STRING network_type=physical membership=False
+INCENP	DSN1	functional_association	STRING	0.835		combined_score=0.835; escore=0.065; dscore=0.000; STRING network_type=physical membership=False
+BMP7	CTNNB1	functional_association	STRING	0.723		combined_score=0.723; escore=0.051; dscore=0.000; STRING network_type=physical membership=False
+BMP7	ACVR1	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.574; dscore=0.900; STRING network_type=physical membership=True
+USP34	SMG1	functional_association	STRING	0.722		combined_score=0.722; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+USP34	H7C0V5_HUMAN	functional_association	STRING	0.74		combined_score=0.740; escore=0.046; dscore=0.000; STRING network_type=physical membership=False
+USP34	UBB	physical_PPI	STRING	0.954		combined_score=0.954; escore=0.922; dscore=0.400; STRING network_type=physical membership=True
+USP34	UBA52	physical_PPI	STRING	0.968		combined_score=0.968; escore=0.947; dscore=0.400; STRING network_type=physical membership=True
+USP34	UBC	physical_PPI	STRING	0.982		combined_score=0.982; escore=0.969; dscore=0.400; STRING network_type=physical membership=True
+KDM1A	CTNNB1	functional_association	STRING	0.839		combined_score=0.839; escore=0.292; dscore=0.000; STRING network_type=physical membership=False
+UBA52	PSMC3	physical_PPI	STRING	0.934		combined_score=0.934; escore=0.856; dscore=0.500; STRING network_type=physical membership=True
+UBA52	UBB	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.983; dscore=0.900; STRING network_type=physical membership=True
+UBA52	UBC	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.990; dscore=0.900; STRING network_type=physical membership=True
+FGFR1	CTNNB1	physical_PPI	STRING	0.947		combined_score=0.947; escore=0.777; dscore=0.000; STRING network_type=physical membership=True
+WWTR1	CTNNB1	functional_association	STRING	0.817		combined_score=0.817; escore=0.512; dscore=0.000; STRING network_type=physical membership=False
+ANAPC15	UBB	physical_PPI	STRING	0.897		combined_score=0.897; escore=0.800; dscore=0.500; STRING network_type=physical membership=True
+ANAPC15	UBC	physical_PPI	STRING	0.897		combined_score=0.897; escore=0.800; dscore=0.500; STRING network_type=physical membership=True
+ANAPC15	PCGF2	physical_PPI	STRING	0.9		combined_score=0.900; escore=0.000; dscore=0.900; STRING network_type=physical membership=True
+HIF1A	PSMC3	functional_association	STRING	0.727		combined_score=0.727; escore=0.292; dscore=0.400; STRING network_type=physical membership=False
+HIF1A	CITED2	physical_PPI	STRING	0.915		combined_score=0.915; escore=0.000; dscore=0.400; STRING network_type=physical membership=True
+HIF1A	UBC	physical_PPI	STRING	0.95		combined_score=0.950; escore=0.878; dscore=0.500; STRING network_type=physical membership=True
+HIF1A	CTNNB1	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.785; dscore=0.000; STRING network_type=physical membership=True
+UBC	PSMC3	physical_PPI	STRING	0.971		combined_score=0.971; escore=0.931; dscore=0.500; STRING network_type=physical membership=True
+UBC	UBB	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.900; dscore=0.900; STRING network_type=physical membership=True
+CITED2	PCGF2	functional_association	STRING	0.741		combined_score=0.741; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CITED2	TFAP2A	physical_PPI	STRING	0.989		combined_score=0.989; escore=0.482; dscore=0.700; STRING network_type=physical membership=True
+UBB	CTNNB1	functional_association	STRING	0.763		combined_score=0.763; escore=0.111; dscore=0.500; STRING network_type=physical membership=False
+UBB	PSMC3	physical_PPI	STRING	0.959		combined_score=0.959; escore=0.896; dscore=0.500; STRING network_type=physical membership=True
+CTNNB1	TFAP2A	functional_association	STRING	0.701		combined_score=0.701; escore=0.292; dscore=0.000; STRING network_type=physical membership=False
+CREBBP	EP300	regulatory	TRRUST			mode=Unknown; PMID=15154850
+CREBBP	PSMC5	regulatory	TRRUST			mode=Activation; PMID=22771340
+CREBBP	TP53	regulatory	TRRUST			mode=Unknown; PMID=15154850
+CTNNB1	BIRC5	regulatory	TRRUST			mode=Unknown; PMID=19662654;19778454
+CUX1	WNT5A	regulatory	TRRUST			mode=Activation; PMID=17227781;23359789
+EP300	BIRC5	regulatory	TRRUST			mode=Activation; PMID=19102934
+EP300	BIRC5	regulatory	TRRUST			mode=Repression; PMID=19102934
+EP300	CCNB2	regulatory	TRRUST			mode=Unknown; PMID=12482752
+EP300	CREBBP	regulatory	TRRUST			mode=Unknown; PMID=9651310
+EP300	ERBB2	regulatory	TRRUST			mode=Unknown; PMID=9045619
+EP300	WT1	regulatory	TRRUST			mode=Activation; PMID=15752709;18064385
+FOXO3	BIRC5	regulatory	TRRUST			mode=Unknown; PMID=22056878
+HIF1A	LOX	regulatory	TRRUST			mode=Unknown; PMID=17685448
+LEF1	BIRC5	regulatory	TRRUST			mode=Unknown; PMID=19620402
+LEF1	CTNNB1	regulatory	TRRUST			mode=Unknown; PMID=11326276
+MSX1	HEY1	regulatory	TRRUST			mode=Activation; PMID=18201699
+NF1	TP53	regulatory	TRRUST			mode=Activation; PMID=10634504;8816507
+PPARG	JAG1	regulatory	TRRUST			mode=Unknown; PMID=20436223
+PPARG	PTEN	regulatory	TRRUST			mode=Activation; PMID=11378386;16425225;16775433;20198337
+PPARG	TP53	regulatory	TRRUST			mode=Activation; PMID=14960510;16887883
+TFAP2A	COL1A1	regulatory	TRRUST			mode=Unknown; PMID=10775443
+TFAP2A	ERBB2	regulatory	TRRUST			mode=Unknown; PMID=10698518;15870067;18218085;22577344
+TFAP2A	PTEN	regulatory	TRRUST			mode=Activation; PMID=18316341
+TFAP2A	SPRY2	regulatory	TRRUST			mode=Unknown; PMID=14644509
+TFAP2B	ERBB2	regulatory	TRRUST			mode=Unknown; PMID=10645007
+TFAP2C	ERBB2	regulatory	TRRUST			mode=Unknown; PMID=10645007
+TP53	BIRC5	regulatory	TRRUST			mode=Repression; PMID=17124180
+TP53	BIRC5	regulatory	TRRUST			mode=Unknown; PMID=19067706
+TP53	CCNB2	regulatory	TRRUST			mode=Repression; PMID=12889596
+TP53	CTNNB1	regulatory	TRRUST			mode=Repression; PMID=19411072
+TP53	FOXO3	regulatory	TRRUST			mode=Unknown; PMID=19299143
+TP53	ID2	regulatory	TRRUST			mode=Unknown; PMID=16557594
+TP53	PLK1	regulatory	TRRUST			mode=Unknown; PMID=24076372
+TP53	PTEN	regulatory	TRRUST			mode=Repression; PMID=17344317
+TP53	PTEN	regulatory	TRRUST			mode=Unknown; PMID=11545734
+TP53	PTTG1	regulatory	TRRUST			mode=Activation; PMID=12355087
+TP53	PTTG1	regulatory	TRRUST			mode=Repression; PMID=15016801
+TP53	SMAD3	regulatory	TRRUST			mode=Unknown; PMID=21900401
+WT1	SMAD3	regulatory	TRRUST			mode=Activation; PMID=20842112
+WWTR1	SMAD3	regulatory	TRRUST			mode=Activation; PMID=22470139
+ACVR1	CTNNB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+ACVR1	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+ACVR1	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+ACVR1	WWTR1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+CTNNB1	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+CTNNB1	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+CTNNB1	WWTR1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+ID2	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+ID2	WWTR1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+SMAD3	WWTR1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TGF_BETA_SIGNALING	both leading-edge in gse118713
+DUSP6	EPHB2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+DUSP6	F2RL1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+DUSP6	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+DUSP6	SPRY2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+DUSP6	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+EPHB2	F2RL1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+EPHB2	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+EPHB2	SPRY2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+EPHB2	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+F2RL1	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+F2RL1	SPRY2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+F2RL1	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+ID2	SPRY2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+ID2	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+SPRY2	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse118713
+EFNA1	F2RL1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+EFNA1	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+EFNA1	JAG1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+EFNA1	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+EFNA1	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+F2RL1	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+F2RL1	JAG1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+F2RL1	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+F2RL1	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+ID2	JAG1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+ID2	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+ID2	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+JAG1	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+JAG1	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+SMAD3	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_TNFA_SIGNALING_VIA_NFKB	both leading-edge in gse118713
+DUSP6	FN1	pathway_co_membership	MSigDB_hallmark		HALLMARK_COAGULATION	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+COL1A1	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+COL1A1	LOX	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+COL1A1	WNT5A	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+FN1	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+FN1	LOX	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+FN1	WNT5A	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+ID2	LOX	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+ID2	WNT5A	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+LOX	WNT5A	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse118713
+DUSP6	FN1	pathway_co_membership	MSigDB_hallmark		HALLMARK_COMPLEMENT	both leading-edge in gse118713
+DUSP6	LYN	pathway_co_membership	MSigDB_hallmark		HALLMARK_COMPLEMENT	both leading-edge in gse118713
+DUSP6	SRC	pathway_co_membership	MSigDB_hallmark		HALLMARK_COMPLEMENT	both leading-edge in gse118713
+FN1	LYN	pathway_co_membership	MSigDB_hallmark		HALLMARK_COMPLEMENT	both leading-edge in gse118713
+FN1	SRC	pathway_co_membership	MSigDB_hallmark		HALLMARK_COMPLEMENT	both leading-edge in gse118713
+LYN	SRC	pathway_co_membership	MSigDB_hallmark		HALLMARK_COMPLEMENT	both leading-edge in gse118713
+COL1A1	ERBB2	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+COL1A1	PPARG	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+COL1A1	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+COL1A1	TGFBR2	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+ERBB2	PPARG	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+ERBB2	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+ERBB2	TGFBR2	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+PPARG	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+PPARG	TGFBR2	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+SMAD3	TGFBR2	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse118713
+ITGA3	NF2	pathway_co_membership	MSigDB_hallmark		HALLMARK_APICAL_JUNCTION	both leading-edge in gse118713
+ITGA3	SRC	pathway_co_membership	MSigDB_hallmark		HALLMARK_APICAL_JUNCTION	both leading-edge in gse118713
+NF2	SRC	pathway_co_membership	MSigDB_hallmark		HALLMARK_APICAL_JUNCTION	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_MET_ACTIVATES_PTK2_SIGNALING	both leading-edge in gse118713
+COL1A1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_MET_ACTIVATES_PTK2_SIGNALING	both leading-edge in gse118713
+COL1A1	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_MET_ACTIVATES_PTK2_SIGNALING	both leading-edge in gse118713
+FN1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_MET_ACTIVATES_PTK2_SIGNALING	both leading-edge in gse118713
+FN1	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_MET_ACTIVATES_PTK2_SIGNALING	both leading-edge in gse118713
+ITGA3	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_MET_ACTIVATES_PTK2_SIGNALING	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_MET_PROMOTES_CELL_MOTILITY	both leading-edge in gse118713
+COL1A1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_MET_PROMOTES_CELL_MOTILITY	both leading-edge in gse118713
+COL1A1	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_MET_PROMOTES_CELL_MOTILITY	both leading-edge in gse118713
+FN1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_MET_PROMOTES_CELL_MOTILITY	both leading-edge in gse118713
+FN1	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_MET_PROMOTES_CELL_MOTILITY	both leading-edge in gse118713
+ITGA3	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_MET_PROMOTES_CELL_MOTILITY	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_NON_INTEGRIN_MEMBRANE_ECM_INTERACTIONS	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_ECM_PROTEOGLYCANS	both leading-edge in gse118713
+BMP7	COL1A1	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+BMP7	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+BMP7	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+BMP7	LOX	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+COL1A1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+COL1A1	LOX	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+FN1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+FN1	LOX	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+ITGA3	LOX	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_DEGRADATION_OF_THE_EXTRACELLULAR_MATRIX	both leading-edge in gse118713
+FOXO3	SMC3	pathway_co_membership	MSigDB_reactome		REACTOME_ESR_MEDIATED_SIGNALING	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_MET	both leading-edge in gse118713
+COL1A1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_MET	both leading-edge in gse118713
+COL1A1	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_MET	both leading-edge in gse118713
+FN1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_MET	both leading-edge in gse118713
+FN1	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_MET	both leading-edge in gse118713
+ITGA3	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_MET	both leading-edge in gse118713
+COL1A1	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+COL1A1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+COL1A1	LYN	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+COL1A1	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+FN1	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+FN1	LYN	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+FN1	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+ITGA3	LYN	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+ITGA3	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+LYN	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_HEMOSTASIS	both leading-edge in gse118713
+ANAPC15	ANAPC2	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	CDC16	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	CDC16	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB7	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB7	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB7	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB7	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC3	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC3	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC3	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC5	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC5	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+UBA52	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+DUSP6	ID2	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse118713
+DUSP6	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse118713
+DUSP6	TRIB1	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse118713
+ID2	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse118713
+ID2	TRIB1	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse118713
+SRC	TRIB1	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse118713
+ANAPC15	ANAPC2	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	CDC16	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	CDC16	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB7	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB7	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB7	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB7	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC3	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC3	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC3	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC5	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC5	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+UBA52	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ADAM17	DUSP6	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse240112
+ADAM17	F2RL1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse240112
+ADAM17	ID2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse240112
+ADAM17	SPRY2	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse240112
+ADAM17	TRIB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_KRAS_SIGNALING_UP	both leading-edge in gse240112
+DMTN	VEZF1	pathway_co_membership	MSigDB_hallmark		HALLMARK_HEME_METABOLISM	both leading-edge in gse240112
+ADAM17	CTNNB1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+ADAM17	HEY1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+ADAM17	JAG1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+ADAM17	LEF1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+CTNNB1	HEY1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+CTNNB1	JAG1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+CTNNB1	LEF1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+HEY1	JAG1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+HEY1	LEF1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+JAG1	LEF1	pathway_co_membership	MSigDB_hallmark		HALLMARK_WNT_BETA_CATENIN_SIGNALING	both leading-edge in gse240112
+COL1A1	MSX1	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse240112
+FN1	MSX1	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse240112
+ID2	MSX1	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse240112
+LOX	MSX1	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse240112
+MSX1	WNT5A	pathway_co_membership	MSigDB_hallmark		HALLMARK_EPITHELIAL_MESENCHYMAL_TRANSITION	both leading-edge in gse240112
+CITED2	COL1A1	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse240112
+CITED2	ERBB2	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse240112
+CITED2	PPARG	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse240112
+CITED2	SMAD3	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse240112
+CITED2	TGFBR2	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse240112
+ADAM17	BMP7	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse240112
+ADAM17	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse240112
+ADAM17	ITGA3	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse240112
+ADAM17	LOX	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse240112
+ADAM17	FN1	pathway_co_membership	MSigDB_reactome		REACTOME_DEGRADATION_OF_THE_EXTRACELLULAR_MATRIX	both leading-edge in gse240112
+DUSP6	EP300	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse240112
+EP300	ID2	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse240112
+EP300	SRC	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse240112
+EP300	TRIB1	pathway_co_membership	MSigDB_reactome		REACTOME_SIGNALING_BY_NTRKS	both leading-edge in gse240112
+FGFR1	JAG1	pathway_co_membership	MSigDB_hallmark		HALLMARK_ANGIOGENESIS	both leading-edge in gse111151
+COL1A1	PTEN	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse111151
+ERBB2	PTEN	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse111151
+PPARG	PTEN	pathway_co_membership	MSigDB_hallmark		HALLMARK_UV_RESPONSE_DN	both leading-edge in gse111151
+ITGA3	PTEN	pathway_co_membership	MSigDB_hallmark		HALLMARK_APICAL_JUNCTION	both leading-edge in gse111151
+NF2	PTEN	pathway_co_membership	MSigDB_hallmark		HALLMARK_APICAL_JUNCTION	both leading-edge in gse111151
+HIF1A	LYN	pathway_co_membership	MSigDB_hallmark		HALLMARK_INFLAMMATORY_RESPONSE	both leading-edge in gse111151
+ADAM17	COL1A1	pathway_co_membership	MSigDB_reactome		REACTOME_EXTRACELLULAR_MATRIX_ORGANIZATION	both leading-edge in gse111151
+ADAM17	COL1A1	pathway_co_membership	MSigDB_reactome		REACTOME_DEGRADATION_OF_THE_EXTRACELLULAR_MATRIX	both leading-edge in gse111151
+ANAPC15	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+ANAPC2	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+POLA2	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+PSMB6	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+PSMB7	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+PSMC3	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+PSMC5	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+UBB	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+ANAPC15	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+ANAPC2	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+POLA2	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+PSMB6	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+PSMB7	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+PSMC3	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+PSMC5	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+UBB	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151

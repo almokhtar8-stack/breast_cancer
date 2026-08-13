@@ -1,0 +1,17 @@
+candidate_A	candidate_B	connection_type	intermediate_gene_if_any	pathway	evidence_source	direct_or_indirect
+USP34	VEZF1	none_found				none
+USP34	EML5	none_found				none
+USP34	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_POSITIVE_REGULATION_OF_SIGNALING	MSigDB / GSEA leading edge	indirect
+VEZF1	EML5	none_found				none
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_ANATOMICAL_STRUCTURE_FORMATION_INVOLVED_IN_MORPHOGENESIS	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_BLOOD_VESSEL_MORPHOGENESIS	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_CIRCULATORY_SYSTEM_DEVELOPMENT	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_EPITHELIUM_DEVELOPMENT	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_POSITIVE_REGULATION_OF_DEVELOPMENTAL_PROCESS	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_POSITIVE_REGULATION_OF_RNA_METABOLIC_PROCESS	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_POSITIVE_REGULATION_OF_TRANSCRIPTION_BY_RNA_POLYMERASE_II	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_REGULATION_OF_MULTICELLULAR_ORGANISMAL_DEVELOPMENT	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_TUBE_DEVELOPMENT	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_TUBE_MORPHOGENESIS	MSigDB / GSEA leading edge	indirect
+VEZF1	CITED2	shared_pathway_membership_or_leading_edge		go_bp:GOBP_VASCULATURE_DEVELOPMENT	MSigDB / GSEA leading edge	indirect
+EML5	CITED2	none_found				none

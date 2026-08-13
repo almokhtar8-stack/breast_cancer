@@ -1,0 +1,187 @@
+source_gene	target_gene	interaction_type	database_source	confidence	pathway	evidence_notes
+PSMB7	UBC	physical_PPI	STRING	0.929		combined_score=0.929; escore=0.858; dscore=0.500; STRING network_type=physical membership=True
+PSMB7	UBA52	physical_PPI	STRING	0.934		combined_score=0.934; escore=0.853; dscore=0.500; STRING network_type=physical membership=True
+PSMB7	UBB	physical_PPI	STRING	0.934		combined_score=0.934; escore=0.857; dscore=0.500; STRING network_type=physical membership=True
+PSMB7	RPS27A	physical_PPI	STRING	0.959		combined_score=0.959; escore=0.902; dscore=0.500; STRING network_type=physical membership=True
+PSMB7	PSMC5	physical_PPI	STRING	0.997		combined_score=0.997; escore=0.983; dscore=0.000; STRING network_type=physical membership=True
+PSMB7	PSMB6	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.900; STRING network_type=physical membership=True
+PSMB7	PSMC3	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.978; dscore=0.800; STRING network_type=physical membership=True
+KMT2C	UBB	physical_PPI	STRING	0.802		combined_score=0.802; escore=0.800; dscore=0.000; STRING network_type=physical membership=True
+KMT2C	UBC	physical_PPI	STRING	0.809		combined_score=0.809; escore=0.800; dscore=0.000; STRING network_type=physical membership=True
+KMT2C	RPS27A	physical_PPI	STRING	0.809		combined_score=0.809; escore=0.800; dscore=0.000; STRING network_type=physical membership=True
+KMT2C	UBA52	physical_PPI	STRING	0.81		combined_score=0.810; escore=0.800; dscore=0.000; STRING network_type=physical membership=True
+KMT2C	TP53	functional_association	STRING	0.858		combined_score=0.858; escore=0.292; dscore=0.000; STRING network_type=physical membership=False
+TP53	UBB	functional_association	STRING	0.799		combined_score=0.799; escore=0.227; dscore=0.500; STRING network_type=physical membership=False
+TP53	PSMC5	physical_PPI	STRING	0.903		combined_score=0.903; escore=0.510; dscore=0.400; STRING network_type=physical membership=True
+TP53	UBC	functional_association	STRING	0.921		combined_score=0.921; escore=0.653; dscore=0.500; STRING network_type=physical membership=False
+TP53	CTNNB1	functional_association	STRING	0.927		combined_score=0.927; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+TP53	RPS27A	functional_association	STRING	0.971		combined_score=0.971; escore=0.923; dscore=0.500; STRING network_type=physical membership=False
+TP53	PTEN	functional_association	STRING	0.999		combined_score=0.999; escore=0.748; dscore=0.900; STRING network_type=physical membership=False
+PSMB6	UBA52	physical_PPI	STRING	0.942		combined_score=0.942; escore=0.853; dscore=0.500; STRING network_type=physical membership=True
+PSMB6	UBC	physical_PPI	STRING	0.946		combined_score=0.946; escore=0.858; dscore=0.500; STRING network_type=physical membership=True
+PSMB6	UBB	physical_PPI	STRING	0.947		combined_score=0.947; escore=0.857; dscore=0.500; STRING network_type=physical membership=True
+PSMB6	RPS27A	physical_PPI	STRING	0.962		combined_score=0.962; escore=0.901; dscore=0.500; STRING network_type=physical membership=True
+PSMB6	PSMC5	physical_PPI	STRING	0.996		combined_score=0.996; escore=0.978; dscore=0.000; STRING network_type=physical membership=True
+PSMB6	PSMC3	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.990; dscore=0.000; STRING network_type=physical membership=True
+RPS27A	CTNNB1	functional_association	STRING	0.735		combined_score=0.735; escore=0.381; dscore=0.500; STRING network_type=physical membership=False
+RPS27A	PTEN	functional_association	STRING	0.752		combined_score=0.752; escore=0.467; dscore=0.500; STRING network_type=physical membership=False
+RPS27A	UBE2C	physical_PPI	STRING	0.806		combined_score=0.806; escore=0.500; dscore=0.500; STRING network_type=physical membership=True
+RPS27A	ANAPC2	physical_PPI	STRING	0.954		combined_score=0.954; escore=0.900; dscore=0.500; STRING network_type=physical membership=True
+RPS27A	USP34	physical_PPI	STRING	0.961		combined_score=0.961; escore=0.926; dscore=0.400; STRING network_type=physical membership=True
+RPS27A	PSMC5	physical_PPI	STRING	0.975		combined_score=0.975; escore=0.915; dscore=0.500; STRING network_type=physical membership=True
+RPS27A	PSMC3	physical_PPI	STRING	0.975		combined_score=0.975; escore=0.935; dscore=0.500; STRING network_type=physical membership=True
+RPS27A	UBB	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.983; dscore=0.900; STRING network_type=physical membership=True
+RPS27A	UBC	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.986; dscore=0.900; STRING network_type=physical membership=True
+RPS27A	UBA52	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.997; dscore=0.900; STRING network_type=physical membership=True
+PSMC5	TRIP12	functional_association	STRING	0.887		combined_score=0.887; escore=0.818; dscore=0.000; STRING network_type=physical membership=False
+PSMC5	UBB	physical_PPI	STRING	0.95		combined_score=0.950; escore=0.879; dscore=0.500; STRING network_type=physical membership=True
+PSMC5	UBA52	physical_PPI	STRING	0.966		combined_score=0.966; escore=0.883; dscore=0.500; STRING network_type=physical membership=True
+PSMC5	UBC	physical_PPI	STRING	0.967		combined_score=0.967; escore=0.920; dscore=0.500; STRING network_type=physical membership=True
+PSMC5	PSMC3	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.998; dscore=0.720; STRING network_type=physical membership=True
+ANAPC2	UBB	physical_PPI	STRING	0.948		combined_score=0.948; escore=0.900; dscore=0.500; STRING network_type=physical membership=True
+ANAPC2	UBA52	physical_PPI	STRING	0.949		combined_score=0.949; escore=0.900; dscore=0.500; STRING network_type=physical membership=True
+ANAPC2	UBC	physical_PPI	STRING	0.961		combined_score=0.961; escore=0.926; dscore=0.500; STRING network_type=physical membership=True
+ANAPC2	ANAPC15	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.976; dscore=0.900; STRING network_type=physical membership=True
+ANAPC2	UBE2C	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.982; dscore=0.900; STRING network_type=physical membership=True
+ANAPC2	CDC16	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.999; dscore=0.900; STRING network_type=physical membership=True
+USP9X	TRIP12	functional_association	STRING	0.749		combined_score=0.749; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+USP9X	USP34	functional_association	STRING	0.793		combined_score=0.793; escore=0.438; dscore=0.000; STRING network_type=physical membership=False
+USP9X	UBC	physical_PPI	STRING	0.817		combined_score=0.817; escore=0.582; dscore=0.500; STRING network_type=physical membership=True
+USP9X	CTNNB1	functional_association	STRING	0.88		combined_score=0.880; escore=0.822; dscore=0.000; STRING network_type=physical membership=False
+MKLN1	USP34	functional_association	STRING	0.79		combined_score=0.790; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+CDC16	UBC	physical_PPI	STRING	0.9		combined_score=0.900; escore=0.806; dscore=0.500; STRING network_type=physical membership=True
+CDC16	UBB	physical_PPI	STRING	0.902		combined_score=0.902; escore=0.806; dscore=0.500; STRING network_type=physical membership=True
+CDC16	UBE2C	physical_PPI	STRING	0.992		combined_score=0.992; escore=0.827; dscore=0.900; STRING network_type=physical membership=True
+CDC16	ANAPC15	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.963; dscore=0.900; STRING network_type=physical membership=True
+UBE2C	UBA52	functional_association	STRING	0.765		combined_score=0.765; escore=0.397; dscore=0.500; STRING network_type=physical membership=False
+UBE2C	UBB	physical_PPI	STRING	0.926		combined_score=0.926; escore=0.827; dscore=0.500; STRING network_type=physical membership=True
+UBE2C	UBC	physical_PPI	STRING	0.942		combined_score=0.942; escore=0.844; dscore=0.500; STRING network_type=physical membership=True
+UBE2C	ANAPC15	physical_PPI	STRING	0.992		combined_score=0.992; escore=0.819; dscore=0.900; STRING network_type=physical membership=True
+PTEN	UBC	functional_association	STRING	0.714		combined_score=0.714; escore=0.354; dscore=0.500; STRING network_type=physical membership=False
+PTEN	CTNNB1	functional_association	STRING	0.943		combined_score=0.943; escore=0.527; dscore=0.000; STRING network_type=physical membership=False
+TRIP12	USP34	functional_association	STRING	0.723		combined_score=0.723; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+TRIP12	UBC	functional_association	STRING	0.752		combined_score=0.752; escore=0.715; dscore=0.000; STRING network_type=physical membership=False
+ASH1L	USP34	functional_association	STRING	0.822		combined_score=0.822; escore=0.045; dscore=0.000; STRING network_type=physical membership=False
+USP34	SMG1	functional_association	STRING	0.722		combined_score=0.722; escore=0.000; dscore=0.000; STRING network_type=physical membership=False
+USP34	H7C0V5_HUMAN	functional_association	STRING	0.74		combined_score=0.740; escore=0.046; dscore=0.000; STRING network_type=physical membership=False
+USP34	UBB	physical_PPI	STRING	0.954		combined_score=0.954; escore=0.922; dscore=0.400; STRING network_type=physical membership=True
+USP34	UBA52	physical_PPI	STRING	0.968		combined_score=0.968; escore=0.947; dscore=0.400; STRING network_type=physical membership=True
+USP34	UBC	physical_PPI	STRING	0.982		combined_score=0.982; escore=0.969; dscore=0.400; STRING network_type=physical membership=True
+UBA52	PSMC3	physical_PPI	STRING	0.934		combined_score=0.934; escore=0.856; dscore=0.500; STRING network_type=physical membership=True
+UBA52	UBB	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.983; dscore=0.900; STRING network_type=physical membership=True
+UBA52	UBC	physical_PPI	STRING	0.999		combined_score=0.999; escore=0.990; dscore=0.900; STRING network_type=physical membership=True
+ANAPC15	UBB	physical_PPI	STRING	0.897		combined_score=0.897; escore=0.800; dscore=0.500; STRING network_type=physical membership=True
+ANAPC15	UBC	physical_PPI	STRING	0.897		combined_score=0.897; escore=0.800; dscore=0.500; STRING network_type=physical membership=True
+UBC	PSMC3	physical_PPI	STRING	0.971		combined_score=0.971; escore=0.931; dscore=0.500; STRING network_type=physical membership=True
+UBC	UBB	physical_PPI	STRING	0.998		combined_score=0.998; escore=0.900; dscore=0.900; STRING network_type=physical membership=True
+UBB	CTNNB1	functional_association	STRING	0.763		combined_score=0.763; escore=0.111; dscore=0.500; STRING network_type=physical membership=False
+UBB	PSMC3	physical_PPI	STRING	0.959		combined_score=0.959; escore=0.896; dscore=0.500; STRING network_type=physical membership=True
+TP53	CTNNB1	regulatory	TRRUST			mode=Repression; PMID=19411072
+TP53	PTEN	regulatory	TRRUST			mode=Repression; PMID=17344317
+TP53	PTEN	regulatory	TRRUST			mode=Unknown; PMID=11545734
+ANAPC15	ANAPC2	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	CDC16	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	CDC16	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC2	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+CDC16	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+POLA2	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB6	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB7	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB7	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB7	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMB7	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC3	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC3	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC3	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC5	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+PSMC5	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+UBA52	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse118713
+ANAPC15	ANAPC2	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	CDC16	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	CDC16	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC2	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	POLA2	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+CDC16	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	PSMB6	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+POLA2	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	PSMB7	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB6	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB7	PSMC3	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB7	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB7	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMB7	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC3	PSMC5	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC3	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC3	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC5	UBA52	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+PSMC5	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+UBA52	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse118713
+ANAPC15	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+ANAPC2	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+POLA2	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+PSMB6	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+PSMB7	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+PSMC3	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+PSMC5	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+UBB	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_SYNTHESIS_OF_DNA	both leading-edge in gse111151
+ANAPC15	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+ANAPC2	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+POLA2	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+PSMB6	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+PSMB7	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+PSMC3	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+PSMC5	UBB	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
+UBB	UBE2C	pathway_co_membership	MSigDB_reactome		REACTOME_DNA_REPLICATION	both leading-edge in gse111151
