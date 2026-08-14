@@ -1,274 +1,343 @@
-# Breast Cancer Tamoxifen Response Project
+# Breast Cancer Tamoxifen Resistance Project
 
-Computational reanalysis identifying and prioritizing genes whose loss
-modulates tamoxifen response in ER-positive breast cancer, by combining a
-public genome-wide CRISPR screen with public bulk and single-cell
-transcriptomics.
+Computational reanalysis identifying, validating, and deeply characterizing
+genes whose loss sensitizes ER-positive breast cancer to tamoxifen, by
+integrating a public genome-wide CRISPR screen with public bulk and
+single-cell transcriptomics, TCGA clinical data, DepMap dependency data,
+network/pathway analysis, structural biology, and pharmacogenomic
+(GDSC) drug-response data.
 
-**Quick links:** [Code map](docs/CODE_MAP.md) ·
-[Project status](docs/PROJECT_STATUS.md) ·
+**This is a computational reanalysis of public data. No wet-lab work was
+performed by this project, and no result here should be read as a
+validated therapeutic target, a proven mechanism, or a safe/efficacious
+drug candidate.**
+
+**Quick links:** [Project workflow](docs/PROJECT_WORKFLOW.md) ·
+[Data provenance](docs/DATA_PROVENANCE.md) ·
+[Results guide](docs/RESULTS_GUIDE.md) ·
+[Reproducibility](docs/REPRODUCIBILITY.md) ·
+[Canonical results index](results/final/README.md) ·
 [Root pre-analysis plan](PREANALYSIS.md) ·
-[GSE245601 pre-analysis plan](docs/gse245601_PREANALYSIS.md) ·
-[Result tables](results/tables/) ·
-[Figures](results/figures/) ·
+[Code map](docs/CODE_MAP.md) ·
 [Tests](tests/)
 
-## Overview
+---
 
-This project computationally reanalyses published functional and
-transcriptomic datasets to identify and prioritize genes whose inhibition
-may modulate tamoxifen response in ER+ breast cancer. It is a
-**computational reanalysis of public data — no wet-lab work was performed
-by this project.** A public genome-wide CRISPR knockout screen (Hany et
-al. 2023) supplies functional perturbation evidence; public bulk RNA-seq
-of tamoxifen-resistant cell lines (GSE118713) supplies resistance-associated
-expression evidence; public human single-cell RNA-seq of tumors treated ex
-vivo with tamoxifen (GSE245601) supplies additional human-tumor response
-context. No claim of therapeutic efficacy or safety is made or implied by
-any result in this repository.
+## A. Overview
 
-## Research Workflow
+This project starts from a public genome-wide CRISPR knockout screen in
+tamoxifen-treated ER+ breast cancer cells and, over sixteen analysis phases,
+narrows a genome-wide gene list down to a small, evidence-ranked shortlist
+of tamoxifen-resistance candidate genes, checks that shortlist against
+independent public cohorts (TCGA, DepMap, additional GEO datasets), maps the
+mechanistic/pathway context of the top candidates, assesses their structural
+druggability and safety liabilities, and designs (but does not run) a
+concrete wet-lab validation plan for the two leading candidates. All data
+are public; all thresholds were declared in advance in dated pre-analysis
+plans; nothing derived from the CRISPR screen is used as a model feature
+(the screen supplies labels only).
+
+## B. Main research question
+
+**Which genes, when lost, sensitize tamoxifen-resistant or tamoxifen-treated
+ER-positive breast cancer cells to tamoxifen — and, among the strongest
+candidates, which is the most promising target for a concrete follow-up
+combination-therapy experiment?**
+
+## C. High-level final findings (USP34 and VEZF1)
+
+The project's frozen four-gene therapeutic shortlist, in order, is
+**USP34 > VEZF1 > EML5 > CITED2** (see
+[`docs/THERAPEUTIC_SHORTLIST_FREEZE.md`](docs/THERAPEUTIC_SHORTLIST_FREEZE.md)).
+USP34 and VEZF1 were carried forward into deep mechanistic, structural, and
+translational-design work; EML5 and CITED2 were not.
+
+**USP34 — current lead translational target.** Functional CRISPR
+sensitisation (Hany screen, FDR=0.042) + low baseline dependency in
+ER+/luminal cancer cell lines (DepMap 26Q1: 0.0% strongly dependent) + real,
+crystallographically-confirmed catalytic targetability (reactive Cys1903,
+PDB 7W3R/7W3U) together make USP34 the lead combination-target *hypothesis*
+— not a validated target. No USP34-selective inhibitor currently exists.
+Structural pocket analysis (fpocket 4.2.3) found a druggable catalytic
+pocket but concluded blind/arbitrary small-molecule docking is **not yet
+justified** (`DOCKING_NOT_YET_JUSTIFIED`; see
+[Section M](#m-proposed-next-experiment) and
+[`docs/RESULTS_GUIDE.md`](docs/RESULTS_GUIDE.md)). A targeted GDSC
+Release 8.5 pharmacogenomic lookup found 9 FDR-significant drug-response
+correlations for USP34 expression in breast cancer cell lines (strongest:
+AZD7762/CHK1-CHK2 inhibitor, FDR=0.008) — all correlational, none causal,
+and none involving tamoxifen or fulvestrant directly. A prior mammary
+epithelial study (PMID 28499884) found USP34 loss can promote EMT/stem-like
+features in some contexts; **this does not invalidate the USP34 tamoxifen
+hypothesis** — it is counter-evidence motivating explicit EMT/stemness
+monitoring in any USP34-perturbation experiment, not a reason to drop USP34.
+
+**VEZF1 — second / backup translational target.** Strong functional CRISPR
+sensitisation (Hany screen, FDR=0.037, nominally the stronger of the two) +
+real baseline dependency in ER+/luminal cancer cell lines (DepMap 26Q1:
+27.3% strongly dependent) together suggest a dual-action biological
+hypothesis, but VEZF1 has poor direct druggability (a zinc-finger
+transcription factor). A candidate indirect strategy — inhibiting VEZF1's
+proposed downstream partner TEAD1 — remains **explicitly unvalidated**
+(`PHARMACOGENOMIC_ASSOCIATION_ONLY` at best; GDSC contains zero TEAD/Hippo
+compounds, so this cannot even be tested pharmacogenomically). The GDSC
+lookup found **zero** FDR-significant drug-response correlations for VEZF1
+in breast cancer cell lines — a genuine negative result. VEZF1 also has a
+more directly causal cardiovascular/developmental liability signal (a
+postnatal zebrafish cardiac-contractility finding, PMID 31911272) than
+USP34's bone-related liability signal.
+
+Full detail: [`results/final/README.md`](results/final/README.md).
+
+## D. Complete analysis workflow (16 phases)
 
 ```
-Genome-wide CRISPR screen (Hany et al. 2023)              [COMPLETE]
-        |
-Bulk RNA resistance analysis (GSE118713)                   [COMPLETE]
-        |
-CRISPR x RNA candidate prioritization                       [COMPLETE]
-        |
-Human single-cell response context (GSE245601)
-   preprocessing + malignant-cell ID                        [COMPLETE]
-   candidate-level expression / pseudobulk DE / ranking      [NOT STARTED]
-        |
-Independent validation (GSE111151)                          [NOT STARTED]
-        |
-Pathway / mechanism                                         [NOT STARTED]
-        |
-Druggability                                                 [NOT STARTED]
-        |
-Normal-tissue expression                                     [NOT STARTED]
-        |
-Final candidate prioritization                               [NOT STARTED]
+ 1. CRISPR screen reanalysis (Hany et al. 2023)              -- functional labels, Gate-1 hit calling
+ 2. GSE118713 bulk RNA resistance analysis                   -- TAMR/FASR vs MCF7 expression
+ 3. CRISPR x bulk-RNA integration                            -- 13 sensitising candidates prioritized
+ 4. NEBULA poster figures                                    -- early-phase summary figures
+ 5. GSE245601 single-cell preprocessing + malignant-cell ID  -- InferCNV (primary) + CopyKAT (sensitivity check)
+ 6. GSE245601 candidate-level expression / pseudobulk        -- per-candidate acute-treatment signal
+ 7. GSE240112 primary-vs-recurrent scRNA-seq                 -- 4th independent evidence layer
+ 8. GSE111151 independent resistance-model validation        -- 5th independent evidence layer
+ 9. Unbiased genome-wide cross-dataset integration            -- all five evidence layers, every gene
+10. Candidate adjudication                                    -- 7 MULTIMODAL_STRONG genes narrowed
+11. Evidence freeze                                            -- frozen 4-gene shortlist: USP34>VEZF1>EML5>CITED2
+12. Systems / pathway network mapping                          -- shortest paths to resistance nodes
+13. Literature mechanism review                                 -- published mechanism check per candidate
+14. Independent validation (TCGA-BRCA + DepMap 26Q1)            -- external cohorts, not used for discovery
+15. Lead-target deep dive + druggability/safety                 -- structure, pocket, safety liabilities
+16. Final translational design + GDSC pharmacogenomics          -- EXP-1..5 wet-lab plan, drug-response lookup
 ```
 
-**Complete:**
-- CRISPR reanalysis of the Hany et al. 2023 screen
-- GSE118713 bulk RNA analysis
-- CRISPR x bulk-RNA integration and candidate evidence classification
-- PAICS published-benchmark check
-- NEBULA poster figures
-- GSE245601 single-cell preprocessing (QC, doublet removal, normalization, clustering)
-- Broad cell-type annotation and epithelial identification
-- InferCNV primary malignant-cell classification
-- CopyKAT independent sensitivity analysis
-- Malignant-cell labels frozen
+Steps 1-4 used only the CRISPR screen and GSE118713; steps 5-9 added
+independent transcriptomic evidence layers genome-wide; steps 10-11 froze
+the shortlist; steps 12-16 characterize the frozen shortlist's top two
+candidates without ever reopening candidate discovery or altering the
+frozen ranking. See [`docs/PROJECT_WORKFLOW.md`](docs/PROJECT_WORKFLOW.md)
+for the full narrative version of this workflow, with code/output pointers
+for every phase.
 
-**Current decision point:** statistical design for the GSE245601
-candidate-level analysis (only 3/10 paired tumors currently meet the
-frozen pseudobulk-eligibility threshold — see
-[Limitations](#limitations--current-methodological-question)).
+## E. Datasets
 
-**Not yet done:** GSE245601 candidate expression analysis, pseudobulk
-differential expression, single-cell candidate ranking, GSE111151
-independent confirmation, mechanism/pathway analysis, druggability
-assessment, normal-tissue expression analysis, final candidate
-prioritization.
-
-## Datasets
-
-| Dataset | Role | Biological system | Status |
+| Dataset | Role | Biological system | Caveats |
 |---|---|---|---|
-| Hany et al. 2023 CRISPR screen (*Sci Adv* 9:eadd3685) | Functional labels (gene-by-treatment interaction effect, E2+4-OHT vs E2) | MCF7-V, a drug-tolerant parental clone | Complete |
-| GSE118713 | Resistance-associated bulk expression features | MCF7 parental / TAMR / FASR cell lines | Complete |
-| GSE245601 | Human ex vivo tamoxifen-response single-cell context | 10 paired primary ER+/HER2− tumors, 10 µM tamoxifen vs control media, 12 h ex vivo, scRNA-seq | Preprocessing + malignant-cell ID complete; candidate analysis not started |
-| GSE111151 | Independent post-hoc confirmation only (excluded from model training) | 4 parental lines + 7 TamR derivatives | Not yet used |
+| Hany et al. 2023 CRISPR screen (*Sci Adv* 9:eadd3685) | Functional labels only (never used as a feature) | MCF7-V drug-tolerant parental clone, E2 vs E2+4-OHT | Genome-wide but single cell line/screen; Gate-1 FDR<0.1 |
+| GSE118713 | Resistance-associated bulk expression | MCF7 parental / TAMR / FASR cell lines | Cell-line model, not patient tissue |
+| GSE245601 | Human ex vivo tamoxifen-response single-cell context | 10 paired primary ER+/HER2- tumors, 10 µM tamoxifen vs control, 12h ex vivo | **Only 3/10 tumor pairs (Tumor_02/03/07) meet the frozen >=50-malignant-cell pseudobulk-eligibility rule**; InferCNV/CopyKAT malignant-cell concordance is highly variable across samples (~56% average agreement) |
+| GSE240112 | Primary-vs-recurrent scRNA-seq, 4th evidence layer | Matched primary/recurrent ER+ tumor pairs | Recurrence != tamoxifen resistance specifically; small patient N |
+| GSE111151 | Independent post-hoc resistance-model confirmation | 4 parental + 7 TamR derivative cell lines | Used for confirmation only, never for candidate discovery |
+| TCGA-BRCA | Independent large-cohort expression/clinical validation | 1,095 primary tumors (deduplicated), bulk RNA-seq + clinical | **Not a tamoxifen-resistance cohort** — a general BRCA cohort; ER+/ER- and treatment status come from clinical annotation, not a resistance phenotype |
+| DepMap Public (24Q4 archived; 26Q1 active) | Cancer cell-line dependency (CRISPR) | Pan-cancer + breast + ER+/luminal cell-line panels | Two releases used; 26Q1 is now the active/reported release, 24Q4 is archived for traceability — see [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md) |
+| GDSC Release 8.5 (30 Oct 2023) | Pharmacogenomic drug-response correlation, USP34/VEZF1 only | Breast cancer cell line panel, GDSC1 + GDSC2 screens | **Correlational only, never causal**; GDSC1/GDSC2 are separate screening campaigns, never pooled for FDR; some compounds carry multiple DRUG_IDs within one release (pseudoreplication trap, handled explicitly) |
 
-GSE245601's treatment contrast is **10 µM tamoxifen vs control media for
-12 hours, ex vivo, on primary tumors** — this is deliberately not
-described with the Hany-screen's "E2 vs E2+4-OHT" wording, which belongs
-only to that unrelated CRISPR screen (see
-[`docs/gse245601_PREANALYSIS.md` §0](docs/gse245601_PREANALYSIS.md#0-scientific-correction-to-the-prior-audit-frozen-here)).
+## F. The frozen candidates — three distinct rankings, not one
 
-## Current Findings
+This project has **three separate rankings**, each answering a different
+question, and none of them overrides another:
 
-**CRISPR x bulk RNA (complete):**
-- 19,103 genes fitted in the CRISPR reanalysis; 28 Gate-1 hits at the
-  frozen FDR<0.1 threshold
-- 13 of the 28 hits are sensitising knockout candidates (knockout depletes
-  under tamoxifen, i.e. associated with increased tamoxifen sensitivity)
-- USP34 currently has the strongest combined CRISPR + TAMR-vs-MCF7
-  bulk-expression support among the 13 candidates
-- PAICS remains a published benchmark gene, checked separately — it is
-  **not** a Gate-1 CRISPR hit in this reanalysis (CRISPR FDR = 0.85)
+1. **Frozen therapeutic shortlist ranking** (evidence_freeze phase,
+   [`docs/THERAPEUTIC_SHORTLIST_FREEZE.md`](docs/THERAPEUTIC_SHORTLIST_FREEZE.md)):
+   USP34 > VEZF1 > EML5 > CITED2, based on combined CRISPR + bulk-RNA +
+   single-cell + independent-validation evidence strength. **This ranking is
+   frozen and is never altered by any later phase.**
+2. **Mechanistic/pathway follow-up order** (systems_network +
+   literature_mechanism + independent_validation phases,
+   [`four_candidate_followup_rankings.tsv`](results/tables/independent_validation/four_candidate_followup_rankings.tsv)): a separate, explicitly-labeled
+   "follow-up order only" signal from TCGA pathway/clinical cross-checks —
+   it does **not** alter the frozen therapeutic ranking above, by design.
+3. **Final translational lead selection** (final_translational phase,
+   [`results/final/README.md`](results/final/README.md)): among the top two
+   frozen candidates only (USP34, VEZF1 — EML5 and CITED2 were not carried
+   this far), USP34 is designated the current **lead** and VEZF1 the
+   **second/backup** target specifically for wet-lab combination-therapy
+   follow-up, based on structural/druggability/safety criteria layered on
+   top of (not replacing) the frozen ranking. This happens to agree with
+   the frozen order here, but is a genuinely separate question (translational
+   feasibility, not overall evidence strength).
 
-**GSE245601 single-cell (preprocessing complete, candidates not yet examined):**
-- 44,140 cells retained after QC and doublet removal across 20 primary
-  tumor samples (10 patients, control + tamoxifen)
-- 29,175 of those cells classified as epithelial
-- InferCNV-based malignant-vs-non-malignant classification completed for
-  all epithelial cells, with CopyKAT run per sample as an independent
-  sensitivity check
-- Only **Tumor_02, Tumor_03, and Tumor_07** currently satisfy the frozen
-  ≥50-malignant-cells-per-arm pseudobulk-eligibility rule
-  (`results/tables/gse245601_pair_eligibility.tsv`)
-- Candidate-gene expression has **not** been examined in GSE245601 — no
-  pseudobulk aggregation or differential expression has been run
-
-No result in this repository should be read as "validated therapeutic
-target," "restores sensitivity," or "safe target" — none of those claims
-is established by the analyses completed so far.
-
-## How to read the candidate results
-
-This section is for a researcher or student looking at the project
-quickly. It explains the columns in
-[`results/tables/candidate_evidence_summary.tsv`](results/tables/candidate_evidence_summary.tsv)
-and [`candidate_sensitisation_candidates.tsv`](results/tables/candidate_sensitisation_candidates.tsv).
-
-| Column / evidence | Simple meaning |
-|---|---|
-| **CRISPR effect_size** | Negative = knockout made cells more sensitive to 4-OHT/tamoxifen. Positive = knockout was relatively enriched (tolerance-associated). For an inhibition strategy, **negative** is the direction of interest. |
-| **CRISPR FDR** (false discovery rate) | Smaller = stronger statistical evidence. Frozen Gate-1 threshold = FDR < 0.10. This is not the same thing as effect size — a small FDR does not mean a large effect. |
-| **TAMR vs MCF7 log2FC** (log2 fold-change) | Positive = higher expression in tamoxifen-resistant TAMR cells. Negative = lower expression in TAMR cells. This is an expression **association**, not causality. |
-| **TAMR vs MCF7 bulk FDR** | Smaller = stronger evidence of an expression difference. FDR < 0.05 is the frozen significant bulk-RNA threshold. |
-| **TAMR vs FASR** | Secondary endocrine-resistance context only — **not** proof of tamoxifen specificity. |
-| **crispr_direction** | `sensitising_knockout` (negative CRISPR effect — the direction of interest) or `tolerance_associated_knockout` (positive effect — not an inhibition candidate for sensitisation). |
-| **evidence_class** | Only assigned for `sensitising_knockout` genes (see below); `tolerance_associated_knockout` genes are marked `not_applicable_not_a_sensitising_knockout` because they are not scored for the inhibition-target question. |
-
-**Evidence classes, in plain terms** (sensitising knockouts only):
-
-- `PRIMARY_RESISTANCE_SUPPORT` — sensitising CRISPR hit **and** significant TAMR-vs-MCF7 bulk support (the strongest combination).
-- `SECONDARY_CONTEXT_SUPPORT` — sensitising CRISPR hit, but only TAMR-vs-FASR support (secondary context, not tamoxifen-specific).
-- `NO_SIGNIFICANT_RNA_SUPPORT` — sensitising CRISPR hit, but no significant bulk-RNA support in either contrast.
-- `RNA_UNAVAILABLE` — bulk expression data unavailable for that gene (filtered out upstream).
-
-### How do we choose a candidate?
-
-1. **Start with a negative CRISPR effect** — knockout increased drug sensitivity.
-2. **Prefer genes with TAMR-vs-MCF7 bulk-RNA support** — this connects the functional CRISPR result with resistance-associated expression.
-3. **Add independent/human evidence** — single-cell, external validation, mechanism, druggability, and normal-tissue expression.
-
-No single column chooses the winner.
-
-**Example — USP34:**
-- CRISPR effect ≈ −1.39, FDR ≈ 0.0417
-- TAMR vs MCF7 log2FC ≈ +0.59, FDR ≈ 0.00731
-- Evidence class: `PRIMARY_RESISTANCE_SUPPORT`
-- Therefore USP34 currently has the strongest combined CRISPR + primary
-  bulk-RNA support among the 13 candidates.
-
-USP34 is **not** validated, safe, or therapeutically proven by this —
-it is the current top candidate by the evidence collected so far.
-
-**Single-cell (GSE245601) candidate columns — not yet populated:**
-Candidate-level GSE245601 single-cell analysis has **not yet been
-performed.** No such column, table, or value exists in this repository
-today. When that analysis is eventually run, the key candidate columns
-will approximately mean:
-
-- **single-cell treatment logFC** — positive = higher expression after
-  tamoxifen; negative = lower expression after tamoxifen.
-- **single-cell FDR** — statistical evidence for the paired human-tumor
-  treatment effect.
-- **n_pairs** — number of eligible paired tumors contributing to that
-  analysis.
-
-These are described here only so the meaning is clear once that analysis
-exists — no such values are reported anywhere in this repository yet.
-
-## Repository Guide — Where is the code?
-
-| Task | Main code | Main outputs | Notes |
-|---|---|---|---|
-| CRISPR screen reanalysis | [`src/labels.py`](src/labels.py), [`src/gate1_checks.py`](src/gate1_checks.py) | [`results/tables/gate1_decision.tsv`](results/tables/gate1_decision.tsv) | Gate-1 FDR<0.1 hit decision, CEG2 essentiality check |
-| Bulk RNA — GSE118713 | [`src/gse118713_prep.py`](src/gse118713_prep.py), [`src/gse118713_qc.py`](src/gse118713_qc.py), [`scripts/analysis/gse118713_limma.R`](scripts/analysis/gse118713_limma.R) | [`results/tables/gse118713_de_summary.tsv`](results/tables/gse118713_de_summary.tsv) | limma DE across TAMR/FASR/MCF7 |
-| CRISPR x bulk integration | [`src/crispr_gse118713_integration.py`](src/crispr_gse118713_integration.py) | [`results/tables/crispr_gse118713_master_table.tsv`](results/tables/crispr_gse118713_master_table.tsv) | Joins Gate-1 hits to GSE118713 expression |
-| Candidate prioritization | [`src/candidate_evidence_summary.py`](src/candidate_evidence_summary.py) | [`results/tables/candidate_evidence_summary.tsv`](results/tables/candidate_evidence_summary.tsv), [`candidate_sensitisation_candidates.tsv`](results/tables/candidate_sensitisation_candidates.tsv) | Evidence-class hierarchy for the 13 sensitising candidates |
-| PAICS benchmark | [`src/candidate_evidence_summary.py`](src/candidate_evidence_summary.py) | [`results/tables/candidate_paics_benchmark.tsv`](results/tables/candidate_paics_benchmark.tsv) | Published-benchmark check, separate from Gate-1 |
-| NEBULA poster figures | [`src/nebula_plots_final.py`](src/nebula_plots_final.py) | [`results/figures/nebula_final/`](results/figures/nebula_final/) | Current, self-contained figure module |
-| GSE245601 download + manifest | [`scripts/download/download_gse245601.sh`](scripts/download/download_gse245601.sh), [`src/gse245601_manifest.py`](src/gse245601_manifest.py) | [`results/tables/gse245601_sample_manifest.tsv`](results/tables/gse245601_sample_manifest.tsv) | Checksum-verified 26-sample manifest |
-| GSE245601 candidate feature-space check | [`src/gse245601_feature_check.py`](src/gse245601_feature_check.py) | [`results/tables/gse245601_candidate_feature_availability.tsv`](results/tables/gse245601_candidate_feature_availability.tsv) | Gene-symbol presence only, no expression values |
-| GSE245601 QC + doublets | [`scripts/analysis/gse245601_01_import_qc_doublets.R`](scripts/analysis/gse245601_01_import_qc_doublets.R) | [`results/tables/gse245601_qc_summary.tsv`](results/tables/gse245601_qc_summary.tsv) | Frozen thresholds, treatment-blind filter mask |
-| GSE245601 normalization/clustering | [`scripts/analysis/gse245601_02_normalize_cluster.R`](scripts/analysis/gse245601_02_normalize_cluster.R) | [`results/tables/gse245601_cluster_summary.tsv`](results/tables/gse245601_cluster_summary.tsv) | LogNormalize, PCA, Louvain, UMAP |
-| GSE245601 cell-type annotation | [`scripts/analysis/gse245601_03_annotate_celltypes.R`](scripts/analysis/gse245601_03_annotate_celltypes.R) | [`results/tables/gse245601_celltype_counts_per_sample.tsv`](results/tables/gse245601_celltype_counts_per_sample.tsv) | Candidate-gene-blind marker scoring |
-| GSE245601 malignant-cell classification | [`scripts/analysis/gse245601_05_infercnv_malignant.R`](scripts/analysis/gse245601_05_infercnv_malignant.R) | [`results/tables/gse245601_malignant_cell_labels.tsv`](results/tables/gse245601_malignant_cell_labels.tsv) | InferCNV-based, treatment-blind |
-| GSE245601 sensitivity check | [`scripts/analysis/gse245601_06_copykat_sensitivity.R`](scripts/analysis/gse245601_06_copykat_sensitivity.R) | [`results/tables/gse245601_malignancy_concordance.tsv`](results/tables/gse245601_malignancy_concordance.tsv) | Independent CopyKAT call, same cells |
-| GSE245601 metadata freeze | [`scripts/analysis/gse245601_07_freeze_metadata.R`](scripts/analysis/gse245601_07_freeze_metadata.R) | [`results/tables/gse245601_cell_metadata_frozen.tsv.gz`](results/tables/gse245601_cell_metadata_frozen.tsv.gz), [`gse245601_pair_eligibility.tsv`](results/tables/gse245601_pair_eligibility.tsv) | Per-cell metadata + pseudobulk-eligibility flags; no pseudobulk run |
-| Tests | [`tests/`](tests/) | — | One test module per analysis module — see [Code map](docs/CODE_MAP.md) |
-
-## Key Figures
-
-1. **[`results/figures/nebula_final/fig1_crispr_landscape.png`](results/figures/nebula_final/fig1_crispr_landscape.png)** — CRISPR hit landscape: all 28 Gate-1 hits, sensitising vs tolerance-associated, with the PAICS benchmark inset.
-2. **[`results/figures/nebula_final/fig3_volcano.png`](results/figures/nebula_final/fig3_volcano.png)** — GSE118713 bulk-RNA result: TAMR-vs-MCF7 differential expression volcano plot.
-3. **[`results/figures/gse245601_preprocessing/02_umap_broad_cell_type.pdf`](results/figures/gse245601_preprocessing/02_umap_broad_cell_type.pdf)** — GSE245601 broad cell-type UMAP (epithelial, fibroblast, myeloid, endothelial, B/plasma, T/NK) across all 20 primary tumor samples.
-4. **[`results/figures/gse245601_preprocessing/07_umap_malignant_vs_nonmalignant.pdf`](results/figures/gse245601_preprocessing/07_umap_malignant_vs_nonmalignant.pdf)** — Malignant vs. non-malignant epithelial cells, InferCNV-derived primary classification.
-5. **[`results/figures/gse245601_preprocessing/08_malignant_counts_by_patient_condition.pdf`](results/figures/gse245601_preprocessing/08_malignant_counts_by_patient_condition.pdf)** — Malignant-cell counts per patient x condition, with the frozen ≥50-cell eligibility line — shows directly why only 3/10 tumor pairs currently qualify for pseudobulk analysis.
-6. **[`results/figures/gse245601_preprocessing/09_malignancy_concordance.pdf`](results/figures/gse245601_preprocessing/09_malignancy_concordance.pdf)** — InferCNV-vs-CopyKAT concordance per sample, shown transparently because it is highly variable (see [Limitations](#limitations--current-methodological-question)).
-
-InferCNV supplied the **primary** malignant-cell classification; CopyKAT
-was run as an **independent sensitivity check** on the same cells, not as
-a second vote — see [Limitations](#limitations--current-methodological-question)
-for how well the two agree. The classification should not be read as a
-ground-truth cancer-cell label.
-
-## Single-Cell Workflow
+## G. Repository structure
 
 ```
-Cell Ranger filtered H5 matrices
-  -> Seurat import
-  -> QC + doublet removal
-  -> normalization (LogNormalize, PCA, UMAP)
-  -> broad cell-type annotation (candidate-gene-blind marker scoring)
-  -> epithelial subset
-  -> InferCNV malignant-cell classification (primary)
-  -> CopyKAT sensitivity analysis (independent check)
-  -> frozen malignant-cell set + pseudobulk-eligibility flags
+config/            YAML configuration -- every file path used by analysis code lives here
+data/
+  raw/             External data (symlinked to Ibex scratch storage) -- NOT in git
+  processed/       A handful of frozen, force-added intermediate matrices -- in git
+  reference/       Gene sets, STRING interactions, TCGA Ensembl ID mapping -- in git
+  checksums/       SHA256 manifests for raw downloads
+docs/               Narrative documentation: workflow, provenance, results guide, per-phase audits
+external_refs/      Cloned reference tool source (InferCNV, CopyKAT) for method audit -- NOT in git
+results/
+  tables/           One subdirectory per analysis phase, TSV outputs
+  figures/          One subdirectory per analysis phase, PNG/PDF outputs
+  reports/          One subdirectory per analysis phase, narrative .md reports
+  networks/         Cytoscape-importable network files
+  final/            Canonical results index -- START HERE for final findings
+scripts/
+  download/         One-time, deterministic network-download scripts (never run at analysis time)
+  analysis/         R scripts (limma, edgeR, Seurat, InferCNV, CopyKAT) invoked from src/ via subprocess
+src/                Python analysis modules -- one (or a small family) per phase, deterministic, no network calls
+tests/              One pytest module per src/ module, exercising real logic
+PREANALYSIS.md       Root pre-analysis plan (CRISPR/bulk phase), with a dated, append-only amendments log
+CLAUDE.md            Project-specific engineering rules (data hygiene, hard rules, commit conventions)
 ```
 
-**Pseudobulk aggregation and candidate-gene expression analysis have not
-yet been performed** on GSE245601. The pipeline stops at a frozen,
-per-cell metadata table; no gene-expression value for any of the 13
-sensitising candidates (or PAICS) has been inspected in this dataset.
+## H. Key results — start here
 
-## Reproducibility
+- **Final findings for USP34/VEZF1:** [`results/final/README.md`](results/final/README.md)
+- **Frozen 4-gene shortlist:** [`docs/THERAPEUTIC_SHORTLIST_FREEZE.md`](docs/THERAPEUTIC_SHORTLIST_FREEZE.md)
+- **GDSC drug-response review:** [`results/reports/final_pharmacogenomics/USP34_VEZF1_GDSC_review.md`](results/reports/final_pharmacogenomics/USP34_VEZF1_GDSC_review.md)
+- **Translational experimental plan (EXP-1..5):** [`results/reports/final_translational/final_USP34_VEZF1_translational_plan.md`](results/reports/final_translational/final_USP34_VEZF1_translational_plan.md)
+- **Independent TCGA/DepMap validation:** [`results/reports/independent_validation/four_candidate_TCGA_DepMap_review.md`](results/reports/independent_validation/four_candidate_TCGA_DepMap_review.md)
+- **Full results guide (what every table/figure means and when it's current):** [`docs/RESULTS_GUIDE.md`](docs/RESULTS_GUIDE.md)
 
-- Analyses run on KAUST Ibex (SLURM); raw sequencing data are **not**
-  committed to this repository. Public processed matrices are downloaded
-  from source by scripts under [`scripts/download/`](scripts/download/)
-  (e.g. [`download_gse245601.sh`](scripts/download/download_gse245601.sh)).
+## I. Reproducibility
+
+- Analyses ran on KAUST Ibex (SLURM); raw sequencing/screen/TCGA/DepMap/GDSC
+  data are **not** committed to this repository (`data/raw` is a symlink to
+  external scratch storage, gitignored). Public data are downloaded from
+  source by deterministic scripts under [`scripts/download/`](scripts/download/).
 - All file paths come from [`config/config.yaml`](config/config.yaml); no
   path is hardcoded in analysis code.
-- Every module has a corresponding pytest module under
-  [`tests/`](tests/) exercising its logic, not merely that it runs.
+- Every `src/` module has a corresponding pytest module under
+  [`tests/`](tests/) exercising its actual logic (recomputing statistics,
+  checking real numeric values), not merely that it runs without error.
+  **Current test suite: 1,150 passed, 1 skipped** (run `pytest -q`).
 - Thresholds are declared in advance in [`PREANALYSIS.md`](PREANALYSIS.md)
-  (CRISPR/bulk phase) and
-  [`docs/gse245601_PREANALYSIS.md`](docs/gse245601_PREANALYSIS.md)
-  (single-cell phase), with dated, append-only amendment logs — never
-  edited in place after analysis begins.
-- The conda/micromamba environment is pinned in
-  [`environment.yml`](environment.yml).
+  and phase-specific pre-analysis plans under `docs/`, with dated,
+  append-only amendment logs — never edited in place after analysis begins.
+- Nothing derived from the CRISPR screen enters the feature table; the
+  screen supplies labels only (see [`CLAUDE.md`](CLAUDE.md)).
+- See [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md) for the full,
+  step-by-step reproduction guide, including known environment gaps.
 
-## Limitations / Current Methodological Question
+## J. Installation / quick start
 
-- Malignant-cell yield varies strongly by tumor: some samples (e.g.
-  Tumor_01, Tumor_04) have only a handful of InferCNV-classified malignant
-  cells, while others (Tumor_03) have hundreds.
-- Only **3 of 10** paired tumors (Tumor_02, Tumor_03, Tumor_07) currently
-  meet the frozen ≥50-malignant-cells-per-arm pseudobulk-eligibility
-  threshold.
-- InferCNV/CopyKAT concordance is highly variable between samples (from
-  near-0% to near-100% agreement per sample; ~56% on average) — the two
-  methods do not always agree on which epithelial cells are malignant.
-- As a result, candidate-level single-cell inference is **not yet
-  finalized**, and the statistical design for how to handle
-  low-malignant-cell tumors (exclude, pool, or model uncertainty
-  explicitly) is the current open decision point for this phase.
+```bash
+# Create the pinned conda/micromamba environment
+micromamba env create -f environment.yml -n bc
 
-## HOW TO SHOW THIS REPO TO A RESEARCHER
+# Run the full test suite
+micromamba run -n bc python3 -m pytest -q
 
-- **Open first:** this README, then [`docs/PROJECT_STATUS.md`](docs/PROJECT_STATUS.md) for the one-page status.
-- **CRISPR code:** [`src/labels.py`](src/labels.py) and [`src/gate1_checks.py`](src/gate1_checks.py) (see the Repository Guide table above).
-- **Bulk RNA code:** [`src/gse118713_prep.py`](src/gse118713_prep.py), [`src/gse118713_qc.py`](src/gse118713_qc.py), [`scripts/analysis/gse118713_limma.R`](scripts/analysis/gse118713_limma.R).
-- **Single-cell code:** [`scripts/analysis/gse245601_01_import_qc_doublets.R`](scripts/analysis/gse245601_01_import_qc_doublets.R) through [`_08_qc_figures.R`](scripts/analysis/gse245601_08_qc_figures.R), in numeric order.
-- **Malignant-cell code:** [`scripts/analysis/gse245601_05_infercnv_malignant.R`](scripts/analysis/gse245601_05_infercnv_malignant.R) (primary) and [`scripts/analysis/gse245601_06_copykat_sensitivity.R`](scripts/analysis/gse245601_06_copykat_sensitivity.R) (independent check).
-- **Latest figures:** [`results/figures/nebula_final/`](results/figures/nebula_final/) (CRISPR/bulk poster figures) and [`results/figures/gse245601_preprocessing/`](results/figures/gse245601_preprocessing/) (single-cell QC/annotation figures).
+# Run any single analysis module (paths always come from config/config.yaml)
+micromamba run -n bc python3 -m src.final_pharmacogenomics_build_tables
+micromamba run -n bc python3 -m src.final_pharmacogenomics_visualization
+```
+
+`environment.yml` pins the Python/pandas/scipy/statsmodels stack and the R
+packages (edgeR, limma) used directly from Python via subprocess. The
+single-cell R pipeline (Seurat, InferCNV, CopyKAT) was run in a separate R
+environment on Ibex that is **not** captured in `environment.yml` — see the
+known-gaps note in [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md).
+Raw data downloads require network access and are not needed to run the
+test suite, which operates on already-downloaded/committed tables.
+
+## K. Data availability
+
+All source data are public. Raw files themselves are not committed to this
+repository (see [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md) for
+exact accessions, release dates, and, where computable, SHA256 checksums):
+
+- Hany et al. 2023 CRISPR screen: *Sci Adv* 9:eadd3685, Data S1
+- GSE118713, GSE245601, GSE240112, GSE111151: NCBI GEO
+- TCGA-BRCA: GDC (Genomic Data Commons)
+- DepMap Public 24Q4 / 26Q1: depmap.org
+- GDSC Release 8.5: `cog.sanger.ac.uk/cancerrxgene/GDSC_release8.5/`
+
+Derived tables/figures/reports produced by this project's own code are
+committed to this repository under `results/`.
+
+## L. Limitations
+
+- This is a **computational reanalysis of public data only** — no wet-lab
+  validation of any finding in this repository has been performed.
+- GSE245601 malignant-cell yield varies strongly by tumor; only 3 of 10
+  paired tumors meet the frozen pseudobulk-eligibility threshold, and
+  InferCNV/CopyKAT malignant-cell-classification concordance is highly
+  variable between samples (from near-0% to near-100%, ~56% on average).
+- TCGA-BRCA is a general breast-cancer cohort, **not** a tamoxifen-resistance
+  cohort; its ER+/ER- and treatment annotations come from clinical records,
+  not a resistance phenotype.
+- GSE111151 and GSE240112 provide independent but imperfect proxies for
+  tamoxifen resistance (established resistant cell-line derivatives; primary
+  vs. recurrent tumor pairs, respectively) — neither is a direct replication
+  of the Hany screen's specific perturbation.
+- DepMap dependency data span two releases (24Q4 archived, 26Q1 active);
+  results are cross-checked for reproduction across releases, but the
+  underlying cell-line panel composition can shift between releases.
+- All GDSC pharmacogenomic findings are **correlational only** — baseline
+  expression correlated with drug response across a cell-line panel is not
+  evidence of a causal or mechanistic relationship, and none of the GDSC
+  findings involve tamoxifen or fulvestrant directly for either USP34 or
+  VEZF1.
+- No validated USP34-selective small-molecule inhibitor currently exists;
+  structural analysis concluded docking is not yet justified
+  (`DOCKING_NOT_YET_JUSTIFIED`) pending a real fragment-screening campaign.
+- USP34 is the most human-genetically-constrained candidate examined in this
+  project (LOEUF=0.152), a caution about tolerability, not a toxicity
+  prediction.
+- Prior mammary-epithelial literature (PMID 28499884) shows USP34 loss can
+  promote EMT/stem-like features in some contexts — counter-evidence
+  motivating explicit EMT/stemness monitoring in any USP34 experiment, not
+  a reason to exclude USP34.
+- VEZF1 has poor direct druggability (zinc-finger transcription factor); its
+  proposed indirect target TEAD1 remains **unvalidated**, and GDSC contains
+  zero TEAD/Hippo-pathway compounds, so this hypothesis cannot currently be
+  tested pharmacogenomically at all.
+- VEZF1 has a directly causal cardiovascular/developmental liability signal
+  (postnatal zebrafish cardiac-contractility finding, PMID 31911272).
+- `environment.yml` does not capture the R single-cell pipeline dependencies
+  (Seurat, InferCNV, CopyKAT), which were run in a separate Ibex R
+  environment — see [`docs/REPRODUCIBILITY.md`](docs/REPRODUCIBILITY.md).
+- The genome-wide cross-dataset integration table anonymizes gene identity
+  for part of its ranking-stability analysis; see
+  `results/tables/cross_dataset_genomewide/anonymized_gene_mapping.tsv` for
+  the mapping and `docs/` for the rationale.
+- Sample sizes are small at several points in the pipeline (e.g. 14 ER+/
+  luminal GDSC breast lines, 3/10 GSE245601 tumor pairs); results from these
+  small-N subsets are always explicitly flagged exploratory, never treated
+  as validation.
+- No result in this repository should be read as "validated therapeutic
+  target," "restores tamoxifen sensitivity," or "safe target."
+
+## M. Proposed next experiment
+
+The final translational phase designed (but did not run) five concrete
+wet-lab experiments for the two lead candidates, in an acquired
+tamoxifen-resistant ER+ breast cancer cell line:
+
+- **EXP-1 (USP34, primary):** genetic (not pharmacological, since no
+  selective inhibitor exists) USP34 perturbation + tamoxifen re-challenge,
+  with a full dose-response/Bliss-independence interaction framework (not a
+  single-dose comparison) and mandatory EMT/stemness monitoring (CDH1,
+  CDH2, SNAI1, AXIN1, active beta-catenin) given the PMID 28499884
+  counter-evidence.
+- **EXP-2A (USP34 comparator A — lineage/cancer-selectivity):** the same
+  perturbation in normal human mammary epithelial cells (e.g. MCF10A), to
+  test cancer-selectivity of any sensitising effect.
+- **EXP-2B (USP34 comparator B — known liability):** the same perturbation
+  in primary human MSCs undergoing osteogenic differentiation, given
+  USP34's established BMP2/Smad1/RUNX2 bone-biology role.
+- **EXP-3 (VEZF1, secondary):** analogous genetic perturbation + tamoxifen
+  re-challenge for VEZF1 in the same resistant line.
+- **EXP-4 (VEZF1 comparator — cardiovascular liability):** the same
+  perturbation in primary human vascular endothelial cells.
+- **EXP-5 (VEZF1-TEAD1 hypothesis test, not a therapeutic experiment):** a
+  targeted test of whether VEZF1 acts through TEAD1, designed so that it
+  could reject (not just confirm) that indirect-targeting hypothesis before
+  it is used for anything therapeutic.
+
+Full design, readouts, outcome categories, and success/failure criteria:
+[`results/reports/final_translational/final_USP34_VEZF1_translational_plan.md`](results/reports/final_translational/final_USP34_VEZF1_translational_plan.md).
+
+## N. Citation / acknowledgement
+
+This repository is an independent computational reanalysis project by
+Almokhtar Aljarodi (KAUST). It reuses public data from Hany et al. 2023
+(*Sci Adv*), NCBI GEO (GSE118713, GSE245601, GSE240112, GSE111151), TCGA
+(GDC), DepMap, and GDSC/CancerRxGene — see
+[`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md) for exact citations of
+each source dataset. No formal citation for this repository itself has been
+established; if referencing this work, please link to this repository
+directly. Licensed under the MIT License (see [`LICENSE`](LICENSE)).

@@ -1,0 +1,14 @@
+field	value
+release	8.5
+release_date	2023-10-30
+source_url	https://cog.sanger.ac.uk/cancerrxgene/GDSC_release8.5/
+gdsc1_file	GDSC1_fitted_dose_response_27Oct23.xlsx
+gdsc2_file	GDSC2_fitted_dose_response_27Oct23.xlsx
+compounds_file	screened_compounds_rel_8.5.csv
+cell_lines_file	Cell_Lines_Details.xlsx
+LN_IC50_definition	natural log of the fitted IC50 (micromolar); LOWER = more sensitive, HIGHER = more resistant
+AUC_definition	area under the fitted dose-response curve as a fraction of the full screening-concentration range; LOWER = more sensitive (curve drops further), HIGHER = more resistant
+direction_source	GDSC_Fitted_Data_Description.pdf (Sanger, v1.0.0, 21 Sep 2017), fetched and read directly this session
+expression_source	DepMap Public 26Q1 (already downloaded/verified in this project, independent_validation.depmap.releases.26Q1) -- reused, not a new RNA-expression dataset, joined to GDSC via SangerModelID/COSMICID (both present natively in both GDSC and DepMap Model.csv, no fuzzy name matching required)
+cell_line_join_key	SangerModelID / COSMIC_ID (exact ID match, both files carry it natively)
+raw_data_location	OUTSIDE git -- see PROVENANCE.txt in the raw data directory (SHA256 recorded)

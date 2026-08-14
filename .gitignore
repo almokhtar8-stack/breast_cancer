@@ -7,6 +7,19 @@ __pycache__/
 *.pyc
 .ipynb_checkpoints/
 .snakemake/
+.pytest_cache/
+
+# Standard disposable editor/OS/R artifacts -- never a data format (csv/tsv
+# are always tracked, per project convention).
+.DS_Store
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+.Rhistory
+.RData
+*.log
 
 # Superseded / intermediate generated figures: kept locally (regenerate via
 # the scripts in scripts/analysis/ or src/), not tracked in git. Canonical

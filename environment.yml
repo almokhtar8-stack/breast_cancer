@@ -19,5 +19,3 @@ dependencies:
   - scikit-learn
   - scipy
   - statsmodels
-
-prefix: "/home/aljaroaa/micromamba/envs/bc"

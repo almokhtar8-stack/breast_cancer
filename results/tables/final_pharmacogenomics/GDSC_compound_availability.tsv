@@ -1,0 +1,7 @@
+compound	present_in_gdsc	drug_id	drug_name_in_gdsc	target	pathway	screens	n_breast_lines_tested
+Tamoxifen	True	1199.0	Tamoxifen	ESR1	Hormone-related	GDSC1,GDSC2	51.0
+4-hydroxytamoxifen / 4-OHT	False						
+Endoxifen	False						
+Fulvestrant	True	1200.0	Fulvestrant	ESR	Hormone-related	GDSC2	50.0
+Fulvestrant	True	1414.0	Fulvestrant	ESR1	Hormone-related	GDSC1	47.0
+Fulvestrant	True	1816.0	Fulvestrant	ESR	Hormone-related	GDSC2	41.0

@@ -1,10 +1,18 @@
 # Code Map
 
+**Partial / historical:** this lookup sheet was built as of 2026-08-11 and
+covers phases 1-9 (CRISPR through GSE245601 preprocessing) in detail. For
+phases 10-16 (candidate adjudication, evidence freeze, systems network,
+literature mechanism, independent validation, lead-target deep dive,
+druggability/safety, final translational, GDSC pharmacogenomics), see
+[`PROJECT_WORKFLOW.md`](PROJECT_WORKFLOW.md), which covers all 16 phases
+with the same code/output-pointer format.
+
 Practical lookup sheet: for a given analysis task, where is the code, what
 does it read, what does it write, and what tests cover it. Built from the
 files that actually exist in this repository as of 2026-08-11 — see
 [`../README.md`](../README.md) for the narrative overview and
-[`PROJECT_STATUS.md`](PROJECT_STATUS.md) for current status.
+[`PROJECT_WORKFLOW.md`](PROJECT_WORKFLOW.md) for current status.
 
 All paths below are relative to the repository root.
 

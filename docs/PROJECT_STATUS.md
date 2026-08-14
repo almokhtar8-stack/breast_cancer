@@ -1,5 +1,13 @@
 # Project Status
 
+**SUPERSEDED — this snapshot is frozen as of 2026-08-11 and is kept only
+for historical traceability. Everything under "NEXT" and "LATER" below has
+since been completed, and the RCOR1/KDM1A blinding rule mentioned below was
+retired on 2026-08-10 (see [`../PREANALYSIS.md`](../PREANALYSIS.md)'s
+amendments log and [`../CLAUDE.md`](../CLAUDE.md)). For current status, see
+[`../README.md`](../README.md) and [`PROJECT_WORKFLOW.md`](PROJECT_WORKFLOW.md)
+instead.**
+
 Last updated: 2026-08-11. See [`../README.md`](../README.md) for the full
 narrative, [`CODE_MAP.md`](CODE_MAP.md) for where each piece of code
 lives, and [`gse245601_PREANALYSIS.md`](gse245601_PREANALYSIS.md) for the
@@ -47,26 +55,27 @@ single-cell pre-analysis plan and blinding rule referenced below.
   visualization, malignant-vs-non-malignant epithelial context check, and
   integration with the frozen CRISPR/bulk-RNA candidate evidence.
 
-## CURRENT
+## CURRENT (AS OF THIS 2026-08-11 SNAPSHOT ONLY — ALL COMPLETED SINCE)
 
 - Reviewing the integrated single-cell + CRISPR + bulk-RNA candidate
   evidence for next steps (see the GSE245601 pseudobulk candidate
   integration report for current findings).
 
-## NEXT
+## NEXT (AS OF THIS 2026-08-11 SNAPSHOT ONLY — ALL COMPLETED SINCE, see [`PROJECT_WORKFLOW.md`](PROJECT_WORKFLOW.md))
 
 - GSE111151 independent confirmation, pathway-level analysis,
   druggability, normal-tissue expression context, and poster redesign
   (explicitly out of scope for the pseudobulk phase just completed).
-- Single-cell candidate ranking
+  **[COMPLETED — Phases 8, 12, 15 in PROJECT_WORKFLOW.md]**
+- Single-cell candidate ranking **[COMPLETED — Phases 7, 9-11]**
 
-## LATER
+## LATER (AS OF THIS 2026-08-11 SNAPSHOT ONLY — ALL COMPLETED SINCE, see [`PROJECT_WORKFLOW.md`](PROJECT_WORKFLOW.md))
 
-- GSE111151 independent confirmation
-- Mechanism / pathway analysis
-- Druggability assessment
-- Normal-tissue expression analysis
-- Final candidate prioritization
+- GSE111151 independent confirmation **[COMPLETED — Phase 8]**
+- Mechanism / pathway analysis **[COMPLETED — Phases 12-13]**
+- Druggability assessment **[COMPLETED — Phase 15]**
+- Normal-tissue expression analysis **[COMPLETED — Phase 15, EXP-2/EXP-4 comparators in Phase 16]**
+- Final candidate prioritization **[COMPLETED — Phase 11 froze the shortlist; Phase 16 selected the final translational lead]**
 
 No candidate-gene expression value has been inspected in GSE245601 at any
 point — the blinding rule in

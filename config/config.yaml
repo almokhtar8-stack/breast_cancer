@@ -7,6 +7,7 @@ data:
     tcga_brca_dir: /ibex/scratch/aljaroaa/tamoxifen-data/tcga_brca
     depmap_24q4_dir: /ibex/scratch/aljaroaa/tamoxifen-data/depmap/24Q4
     depmap_26q1_dir: /ibex/scratch/aljaroaa/tamoxifen-data/depmap/26Q1
+    gdsc_dir: /ibex/scratch/aljaroaa/tamoxifen-data/gdsc
   reference:
     ceg2_gene_list: data/reference/hart2017_ceg2_684.tsv
   processed_dir: data/processed
@@ -855,4 +856,31 @@ independent_validation:
     tables_dir: results/tables/independent_validation
     figures_dir: results/figures/independent_validation
     reports_dir: results/reports/independent_validation
-    cytoscape_dir: results/networks/systems_network/cytoscape
+
+# GDSC / CancerRxGene Release 8.5 (30 October 2023, the current release at
+# the time of this analysis -- confirmed live from cog.sanger.ac.uk headers
+# and cancerrxgene.org/news; no later release exists). Downloaded directly
+# by Claude via scripts/download/download_gdsc.py (no portal gating, unlike
+# DepMap). Raw files kept outside git per project convention; SHA256
+# recorded in /ibex/scratch/aljaroaa/tamoxifen-data/gdsc/PROVENANCE.txt.
+final_pharmacogenomics:
+  gdsc:
+    release: "8.5"
+    release_date: "2023-10-30"
+    source_url: "https://cog.sanger.ac.uk/cancerrxgene/GDSC_release8.5/"
+    raw_dir_key: gdsc_dir
+    raw:
+      gdsc1_fitted_dose_response: GDSC1_fitted_dose_response_27Oct23.xlsx
+      gdsc2_fitted_dose_response: GDSC2_fitted_dose_response_27Oct23.xlsx
+      screened_compounds: screened_compounds_rel_8.5.csv
+      cell_lines_details: Cell_Lines_Details.xlsx
+    response_metric_definitions:
+      LN_IC50: "natural log of the fitted IC50 (micromolar); LOWER = more sensitive, HIGHER = more resistant"
+      AUC: "area under the fitted dose-response curve as a fraction of the full screening-concentration range; LOWER = more sensitive (curve drops further), HIGHER = more resistant"
+      source_of_definitions: "GDSC_Fitted_Data_Description.pdf (Sanger, v1.0.0, 21 Sep 2017), fetched and read directly this session"
+    expression_source: "DepMap Public 26Q1 (already downloaded/verified in this project, independent_validation.depmap.releases.26Q1) -- reused, not a new RNA-expression dataset, joined to GDSC via SangerModelID/COSMICID (both present natively in both GDSC and DepMap Model.csv, no fuzzy name matching required)"
+    strong_dependency_probability_threshold_note: "not applicable to this phase -- this is an expression-vs-drug-response correlation analysis, unrelated to DepMap's own CRISPR dependency-probability metric"
+  output:
+    tables_dir: results/tables/final_pharmacogenomics
+    figures_dir: results/figures/final_pharmacogenomics
+    reports_dir: results/reports/final_pharmacogenomics
