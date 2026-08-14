@@ -1,0 +1,5 @@
+candidate	n_breast_lines_expressed	median_tpm_log2p1_breast	n_er_luminal_lines_expressed	median_tpm_log2p1_er_luminal	fraction_breast_lines_expressed_gt1	spearman_rho_expression_vs_dependency_breast	p_value	n_paired	notes	fdr
+USP34	70	5.134623079172714	19	5.109778429078662	1.0	0.009555822328931571	0.9474874631857076	50	secondary/exploratory analysis; correlation between expression and gene-effect across breast lines, not causal	0.9474874631857076
+VEZF1	70	4.473477693321559	19	5.006298023900369	0.9857142857142858	-0.055895699792816944	0.6998320868511573	50	secondary/exploratory analysis; correlation between expression and gene-effect across breast lines, not causal	0.9474874631857076
+EML5	70	0.8914139460374471	19	0.9708536543404837	0.4142857142857143	-0.13139632703660478	0.36305220411388256	50	secondary/exploratory analysis; correlation between expression and gene-effect across breast lines, not causal	0.9474874631857076
+CITED2	70	5.044393059526607	19	5.38404980679516	1.0	-0.03308523409363745	0.8195738612852521	50	secondary/exploratory analysis; correlation between expression and gene-effect across breast lines, not causal	0.9474874631857076

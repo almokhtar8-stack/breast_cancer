@@ -1,0 +1,12 @@
+candidate	pathway	spearman_rho	p_value	n	notes	fdr
+USP34	HALLMARK_WNT_BETA_CATENIN_SIGNALING	-0.02411756699324165	0.5554513625378952	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.5554513625378952
+VEZF1	GOBP_BLOOD_VESSEL_MORPHOGENESIS	-0.035638821218947826	0.38352176675687727	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.4261352963965303
+VEZF1	HALLMARK_HEME_METABOLISM	0.08388078855774599	0.03997689345906602	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.07995378691813204
+EML5	NONE			0	no independently-justified candidate-specific pathway declared for this gene (per config/config.yaml's independent_validation.tcga.pathways.candidate_pathways) -- no pathway test invented post hoc	
+CITED2	HALLMARK_ESTROGEN_RESPONSE_EARLY	0.057371214920041436	0.1604595419839001	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.22922791711985732
+CITED2	HALLMARK_ESTROGEN_RESPONSE_LATE	-0.03744310400862224	0.359890646865214	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.4261352963965303
+CITED2	HALLMARK_UV_RESPONSE_DN	0.1280573001591671	0.00167134937463579	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.0055711645821193
+CITED2	HALLMARK_E2F_TARGETS	-0.16983302731396474	2.892313431217604e-05	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.00028923134312176037
+CITED2	HALLMARK_G2M_CHECKPOINT	-0.13833882871896866	0.0006791023213385694	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.0033955116066928465
+CITED2	HALLMARK_P53_PATHWAY	-0.09696832491201364	0.017507287660220885	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.04376821915055221
+CITED2	HALLMARK_HYPOXIA	0.0743238175661599	0.06886953612511518	600	ER+ primary tumors only; ssGSEA NES vs log2(TPM+1); association only, not regulation	0.1147825602085253

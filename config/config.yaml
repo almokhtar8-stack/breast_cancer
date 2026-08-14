@@ -4,6 +4,9 @@ data:
     ceg2_supplementary_archive: /ibex/scratch/aljaroaa/tamoxifen-data/ceg2/hart2017_g3_supplementary.zip
     gse118713_transcript_tpm: /ibex/scratch/aljaroaa/tamoxifen-data/rnaseq/GSE118713_TRANSCRIPT_TAMR_FASR_MCF7_expression_data.tsv.gz
     gse111151_sample_dir: /ibex/scratch/aljaroaa/tamoxifen-data/rnaseq/GSE111151
+    tcga_brca_dir: /ibex/scratch/aljaroaa/tamoxifen-data/tcga_brca
+    depmap_24q4_dir: /ibex/scratch/aljaroaa/tamoxifen-data/depmap/24Q4
+    depmap_26q1_dir: /ibex/scratch/aljaroaa/tamoxifen-data/depmap/26Q1
   reference:
     ceg2_gene_list: data/reference/hart2017_ceg2_684.tsv
   processed_dir: data/processed
@@ -783,4 +786,73 @@ systems_network:
     figures_dir: results/figures/systems_network
     final_review_dir: results/figures/systems_network/final_review
     networks_dir: results/networks/systems_network
+    cytoscape_dir: results/networks/systems_network/cytoscape
+
+independent_validation:
+  candidates: [USP34, VEZF1, EML5, CITED2]
+  tcga:
+    provenance_note: "see scripts/download/download_tcga_brca.py docstring for exact sources/URLs/access rationale"
+    expression_source: "GDC-harmonized STAR-pipeline TPM (log2(TPM+1)) via UCSC Xena GDC hub"
+    expression_url: https://gdc.xenahubs.net/download/TCGA-BRCA.star_tpm.tsv.gz
+    receptor_status_source: "cBioPortal brca_tcga_pub (TCGA, Nature 2012 discovery cohort)"
+    receptor_status_study_id: brca_tcga_pub
+    survival_source: "cBioPortal brca_tcga_pan_can_atlas_2018 (TCGA PanCancer Atlas, Cell 2018)"
+    survival_study_id: brca_tcga_pan_can_atlas_2018
+    raw:
+      star_tpm_tsv_gz: TCGA-BRCA.star_tpm.tsv.gz
+      gencode_v36_probemap: gencode.v36.annotation.gtf.gene.probemap
+      xena_survival_tsv_gz: TCGA-BRCA.survival.tsv.gz
+      receptor_clinical_patient_json: cbioportal_brca_tcga_pub_clinical_patient.json
+      receptor_clinical_sample_json: cbioportal_brca_tcga_pub_clinical_sample.json
+      survival_clinical_json: cbioportal_brca_tcga_pan_can_atlas_2018_clinical_patient.json
+    pathways:
+      hallmark_gmt: data/reference/genesets/hallmark.gmt
+      go_bp_gmt: data/reference/genesets/go_bp.gmt
+      candidate_pathways:
+        USP34: [HALLMARK_WNT_BETA_CATENIN_SIGNALING]
+        VEZF1: [GOBP_BLOOD_VESSEL_MORPHOGENESIS, HALLMARK_HEME_METABOLISM]
+        CITED2: [HALLMARK_ESTROGEN_RESPONSE_EARLY, HALLMARK_ESTROGEN_RESPONSE_LATE, HALLMARK_UV_RESPONSE_DN, HALLMARK_E2F_TARGETS, HALLMARK_G2M_CHECKPOINT, HALLMARK_P53_PATHWAY, HALLMARK_HYPOXIA]
+        EML5: []
+    thresholds:
+      fdr: 0.05
+      min_n_group: 10
+      min_events_cox: 10
+  depmap:
+    strong_dependency_probability_threshold: 0.5
+    # 24Q4 is the completed, fully-verified, frozen prior analysis.
+    # 26Q1 files were manually downloaded from the official DepMap portal
+    # by the user on 2026-08-14 and verified by Claude (see
+    # /ibex/scratch/aljaroaa/tamoxifen-data/depmap/26Q1/PROVENANCE.txt) --
+    # 26Q1 is now the active/primary release. 24Q4 remains fully
+    # retrievable below for the version-comparison table.
+    active_release: "26Q1"
+    releases:
+      24Q4:
+        provenance_note: "see scripts/download/download_depmap.py docstring for exact release/URLs/access rationale"
+        status: "complete, MD5-verified, frozen"
+        figshare_article: 27993248
+        doi: "10.25452/figshare.plus.27993248.v1"
+        raw_dir_key: depmap_24q4_dir
+        has_dependency_probability: true
+        expression_schema: simple_modelid_index
+        raw:
+          model_csv: Model.csv
+          crispr_gene_effect_csv: CRISPRGeneEffect.csv
+          crispr_gene_dependency_csv: CRISPRGeneDependency.csv
+          expression_csv: OmicsExpressionProteinCodingGenesTPMLogp1.csv
+      26Q1:
+        provenance_note: "manually downloaded from https://depmap.org/portal/data_page/?tab=allData by the user on 2026-08-14 (CRISPRGeneDependency.csv added in a follow-up manual download, 2026-08-14); verified by Claude -- see /ibex/scratch/aljaroaa/tamoxifen-data/depmap/26Q1/PROVENANCE.txt and results/reports/independent_validation/DEPMAP_26Q1_ACCESS_STATUS.md"
+        status: "TRUSTED, COMPLETE -- CRISPRGeneEffect.csv/Model.csv/expression/CRISPRGeneDependency.csv all verified (SHA256 recorded, probability direction independently confirmed against known pan-essential/non-essential genes)"
+        raw_dir_key: depmap_26q1_dir
+        has_dependency_probability: true
+        expression_schema: profile_level_default_flag
+        raw:
+          model_csv: Model.csv
+          crispr_gene_effect_csv: CRISPRGeneEffect.csv
+          crispr_gene_dependency_csv: CRISPRGeneDependency.csv
+          expression_csv: OmicsExpressionTPMLogp1HumanProteinCodingGenes.csv
+  output:
+    tables_dir: results/tables/independent_validation
+    figures_dir: results/figures/independent_validation
+    reports_dir: results/reports/independent_validation
     cytoscape_dir: results/networks/systems_network/cytoscape
