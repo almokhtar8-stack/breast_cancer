@@ -1,0 +1,31 @@
+candidate	neighbor_gene	interaction_type	database_source	confidence	neighbor_node_class	neighbor_crispr_direction	neighbor_crispr_fdr	neighbor_resistance_pattern	neighbor_number_consensus_pathways	neighbor_degree_in_network
+USP34	RPS27A	physical_PPI	STRING	0.961	candidate_partner	nonsignificant_sensitising_direction	0.8270560220965696	no_significant_resistance_dataset	3	15.0
+USP34	USP9X	functional_association	STRING	0.793	candidate_partner	nonsignificant_sensitising_direction	0.9135531170853076	no_significant_resistance_dataset	0	6.0
+USP34	MKLN1	functional_association	STRING	0.79	candidate_partner	nonsignificant_tolerance_direction	0.922958037549524	consistent_up_(1/3_significant)	4	1.0
+USP34	TRIP12	functional_association	STRING	0.723	candidate_partner	nonsignificant_sensitising_direction	0.944780200722219	no_significant_resistance_dataset	0	4.0
+USP34	ASH1L	functional_association	STRING	0.822	candidate_partner	nonsignificant_tolerance_direction	0.7909727675032434	no_significant_resistance_dataset	0	1.0
+USP34	SMG1	functional_association	STRING	0.722	candidate_partner	nonsignificant_sensitising_direction	0.9497871458388842	no_significant_resistance_dataset	0	1.0
+USP34	H7C0V5_HUMAN	functional_association	STRING	0.74	candidate_partner	not_tested		no_significant_resistance_dataset	0	1.0
+USP34	UBB	physical_PPI	STRING	0.954	candidate_partner	nonsignificant_tolerance_direction	0.5850133063510367	no_significant_resistance_dataset	3	17.0
+USP34	UBA52	physical_PPI	STRING	0.968	candidate_partner	nonsignificant_tolerance_direction	0.9736757370835524	no_significant_resistance_dataset	3	14.0
+USP34	UBC	physical_PPI	STRING	0.982	candidate_partner	nonsignificant_tolerance_direction	0.7616616496167914	no_significant_resistance_dataset	0	20.0
+VEZF1	DMTN	pathway_co_membership	MSigDB_hallmark		resistance_gene	nonsignificant_sensitising_direction	0.9006536946538933	consistent_up_(2/3_significant)	23	1.0
+EML5	NO_RESOLVED_NETWORK_NEIGHBOURHOOD									
+CITED2	TFAP2C	physical_PPI	STRING	0.945	multiple	tolerance_associated_KO	0.0482149029216125	consistent_down_(1/3_significant)	2	3.0
+CITED2	CREBBP	physical_PPI	STRING	0.995	candidate_partner	nonsignificant_sensitising_direction	0.957815716818056	no_significant_resistance_dataset	0	16.0
+CITED2	EP300	physical_PPI	STRING	0.999	candidate_partner	nonsignificant_sensitising_direction	0.6009826181172715	consistent_up_(1/3_significant)	17	28.0
+CITED2	EPAS1	functional_association	STRING	0.79	candidate_partner	nonsignificant_tolerance_direction	0.9243328570351124	consistent_up_(3/3_significant)	14	9.0
+CITED2	TP53	functional_association	STRING	0.723	candidate_partner	nonsignificant_tolerance_direction	0.8121550190740409	consistent_down_(2/3_significant)	4	34.0
+CITED2	FOXO3	functional_association	STRING	0.933	candidate_partner	nonsignificant_sensitising_direction	0.8014286065646663	consistent_down_(1/3_significant)	1	13.0
+CITED2	LHX2	physical_PPI	STRING	0.895	candidate_partner	nonsignificant_tolerance_direction	0.8547014306298557	consistent_up_(1/3_significant)	23	2.0
+CITED2	WT1	functional_association	STRING	0.711	candidate_partner	nonsignificant_sensitising_direction	0.9695260433297674	no_significant_resistance_dataset	0	5.0
+CITED2	FOXO1	functional_association	STRING	0.816	candidate_partner	nonsignificant_sensitising_direction	0.9442246511467666	consistent_up_(2/3_significant)	17	10.0
+CITED2	TFAP2B	physical_PPI	STRING	0.88	candidate_partner	nonsignificant_tolerance_direction	0.9731795120896176	no_significant_resistance_dataset	0	3.0
+CITED2	HIF1A	physical_PPI	STRING	0.915	multiple	nonsignificant_tolerance_direction	0.9654441649938414	consistent_up_(2/3_significant)	67	17.0
+CITED2	PCGF2	functional_association	STRING	0.741	candidate_partner	nonsignificant_sensitising_direction	0.2636544015200702	consistent_up_(1/3_significant)	8	6.0
+CITED2	TFAP2A	physical_PPI	STRING	0.989	candidate_partner	nonsignificant_tolerance_direction	0.7893096654426276	no_significant_resistance_dataset	26	10.0
+CITED2	COL1A1	pathway_co_membership	MSigDB_hallmark		leading_edge	nonsignificant_sensitising_direction	0.8247485940043205	consistent_up_(2/3_significant)	42	17.0
+CITED2	ERBB2	pathway_co_membership	MSigDB_hallmark		leading_edge	nonsignificant_sensitising_direction	0.9069837166072832	consistent_up_(2/3_significant)	30	21.0
+CITED2	PPARG	pathway_co_membership	MSigDB_hallmark		multiple	nonsignificant_sensitising_direction	0.8848707613512676	consistent_up_(2/3_significant)	53	14.0
+CITED2	SMAD3	pathway_co_membership	MSigDB_hallmark		leading_edge	nonsignificant_tolerance_direction	0.6847632537957313	consistent_up_(2/3_significant)	93	25.0
+CITED2	TGFBR2	pathway_co_membership	MSigDB_hallmark		leading_edge	nonsignificant_tolerance_direction	0.936326778050455	consistent_up_(1/3_significant)	52	9.0

@@ -1,0 +1,22 @@
+candidate	target	path_length_edges	path_rank	n_equally_short_paths	path	edge_index_in_path	source_gene	target_gene	interaction_type	database_source	confidence	evidence_notes	flag_weak_remote
+USP34	CTNNB1	2.0	1.0	3	USP34 -> RPS27A -> CTNNB1	1.0	USP34	RPS27A	physical_PPI	STRING	0.961	combined_score=0.961; escore=0.926; dscore=0.400; STRING network_type=physical membership=True	False
+USP34	CTNNB1	2.0	1.0	3	USP34 -> RPS27A -> CTNNB1	2.0	RPS27A	CTNNB1	functional_association	STRING	0.735	combined_score=0.735; escore=0.381; dscore=0.500; STRING network_type=physical membership=False	False
+USP34	CTNNB1	2.0	2.0	3	USP34 -> USP9X -> CTNNB1	1.0	USP34	USP9X	functional_association	STRING	0.793	combined_score=0.793; escore=0.438; dscore=0.000; STRING network_type=physical membership=False	False
+USP34	CTNNB1	2.0	2.0	3	USP34 -> USP9X -> CTNNB1	2.0	USP9X	CTNNB1	functional_association	STRING	0.88	combined_score=0.880; escore=0.822; dscore=0.000; STRING network_type=physical membership=False	False
+USP34	CTNNB1	2.0	3.0	3	USP34 -> UBB -> CTNNB1	1.0	USP34	UBB	physical_PPI	STRING	0.954	combined_score=0.954; escore=0.922; dscore=0.400; STRING network_type=physical membership=True	False
+USP34	CTNNB1	2.0	3.0	3	USP34 -> UBB -> CTNNB1	2.0	UBB	CTNNB1	functional_association	STRING	0.763	combined_score=0.763; escore=0.111; dscore=0.500; STRING network_type=physical membership=False	False
+USP34	PTEN	2.0	1.0	2	USP34 -> RPS27A -> PTEN	1.0	USP34	RPS27A	physical_PPI	STRING	0.961	combined_score=0.961; escore=0.926; dscore=0.400; STRING network_type=physical membership=True	False
+USP34	PTEN	2.0	1.0	2	USP34 -> RPS27A -> PTEN	2.0	RPS27A	PTEN	functional_association	STRING	0.752	combined_score=0.752; escore=0.467; dscore=0.500; STRING network_type=physical membership=False	False
+USP34	PTEN	2.0	2.0	2	USP34 -> UBC -> PTEN	1.0	USP34	UBC	physical_PPI	STRING	0.982	combined_score=0.982; escore=0.969; dscore=0.400; STRING network_type=physical membership=True	False
+USP34	PTEN	2.0	2.0	2	USP34 -> UBC -> PTEN	2.0	UBC	PTEN	functional_association	STRING	0.714	combined_score=0.714; escore=0.354; dscore=0.500; STRING network_type=physical membership=False	False
+USP34	EP300	2.0	1.0	1	USP34 -> UBC -> EP300	1.0	USP34	UBC	physical_PPI	STRING	0.982	combined_score=0.982; escore=0.969; dscore=0.400; STRING network_type=physical membership=True	False
+USP34	EP300	2.0	1.0	1	USP34 -> UBC -> EP300	2.0	UBC	EP300	functional_association	STRING	0.791	combined_score=0.791; escore=0.510; dscore=0.500; STRING network_type=physical membership=False	False
+USP34	SOX2	2.0	1.0	1	USP34 -> USP9X -> SOX2	1.0	USP34	USP9X	functional_association	STRING	0.793	combined_score=0.793; escore=0.438; dscore=0.000; STRING network_type=physical membership=False	False
+USP34	SOX2	2.0	1.0	1	USP34 -> USP9X -> SOX2	2.0	USP9X	SOX2	functional_association	STRING	0.747	combined_score=0.747; escore=0.510; dscore=0.000; STRING network_type=physical membership=False	False
+CITED2	EP300	1.0	1.0	1	CITED2 -> EP300	1.0	CITED2	EP300	physical_PPI	STRING	0.999	combined_score=0.999; escore=0.983; dscore=0.500; STRING network_type=physical membership=True	False
+CITED2	CREBBP	1.0	1.0	1	CITED2 -> CREBBP	1.0	CITED2	CREBBP	physical_PPI	STRING	0.995	combined_score=0.995; escore=0.926; dscore=0.500; STRING network_type=physical membership=True	False
+CITED2	TFAP2C	1.0	1.0	1	CITED2 -> TFAP2C	1.0	CITED2	TFAP2C	physical_PPI	STRING	0.945	combined_score=0.945; escore=0.482; dscore=0.700; STRING network_type=physical membership=True	False
+CITED2	HIF1A	1.0	1.0	1	CITED2 -> HIF1A	1.0	CITED2	HIF1A	physical_PPI	STRING	0.915	combined_score=0.915; escore=0.000; dscore=0.400; STRING network_type=physical membership=True	False
+CITED2	TP53	1.0	1.0	1	CITED2 -> TP53	1.0	CITED2	TP53	functional_association	STRING	0.723	combined_score=0.723; escore=0.000; dscore=0.000; STRING network_type=physical membership=False	False
+VEZF1	DMTN	1.0	1.0	1	VEZF1 -> DMTN	1.0	VEZF1	DMTN	pathway_co_membership	MSigDB_hallmark		both leading-edge in gse240112	False
+EML5	NONE			0	NO_RESOLVED_NETWORK_NEIGHBOURHOOD_IN_CURRENT_ANALYSIS							EML5 has zero edges in the frozen network; no shortest-path analysis is possible.	False

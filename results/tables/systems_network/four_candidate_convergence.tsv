@@ -1,0 +1,7 @@
+candidate_A	candidate_B	direct_interaction	shared_direct_neighbors	n_shared_direct_neighbors	shared_bridge_genes	n_shared_bridge_genes	shared_resistance_pathways_or_leading_edge_modules	n_shared_pathways	shared_transcriptional_regulator	shared_resistance_hub_gene	any_convergence
+USP34	VEZF1	False		0		0		0			False
+USP34	EML5	False		0		0		0			False
+USP34	CITED2	False		0		0	go_bp:GOBP_POSITIVE_REGULATION_OF_SIGNALING	1			True
+VEZF1	EML5	False		0		0		0			False
+VEZF1	CITED2	False		0		0	go_bp:GOBP_ANATOMICAL_STRUCTURE_FORMATION_INVOLVED_IN_MORPHOGENESIS;go_bp:GOBP_BLOOD_VESSEL_MORPHOGENESIS;go_bp:GOBP_CIRCULATORY_SYSTEM_DEVELOPMENT;go_bp:GOBP_EPITHELIUM_DEVELOPMENT;go_bp:GOBP_POSITIVE_REGULATION_OF_DEVELOPMENTAL_PROCESS;go_bp:GOBP_POSITIVE_REGULATION_OF_RNA_METABOLIC_PROCESS;go_bp:GOBP_POSITIVE_REGULATION_OF_TRANSCRIPTION_BY_RNA_POLYMERASE_II;go_bp:GOBP_REGULATION_OF_MULTICELLULAR_ORGANISMAL_DEVELOPMENT;go_bp:GOBP_TUBE_DEVELOPMENT;go_bp:GOBP_TUBE_MORPHOGENESIS;go_bp:GOBP_VASCULATURE_DEVELOPMENT	11			True
+EML5	CITED2	False		0		0		0			False

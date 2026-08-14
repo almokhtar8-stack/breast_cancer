@@ -277,6 +277,238 @@ class TestNoGSE245601InResistanceCrossContamination:
         assert all_datasets <= {"gse118713", "gse240112", "gse111151"}
 
 
+class TestUSP34ShortestPaths:
+    def test_all_four_targets_have_a_path_of_length_two(self):
+        df = pd.read_csv(TABLES / "USP34_shortest_paths.tsv", sep="\t")
+        for target in ["CTNNB1", "PTEN", "EP300", "SOX2"]:
+            sub = df.loc[df["target"] == target]
+            assert (sub["path_length_edges"] == 2).all()
+            assert (sub["path"] != "NO_PATH_IN_NETWORK").all()
+
+    def test_no_path_is_mislabeled_as_direct(self):
+        # every reported USP34 path must have exactly 2 " -> " hops (source
+        # -> intermediate -> target); a 1-hop (direct) path would mean USP34
+        # has a real 1-edge interaction with the target, which is not the
+        # case in this frozen network for any of the 4 targets
+        df = pd.read_csv(TABLES / "USP34_shortest_paths.tsv", sep="\t")
+        for path in df["path"].unique():
+            assert path.count(" -> ") == 2, f"unexpected path length: {path}"
+
+    def test_edge_evidence_never_invents_a_missing_interaction_type(self):
+        df = pd.read_csv(TABLES / "USP34_shortest_paths.tsv", sep="\t")
+        assert df["interaction_type"].isin(["physical_PPI", "functional_association", "regulatory", "pathway_co_membership"]).all()
+
+
+class TestUSP34BridgeGeneEvidence:
+    BRIDGE_GENES = ["USP9X", "RPS27A", "UBC", "UBB"]
+
+    def test_all_four_bridge_genes_present(self):
+        df = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t")
+        assert set(df["gene"]) == set(self.BRIDGE_GENES)
+
+    def test_crispr_sign_convention(self):
+        df = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t").set_index("gene")
+        for gene in self.BRIDGE_GENES:
+            row = df.loc[gene]
+            if row["crispr_effect"] < 0:
+                assert "sensitising" in row["crispr_direction"]
+            else:
+                assert "tolerance" in row["crispr_direction"]
+
+    def test_classification_is_one_of_three_conservative_tiers(self):
+        df = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t")
+        assert df["classification"].isin(["A_DATA_SUPPORTED_BRIDGE", "B_PARTIAL_SUPPORT", "C_NETWORK_ONLY_GENERIC_BRIDGE"]).all()
+
+    def test_a_tier_requires_an_fdr_significant_hit(self):
+        df = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t")
+        sig_cols = [c for c in df.columns if c.endswith("_significant_fdr05")]
+        a_tier = df.loc[df["classification"] == "A_DATA_SUPPORTED_BRIDGE"]
+        for _, row in a_tier.iterrows():
+            assert row[sig_cols].any()
+
+    def test_c_tier_has_no_nominal_resistance_or_crispr_hit(self):
+        df = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t")
+        resistance_nominal_cols = ["gse118713_nominal_p05", "gse240112_nominal_p05", "gse111151_nominal_p05"]
+        c_tier = df.loc[df["classification"] == "C_NETWORK_ONLY_GENERIC_BRIDGE"]
+        for _, row in c_tier.iterrows():
+            assert not row["crispr_nominal_p05"]
+            assert not row[resistance_nominal_cols].any()
+
+    def test_gse245601_acute_never_drives_classification(self):
+        # a gene whose ONLY nominal hit is the acute layer must not reach
+        # B_PARTIAL_SUPPORT on that basis alone
+        df = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t")
+        resistance_or_crispr_cols = ["crispr_nominal_p05", "gse118713_nominal_p05", "gse240112_nominal_p05", "gse111151_nominal_p05"]
+        for _, row in df.iterrows():
+            if row["classification"] == "B_PARTIAL_SUPPORT":
+                assert row[resistance_or_crispr_cols].any(), f"{row['gene']} classified B without a non-acute nominal hit"
+
+    def test_values_match_frozen_node_table(self):
+        bridge = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t").set_index("gene")
+        nodes = pd.read_csv(NETWORKS / "cytoscape" / "network_nodes.tsv", sep="\t").set_index("gene")
+        for gene in self.BRIDGE_GENES:
+            assert bridge.loc[gene, "crispr_effect"] == pytest.approx(nodes.loc[gene, "crispr_effect"])
+            assert bridge.loc[gene, "gse118713_log2fc"] == pytest.approx(nodes.loc[gene, "gse118713_log2fc"])
+            assert bridge.loc[gene, "gse245601_track_a_log2fc"] == pytest.approx(nodes.loc[gene, "gse245601_acute_log2fc"])
+
+    def test_bridges_usp34_to_matches_shortest_path_table(self):
+        bridge = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t").set_index("gene")
+        expected = {
+            "USP9X": {"CTNNB1", "SOX2"},
+            "RPS27A": {"CTNNB1", "PTEN"},
+            "UBC": {"EP300", "PTEN"},
+            "UBB": {"CTNNB1"},
+        }
+        for gene, targets in expected.items():
+            assert set(bridge.loc[gene, "bridges_usp34_to"].split(",")) == targets
+
+
+class TestFourCandidateNetworkAudit:
+    FROZEN_FOUR = {"USP34", "VEZF1", "EML5", "CITED2"}
+
+    def test_frozen_shortlist_unchanged(self):
+        for path in [
+            TABLES / "four_candidate_direct_neighbors.tsv",
+            TABLES / "four_candidate_shortest_paths.tsv",
+            TABLES / "four_candidate_bridge_evidence.tsv",
+            TABLES / "four_candidate_network_audit.tsv",
+        ]:
+            df = pd.read_csv(path, sep="\t")
+            assert set(df["candidate"]) == self.FROZEN_FOUR
+
+    def test_eml5_has_no_direct_neighbors(self):
+        df = pd.read_csv(TABLES / "four_candidate_direct_neighbors.tsv", sep="\t")
+        eml5 = df.loc[df["candidate"] == "EML5"]
+        assert len(eml5) == 1
+        assert eml5["neighbor_gene"].iloc[0] == "NO_RESOLVED_NETWORK_NEIGHBOURHOOD"
+
+    def test_vezf1_direct_neighbor_count_matches_known_frozen_state(self):
+        # VEZF1 has zero STRING partners at any threshold (documented in
+        # docs/SYSTEMS_NETWORK_NODE_RULE.md) -- its only edge is the
+        # pathway_co_membership link to DMTN.
+        df = pd.read_csv(TABLES / "four_candidate_direct_neighbors.tsv", sep="\t")
+        vezf1 = df.loc[df["candidate"] == "VEZF1"]
+        assert len(vezf1) == 1
+        assert vezf1["neighbor_gene"].iloc[0] == "DMTN"
+        assert vezf1["interaction_type"].iloc[0] == "pathway_co_membership"
+
+    def test_eml5_shortest_paths_explicitly_unresolved(self):
+        df = pd.read_csv(TABLES / "four_candidate_shortest_paths.tsv", sep="\t")
+        eml5 = df.loc[df["candidate"] == "EML5"]
+        assert len(eml5) == 1
+        assert eml5["path"].iloc[0] == "NO_RESOLVED_NETWORK_NEIGHBOURHOOD_IN_CURRENT_ANALYSIS"
+
+    def test_no_shortest_path_exceeds_two_hops(self):
+        df = pd.read_csv(TABLES / "four_candidate_shortest_paths.tsv", sep="\t")
+        lengths = df["path_length_edges"].dropna()
+        assert (lengths <= 2).all()
+
+    def test_cited2_targets_are_all_one_hop_direct(self):
+        # Part 4: CITED2's 5 named targets are literal direct neighbors, so
+        # a 1-hop path length here means no bridge gene was needed -- this
+        # must not be reported as an indirect/2-hop connection.
+        df = pd.read_csv(TABLES / "four_candidate_shortest_paths.tsv", sep="\t")
+        cited2 = df.loc[df["candidate"] == "CITED2"]
+        assert (cited2["path_length_edges"] == 1).all()
+        for path in cited2["path"].unique():
+            assert path.count(" -> ") == 1
+
+    def test_bridge_evidence_classification_tiers_valid(self):
+        df = pd.read_csv(TABLES / "four_candidate_bridge_evidence.tsv", sep="\t")
+        assert df["classification"].isin(
+            ["A_DATA_SUPPORTED_BRIDGE", "B_PARTIAL_SUPPORT", "C_NETWORK_ONLY_GENERIC_BRIDGE", "D_NOT_ASSESSABLE"]
+        ).all()
+
+    def test_eml5_bridge_not_assessable(self):
+        df = pd.read_csv(TABLES / "four_candidate_bridge_evidence.tsv", sep="\t")
+        eml5 = df.loc[df["candidate"] == "EML5"]
+        assert len(eml5) == 1
+        assert eml5["classification"].iloc[0] == "D_NOT_ASSESSABLE"
+
+    def test_gse245601_acute_never_solely_drives_a_tier(self):
+        # a bridge gene must not reach A_DATA_SUPPORTED_BRIDGE on the
+        # strength of the acute-only layer -- only CRISPR or a resistance
+        # dataset FDR<0.05 hit may do that.
+        df = pd.read_csv(TABLES / "four_candidate_bridge_evidence.tsv", sep="\t")
+        resistance_or_crispr_fdr_cols = ["crispr_significant_fdr05", "gse118713_significant_fdr05", "gse240112_significant_fdr05", "gse111151_significant_fdr05"]
+        a_tier = df.loc[df["classification"] == "A_DATA_SUPPORTED_BRIDGE"]
+        for _, row in a_tier.iterrows():
+            assert row[resistance_or_crispr_fdr_cols].any(), f"{row['bridge_gene']} reached A-tier without a non-acute FDR<0.05 hit"
+
+    def test_convergence_matrix_covers_all_six_pairs(self):
+        df = pd.read_csv(TABLES / "four_candidate_convergence.tsv", sep="\t")
+        pairs = set(zip(df["candidate_A"], df["candidate_B"]))
+        assert len(pairs) == 6
+
+    def test_vezf1_cited2_convergence_preserved(self):
+        df = pd.read_csv(TABLES / "four_candidate_convergence.tsv", sep="\t")
+        row = df.loc[(df["candidate_A"] == "VEZF1") & (df["candidate_B"] == "CITED2")].iloc[0]
+        assert row["any_convergence"]
+        assert row["n_shared_pathways"] > 0
+        assert "GOBP_BLOOD_VESSEL_MORPHOGENESIS" in row["shared_resistance_pathways_or_leading_edge_modules"]
+
+    def test_eml5_never_shows_convergence(self):
+        df = pd.read_csv(TABLES / "four_candidate_convergence.tsv", sep="\t")
+        eml5_rows = df.loc[(df["candidate_A"] == "EML5") | (df["candidate_B"] == "EML5")]
+        assert not eml5_rows["any_convergence"].any()
+
+    def test_no_candidate_pair_shares_a_resistance_hub(self):
+        df = pd.read_csv(TABLES / "four_candidate_convergence.tsv", sep="\t")
+        assert (df["shared_resistance_hub_gene"].fillna("") == "").all()
+
+    def test_head_to_head_classification_vocabulary(self):
+        df = pd.read_csv(TABLES / "four_candidate_network_audit.tsv", sep="\t")
+        valid = {
+            "1_STRONG_SYSTEMS_SUPPORT",
+            "2_MODERATE_SYSTEMS_SUPPORT",
+            "3_NETWORK_HYPOTHESIS_ONLY",
+            "4_DATA_SUPPORTED_BUT_MECHANISTICALLY_UNRESOLVED",
+            "5_WEAK_NON_SPECIFIC_NETWORK_SUPPORT",
+        }
+        assert set(df["systems_mechanism_classification"]) <= valid
+
+    def test_eml5_classified_data_supported_but_mechanistically_unresolved(self):
+        df = pd.read_csv(TABLES / "four_candidate_network_audit.tsv", sep="\t").set_index("candidate")
+        assert df.loc["EML5", "systems_mechanism_classification"] == "4_DATA_SUPPORTED_BUT_MECHANISTICALLY_UNRESOLVED"
+
+    def test_direct_neighbor_counts_match_part2_table(self):
+        neighbors = pd.read_csv(TABLES / "four_candidate_direct_neighbors.tsv", sep="\t")
+        audit = pd.read_csv(TABLES / "four_candidate_network_audit.tsv", sep="\t").set_index("candidate")
+        counts = {
+            "USP34": 10,
+            "VEZF1": 1,
+            "EML5": 0,
+            "CITED2": 18,
+        }
+        for candidate, expected_n in counts.items():
+            assert int(audit.loc[candidate, "n_direct_neighbors"]) == expected_n
+
+    def test_evidence_freeze_untouched(self):
+        result = subprocess.run(
+            ["git", "status", "--porcelain", "results/tables/evidence_freeze/", "docs/THERAPEUTIC_SHORTLIST_FREEZE.md"],
+            capture_output=True,
+            text=True,
+            cwd=Path(__file__).resolve().parents[1],
+        )
+        assert result.stdout.strip() == "", f"frozen evidence-freeze files show as changed: {result.stdout}"
+
+    def test_prior_usp34_bridge_evidence_content_unchanged(self):
+        # USP34_bridge_gene_evidence.tsv is reused verbatim (Part 1/5) --
+        # confirm its 4 genes and classifications still match what the
+        # prior USP34-specific audit established, since this table predates
+        # git tracking and a git-status check alone cannot prove it wasn't
+        # edited.
+        df = pd.read_csv(TABLES / "USP34_bridge_gene_evidence.tsv", sep="\t").set_index("gene")
+        expected = {
+            "USP9X": "B_PARTIAL_SUPPORT",
+            "RPS27A": "C_NETWORK_ONLY_GENERIC_BRIDGE",
+            "UBC": "C_NETWORK_ONLY_GENERIC_BRIDGE",
+            "UBB": "B_PARTIAL_SUPPORT",
+        }
+        for gene, classification in expected.items():
+            assert df.loc[gene, "classification"] == classification
+
+
 if __name__ == "__main__":
     import sys
 
