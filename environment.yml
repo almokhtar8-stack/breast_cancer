@@ -3,19 +3,31 @@ channels:
   - conda-forge
   - bioconda
 dependencies:
+  - biopython
   - bioconductor-edger=4.8.2
   - bioconductor-limma=3.66.0
+  - gseapy
+  - h5py
+  - lifelines
   - matplotlib
+  - networkx
   - numpy
   - openpyxl
-  - pandas
+  # pinned <3: the whole codebase was authored and test-covered against the
+  # pandas 2.x API; pandas 3.0 is a major-version break and was flagged as a
+  # genuine, unverified compatibility risk during the post-audit
+  # reproducibility check (2026-08-15) -- this pin is a documented,
+  # deliberate choice, not an untested guess.
+  - pandas>=2,<3
   - pip
   - pyarrow
+  - pymol-open-source
   - python=3.11
   - pytest
   - pyyaml
   - r-base=4.5.3
   - r-statmod=1.5.2
+  - requests
   - scikit-learn
   - scipy
   - statsmodels

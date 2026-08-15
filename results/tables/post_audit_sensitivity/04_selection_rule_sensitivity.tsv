@@ -1,0 +1,76 @@
+rule	gene	eligible	rank	n_eligible
+RULE_0_original_frozen_gate	CITED2	True	4.0	4
+RULE_0_original_frozen_gate	CTDNEP1	False		4
+RULE_0_original_frozen_gate	EIF4ENIF1	False		4
+RULE_0_original_frozen_gate	EML5	True	3.0	4
+RULE_0_original_frozen_gate	HMGB1	False		4
+RULE_0_original_frozen_gate	ICK	False		4
+RULE_0_original_frozen_gate	KDM1A	False		4
+RULE_0_original_frozen_gate	PET117	False		4
+RULE_0_original_frozen_gate	SUPT4H1	False		4
+RULE_0_original_frozen_gate	TADA2B	False		4
+RULE_0_original_frozen_gate	TLK2	False		4
+RULE_0_original_frozen_gate	TSR3	False		4
+RULE_0_original_frozen_gate	USP17L29	False		4
+RULE_0_original_frozen_gate	USP34	True	1.0	4
+RULE_0_original_frozen_gate	VEZF1	True	2.0	4
+RULE_1_crispr_only_no_rna_gate	CITED2	False		13
+RULE_1_crispr_only_no_rna_gate	CTDNEP1	True	13.0	13
+RULE_1_crispr_only_no_rna_gate	EIF4ENIF1	True	7.0	13
+RULE_1_crispr_only_no_rna_gate	EML5	False		13
+RULE_1_crispr_only_no_rna_gate	HMGB1	True	8.0	13
+RULE_1_crispr_only_no_rna_gate	ICK	True	9.0	13
+RULE_1_crispr_only_no_rna_gate	KDM1A	True	1.0	13
+RULE_1_crispr_only_no_rna_gate	PET117	True	11.0	13
+RULE_1_crispr_only_no_rna_gate	SUPT4H1	True	5.0	13
+RULE_1_crispr_only_no_rna_gate	TADA2B	True	3.0	13
+RULE_1_crispr_only_no_rna_gate	TLK2	True	2.0	13
+RULE_1_crispr_only_no_rna_gate	TSR3	True	12.0	13
+RULE_1_crispr_only_no_rna_gate	USP17L29	True	4.0	13
+RULE_1_crispr_only_no_rna_gate	USP34	True	10.0	13
+RULE_1_crispr_only_no_rna_gate	VEZF1	True	6.0	13
+RULE_2_chronic_rna_corroboration	CITED2	False		2
+RULE_2_chronic_rna_corroboration	CTDNEP1	False		2
+RULE_2_chronic_rna_corroboration	EIF4ENIF1	False		2
+RULE_2_chronic_rna_corroboration	EML5	False		2
+RULE_2_chronic_rna_corroboration	HMGB1	False		2
+RULE_2_chronic_rna_corroboration	ICK	False		2
+RULE_2_chronic_rna_corroboration	KDM1A	False		2
+RULE_2_chronic_rna_corroboration	PET117	False		2
+RULE_2_chronic_rna_corroboration	SUPT4H1	False		2
+RULE_2_chronic_rna_corroboration	TADA2B	False		2
+RULE_2_chronic_rna_corroboration	TLK2	False		2
+RULE_2_chronic_rna_corroboration	TSR3	False		2
+RULE_2_chronic_rna_corroboration	USP17L29	False		2
+RULE_2_chronic_rna_corroboration	USP34	True	2.0	2
+RULE_2_chronic_rna_corroboration	VEZF1	True	1.0	2
+RULE_3_gse111151_specific	CITED2	False		0
+RULE_3_gse111151_specific	CTDNEP1	False		0
+RULE_3_gse111151_specific	EIF4ENIF1	False		0
+RULE_3_gse111151_specific	EML5	False		0
+RULE_3_gse111151_specific	HMGB1	False		0
+RULE_3_gse111151_specific	ICK	False		0
+RULE_3_gse111151_specific	KDM1A	False		0
+RULE_3_gse111151_specific	PET117	False		0
+RULE_3_gse111151_specific	SUPT4H1	False		0
+RULE_3_gse111151_specific	TADA2B	False		0
+RULE_3_gse111151_specific	TLK2	False		0
+RULE_3_gse111151_specific	TSR3	False		0
+RULE_3_gse111151_specific	USP17L29	False		0
+RULE_3_gse111151_specific	USP34	False		0
+RULE_3_gse111151_specific	VEZF1	False		0
+RULE_4_human_evidence_first	CITED2	False		13
+RULE_4_human_evidence_first	CTDNEP1	True	13.0	13
+RULE_4_human_evidence_first	EIF4ENIF1	True	8.0	13
+RULE_4_human_evidence_first	EML5	False		13
+RULE_4_human_evidence_first	HMGB1	True	9.0	13
+RULE_4_human_evidence_first	ICK	True	10.0	13
+RULE_4_human_evidence_first	KDM1A	True	1.0	13
+RULE_4_human_evidence_first	PET117	True	11.0	13
+RULE_4_human_evidence_first	SUPT4H1	True	7.0	13
+RULE_4_human_evidence_first	TADA2B	True	5.0	13
+RULE_4_human_evidence_first	TLK2	True	2.0	13
+RULE_4_human_evidence_first	TSR3	True	12.0	13
+RULE_4_human_evidence_first	USP17L29	True	6.0	13
+RULE_4_human_evidence_first	USP34	True	4.0	13
+RULE_4_human_evidence_first	VEZF1	True	3.0	13

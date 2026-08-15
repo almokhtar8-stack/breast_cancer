@@ -8,6 +8,7 @@ data:
     depmap_24q4_dir: /ibex/scratch/aljaroaa/tamoxifen-data/depmap/24Q4
     depmap_26q1_dir: /ibex/scratch/aljaroaa/tamoxifen-data/depmap/26Q1
     gdsc_dir: /ibex/scratch/aljaroaa/tamoxifen-data/gdsc
+    usp34_structures_dir: /ibex/scratch/aljaroaa/tamoxifen-data/usp34_structures
   reference:
     ceg2_gene_list: data/reference/hart2017_ceg2_684.tsv
   processed_dir: data/processed
@@ -884,3 +885,19 @@ final_pharmacogenomics:
     tables_dir: results/tables/final_pharmacogenomics
     figures_dir: results/figures/final_pharmacogenomics
     reports_dir: results/reports/final_pharmacogenomics
+
+# Poster figure assembly -- draws only from already-frozen source tables
+# above (evidence_freeze, cross_dataset_genomewide, independent_validation,
+# final_translational); no new analysis, no new candidate discovery. The
+# two real USP34 PDB structures (7W3R, 7W3U) are re-downloaded here purely
+# for static visualization -- the structural facts themselves were already
+# established and frozen in the final_translational phase.
+poster:
+  candidates: [USP34, VEZF1, EML5, CITED2]
+  structures:
+    raw_dir_key: usp34_structures_dir
+    pdb_ids: [7W3R, 7W3U]
+    source_url_template: "https://files.rcsb.org/download/{pdb_id}.pdb"
+  output:
+    figures_dir: results/figures/poster
+    reports_dir: results/reports/poster

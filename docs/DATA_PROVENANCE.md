@@ -38,7 +38,18 @@ gitignored in full.
 ## GSE240112 (single-cell RNA-seq)
 
 - **Source:** NCBI GEO accession GSE240112.
-- **System:** matched primary/recurrent ER+ tumor pairs.
+- **System:** unpaired primary and recurrent ER+ tumors from different
+  patients (3 primary, 3 recurrent) -- **not matched or paired**. Primary
+  tissue is sourced from OriGene Technologies Inc. and recurrent tissue
+  from the Ontario Tumor Bank, two different source institutions; no
+  pairing statement exists anywhere in the GEO metadata or the source
+  paper's Methods. Disease state is therefore confounded with
+  biobank/source institution and this must be disclosed alongside any
+  result from this dataset. See `GSE240112_PREANALYSIS.md` Section C and
+  `GSE240112_DATA_AUDIT.md` Section 2 for the full audit this correction
+  is based on. (Corrected 2026-08-15, post-audit sensitivity analysis --
+  the frozen GSE240112 analysis itself was already run correctly as
+  unpaired; only this summary line was wrong.)
 - **Pre-analysis plan:** [`GSE240112_PREANALYSIS.md`](GSE240112_PREANALYSIS.md).
 
 ## GSE111151 (bulk RNA-seq)

@@ -1,11 +1,18 @@
-# Breast Cancer Tamoxifen Resistance Project
+# From a CRISPR Screen to Therapeutic Vulnerabilities: Functional Genomics of Tamoxifen Sensitisation in ER+ Breast Cancer
 
-Computational reanalysis identifying, validating, and deeply characterizing
-genes whose loss sensitizes ER-positive breast cancer to tamoxifen, by
-integrating a public genome-wide CRISPR screen with public bulk and
-single-cell transcriptomics, TCGA clinical data, DepMap dependency data,
-network/pathway analysis, structural biology, and pharmacogenomic
-(GDSC) drug-response data.
+This project integrates a genome-wide CRISPR screen with transcriptomic,
+human tumour, pathway, cancer-dependency, and structural analyses to
+identify therapeutic vulnerabilities linked to tamoxifen sensitisation in
+ER+ breast cancer. By comparing evidence across multiple independent
+datasets and biological layers, the study prioritises candidate targets
+with distinct functional, clinical, and translational strengths,
+generating experimentally testable hypotheses for improving endocrine
+therapy response.
+
+*(Working/internal name: "Breast Cancer Tamoxifen Resistance Project" —
+retained below and throughout file/directory names and historical
+commits for continuity; the title above is the official project title as
+of the 2026-08-15 science freeze.)*
 
 **This is a computational reanalysis of public data. No wet-lab work was
 performed by this project, and no result here should be read as a
@@ -44,50 +51,110 @@ ER-positive breast cancer cells to tamoxifen — and, among the strongest
 candidates, which is the most promising target for a concrete follow-up
 combination-therapy experiment?**
 
-## C. High-level final findings (USP34 and VEZF1)
+## C. High-level final findings — historical shortlist + post-audit reinterpretation
 
-The project's frozen four-gene therapeutic shortlist, in order, is
+**Historical result (preserved, not rewritten).** The project's original,
+frozen four-gene therapeutic shortlist, produced under a predefined
+multimodal eligibility gate (CRISPR sensitisation **and** at least one
+RNA/human-tumour corroboration dataset), in order, is
 **USP34 > VEZF1 > EML5 > CITED2** (see
 [`docs/THERAPEUTIC_SHORTLIST_FREEZE.md`](docs/THERAPEUTIC_SHORTLIST_FREEZE.md)).
-USP34 and VEZF1 were carried forward into deep mechanistic, structural, and
-translational-design work; EML5 and CITED2 were not.
+This ranking, and the frozen tables it was computed from, remain byte
+-identical and historically valid **as the result of that specific,
+predefined gate** — it is not being erased or overwritten below.
 
-**USP34 — current lead translational target.** Functional CRISPR
-sensitisation (Hany screen, FDR=0.042) + low baseline dependency in
-ER+/luminal cancer cell lines (DepMap 26Q1: 0.0% strongly dependent) + real,
-crystallographically-confirmed catalytic targetability (reactive Cys1903,
-PDB 7W3R/7W3U) together make USP34 the lead combination-target *hypothesis*
-— not a validated target. No USP34-selective inhibitor currently exists.
-Structural pocket analysis (fpocket 4.2.3) found a druggable catalytic
-pocket but concluded blind/arbitrary small-molecule docking is **not yet
-justified** (`DOCKING_NOT_YET_JUSTIFIED`; see
-[Section M](#m-proposed-next-experiment) and
-[`docs/RESULTS_GUIDE.md`](docs/RESULTS_GUIDE.md)). A targeted GDSC
+**Post-audit reinterpretation (2026-08-15).** An external scientific
+review challenged the RNA-corroboration eligibility requirement above —
+correctly noting that a gene does not need to become transcriptionally
+differentially expressed during acquired resistance for its knockout to
+sensitise cells to tamoxifen, and that this requirement could have
+excluded stronger *functional* hits. A dedicated, separate
+[**post-audit sensitivity analysis**](results/reports/post_audit/) tested
+this and found **no single gene wins on every evidence axis**:
+
+| Role | Gene | Basis |
+|---|---|---|
+| Strongest functional CRISPR sensitiser | **KDM1A** | rank 1 of 13 significant sensitising screen hits by both effect and FDR — stronger than USP34 (rank 12/13) or VEZF1 (rank 8/13) |
+| Most pharmacologically mature | **KDM1A** | existing clinical-stage selective LSD1 inhibitor (iadademstat/ORY-1001) |
+| Strongest baseline ER+/luminal cancer-cell dependency | **TLK2** | 81.8% of 11 DepMap 26Q1 ER+/luminal lines strongly dependent, vs. 27.3% (VEZF1) and 0.0% (USP34, KDM1A) |
+| Strongest human recurrence-associated RNA signal | **VEZF1** | the only one of the four with a significant (FDR<0.05) hit in the one real-patient-tumour dataset (GSE240112) — an association with recurrence, not proof of reversing tamoxifen resistance |
+| Novel target with the most direct experimental evidence of covalent chemical reactivity, no inhibitor yet | **USP34, hedged** | KDM1A and TLK2 *also* have real experimental structures (corrected finding — an earlier draft wrongly implied only USP34 did). USP34's solved catalytic domain (PDB 7W3R/7W3U) proves Cys1903 is covalently reactive to a ubiquitin-based activity probe — this is real evidence of catalytic-cysteine reactivity, but it does **not** by itself establish that USP34 is more small-molecule-addressable than, e.g., TLK2's canonical ATP-competitive kinase pocket (a well-precedented druggable pocket type); "most structurally addressable" should be read as a hypothesis, not a proven comparative ranking |
+| Best-supported multimodal (CRISPR + RNA) target | **Tied / not clearly decidable** — USP34 (GSE118713 only) and VEZF1 (GSE240112 only) each have exactly one significant corroborating dataset, not multiple independent ones |
+| Overall universal winner | **NO** | see [`POST_AUDIT_SENSITIVITY_REPORT.md`](results/reports/post_audit/POST_AUDIT_SENSITIVITY_REPORT.md) and [`SCIENCE_FREEZE_REPORT.md`](results/reports/post_audit/SCIENCE_FREEZE_REPORT.md) for the full evidence behind every cell above |
+
+KDM1A and TLK2 were not carried into this project's downstream
+structural/TCGA/GDSC/tissue-liability work (that work predates the
+post-audit analysis and was built specifically around USP34/VEZF1/EML5/
+CITED2); their evidence base is therefore CRISPR + DepMap + independent
+published literature only, not the same depth as USP34/VEZF1. This is a
+disclosed evidence-coverage gap, not a finding that they are weaker.
+
+**USP34 — the historically-frozen lead, with corrected caveats.**
+Functional CRISPR sensitisation (Hany screen, FDR=0.042) — **note: this
+is the *weakest* CRISPR evidence of the 13 significant sensitising screen
+hits by effect size, not the strongest** (see table above) — + low
+baseline dependency in ER+/luminal cancer cell lines (DepMap 26Q1: 0.0%
+strongly dependent) + a real, crystallographically-confirmed covalent
+-probe-proven reactive catalytic cysteine (Cys1903, PDB 7W3R/7W3U, no
+existing inhibitor) together make USP34 a defensible lead *combination
+-target hypothesis for structural/covalent tractability specifically* —
+not a validated target, and not the strongest hit on every axis. No
+USP34-selective inhibitor currently exists. Structural pocket analysis
+(fpocket 4.2.3) found a druggable-scored but unusually large/groove
+-shaped catalytic pocket; blind/arbitrary small-molecule docking was
+concluded **not yet justified** (`DOCKING_NOT_YET_JUSTIFIED`; docking was
+never run, and no docking result should be read anywhere in this
+repository) — see [Section M](#m-proposed-next-experiment) and
+[`docs/RESULTS_GUIDE.md`](docs/RESULTS_GUIDE.md). A targeted GDSC
 Release 8.5 pharmacogenomic lookup found 9 FDR-significant drug-response
-correlations for USP34 expression in breast cancer cell lines (strongest:
-AZD7762/CHK1-CHK2 inhibitor, FDR=0.008) — all correlational, none causal,
-and none involving tamoxifen or fulvestrant directly. A prior mammary
-epithelial study (PMID 28499884) found USP34 loss can promote EMT/stem-like
-features in some contexts; **this does not invalidate the USP34 tamoxifen
-hypothesis** — it is counter-evidence motivating explicit EMT/stemness
-monitoring in any USP34-perturbation experiment, not a reason to drop USP34.
+correlation *rows* for USP34 expression, but only **8 unique compounds**
+(AZD7762 is counted twice, once per response metric), **all in GDSC1 with
+zero independent replication in GDSC2**, and 2 of the 7 LN_IC50-only hits
+**reverse sign** in the AUC metric — only AZD7762 (CHK1/CHK2 inhibitor,
+FDR=0.008, consistent direction in both metrics) is a genuinely robust
+association. **GDSC is exploratory/supporting evidence only — it was not,
+and should not be read as, a primary reason USP34 was selected** —
+correlational, never causal, and none of it involves tamoxifen or
+fulvestrant directly. A prior mammary epithelial study (PMID 28499884)
+found USP34 loss can promote EMT/stem-like features in some contexts —
+counter-evidence motivating explicit EMT/stemness monitoring, not a
+reason to drop USP34. A 2026 human-genetics study (Wigoda et al.,
+*Clinical Genetics*, DOI 10.1111/cge.70194) reports 6 individuals (5
+confirmed de novo) with heterozygous USP34 loss-of-function and a
+neurodevelopmental phenotype — a genuine, congenital, lifelong germline
+dosage-sensitivity signal that is a serious translational liability
+consideration; it does **not** by itself establish that a time-limited,
+adult, partial pharmacological inhibition is unsafe, and should not be
+read either way without that distinction (see
+[`SCIENCE_FREEZE_REPORT.md`](results/reports/post_audit/SCIENCE_FREEZE_REPORT.md)).
 
 **VEZF1 — second / backup translational target.** Strong functional CRISPR
-sensitisation (Hany screen, FDR=0.037, nominally the stronger of the two) +
-real baseline dependency in ER+/luminal cancer cell lines (DepMap 26Q1:
-27.3% strongly dependent) together suggest a dual-action biological
-hypothesis, but VEZF1 has poor direct druggability (a zinc-finger
-transcription factor). A candidate indirect strategy — inhibiting VEZF1's
+sensitisation (Hany screen, FDR=0.037) + real baseline dependency in
+ER+/luminal cancer cell lines (DepMap 26Q1: 27.3% strongly dependent)
+together suggest a dual-action biological hypothesis, but VEZF1 has poor
+direct druggability (a C2H2 zinc-finger transcription factor — a target
+class historically much harder to drug than an enzyme). One weak, early
+-stage, structure-unguided small-molecule screening hit against VEZF1 DNA
+binding has been published (IC50=20 micromolar; not a validated or
+selective inhibitor). A candidate indirect strategy — inhibiting VEZF1's
 proposed downstream partner TEAD1 — remains **explicitly unvalidated**
 (`PHARMACOGENOMIC_ASSOCIATION_ONLY` at best; GDSC contains zero TEAD/Hippo
 compounds, so this cannot even be tested pharmacogenomically). The GDSC
 lookup found **zero** FDR-significant drug-response correlations for VEZF1
-in breast cancer cell lines — a genuine negative result. VEZF1 also has a
-more directly causal cardiovascular/developmental liability signal (a
+in breast cancer cell lines — a genuine negative result. VEZF1's
+recurrence association (GSE240112) is real (FDR<0.05) but must never be
+read as proof that VEZF1 *causes* or that targeting it would *reverse*
+tamoxifen resistance — it is one unpaired, small (n=3 vs 3), source
+-confounded human dataset, association only. VEZF1 also has a more
+directly causal cardiovascular/developmental liability signal (a
 postnatal zebrafish cardiac-contractility finding, PMID 31911272) than
 USP34's bone-related liability signal.
 
-Full detail: [`results/final/README.md`](results/final/README.md).
+Full detail: [`results/final/README.md`](results/final/README.md) (historical
+USP34/VEZF1 translational work) and
+[`results/reports/post_audit/`](results/reports/post_audit/) (post-audit
+sensitivity analysis and science-freeze report — the authoritative final
+scientific-state document).
 
 ## D. Complete analysis workflow (16 phases)
 
@@ -125,11 +192,11 @@ for every phase.
 | Hany et al. 2023 CRISPR screen (*Sci Adv* 9:eadd3685) | Functional labels only (never used as a feature) | MCF7-V drug-tolerant parental clone, E2 vs E2+4-OHT | Genome-wide but single cell line/screen; Gate-1 FDR<0.1 |
 | GSE118713 | Resistance-associated bulk expression | MCF7 parental / TAMR / FASR cell lines | Cell-line model, not patient tissue |
 | GSE245601 | Human ex vivo tamoxifen-response single-cell context | 10 paired primary ER+/HER2- tumors, 10 µM tamoxifen vs control, 12h ex vivo | **Only 3/10 tumor pairs (Tumor_02/03/07) meet the frozen >=50-malignant-cell pseudobulk-eligibility rule**; InferCNV/CopyKAT malignant-cell concordance is highly variable across samples (~56% average agreement) |
-| GSE240112 | Primary-vs-recurrent scRNA-seq, 4th evidence layer | Matched primary/recurrent ER+ tumor pairs | Recurrence != tamoxifen resistance specifically; small patient N |
+| GSE240112 | Primary-vs-recurrent scRNA-seq, 4th evidence layer | 3 primary + 3 recurrent ER+ tumors, **unpaired, different patients** (PT from OriGene Technologies, RT from the Ontario Tumor Bank — different source institutions, no pairing statement in GEO metadata) | Recurrence-associated, not tamoxifen-resistance-causal; disease state is confounded with biobank/source; small patient N (n=3 vs 3) |
 | GSE111151 | Independent post-hoc resistance-model confirmation | 4 parental + 7 TamR derivative cell lines | Used for confirmation only, never for candidate discovery |
 | TCGA-BRCA | Independent large-cohort expression/clinical validation | 1,095 primary tumors (deduplicated), bulk RNA-seq + clinical | **Not a tamoxifen-resistance cohort** — a general BRCA cohort; ER+/ER- and treatment status come from clinical annotation, not a resistance phenotype |
 | DepMap Public (24Q4 archived; 26Q1 active) | Cancer cell-line dependency (CRISPR) | Pan-cancer + breast + ER+/luminal cell-line panels | Two releases used; 26Q1 is now the active/reported release, 24Q4 is archived for traceability — see [`docs/DATA_PROVENANCE.md`](docs/DATA_PROVENANCE.md) |
-| GDSC Release 8.5 (30 Oct 2023) | Pharmacogenomic drug-response correlation, USP34/VEZF1 only | Breast cancer cell line panel, GDSC1 + GDSC2 screens | **Correlational only, never causal**; GDSC1/GDSC2 are separate screening campaigns, never pooled for FDR; some compounds carry multiple DRUG_IDs within one release (pseudoreplication trap, handled explicitly) |
+| GDSC Release 8.5 (30 Oct 2023) | Exploratory/supporting pharmacogenomic drug-response correlation, USP34/VEZF1 only — **not a reason either gene was selected** | Breast cancer cell line panel, GDSC1 + GDSC2 screens | **Correlational only, never causal**; GDSC1/GDSC2 are separate screening campaigns, never pooled for FDR; some compounds carry multiple DRUG_IDs within one release (pseudoreplication trap, handled explicitly); USP34's "9 significant rows" = **8 unique compounds** (AZD7762 counted twice across metrics), **all GDSC1, zero GDSC2 replication**, 2 of 7 LN_IC50-only hits reverse sign in AUC; VEZF1 has **zero** significant associations |
 
 ## F. The frozen candidates — three distinct rankings, not one
 
@@ -155,6 +222,17 @@ question, and none of them overrides another:
    top of (not replacing) the frozen ranking. This happens to agree with
    the frozen order here, but is a genuinely separate question (translational
    feasibility, not overall evidence strength).
+4. **Post-audit sensitivity reinterpretation** (2026-08-15,
+   [`results/reports/post_audit/`](results/reports/post_audit/)): a
+   later, separate analysis testing how rankings 1-3 above change if the
+   RNA-corroboration eligibility requirement in ranking 1 is relaxed. It
+   does **not** alter or replace rankings 1-3 — it is an explicitly
+   additional, disclosed sensitivity layer — and it found that on pure
+   CRISPR functional strength (no RNA gate) the order is KDM1A > TLK2 >
+   ... > VEZF1 > ... > USP34, the reverse of ranking 1's within-shortlist
+   order for USP34 specifically. See Section C above and
+   [`SCIENCE_FREEZE_REPORT.md`](results/reports/post_audit/SCIENCE_FREEZE_REPORT.md)
+   for the full, role-by-role final interpretation.
 
 ## G. Repository structure
 
@@ -184,8 +262,10 @@ CLAUDE.md            Project-specific engineering rules (data hygiene, hard rule
 
 ## H. Key results — start here
 
-- **Final findings for USP34/VEZF1:** [`results/final/README.md`](results/final/README.md)
-- **Frozen 4-gene shortlist:** [`docs/THERAPEUTIC_SHORTLIST_FREEZE.md`](docs/THERAPEUTIC_SHORTLIST_FREEZE.md)
+- **Authoritative final scientific state (start here):** [`results/reports/post_audit/SCIENCE_FREEZE_REPORT.md`](results/reports/post_audit/SCIENCE_FREEZE_REPORT.md)
+- **Post-audit sensitivity analysis (full detail):** [`results/reports/post_audit/POST_AUDIT_SENSITIVITY_REPORT.md`](results/reports/post_audit/POST_AUDIT_SENSITIVITY_REPORT.md)
+- **Historical final findings for USP34/VEZF1 (pre-audit):** [`results/final/README.md`](results/final/README.md)
+- **Frozen 4-gene shortlist (historical, unchanged):** [`docs/THERAPEUTIC_SHORTLIST_FREEZE.md`](docs/THERAPEUTIC_SHORTLIST_FREEZE.md)
 - **GDSC drug-response review:** [`results/reports/final_pharmacogenomics/USP34_VEZF1_GDSC_review.md`](results/reports/final_pharmacogenomics/USP34_VEZF1_GDSC_review.md)
 - **Translational experimental plan (EXP-1..5):** [`results/reports/final_translational/final_USP34_VEZF1_translational_plan.md`](results/reports/final_translational/final_USP34_VEZF1_translational_plan.md)
 - **Independent TCGA/DepMap validation:** [`results/reports/independent_validation/four_candidate_TCGA_DepMap_review.md`](results/reports/independent_validation/four_candidate_TCGA_DepMap_review.md)
@@ -202,7 +282,8 @@ CLAUDE.md            Project-specific engineering rules (data hygiene, hard rule
 - Every `src/` module has a corresponding pytest module under
   [`tests/`](tests/) exercising its actual logic (recomputing statistics,
   checking real numeric values), not merely that it runs without error.
-  **Current test suite: 1,150 passed, 1 skipped** (run `pytest -q`).
+  **Current test suite: 1,295 passed, 1 skipped** (run `pytest -q`; count
+  as of the 2026-08-15 science freeze).
 - Thresholds are declared in advance in [`PREANALYSIS.md`](PREANALYSIS.md)
   and phase-specific pre-analysis plans under `docs/`, with dated,
   append-only amendment logs — never edited in place after analysis begins.
@@ -259,10 +340,15 @@ committed to this repository under `results/`.
 - TCGA-BRCA is a general breast-cancer cohort, **not** a tamoxifen-resistance
   cohort; its ER+/ER- and treatment annotations come from clinical records,
   not a resistance phenotype.
-- GSE111151 and GSE240112 provide independent but imperfect proxies for
-  tamoxifen resistance (established resistant cell-line derivatives; primary
-  vs. recurrent tumor pairs, respectively) — neither is a direct replication
-  of the Hany screen's specific perturbation.
+- GSE111151 is an independent but imperfect proxy for tamoxifen
+  resistance (established resistant cell-line derivatives; not a direct
+  replication of the Hany screen's specific perturbation). GSE240112 is a
+  **different kind of evidence, not interchangeable with GSE111151/
+  GSE118713**: it is a recurrence-association comparison (3 unpaired
+  primary vs. 3 unpaired recurrent human tumors, different patients,
+  different source biobanks), not an experimentally established
+  resistance model — it must never be described as "chronic resistance"
+  evidence, only as recurrence-associated.
 - DepMap dependency data span two releases (24Q4 archived, 26Q1 active);
   results are cross-checked for reproduction across releases, but the
   underlying cell-line panel composition can shift between releases.
@@ -298,8 +384,19 @@ committed to this repository under `results/`.
   luminal GDSC breast lines, 3/10 GSE245601 tumor pairs); results from these
   small-N subsets are always explicitly flagged exploratory, never treated
   as validation.
+- The frozen 4-gene shortlist's RNA-corroboration eligibility requirement
+  is one reasonable, disclosed design choice, not a scientific necessity
+  — a post-audit sensitivity analysis found that without it, two other
+  screen hits (KDM1A, TLK2) rank ahead of USP34 on pure CRISPR functional
+  strength; neither was carried into this project's structural/TCGA/GDSC
+  work, so their evidence base is CRISPR + DepMap + external literature
+  only, not full parity with USP34/VEZF1. See
+  [`results/reports/post_audit/`](results/reports/post_audit/).
 - No result in this repository should be read as "validated therapeutic
-  target," "restores tamoxifen sensitivity," or "safe target."
+  target," "restores tamoxifen sensitivity," or "safe target." **No
+  candidate discussed anywhere in this repository — USP34, VEZF1, KDM1A,
+  TLK2, EML5, or CITED2 — has been experimentally validated as a therapy
+  by this computational project.**
 
 ## M. Proposed next experiment
 
