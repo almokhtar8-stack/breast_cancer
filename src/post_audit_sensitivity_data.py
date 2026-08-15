@@ -47,7 +47,19 @@ DEPMAP_CANDIDATE_DEPENDENCY = Path("results/tables/independent_validation/DepMap
 ORIGINAL_FOUR = ["USP34", "VEZF1", "EML5", "CITED2"]
 FOCUS_FOUR = ["KDM1A", "TLK2", "USP34", "VEZF1"]  # required by the audit
 CRISPR_GATE1_FDR = 0.1  # PREANALYSIS.md Section 4, pre-specified, unchanged here
-CHRONIC_RESISTANCE_DATASETS = ["gse118713", "gse240112", "gse111151"]  # GSE245601 excluded: acute
+CHRONIC_RESISTANCE_DATASETS = ["gse118713", "gse240112", "gse111151"]
+# ^ Name/columns derived from this list (n_chronic_datasets_fdr05, etc.) use
+# "chronic" ONLY in the sense of "not the GSE245601 acute 12h exposure" --
+# it is NOT a claim that all three are the same kind of evidence. GSE118713
+# and GSE111151 are established acquired-resistance cell-line models;
+# GSE240112 is a recurrence-ASSOCIATION in unpaired human tumours, not an
+# experimentally established resistance model, and must never be narrated
+# as "chronic resistance" evidence on its own -- see the report text for
+# the resistance-model-vs-recurrence-association distinction. Kept as the
+# original column/variable names (not renamed) per the 2026-08-16
+# re-audit's explicit instruction to avoid unnecessary churn to an
+# already-tagged, externally-accepted science freeze; this comment is the
+# first-use documentation that instruction asked for instead.
 
 
 def load_config(config_path: str | Path = "config/config.yaml") -> dict:
@@ -222,9 +234,10 @@ def build_evidence_matrix() -> pd.DataFrame:
     out = out.merge(pathway, on="gene", how="left")
     out = out.merge(gdsc, on="gene", how="left")
 
-    # chronic (non-acute) resistance corroboration count -- the honest,
-    # transparent quantity behind "how many independent resistance models
-    # support this gene", computed the same way as the frozen
+    # "chronic" = non-acute (see CHRONIC_RESISTANCE_DATASETS comment above
+    # for the resistance-model-vs-recurrence-association distinction
+    # within this set -- GSE240112 is recurrence-associated, not itself a
+    # resistance model). Computed the same way as the frozen
     # resistance_fdr05_count() (gse118713/gse240112/gse111151 only)
     out["n_chronic_datasets_fdr05"] = (
         (out["gse118713_fdr"] < 0.05).fillna(False).astype(int)

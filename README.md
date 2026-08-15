@@ -76,9 +76,9 @@ this and found **no single gene wins on every evidence axis**:
 |---|---|---|
 | Strongest functional CRISPR sensitiser | **KDM1A** | rank 1 of 13 significant sensitising screen hits by both effect and FDR — stronger than USP34 (rank 12/13) or VEZF1 (rank 8/13) |
 | Most pharmacologically mature | **KDM1A** | existing clinical-stage selective LSD1 inhibitor (iadademstat/ORY-1001) |
-| Strongest baseline ER+/luminal cancer-cell dependency | **TLK2** | 81.8% of 11 DepMap 26Q1 ER+/luminal lines strongly dependent, vs. 27.3% (VEZF1) and 0.0% (USP34, KDM1A) |
+| Strongest baseline ER+/luminal cancer-cell dependency **among the four focus genes** | **TLK2** | 81.8% (9/11) of DepMap 26Q1 ER+/luminal dependency-evaluable lines strongly dependent, vs. 27.3% (VEZF1) and 0.0% (USP34, KDM1A). Denominator provenance: 96 breast models in DepMap metadata -> 22 ER+/luminal -> 53 breast / **11 ER+/luminal dependency-evaluable** (have a Chronos value at all). SUPT4H1 is higher (90.9%) across the full 13-gene significant-sensitising universe — not one of the four focus genes, not promoted here. **High dependency is not automatically an advantage**: it may reflect a narrower, less tamoxifen-specific therapeutic window rather than a purely favourable "dual-action" signal — this caveat applies to both TLK2 and VEZF1 |
 | Strongest human recurrence-associated RNA signal | **VEZF1** | the only one of the four with a significant (FDR<0.05) hit in the one real-patient-tumour dataset (GSE240112) — an association with recurrence, not proof of reversing tamoxifen resistance |
-| Novel target with the most direct experimental evidence of covalent chemical reactivity, no inhibitor yet | **USP34, hedged** | KDM1A and TLK2 *also* have real experimental structures (corrected finding — an earlier draft wrongly implied only USP34 did). USP34's solved catalytic domain (PDB 7W3R/7W3U) proves Cys1903 is covalently reactive to a ubiquitin-based activity probe — this is real evidence of catalytic-cysteine reactivity, but it does **not** by itself establish that USP34 is more small-molecule-addressable than, e.g., TLK2's canonical ATP-competitive kinase pocket (a well-precedented druggable pocket type); "most structurally addressable" should be read as a hypothesis, not a proven comparative ranking |
+| Novel target with the most direct experimental evidence of covalent PROTEIN reactivity, no inhibitor yet | **USP34, hedged** | KDM1A and TLK2 *also* have real experimental structures (corrected finding — an earlier draft wrongly implied only USP34 did). **Evidence-specific wording, not one generic "strongest covalent target" claim:** USP34's solved catalytic domain (PDB 7W3R/7W3U) proves Cys1903 is covalently reactive to a macromolecular ubiquitin-based **activity probe** (protein-scale chemical biology tool, not a drug). KDM1A separately has its own, more mature, and differently-sourced covalent chemistry: established covalent **small-molecule** pharmacology through mechanism-based LSD1 inhibitors reacting with the FAD cofactor (tranylcypromine-class chemistry, several clinical-stage). These are two different kinds of "covalent" evidence and are not directly comparable rankings; USP34's probe reactivity does **not** by itself establish that USP34 is more small-molecule-addressable than TLK2's canonical ATP-competitive kinase pocket or KDM1A's established covalent inhibitor chemistry; "most structurally addressable" should be read as a hypothesis, not a proven comparative ranking |
 | Best-supported multimodal (CRISPR + RNA) target | **Tied / not clearly decidable** — USP34 (GSE118713 only) and VEZF1 (GSE240112 only) each have exactly one significant corroborating dataset, not multiple independent ones |
 | Overall universal winner | **NO** | see [`POST_AUDIT_SENSITIVITY_REPORT.md`](results/reports/post_audit/POST_AUDIT_SENSITIVITY_REPORT.md) and [`SCIENCE_FREEZE_REPORT.md`](results/reports/post_audit/SCIENCE_FREEZE_REPORT.md) for the full evidence behind every cell above |
 
@@ -88,6 +88,17 @@ post-audit analysis and was built specifically around USP34/VEZF1/EML5/
 CITED2); their evidence base is therefore CRISPR + DepMap + independent
 published literature only, not the same depth as USP34/VEZF1. This is a
 disclosed evidence-coverage gap, not a finding that they are weaker.
+
+**KDM1A vs. USP34, explicit pairwise interpretation (not a new ranking
+rule):** both show 0.0% strong ER+/luminal baseline dependency in the
+evaluated DepMap subset — on that axis alone they are indistinguishable.
+KDM1A has substantially stronger CRISPR sensitisation evidence (rank
+1/13 vs. USP34's rank 12/13) and existing clinical-stage pharmacology.
+USP34's distinguishing advantages are novelty as a target, its
+experimentally demonstrated catalytic-cysteine (Cys1903) reactivity, and
+its single-model GSE118713 RNA corroboration. **Neither is stated to be
+superior overall**, and KDM1A is not stated to universally win — this is
+a pairwise comparison on named axes, not a composite score.
 
 **USP34 — the historically-frozen lead, with corrected caveats.**
 Functional CRISPR sensitisation (Hany screen, FDR=0.042) — **note: this

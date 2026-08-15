@@ -234,13 +234,37 @@ VEZF1 has the most (one significant human dataset), USP34 has none.
 
 ## 12. DepMap comparison
 
-Figure C / `03_post_audit_evidence_matrix.tsv`. Baseline ER+/luminal (n=11)
-dependency, dependency-probability>0.5 fraction: **TLK2 82%**, HMGB1 82%,
-SUPT4H1 91% (highest of all 13), **VEZF1 27%**, **KDM1A 0%**, **USP34
-0%**. TLK2 has, by a wide margin, the strongest baseline cancer-cell
-dependency of the 4 focus genes — a real, quantitative "dual-action"
-signal (functional sensitiser + baseline vulnerability) that neither
-USP34 nor KDM1A show.
+Figure C / `03_post_audit_evidence_matrix.tsv`. **Provenance:** DepMap
+Public 26Q1, `CRISPRGeneDependency.csv`. Of 96 breast models in DepMap's
+own metadata, 22 are ER+/luminal by this project's `ModelSubtypeFeatures`
+rule; of those, 53 breast models (11 ER+/luminal) actually have a
+Chronos/dependency-probability value in the release's gene-effect matrix
+("dependency-evaluable") — the **n=11 ER+/luminal dependency-evaluable
+lines** is the denominator behind every percentage below, not the raw 22.
+
+Baseline ER+/luminal (n=11) dependency, dependency-probability>0.5
+fraction: **TLK2 81.8% (9/11)**, HMGB1 81.8% (9/11), SUPT4H1 90.9% (10/11,
+the highest across the full 13-gene significant-sensitising universe --
+not one of the 4 focus genes and not promoted to a lead here), **VEZF1
+27.3% (3/11)**, **KDM1A 0.0% (0/11)**, **USP34 0.0% (0/11)**. TLK2 has,
+by a wide margin, the **strongest baseline cancer-cell dependency among
+the 4 focus genes specifically** (SUPT4H1 is higher across the broader
+13-gene universe, a scope distinction, not a new candidate claim).
+
+**High baseline dependency is not automatically a translational
+advantage for a tamoxifen-sensitisation strategy.** It can indicate two
+different things, and this project's data do not distinguish between
+them: (a) a genuinely strong baseline anticancer vulnerability (a
+positive), or (b) a narrower context-specific therapeutic window --
+i.e. the gene may already matter broadly for cancer-cell fitness
+independent of tamoxifen, making a tamoxifen-*specific* combination
+strategy less differentiated and raising normal-tissue-toxicity risk
+proportionally. This applies to **both TLK2 (81.8%) and VEZF1 (27.3%)**
+and should not be read as a purely favourable signal for either; it is a
+real, quantitative "dual-action" hypothesis (functional sensitiser +
+baseline vulnerability) that neither USP34 nor KDM1A show, stated as a
+hypothesis requiring follow-up (e.g. the normal-tissue comparators in the
+proposed experimental design), not a proven advantage.
 
 ## 13. Translational/druggability comparison (View E)
 
@@ -355,13 +379,25 @@ document going forward.
 |---|---|---|---|---|---|---|
 | 0 original frozen gate | 4 | ineligible | ineligible | **rank 1** | rank 2 | — (baseline) |
 | 1 CRISPR only, no RNA gate | 13 | **rank 1** | rank 2 | rank 10 | rank 6 | YES -- KDM1A leads |
-| 2 chronic RNA corroboration | 2 | ineligible | ineligible | rank 2 | **rank 1** | YES -- VEZF1 leads (of the 2 eligible) |
+| 2 non-acute RNA corroboration | 2 | ineligible | ineligible | rank 2 | **rank 1** | YES -- VEZF1 leads (of the 2 eligible) |
 | 3 GSE111151-specific | 0 | ineligible | ineligible | ineligible | ineligible | N/A -- empty set |
 | 4 human evidence first | 13 | **rank 1** | rank 2 | rank 4 | rank 3 | YES -- KDM1A/TLK2 lead; VEZF1 outranks USP34 |
 
 The external reviewer's specific claim — that VEZF1 may outrank USP34
 once human evidence is ordered before cell-line RNA consistency — is
 **confirmed under Rule 4** (`TestRule4HumanEvidenceFirst`, pinned).
+
+**Rule 4 coverage limitation (added 2026-08-16):** Rule 4's "human
+evidence" tie-break uses GSE240112 (available genome-wide, all 13 genes)
+and TCGA (`tcga_fdr`). TCGA follow-up in this project was originally run
+**only on the frozen four-candidate set** (USP34/VEZF1/EML5/CITED2) --
+9 of the 13 significant sensitising genes, including KDM1A and TLK2, have
+no TCGA column at all (`NaN`, not "not significant"; see
+`03_post_audit_evidence_matrix.tsv`). **Rule 4 is therefore a sensitivity
+test of one specific, disclosed reordering, not a genome-wide, unbiased
+human-evidence ranking** — its result for KDM1A/TLK2 rests on GSE240112
+alone (both null there), never on a TCGA comparison that was never run
+for them.
 
 **Full transparency on Rule 4's construction** (raised by the Codex
 adversarial review, Section "K" below): Rule 4 was deliberately built,
@@ -380,21 +416,25 @@ result the reviewer predicted" (yes) rather than as an independently
 
 ## 18. Leave-one-dataset-out results
 
-`05_leave_one_dataset_out.tsv`. USP34's chronic-RNA corroboration
-(GSE118713-only) disappears entirely if GSE118713 is excluded. VEZF1's
-chronic-RNA corroboration (GSE240112-only) disappears entirely if
-GSE240112 is excluded. Both candidates' RNA support is therefore
-**single-dataset-dependent** — neither survives removal of its one
-supporting dataset. KDM1A and TLK2 have no chronic-RNA corroboration to
-lose under any leave-one-out scenario (they start at zero).
+`05_leave_one_dataset_out.tsv`. USP34's non-acute RNA corroboration
+(GSE118713-only, an established resistance model) disappears entirely if
+GSE118713 is excluded. VEZF1's non-acute RNA corroboration (GSE240112
+-only, a recurrence association, not a resistance model) disappears
+entirely if GSE240112 is excluded. Both candidates' RNA support is
+therefore **single-dataset-dependent** — neither survives removal of its
+one supporting dataset. KDM1A and TLK2 have no non-acute RNA
+corroboration to lose under any leave-one-out scenario (they start at
+zero).
 
 ## 19. Does USP34 remain...?
 
 - **strongest functional sensitiser?** **NO.** 12th of 13 by effect, 10th
   of 13 by FDR (Section 8).
 - **strongest multimodal candidate?** **Tied/ambiguous with VEZF1, not a
-  clean "yes."** Both have exactly one significant chronic-RNA dataset;
-  USP34 additionally has a measured TCGA paired tumor-vs-normal trend
+  clean "yes."** Both have exactly one significant non-acute RNA dataset
+  (USP34: GSE118713, a resistance model; VEZF1: GSE240112, a recurrence
+  association, not a resistance model -- not directly comparable in
+  kind); USP34 additionally has a measured TCGA paired tumor-vs-normal trend
   that does NOT reach FDR<0.05 (FDR=0.21 -- not statistical evidence of a
   real difference, corrected wording after Codex review flagged the
   original draft's "signal" language as disproportionate) and the only
@@ -427,7 +467,7 @@ lose under any leave-one-out scenario (they start at zero).
 
 **Yes, under Rule 4 (human-evidence-first)**, VEZF1 outranks USP34 —
 directly confirming the external reviewer's specific hypothesis. Under
-Rule 2 (chronic-RNA-only eligibility), VEZF1 also ranks 1st of the 2
+Rule 2 (non-acute-RNA-only eligibility), VEZF1 also ranks 1st of the 2
 eligible genes (ahead of USP34). VEZF1 does not become stronger than
 KDM1A or TLK2 under any rule tested (CRISPR band always favors them where
 they are eligible).
@@ -442,13 +482,32 @@ require RNA/human corroboration (Rules 0, 2, 3), where it is ineligible
 because — verified — it has no significant signal in any RNA dataset this
 project has tested.
 
+**KDM1A vs. USP34, explicit pairwise interpretation (not a new ranking
+rule):** both show 0.0% strong ER+/luminal baseline dependency in the
+evaluated DepMap subset (11 dependency-evaluable lines) — indistinguishable
+on that specific axis. KDM1A has substantially stronger CRISPR
+sensitisation evidence (effect rank 1/13 vs. USP34's 12/13; FDR rank 1/13
+vs. 10/13) and existing clinical-stage pharmacology (iadademstat).
+USP34's distinguishing advantages are novelty as a target, its
+experimentally demonstrated catalytic-cysteine (Cys1903) reactivity to a
+covalent activity probe, and its single-model GSE118713 RNA
+corroboration (which KDM1A entirely lacks). **This is not a claim that
+USP34 is superior overall, nor that KDM1A universally wins** — each
+advantage is stated on its own named axis.
+
 ## 22. Is TLK2 stronger under any reasonable criterion?
 
 **Yes, on two specific, real axes**: functional CRISPR strength (2nd of
-13 by FDR) and baseline ER+/luminal cancer-cell dependency (81.8%, the
-strongest of the 4 focus genes by a wide margin — a genuine "dual-action"
-signal). It is weaker on RNA/human corroboration (identically null to
-KDM1A) and markedly weaker on existing pharmacology (no selective
+13 by FDR) and baseline ER+/luminal cancer-cell dependency (81.8%,
+strongest **among the 4 focus genes** by a wide margin — SUPT4H1 is
+higher, 90.9%, across the full 13-gene universe but is not one of the 4
+focus genes). This dependency signal is a real "dual-action" hypothesis
+(functional sensitiser + baseline vulnerability), **not automatically a
+positive** — high baseline dependency can equally indicate a narrower,
+less tamoxifen-specific therapeutic window, a caveat that applies
+symmetrically to VEZF1's 27.3%. It is weaker on RNA/human corroboration
+(identically null to KDM1A) and markedly weaker on existing pharmacology
+(no selective
 inhibitor exists, an unsolved TLK1-paralog selectivity problem).
 
 ## 23. Is there a single scientifically defensible "winner"?
@@ -459,7 +518,11 @@ actually supports.
 ## 24. Distinct candidate roles supported by the evidence
 
 - **Strongest functional sensitiser:** KDM1A (Section 8, 14).
-- **Strongest baseline cancer-cell vulnerability:** TLK2 (Section 12, 15).
+- **Strongest baseline cancer-cell vulnerability among the four focus
+  genes:** TLK2 (Section 12, 15); SUPT4H1 is higher (90.9%) in the full
+  13-gene universe but is not one of the four focus genes and is not
+  promoted to a lead here. Not automatically an advantage -- see Section
+  12/21/22.
 - **Strongest single-dataset non-acute RNA corroboration:** USP34
   (GSE118713, an established acquired-resistance cell-line model) and
   VEZF1 (GSE240112, a recurrence *association* in unpaired human tumors —
@@ -504,7 +567,7 @@ complementary roles (Section 24) rather than a single ranked winner.
 |---|---|---|
 | Strongest functional sensitiser | **KDM1A** | rank 1/13 by both CRISPR effect and FDR (Section 8) |
 | Most pharmacologically mature | **KDM1A** | existing clinical-stage selective inhibitor, iadademstat (Section 13, 13A) |
-| Strongest baseline ER+/luminal dependency | **TLK2** | 81.8% of 11 lines dependency-probability>0.5, the highest of the 4 (Section 12) |
+| Strongest baseline ER+/luminal dependency **among the 4 focus genes** | **TLK2** | 81.8% (9/11) DepMap 26Q1 dependency-evaluable lines, dependency-probability>0.5, highest of the 4 focus genes (SUPT4H1 is higher, 90.9%, across the full 13-gene universe). Not automatically an advantage -- may indicate a narrower, less tamoxifen-specific therapeutic window (Section 12) |
 | Strongest human recurrence-associated signal | **VEZF1** | only significant GSE240112 hit among the 4 (Section 11) -- an association with recurrence, not proof of causing or reversing tamoxifen resistance |
 | Novel target with the most direct evidence of covalent chemical reactivity (hedged -- not a proven comparative-tractability ranking) | **USP34** | corrected, precise basis in Section 13A -- not "the only one with a structure"; proves Cys1903 reactivity to a macromolecular probe, does not by itself prove USP34 is more small-molecule-tractable than TLK2's canonical kinase pocket |
 | Best-supported multimodal target | **Not a clean tie -- not clearly decidable** | USP34 (GSE118713, an established resistance model) and VEZF1 (GSE240112, a smaller, unpaired, source-confounded recurrence association) each have exactly one significant non-acute RNA dataset, but the two datasets differ substantially in kind and rigor and should not be read as interchangeable (Section 9, 18) |

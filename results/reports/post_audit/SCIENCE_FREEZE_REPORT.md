@@ -48,19 +48,37 @@ direction) in the Hany CRISPR screen:
   strongest functional sensitiser in the entire screen — but is null in
   every RNA dataset this project has.
 - **TLK2** ranks 2nd of 13 by FDR — and has, by a wide margin, the
-  strongest baseline ER+/luminal DepMap dependency of any of the 4 focus
-  genes (81.8% of 11 lines).
+  strongest baseline ER+/luminal DepMap dependency **among the 4 focus
+  genes** (81.8%, i.e. 9 of 11 dependency-evaluable lines, DepMap Public
+  26Q1 -- provenance: 96 breast models in metadata -> 22 ER+/luminal ->
+  53 breast / 11 ER+/luminal dependency-evaluable; SUPT4H1 is higher,
+  90.9%, across the full 13-gene universe but is not one of the 4 focus
+  genes). High dependency is not automatically an advantage for a
+  tamoxifen-sensitisation strategy -- it may instead indicate a
+  narrower, less tamoxifen-specific therapeutic window; this caveat
+  applies equally to VEZF1's 27.3%.
 - **USP34** ranks 12th of 13 by effect / 10th of 13 by FDR — the
   *weakest* CRISPR evidence of the four focus genes — but has exactly
-  one significant chronic-RNA dataset (GSE118713) and a real,
-  crystallographically-proven covalently-reactive catalytic cysteine.
+  one significant non-acute (recurrence/resistance-context) RNA dataset
+  (GSE118713, an established acquired-resistance cell-line model) and a
+  real, crystallographically-proven covalently-reactive catalytic
+  cysteine, demonstrated with a macromolecular activity-based ubiquitin
+  probe (not a small-molecule inhibitor).
 - **VEZF1** ranks 8th of 13 by effect / 6th of 13 by FDR, with exactly
-  one significant chronic-RNA dataset (GSE240112, the only significant
-  human-tumour signal of the four).
+  one significant non-acute RNA dataset (GSE240112 -- a recurrence
+  *association* in unpaired human tumours, not an experimentally
+  established resistance model; the only significant human-tumour
+  signal of the four).
 - GSE111151, the only dataset in this project with multiple independent
   resistance backgrounds, corroborates **zero** of the 12 testable
   significant sensitising hits (including all 4 focus genes) at
   FDR<0.05 — a real, disclosed null result.
+- **KDM1A vs. USP34, pairwise (not a new ranking rule):** both are 0.0%
+  strongly dependent in the same 11-line DepMap subset. KDM1A has
+  substantially stronger CRISPR evidence and existing clinical-stage
+  pharmacology; USP34's distinguishing advantages are novelty, its
+  demonstrated catalytic-cysteine reactivity, and its single-model
+  GSE118713 corroboration. Neither is stated to be superior overall.
 
 ## 4. Final candidate-role interpretation
 
@@ -68,9 +86,9 @@ direction) in the Hany CRISPR screen:
 |---|---|---|
 | Strongest functional sensitiser | KDM1A | high — direct recomputation from `labels.parquet` |
 | Most pharmacologically mature | KDM1A | high — multiple clinical-stage LSD1 inhibitors exist |
-| Strongest baseline ER+/luminal dependency | TLK2 | high — DepMap 26Q1, 11-line denominator |
-| Strongest human recurrence-associated RNA signal | VEZF1 | moderate — single unpaired, small-n, source-confounded dataset |
-| Novel target with the most direct evidence of covalent chemical reactivity | USP34 | moderate — hedged, not a proven comparative-tractability ranking; see Section 5 |
+| Strongest baseline ER+/luminal dependency among the 4 focus genes | TLK2 | high — DepMap 26Q1, 11-line dependency-evaluable denominator; not automatically an advantage (see Section 3 above) |
+| Strongest human recurrence-associated RNA signal | VEZF1 | moderate — single unpaired, small-n, source-confounded, recurrence-associated (not resistance-model) dataset |
+| Target with the most direct evidence of covalent PROTEIN reactivity (activity probe, not a drug) | USP34 | moderate — hedged, not a proven comparative-tractability ranking, and distinct in kind from KDM1A's covalent small-molecule pharmacology; see Section 5 |
 | Best-supported multimodal (CRISPR+RNA) target | Not a clean tie between USP34/VEZF1, not decidable | low — each has exactly 1 significant non-acute RNA dataset, but of different kinds/rigor (established resistance model vs. small unpaired recurrence association) — not interchangeable |
 | **Overall universal winner** | **NO** | — |
 
@@ -231,10 +249,13 @@ recomputed any part of the original historical analysis.
   EML5/CITED2). Their evidence base is CRISPR + DepMap + independently
   verified external literature only — a real, disclosed evidence-depth
   gap, not evidence they are weaker.
-- USP34's and VEZF1's chronic-RNA corroboration is each a **single
-  dataset**, not multiple independent confirmations; leave-one-dataset
-  -out analysis shows each candidate's entire RNA support disappears if
-  that one dataset is removed.
+- USP34's and VEZF1's non-acute RNA corroboration is each a **single
+  dataset** (USP34: GSE118713, an established acquired-resistance
+  cell-line model; VEZF1: GSE240112, a recurrence *association* in
+  unpaired human tumours, not an experimentally established resistance
+  model -- not directly comparable in kind), not multiple independent
+  confirmations; leave-one-dataset-out analysis shows each candidate's
+  entire RNA support disappears if that one dataset is removed.
 - A documentation tension between two GSE111151 pre-analysis plans (an
   earlier "no ordinary FDR, post-selection-confirmation-only" rule vs. a
   later, separately-dated, locked plan specifying a conventional blocked

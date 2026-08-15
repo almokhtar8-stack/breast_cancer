@@ -198,7 +198,7 @@ def build_figure_d_rule_stability(stub: Path) -> None:
     srs = pad.build_selection_rule_sensitivity()
     rule_order = ["RULE_0_original_frozen_gate", "RULE_1_crispr_only_no_rna_gate", "RULE_2_chronic_rna_corroboration",
                   "RULE_3_gse111151_specific", "RULE_4_human_evidence_first"]
-    rule_labels = ["Rule 0\noriginal gate", "Rule 1\nCRISPR only", "Rule 2\nchronic RNA", "Rule 3\nGSE111151 only", "Rule 4\nhuman evidence\nfirst"]
+    rule_labels = ["Rule 0\noriginal gate", "Rule 1\nCRISPR only", "Rule 2\nnon-acute RNA", "Rule 3\nGSE111151 only", "Rule 4\nhuman evidence\nfirst"]
 
     fig, ax = plt.subplots(figsize=(11, 7), dpi=300)
     max_rank = int(np.nanmax(srs["rank"])) + 1

@@ -99,12 +99,12 @@ Ratings scale: HIGH / MEDIUM / LOW.
 - **Recommendation: SUPPLEMENTARY.** Valuable as safety-diligence backup material; not a headline scientific claim.
 
 ## 11. `11_GDSC_USP34_pharmacogenomics`
-- Scientific importance: **MEDIUM** -- association-only pharmacogenomics on a secondary axis, explicitly labeled as such.
+- Scientific importance: **MEDIUM** -- association-only pharmacogenomics on a secondary axis, explicitly labeled as such. Evidence quality was further downgraded during the post-audit science freeze (2026-08-15): the 9 FDR-significant rows represent only **8 unique compounds** (AZD7762 counted twice, once per response metric), all 9 rows are GDSC1 with zero independent GDSC2 replication, and 2 of the 7 LN_IC50-only hits reverse sign in the AUC metric -- only AZD7762 is a genuinely robust, metric-consistent association; VEZF1 has zero significant GDSC associations. See `results/reports/post_audit/SCIENCE_FREEZE_REPORT.md` Section 7 for the full downgrade note.
 - Visual impact: **HIGH** -- the lollipop + scatter combination is clean and the AZD7762 relationship is visually convincing.
 - Uniqueness of message: **MEDIUM** -- overlaps with the frozen `poster/04_pharmacogenomics.png`.
 - Poster readability: **HIGH**.
 - Redundancy: **MEDIUM** (vs the existing frozen poster figure 4, which shows the same AZD7762 scatter as panel B here).
-- **Recommendation: SUPPORTING.** Panel A (top associations) is new and adds value beyond the existing frozen figure; panel B duplicates it.
+- **Recommendation: SUPPORTING/SUPPLEMENTARY.** Panel A (top associations) is new and adds value beyond the existing frozen figure; panel B duplicates it. **Poster-status note (added 2026-08-16, re-audit cleanup):** given the GDSC1-only replication and sign-reversal caveats above, this figure is not deleted and remains available in the bank, but it is explicitly **not part of the main poster narrative** and should be treated as supporting/supplementary background material only, unless a later explicit decision changes that. No new GDSC analysis was performed to reach this note.
 
 ## 12. `12_USP34_structure_surface`
 - Scientific importance: **HIGH** -- same real structural facts as before (catalytic dyad, covalent probe), now shown as an actual publication-style hero image.
