@@ -43,6 +43,18 @@ python scripts/poster/build_all.py --check
 
 - Tests read real project data, so they must be run from the repository root
   with the `bc` environment active.
+- **The figure tests re-render figures into `results/figures/`.** Because PDF and
+  SVG output is not byte-reproducible (and figure 03's PNG is not either — see
+  [`poster/README.md`](../poster/README.md)), running the suite leaves those
+  committed artifacts showing as modified even though no figure changed. Discard
+  the churn with:
+
+  ```bash
+  git checkout -- results/figures/
+  ```
+
+  The five reproducible PNGs are unaffected and are checked byte-for-byte by
+  `tests/test_poster_release_integrity.py`.
 - DepMap tests read a cached 11-line extract; if
   `results/tables/poster_depmap_v1/` is deleted they rebuild it from the external
   DepMap matrices, which requires those files locally (see
