@@ -31,3 +31,8 @@ dependencies:
   - scikit-learn
   - scipy
   - statsmodels
+  - pip:
+      # label collision-avoidance for the post-freeze exploratory network
+      # figure (src/poster_network_mechanism_v2.py) -- not on conda-forge
+      # under this name/version, plain PyPI install.
+      - adjustText
