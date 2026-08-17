@@ -19,14 +19,48 @@ performed by this project, and no result here should be read as a
 validated therapeutic target, a proven mechanism, or a safe/efficacious
 drug candidate.**
 
-**Quick links:** [Project workflow](docs/PROJECT_WORKFLOW.md) ·
+**Quick links:** **[▶ Final poster figures](poster/)** ·
+[Analysis map](docs/analysis_map.md) ·
+[Project workflow](docs/PROJECT_WORKFLOW.md) ·
 [Data provenance](docs/DATA_PROVENANCE.md) ·
 [Results guide](docs/RESULTS_GUIDE.md) ·
 [Reproducibility](docs/REPRODUCIBILITY.md) ·
 [Canonical results index](results/final/README.md) ·
 [Root pre-analysis plan](PREANALYSIS.md) ·
 [Code map](docs/CODE_MAP.md) ·
-[Tests](tests/)
+[Public repo audit](docs/FINAL_PUBLIC_REPO_AUDIT.md) ·
+[Tests](tests/README.md)
+
+---
+
+## Start here: the six final poster figures
+
+The current poster tells one six-step story about four focus genes —
+**KDM1A, TLK2, USP34, VEZF1**:
+
+| # | Figure | Question | Status |
+|---|---|---|---|
+| 01 | [CRISPR discovery](poster/final_figures/01_crispr_discovery.png) | Which knockouts sensitise ER+ cells to tamoxifen? | frozen |
+| 02 | [Candidate expression](poster/final_figures/02_candidate_expression.png) | How do the four behave across resistance / recurrence / acute response? | derived from frozen |
+| 03 | [Molecular networks](poster/final_figures/03_molecular_networks.png) | What neighbourhood surrounds each candidate? | **post-freeze exploratory** |
+| 04 | [Pathway remodeling](poster/final_figures/04_pathway_remodeling.png) | Do those programs change in the transcriptomic data? | derived from frozen |
+| 05 | [Baseline dependency](poster/final_figures/05_depmap_dependency.png) | Is sensitisation distinct from baseline cancer dependency? | derived from frozen |
+| 06 | [Structural tractability](poster/final_figures/06_structural_tractability.png) | Can these vulnerabilities realistically be targeted? | derived from frozen |
+
+Canonical files, per-figure provenance, interpretation boundaries and exact
+rebuild commands: **[`poster/README.md`](poster/README.md)** and
+[`poster/figure_manifest.tsv`](poster/figure_manifest.tsv) (which records the
+SHA-256 of every published figure file).
+
+```bash
+python scripts/poster/build_all.py           # rebuild all six + refresh manifest
+python scripts/poster/build_all.py --check   # verify outputs/hashes only
+```
+
+> **Important:** the four poster focus genes are **not** the historical frozen
+> shortlist. The frozen evidence-only shortlist was *USP34, VEZF1, EML5,
+> CITED2*; the poster four were set by the later post-audit reinterpretation
+> (§C). No frozen value or ranking was changed to produce them.
 
 ---
 
@@ -248,6 +282,10 @@ question, and none of them overrides another:
 ## G. Repository structure
 
 ```
+poster/             PUBLIC ENTRY POINT for the final poster
+  README.md         Per-figure question/result/source + interpretation boundaries
+  final_figures/    The six canonical figures (PNG/PDF/SVG), byte-identical copies of their sources
+  figure_manifest.tsv  Provenance + SHA-256 for every published figure file
 config/            YAML configuration -- every file path used by analysis code lives here
 data/
   raw/             External data (symlinked to Ibex scratch storage) -- NOT in git
@@ -263,10 +301,11 @@ results/
   networks/         Cytoscape-importable network files
   final/            Canonical results index -- START HERE for final findings
 scripts/
+  poster/           Six thin wrappers + build_all.py -- rebuild the canonical poster figures
   download/         One-time, deterministic network-download scripts (never run at analysis time)
   analysis/         R scripts (limma, edgeR, Seurat, InferCNV, CopyKAT) invoked from src/ via subprocess
 src/                Python analysis modules -- one (or a small family) per phase, deterministic, no network calls
-tests/              One pytest module per src/ module, exercising real logic
+tests/              One pytest module per src/ module, exercising real logic (see tests/README.md)
 PREANALYSIS.md       Root pre-analysis plan (CRISPR/bulk phase), with a dated, append-only amendments log
 CLAUDE.md            Project-specific engineering rules (data hygiene, hard rules, commit conventions)
 ```
