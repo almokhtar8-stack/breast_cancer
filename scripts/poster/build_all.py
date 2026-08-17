@@ -92,6 +92,9 @@ FIGURES = [
          analysis_status="derived_from_frozen", post_freeze="no"),
 ]
 
+# Figure whose PNG is not byte-reproducible; see the comment in main().
+NON_REPRODUCIBLE_PNG = {"03_molecular_networks"}
+
 MANIFEST_COLUMNS = [
     "figure_number", "figure_name", "scientific_question", "poster_png", "poster_pdf",
     "poster_svg", "canonical_source", "render_module", "wrapper_script",
@@ -173,8 +176,16 @@ def main() -> int:
             if not dst.exists():
                 failures.append(f"figure {fig['number']}: missing canonical copy {dst.name}")
                 continue
-            src_hash, dst_hash = sha256(src), sha256(dst)
-            if src_hash != dst_hash:
+            dst_hash = sha256(dst)
+            # Only PNG is required to match its source byte-for-byte. PDF is
+            # reproducible only with SOURCE_DATE_EPOCH pinned and SVG never is
+            # (matplotlib emits per-run element ids), so a re-render legitimately
+            # changes PDF/SVG bytes without changing the figure. Figure 03's PNG
+            # is additionally exempt: its label placement uses adjustText, whose
+            # solver is nondeterministic (documented in
+            # src/poster_network_mechanism_v4.py).
+            strict_png = ext == "png" and fig["name"] not in NON_REPRODUCIBLE_PNG
+            if strict_png and sha256(src) != dst_hash:
                 failures.append(f"figure {fig['number']}: {dst.name} differs from its source")
             row[f"poster_{ext}"] = rel(dst)
             row[f"sha256_{ext}"] = dst_hash
@@ -192,7 +203,10 @@ def main() -> int:
             lines.append("\t".join(str(row.get(c, "")) for c in MANIFEST_COLUMNS))
         MANIFEST.write_text("\n".join(lines) + "\n")
 
-    print(f"\nOK: {len(rows)}/6 canonical figures present, all copies byte-identical to source.")
+    n_strict = len(rows) - len(NON_REPRODUCIBLE_PNG)
+    print(f"\nOK: {len(rows)}/6 canonical figures present; "
+          f"{n_strict}/{len(rows)} PNGs verified byte-identical to source "
+          f"(PDF/SVG and figure 03's PNG are not byte-reproducible -- see poster/README.md).")
     print(f"     figures  -> {rel(FINAL_DIR)}/")
     print(f"     manifest -> {rel(MANIFEST)}")
     return 0
