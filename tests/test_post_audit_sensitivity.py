@@ -224,6 +224,7 @@ class TestDocumentationCorrection:
 class TestEnvironmentSpecCompleteness:
     def test_environment_yml_declares_every_imported_third_party_package(self):
         import ast
+        import sys
 
         text = Path("environment.yml").read_text()
         declared = set()
@@ -255,10 +256,11 @@ class TestEnvironmentSpecCompleteness:
                 elif isinstance(node, ast.ImportFrom) and node.level == 0 and node.module:
                     imports.add(node.module.split(".")[0])
 
-        stdlib_ish = {"src", "scripts", "__future__", "pathlib", "logging", "os", "sys", "re", "json",
-                      "collections", "itertools", "functools", "typing", "dataclasses", "subprocess",
-                      "tempfile", "shutil", "hashlib", "gzip", "ast", "inspect", "warnings", "math", "io",
-                      "copy", "textwrap", "time", "zipfile", "argparse", "datetime", "urllib"}
+        # Use Python's own authoritative stdlib list rather than a
+        # hand-maintained set: the previous literal set silently omitted
+        # modules (e.g. `csv`), which made this test demand a conda package
+        # for a stdlib module the moment any file imported one.
+        stdlib_ish = set(sys.stdlib_module_names) | {"src", "scripts"}
         third_party = imports - stdlib_ish
         missing = sorted(third_party - declared_imports - {"PIL"})  # PIL: transitive via matplotlib, not directly declared upstream either
         assert missing == [], f"third-party imports missing from environment.yml: {missing}"
