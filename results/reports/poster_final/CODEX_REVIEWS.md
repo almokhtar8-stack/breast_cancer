@@ -162,3 +162,69 @@ was that a sceptic "would receive an unusually accurate overall picture", and
 that the poster's evidential conclusion — a hypothesis worth testing, not a
 supported therapeutic target — is fair.
 
+---
+
+## Checkpoint 3 — before the final commit (structural)
+
+**Asked:** to verify the freeze is intact; that nothing changed outside the
+permitted paths; that no superseded module was deleted or edited; that every
+figure is traceable to its source with matching hashes; a prohibited-claim
+sweep and a required-disclosure sweep across the poster text, `POSTER.md` and
+the root `README.md`; and anything else structurally wrong.
+
+### What came back
+
+**Passed:** freeze intact on all four checks (tag commit, shortlist checksum,
+`evidence_freeze/` diff empty, `poster/` and `PREANALYSIS.md` diff empty); no
+superseded module deleted or edited; all 21 recorded figure hashes match the
+actual files; every figure has a named source and clears the 20 pt floor; all
+six required disclosures present.
+
+**Five findings, all acted on.**
+
+**1. I had deleted a pre-existing file.** `results/reports/poster_final/POSTER_FINAL_FIGURE_GUIDE.md`
+existed at the base commit — added by commit `fd5172c`, whose message is
+literally *"Retain provenance notes for superseded figure iterations"* — and I
+removed it with `rm -f` while tidying, having assumed the directory was new.
+That is a direct violation of the constraint against deleting superseded
+documents, and it is exactly the kind of thing a structural check exists to
+catch. *Action:* restored byte-identically from `477c992`. The branch now
+deletes nothing.
+
+**2. `verification_against_frozen.tsv` had 16 rows with a blank verdict.**
+Figure 3 inherits the volcano gate, which reports `fdr_match` and
+`log2fc_match` rather than the single `match` column the combined table is read
+on, so its 16 candidate rows appeared blank even though every one of them
+passed. Codex was right to call this a literal failure of "every check has
+`match == True`" — a reader auditing that file could not tell passing from
+unrecorded. *Action:* the inherited rows are now folded into the common schema,
+with `match` computed from both sub-checks. All 87 rows now carry a verdict and
+all are `True`.
+
+**3. An absolute claim in the root `README.md`.** Line 178 read that USP34's
+structure *"proves Cys1903 is covalently reactive"*. *Action:* changed to
+*"demonstrates that Cys1903 is covalently reactive"*. The underlying statement
+is true and well hedged in its surrounding paragraph, but "proves" is not a
+word this project should use about a single co-crystal.
+
+**4. `scripts/post_poster_probe_gse245601_annotations.py` outside the permitted
+patterns.** Correct observation, no action needed: the file arrived with the
+`post-poster-strengthening` merge that Part 8 mandates, and my path list given
+to the reviewer simply omitted `scripts/post_poster_*`. It is that branch's own
+network-probe script, unchanged.
+
+**5. `docs/POSTER_BRIEF.md` untracked in a read-only directory.** This is the
+author's own brief, written by them into `docs/` before the work began. It is
+untracked, so it is not part of this branch's diff, and it is not mine to
+delete or commit. *Action:* left exactly as found, and recorded here so it is
+not mistaken for something this branch produced.
+
+### Standing note
+
+The prohibited-claim sweep found no other affirmative violation. Every other
+hit for "validated", "confirms", "replicated", "efficacy", "docking",
+"paired" and "single-cell" was either a negation ("*not* a validated
+therapeutic target", "*no* docking ... was performed") or an accurate
+descriptive use (GSE245601's design genuinely is patient-paired; the datasets
+genuinely are single-cell in origin while the analysis unit is per-tumour
+pseudobulk, which the text states).

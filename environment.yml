@@ -26,7 +26,9 @@ dependencies:
   - pytest
   - pyyaml
   - r-base=4.5.3
+  - r-data.table
   - r-statmod=1.5.2
+  - r-yaml
   - requests
   - scikit-learn
   - scipy

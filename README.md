@@ -19,7 +19,55 @@ performed by this project, and no result here should be read as a
 validated therapeutic target, a proven mechanism, or a safe/efficacious
 drug candidate.**
 
-**Quick links:** **[▶ Final poster figures](poster/)** ·
+## What this project found — in sixty seconds
+
+A published genome-wide CRISPR screen tested 19,103 genes and found **13**
+whose loss makes tamoxifen work better in an ER-positive breast-cancer cell
+line. Four were carried forward and checked against four independent public
+transcriptomic datasets.
+
+**The gene-level result is largely negative, and that is reported as
+prominently as anything else here:**
+
+- Only **2 of 16** candidate gene-and-dataset combinations reach a false
+  discovery rate of 0.05 (USP34 in GSE118713; VEZF1 in GSE240112).
+- Each candidate is corroborated in **at most one** dataset, none in more
+  than one.
+- Pooling the three resistance-context datasets in a random-effects
+  meta-analysis, **no candidate reaches a pooled false discovery rate of
+  0.05** — the smallest is 0.100.
+- The best-designed resistance dataset (GSE111151) returned nulls, and a power
+  calculation shows it was **underpowered rather than negative**: its median
+  80%-power detection threshold was about a 1.5-fold change, larger than every
+  candidate effect it observed.
+
+**What is more consistent is the programme level:** oestrogen response and
+cell-cycle entry are suppressed in all four datasets, and the
+epithelial-to-mesenchymal transition programme is enriched in the three
+long-term resistance settings while running the *other* way after 12 hours of
+tamoxifen.
+
+**The honest summary is that this evidence supports a hypothesis worth
+testing, not a target.** The candidates differ in the *kind* of chemical
+evidence they have rather than the amount; USP34 is carried furthest on the
+novelty of an unexplored catalytic site, not on the strength of its evidence —
+it ranks 12th of 13 by screen effect size.
+
+## What this project does not claim
+
+- No candidate is a validated therapeutic target.
+- No candidate is shown to **cause** or drive resistance.
+- Nothing here says inhibiting any of these genes would benefit a patient.
+- Nothing is validated, confirmed or replicated **at gene level**.
+- GSE245601 measures an **acute 12-hour** drug response, **not** resistance,
+  and its analysis unit is per-tumour pseudobulk, not single cells.
+- GSE240112 compares **different, unpaired** patients from two tissue banks;
+  treatment group is confounded with bank.
+- Structural evidence indicates chemical **reachability only**, never efficacy.
+- **No docking, binding prediction or molecular modelling was ever performed.**
+
+**Quick links:** **[▶ Poster deliverable](POSTER.md)** ·
+[Frozen poster figures](poster/) ·
 [Analysis map](docs/analysis_map.md) ·
 [Project workflow](docs/PROJECT_WORKFLOW.md) ·
 [Data provenance](docs/DATA_PROVENANCE.md) ·
@@ -55,6 +103,21 @@ SHA-256 of every published figure file).
 ```bash
 python scripts/poster/build_all.py           # rebuild all six + refresh manifest
 python scripts/poster/build_all.py --check   # verify outputs/hashes only
+```
+
+### A revised seven-figure set also exists
+
+A later pass rebuilt the figure set for a specific conference poster, fixing
+diagnosed problems in five of the six figures above and adding a methods
+workflow diagram the project previously lacked. It lives alongside the frozen
+six and **does not replace them**:
+**[`POSTER.md`](POSTER.md)** · figures in
+[`results/figures/poster_final/`](results/figures/poster_final/) · full poster
+text, an independent validity review and a defence guide in
+[`results/reports/poster_final/`](results/reports/poster_final/).
+
+```bash
+python scripts/poster/final_build_all.py     # rebuild all seven + manifest + CVD checks
 ```
 
 > **Important:** the four poster focus genes are **not** the historical frozen
@@ -112,7 +175,7 @@ this and found **no single gene wins on every evidence axis**:
 | Most pharmacologically mature | **KDM1A** | existing clinical-stage selective LSD1 inhibitor (iadademstat/ORY-1001) |
 | Strongest baseline ER+/luminal cancer-cell dependency **among the four focus genes** | **TLK2** | 81.8% (9/11) of DepMap 26Q1 ER+/luminal dependency-evaluable lines strongly dependent, vs. 27.3% (VEZF1) and 0.0% (USP34, KDM1A). Denominator provenance: 96 breast models in DepMap metadata -> 22 ER+/luminal -> 53 breast / **11 ER+/luminal dependency-evaluable** (have a Chronos value at all). SUPT4H1 is higher (90.9%) across the full 13-gene significant-sensitising universe — not one of the four focus genes, not promoted here. **High dependency is not automatically an advantage**: it may reflect a narrower, less tamoxifen-specific therapeutic window rather than a purely favourable "dual-action" signal — this caveat applies to both TLK2 and VEZF1 |
 | Strongest human recurrence-associated RNA signal | **VEZF1** | the only one of the four with a significant (FDR<0.05) hit in the one real-patient-tumour dataset (GSE240112) — an association with recurrence, not proof of reversing tamoxifen resistance |
-| Novel target with the most direct experimental evidence of covalent PROTEIN reactivity, no inhibitor yet | **USP34, hedged** | KDM1A and TLK2 *also* have real experimental structures (corrected finding — an earlier draft wrongly implied only USP34 did). **Evidence-specific wording, not one generic "strongest covalent target" claim:** USP34's solved catalytic domain (PDB 7W3R/7W3U) proves Cys1903 is covalently reactive to a macromolecular ubiquitin-based **activity probe** (protein-scale chemical biology tool, not a drug). KDM1A separately has its own, more mature, and differently-sourced covalent chemistry: established covalent **small-molecule** pharmacology through mechanism-based LSD1 inhibitors reacting with the FAD cofactor (tranylcypromine-class chemistry, several clinical-stage). These are two different kinds of "covalent" evidence and are not directly comparable rankings; USP34's probe reactivity does **not** by itself establish that USP34 is more small-molecule-addressable than TLK2's canonical ATP-competitive kinase pocket or KDM1A's established covalent inhibitor chemistry; "most structurally addressable" should be read as a hypothesis, not a proven comparative ranking |
+| Novel target with the most direct experimental evidence of covalent PROTEIN reactivity, no inhibitor yet | **USP34, hedged** | KDM1A and TLK2 *also* have real experimental structures (corrected finding — an earlier draft wrongly implied only USP34 did). **Evidence-specific wording, not one generic "strongest covalent target" claim:** USP34's solved catalytic domain (PDB 7W3R/7W3U) demonstrates that Cys1903 is covalently reactive to a macromolecular ubiquitin-based **activity probe** (protein-scale chemical biology tool, not a drug). KDM1A separately has its own, more mature, and differently-sourced covalent chemistry: established covalent **small-molecule** pharmacology through mechanism-based LSD1 inhibitors reacting with the FAD cofactor (tranylcypromine-class chemistry, several clinical-stage). These are two different kinds of "covalent" evidence and are not directly comparable rankings; USP34's probe reactivity does **not** by itself establish that USP34 is more small-molecule-addressable than TLK2's canonical ATP-competitive kinase pocket or KDM1A's established covalent inhibitor chemistry; "most structurally addressable" should be read as a hypothesis, not a proven comparative ranking |
 | Best-supported multimodal (CRISPR + RNA) target | **Tied / not clearly decidable** — USP34 (GSE118713 only) and VEZF1 (GSE240112 only) each have exactly one significant corroborating dataset, not multiple independent ones |
 | Overall universal winner | **NO** | see [`POST_AUDIT_SENSITIVITY_REPORT.md`](results/reports/post_audit/POST_AUDIT_SENSITIVITY_REPORT.md) and [`SCIENCE_FREEZE_REPORT.md`](results/reports/post_audit/SCIENCE_FREEZE_REPORT.md) for the full evidence behind every cell above |
 

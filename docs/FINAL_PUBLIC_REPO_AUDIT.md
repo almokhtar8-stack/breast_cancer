@@ -149,6 +149,30 @@ than trusting prior reports or documentation.
 | **3 — rerun selected analyses** | **Partially.** Requires re-downloading external raw data (GEO series, DepMap ~440 MB matrices, PDB files, GDSC, TCGA) and repointing `config/config.yaml`; helper scripts are in `scripts/download/`. R-based steps additionally need the R toolchain. |
 | **4 — full raw-data reproduction** | **Not from GitHub alone.** Raw matrices are excluded for size and must be re-obtained from their public sources; some steps also require PyMOL and R. |
 
+## Environment specification (amendment, 2026-08-18, `poster-final` branch)
+
+Two claims about the environment were checked during the poster-final pass.
+Both are recorded here because one of them turned out to be false, and a
+correction that is not needed is worth documenting as clearly as one that is.
+
+**`h5py` is NOT missing from `environment.yml`, and this document never said it
+was.** The claim was raised as a known documentation error to fix. It is not
+one: `h5py` is declared at line 10 of `environment.yml`, it imports (3.16.0),
+and the test suite collects without error. A search of this document, the root
+`README.md` and all of `docs/` finds no statement that `h5py` is absent. **No
+correction was made, because there was nothing to correct.**
+
+**A real, pre-existing gap was found and fixed instead.** `environment.yml`
+declared `r-base` and `r-statmod` but not `r-yaml` or `r-data.table`, while
+`src/post_poster_de_refit.R` loads all four of `edgeR`, `limma`, `yaml` and
+`data.table`. The `bc` environment therefore could not run the frozen R refit
+without an out-of-band install — the work was in practice carried out in a
+separate `sc245601` environment that happened to have them. Both packages have
+been added to `environment.yml`, so the R step is now reproducible from the
+declared environment alone. This affects reproducibility level 3 in the table
+above: the R-based steps need the R toolchain, and the specification now
+actually describes it.
+
 ## Release decision
 
 **READY** for public release, with the WARN items above recorded as documented
