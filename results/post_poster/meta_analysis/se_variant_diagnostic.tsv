@@ -1,0 +1,4 @@
+dataset	dataset_key	engine	n_genes	n_genes_with_ratio	n_genes_no_wald_se	t_wald_sq_over_quasi_f_median	t_wald_sq_over_quasi_f_q25	t_wald_sq_over_quasi_f_q75	se_ratio_wald_over_f_calibrated_median	interpretation	post_freeze_exploratory
+GSE118713	gse118713	limma_eBayes_log2TPM1	14757	14738	0	1.0	0.9999999999999969	1.000000000000003	1.0	wald and f_calibrated are identical by construction (quasi_f is the squared moderated t)	True
+GSE111151	gse111151	edgeR_glmQLF	27108	27104	1	0.7244750219428548	0.68121797740586	0.7924679034381451	1.1748658807752985	wald statistic runs below the deviance-based quasi-F; wald SE is the conservative variant	True
+GSE240112	gse240112	edgeR_glmQLF	18428	18146	282	0.8960836348587268	0.885411614546369	0.9184944130125154	1.056393516368777	wald statistic runs below the deviance-based quasi-F; wald SE is the conservative variant	True

@@ -1,0 +1,4 @@
+dataset	dataset_key	rows_in_refit_table	rows_lost_no_gene_symbol	rows_after_symbol_filter	rows_lost_duplicate_symbol_collapse	rows_out_unique_symbols	collapse_rule	n_genes_no_wald_se	n_genes_no_f_calibrated_se	post_freeze_exploratory
+GSE118713	gse118713	14838	0	14838	81	14757	keep the row with the highest avg_log_cpm; ties broken on gene id ascending, so the result is deterministic	0	19	True
+GSE111151	gse111151	27418	0	27418	310	27108	keep the row with the highest avg_log_cpm; ties broken on gene id ascending, so the result is deterministic	1	3	True
+GSE240112	gse240112	18428	0	18428	0	18428	keep the row with the highest avg_log_cpm; ties broken on gene id ascending, so the result is deterministic	282	0	True
