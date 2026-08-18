@@ -18,9 +18,12 @@ What changed from v1 (see results/reports/post_poster/FIGURE2_VOLCANO_V2_NOTE.md
   * A shared zoom row beneath the four main panels (variant A) covers the
     region where the candidates actually sit; a rectangle on each main panel
     marks it.
-  * Coincident candidate points are spread horizontally by a fixed,
-    documented amount (``COINCIDENCE_TOL``, ``COINCIDENCE_STEP``); y is
-    never moved, so no point changes side of the threshold line.
+  * Coincident candidates: in variant A's zoom row they are spread
+    horizontally by a fixed, documented amount (``COINCIDENCE_TOL``,
+    ``COINCIDENCE_STEP``, disclosed on the figure); y is never moved. In
+    variant B NO point is displaced: coincident candidates are drawn as
+    concentric rings at their true shared position, so every plotted x
+    equals the source log2FC exactly (test-enforced).
   * Labels sit at fixed, hand-placed positions with leader lines -- no
     collision solver -- so output is reproducible.
   * Two variants from the same verified data in one run: A with the
@@ -138,6 +141,14 @@ LABEL_POS: dict[tuple[str, str], tuple[float, float, str]] = {
 # Explicit draw order (later = on top) so no ring is ever fully hidden.
 DRAW_ORDER: tuple[str, ...] = ("KDM1A", "TLK2", "USP34", "VEZF1")
 
+# Variant B: coincident candidates share their TRUE centre and differ in
+# radius. Marker areas (points^2) for the 1st, 2nd, 3rd member of a cluster
+# in alphabetical order; the largest is drawn first so none is hidden.
+CONCENTRIC_SIZES: tuple[float, ...] = (190.0, 460.0, 820.0)
+
+OFFSET_DISCLOSURE = ("Zoom row: candidates within 0.06 log2FC of each other are drawn 0.14 apart "
+                     "horizontally so each can be counted (5 points; y unchanged; measured values in the manifest).")
+
 
 # ---------------------------------------------------------------------------
 # Geometry helpers
@@ -219,25 +230,51 @@ def _style_axes(ax, xlim, ylim, sig_y):
         ax.spines[spine].set_color(NEUTRAL["tick"])
 
 
+def coincident_clusters(points: dict[str, tuple[float, float]]) -> dict[str, list[str]]:
+    """gene -> alphabetically sorted members of its coincidence cluster
+    (singletons included), using the same tolerance as spread_coincident."""
+    _, records = spread_coincident(points)
+    members: dict[str, list[str]] = {g: [g] for g in points}
+    for r in records:
+        members[r["gene"]] = r["cluster"].split("+")
+    return members
+
+
 def _draw_candidates(ax, panel: Panel, ring_size: float, fill_size: float, lw: float,
-                     labels: bool, offsets: bool, label_fontsize: float) -> tuple[int, list[dict]]:
-    """Draw the four candidates on ``ax`` in fixed order. Returns
-    (n_filled, offset records)."""
+                     labels: bool, coincidence: str, label_fontsize: float) -> tuple[int, list[dict]]:
+    """Draw the four candidates on ``ax`` in fixed order.
+
+    ``coincidence`` is one of
+      "measured"   -- every point at its measured position, plain rings;
+      "spread"     -- coincident points displaced horizontally (variant A zoom row);
+      "concentric" -- coincident points at their TRUE position as concentric
+                      rings of increasing radius (variant B); zero displacement.
+    Returns (n_filled, offset records) -- records are empty unless "spread"."""
+    if coincidence not in ("measured", "spread", "concentric"):
+        raise ValueError(coincidence)
     measured = candidate_points(panel)
-    display, records = spread_coincident(measured) if offsets else (dict(measured), [])
+    display, records = spread_coincident(measured) if coincidence == "spread" else (dict(measured), [])
+    clusters = coincident_clusters(measured) if coincidence == "concentric" else {g: [g] for g in measured}
     n_filled = 0
     for z, gene in enumerate(DRAW_ORDER):
         x, y = display[gene]
         fdr = float(panel.candidate_rows.loc[gene, "fdr"])
         significant = fdr < SIG_FDR
         colour = GENE_COLOURS[gene]
+        members = clusters[gene]
+        rank = members.index(gene)              # 0 for singletons
+        size = ring_size if len(members) == 1 else CONCENTRIC_SIZES[rank]
+        # concentric: larger rings drawn beneath smaller ones so none is hidden
+        zorder = 10 + z if len(members) == 1 else 10 + (len(members) - rank)
         if significant:
             ax.scatter([x], [y], s=fill_size, c=colour, edgecolors="white",
                        linewidths=1.2, zorder=10 + z)
             n_filled += 1
         else:
-            ax.scatter([x], [y], s=ring_size, facecolors="none", edgecolors=colour,
-                       linewidths=lw, zorder=10 + z)
+            # clip_on=False: a ring centred just above y=0 must not lose its
+            # lower arc to the axis edge, or it stops being countable
+            ax.scatter([x], [y], s=size, facecolors="none", edgecolors=colour,
+                       linewidths=lw, zorder=zorder, clip_on=False)
         if labels:
             lx, ly, ha = LABEL_POS[(panel.accession, gene)]
             text = f"{gene}\nFDR {fdr:.4f}" if significant else gene
@@ -256,7 +293,7 @@ def _panel_header(ax, panel: Panel):
             fontsize=9.0, color=NEUTRAL["tick"])
 
 
-def _legend_strip(fig, y: float, with_background: bool):
+def _legend_strip(fig, y: float, with_background: bool, disclosure: str | None = None):
     handles = [
         Line2D([], [], marker="o", linestyle="none", markersize=9, markerfacecolor="none",
                markeredgecolor=NEUTRAL["text"], markeredgewidth=1.8, label="candidate, FDR ≥ 0.05"),
@@ -271,6 +308,10 @@ def _legend_strip(fig, y: float, with_background: bool):
     fig.legend(handles=handles, loc="lower center", bbox_to_anchor=(0.5, y), ncol=len(handles),
                frameon=False, fontsize=9.0, handletextpad=0.5, columnspacing=1.8,
                labelcolor=NEUTRAL["subtitle"])
+    if disclosure:
+        # an alteration of what is drawn belongs ON the figure, not only in the note
+        fig.text(0.5, y - 0.006, disclosure, ha="center", va="top", fontsize=8.2,
+                 color=NEUTRAL["subtitle"])
 
 
 def _figure_text(fig, top_y: float, caption_gap: float = 0.045):
@@ -312,7 +353,7 @@ def build_variant_a(panels: list[Panel], stub: Path) -> tuple[dict[str, Path], d
 
     fig = plt.figure(figsize=(13.3, 10.2))
     gs = fig.add_gridspec(2, 4, height_ratios=[2.0, 1.15], left=0.055, right=0.985,
-                          top=0.80, bottom=0.115, wspace=0.10, hspace=0.38)
+                          top=0.80, bottom=0.135, wspace=0.10, hspace=0.38)
     main_axes = [fig.add_subplot(gs[0, i]) for i in range(4)]
     zoom_axes = [fig.add_subplot(gs[1, i]) for i in range(4)]
 
@@ -329,7 +370,7 @@ def build_variant_a(panels: list[Panel], stub: Path) -> tuple[dict[str, Path], d
         ax.scatter(lfc[~cand_mask], y[~cand_mask], s=4, c=NEUTRAL["background"], alpha=0.45,
                    linewidths=0, zorder=1)
         nf, _ = _draw_candidates(ax, panel, ring_size=70, fill_size=85, lw=1.6,
-                                 labels=False, offsets=False, label_fontsize=9)
+                                 labels=False, coincidence="measured", label_fontsize=9)
         n_filled_main += nf
         # zoom rectangle on the main panel
         ax.add_patch(Rectangle((ZOOM_XLIM[0], ZOOM_YLIM[0]), ZOOM_XLIM[1] - ZOOM_XLIM[0],
@@ -345,7 +386,7 @@ def build_variant_a(panels: list[Panel], stub: Path) -> tuple[dict[str, Path], d
         inz = (lfc >= ZOOM_XLIM[0]) & (lfc <= ZOOM_XLIM[1]) & (y <= ZOOM_YLIM[1]) & ~cand_mask
         zax.scatter(lfc[inz], y[inz], s=5, c=NEUTRAL["background"], alpha=0.35, linewidths=0, zorder=1)
         nz, recs = _draw_candidates(zax, panel, ring_size=110, fill_size=130, lw=2.2,
-                                    labels=True, offsets=True, label_fontsize=9.2)
+                                    labels=True, coincidence="spread", label_fontsize=9.2)
         n_filled_zoom += nz
         for r in recs:
             r["dataset"] = panel.accession
@@ -363,7 +404,7 @@ def build_variant_a(panels: list[Panel], stub: Path) -> tuple[dict[str, Path], d
     main_axes[0].text(xlim[0] + 0.02 * (xlim[1] - xlim[0]), sig_y + 0.10, "FDR 0.05",
                       fontsize=8, color=NEUTRAL["tick"], va="bottom")
     _figure_text(fig, 0.975)
-    _legend_strip(fig, 0.012, with_background=True)
+    _legend_strip(fig, 0.040, with_background=True, disclosure=OFFSET_DISCLOSURE)
     written = _save(fig, stub)
     info = {"xlim": xlim, "ylim": ylim, "zoom_xlim": ZOOM_XLIM, "zoom_ylim": ZOOM_YLIM,
             "offsets": offset_records}
@@ -371,7 +412,8 @@ def build_variant_a(panels: list[Panel], stub: Path) -> tuple[dict[str, Path], d
 
 
 # ---------------------------------------------------------------------------
-# Variant B: candidates only, tighter shared range, no inset
+# Variant B: candidates only, tighter shared range, no inset, ZERO displacement
+# (coincident candidates are concentric rings at their true position)
 # ---------------------------------------------------------------------------
 def build_variant_b(panels: list[Panel], stub: Path) -> tuple[dict[str, Path], dict]:
     _pin_reproducibility()
@@ -387,8 +429,8 @@ def build_variant_b(panels: list[Panel], stub: Path) -> tuple[dict[str, Path], d
     offset_records: list[dict] = []
     for i, (ax, panel) in enumerate(zip(axes, panels)):
         _style_axes(ax, xlim, ylim, sig_y)
-        nf, recs = _draw_candidates(ax, panel, ring_size=190, fill_size=220, lw=2.6,
-                                    labels=True, offsets=True, label_fontsize=10.2)
+        nf, recs = _draw_candidates(ax, panel, ring_size=CONCENTRIC_SIZES[0], fill_size=220, lw=2.6,
+                                    labels=True, coincidence="concentric", label_fontsize=10.2)
         n_filled += nf
         for r in recs:
             r["dataset"] = panel.accession
@@ -539,7 +581,8 @@ def write_outputs(panels: list[Panel], verification: pd.DataFrame, out_dir: Path
     verification.insert(0, "analysis_status", STATUS_LABEL)
     verification.to_csv(out_dir / "verification_against_frozen.tsv", sep="\t", index=False)
 
-    offsets = pd.DataFrame(info["variant_b_candidates_only"]["offsets"])
+    offsets = pd.DataFrame(info["variant_a_genomewide"]["offsets"])
+    offsets["applies_to"] = "variant_a_genomewide zoom row only; variant B draws concentric rings at measured x"
     offsets.insert(0, "analysis_status", STATUS_LABEL)
     offsets.to_csv(out_dir / "cosmetic_offsets.tsv", sep="\t", index=False)
 

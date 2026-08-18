@@ -12,6 +12,9 @@ import pytest
 import src.poster_candidate_volcano_v2 as v2
 from src.poster_candidate_volcano_v2 import (
     CANDIDATES,
+    CONCENTRIC_SIZES,
+    OFFSET_DISCLOSURE,
+    coincident_clusters,
     COINCIDENCE_STEP,
     COINCIDENCE_TOL,
     EXPECTED_SIGNIFICANT,
@@ -171,7 +174,7 @@ def test_offset_never_changes_threshold_side_on_the_real_data(panels):
             assert d[g][1] == m[g][1]
 
 
-def test_real_data_offsets_are_the_documented_clusters(panels):
+def test_real_data_clusters_are_the_two_documented_ones(panels):
     clusters = {}
     for p in panels:
         _, recs = spread_coincident(candidate_points(p))
@@ -211,6 +214,7 @@ def test_main_writes_manifest_covering_both_variants(tmp_path):
         assert m[f"sha256_{ext}"].nunique() == 2  # the two variants differ
     for g, c in GENE_COLOURS.items():
         assert (m[f"colour_{g}"] == c).all()
+    assert m.loc[0, "n_points_offset"] == 5 and m.loc[1, "n_points_offset"] == 0
     assert m.loc[0, "zoom_xlim"] == "-1.5,1.5" and m.loc[0, "zoom_ylim"] == "0.0,2.5"
     assert pd.isna(m.loc[1, "zoom_xlim"])  # variant B has no zoom row
     assert m.loc[1, "shared_xlim"] == "-1.500,1.500" and m.loc[1, "shared_ylim"] == "0.000,2.500"
@@ -220,3 +224,111 @@ def test_main_writes_manifest_covering_both_variants(tmp_path):
         assert (t["analysis_status"] == STATUS_LABEL).all()
     assert (tmp_path / "cvd_simulation").is_dir()
     assert len(list((tmp_path / "cvd_simulation").glob("*.png"))) == 4
+
+
+# --- variant B: zero displacement, concentric rings ------------------------------
+def _candidate_scatter_positions(builder, panels, tmp_path):
+    """Render with ``builder`` and return, per panel, the (x, y, area) of every
+    single-point scatter collection -- i.e. every candidate marker drawn."""
+    captured = {}
+    orig_save = v2._save
+
+    def spy(fig, stub):
+        out = []
+        for ax in fig.axes:
+            if ax.get_xlabel() != "log2 fold change":
+                continue
+            pts = []
+            for coll in ax.collections:
+                offs = coll.get_offsets()
+                if len(offs) == 1:
+                    pts.append((float(offs[0][0]), float(offs[0][1]), float(coll.get_sizes()[0])))
+            out.append((tuple(ax.get_xlim()), pts))
+        captured["panels"] = out
+        return orig_save(fig, stub)
+
+    v2._save = spy
+    try:
+        builder(panels, tmp_path / builder.__name__)
+    finally:
+        v2._save = orig_save
+    return captured["panels"]
+
+
+def test_variant_b_applies_zero_displacement_plotted_x_equals_source_log2fc(panels, tmp_path):
+    drawn = _candidate_scatter_positions(build_variant_b, panels, tmp_path)
+    assert len(drawn) == 4
+    n_checked = 0
+    for (xlim, pts), panel in zip(drawn, panels):
+        assert len(pts) == 4
+        drawn_xy = sorted((x, y) for x, y, _ in pts)
+        source_xy = sorted((float(panel.candidate_rows.loc[g, "log2fc"]),
+                            float(-np.log10(panel.candidate_rows.loc[g, "fdr"]))) for g in CANDIDATES)
+        for (dx, dy), (sx, sy) in zip(drawn_xy, source_xy):
+            assert dx == sx, f"{panel.accession}: plotted x {dx!r} != source log2FC {sx!r}"
+            assert dy == sy
+            n_checked += 1
+    assert n_checked == 16
+
+
+def test_variant_b_info_records_no_offsets(panels, tmp_path):
+    _, info = build_variant_b(panels, tmp_path / "b")
+    assert info["offsets"] == []
+
+
+def test_variant_b_coincident_candidates_are_concentric_rings_of_distinct_radius(panels, tmp_path):
+    drawn = dict(zip([p.accession for p in panels],
+                     [pts for _, pts in _candidate_scatter_positions(build_variant_b, panels, tmp_path)]))
+    for p in panels:
+        clusters = coincident_clusters(candidate_points(p))
+        for gene, members in clusters.items():
+            if len(members) < 2:
+                continue
+            # every member of the cluster is drawn at ITS OWN measured centre
+            member_sizes = []
+            for m in members:
+                mx, my = candidate_points(p)[m]
+                hits = [a for x, y, a in drawn[p.accession] if x == mx and y == my]
+                assert len(hits) == 1
+                member_sizes.append(hits[0])
+            # ... with strictly increasing area in alphabetical order
+            assert member_sizes == sorted(member_sizes) and len(set(member_sizes)) == len(member_sizes)
+            assert tuple(member_sizes) == CONCENTRIC_SIZES[: len(members)]
+    assert len(CONCENTRIC_SIZES) >= 3 and list(CONCENTRIC_SIZES) == sorted(CONCENTRIC_SIZES)
+
+
+def test_variant_a_zoom_row_still_spreads_and_discloses_it(panels, tmp_path):
+    _, info = build_variant_a(panels, tmp_path / "a")
+    assert len(info["offsets"]) == 5
+    assert {r["dataset"] for r in info["offsets"]} == {"GSE111151", "GSE245601"}
+    # the disclosure is drawn on the figure, not only written in the note
+    captured = {}
+    orig_save = v2._save
+
+    def spy(fig, stub):
+        captured["texts"] = [t.get_text() for t in fig.texts]
+        return orig_save(fig, stub)
+
+    v2._save = spy
+    try:
+        build_variant_a(panels, tmp_path / "a2")
+    finally:
+        v2._save = orig_save
+    assert OFFSET_DISCLOSURE in captured["texts"]
+    assert "0.14" in OFFSET_DISCLOSURE and "5 points" in OFFSET_DISCLOSURE
+
+
+def test_variant_b_has_no_disclosure_because_nothing_is_displaced(panels, tmp_path):
+    captured = {}
+    orig_save = v2._save
+
+    def spy(fig, stub):
+        captured["texts"] = [t.get_text() for t in fig.texts]
+        return orig_save(fig, stub)
+
+    v2._save = spy
+    try:
+        build_variant_b(panels, tmp_path / "b")
+    finally:
+        v2._save = orig_save
+    assert OFFSET_DISCLOSURE not in captured["texts"]

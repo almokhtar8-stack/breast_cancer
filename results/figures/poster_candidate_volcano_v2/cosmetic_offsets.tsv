@@ -1,6 +1,6 @@
-analysis_status	gene	measured_x	display_x	x_offset	y_unchanged	cluster	dataset
-post_freeze_exploratory	KDM1A	0.0713993613378379	0.002094361806778397	-0.06930499953105951	0.04290504643800686	KDM1A+TLK2	GSE111151
-post_freeze_exploratory	TLK2	0.0727893622757189	0.14209436180677842	0.06930499953105952	0.07585829039998601	KDM1A+TLK2	GSE111151
-post_freeze_exploratory	TLK2	-0.0362993225303796	-0.18011569545927847	-0.14381637292889887	0.05443361588194557	TLK2+USP34+VEZF1	GSE245601
-post_freeze_exploratory	USP34	-0.0334650201061386	-0.04011569545927847	-0.006650675353139866	0.04549237288303751	TLK2+USP34+VEZF1	GSE245601
-post_freeze_exploratory	VEZF1	-0.0505827437413172	0.09988430454072154	0.15046704828203875	0.05060737206644244	TLK2+USP34+VEZF1	GSE245601
+analysis_status	gene	measured_x	display_x	x_offset	y_unchanged	cluster	dataset	applies_to
+post_freeze_exploratory	KDM1A	0.0713993613378379	0.002094361806778397	-0.06930499953105951	0.04290504643800686	KDM1A+TLK2	GSE111151	variant_a_genomewide zoom row only; variant B draws concentric rings at measured x
+post_freeze_exploratory	TLK2	0.0727893622757189	0.14209436180677842	0.06930499953105952	0.07585829039998601	KDM1A+TLK2	GSE111151	variant_a_genomewide zoom row only; variant B draws concentric rings at measured x
+post_freeze_exploratory	TLK2	-0.0362993225303796	-0.18011569545927847	-0.14381637292889887	0.05443361588194557	TLK2+USP34+VEZF1	GSE245601	variant_a_genomewide zoom row only; variant B draws concentric rings at measured x
+post_freeze_exploratory	USP34	-0.0334650201061386	-0.04011569545927847	-0.006650675353139866	0.04549237288303751	TLK2+USP34+VEZF1	GSE245601	variant_a_genomewide zoom row only; variant B draws concentric rings at measured x
+post_freeze_exploratory	VEZF1	-0.0505827437413172	0.09988430454072154	0.15046704828203875	0.05060737206644244	TLK2+USP34+VEZF1	GSE245601	variant_a_genomewide zoom row only; variant B draws concentric rings at measured x

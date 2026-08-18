@@ -35,7 +35,7 @@ Code: `src/poster_candidate_volcano_v2.py`, wrapper
 |---|---|
 | Per-panel autoscaling: x ranges ±7 / ±10 / ±15 / ±3, so the same fold change sat in a different place in every panel and panel 4 was stretched while panel 3 was compressed | One shared x range and one shared y range per variant, derived from the data and asserted to contain every plotted point; identical panel geometry |
 | Three of four candidates crowd near the origin in every panel | Variant A: a shared **zoom row** beneath the four main panels covering the candidate region, with a rectangle on each main panel marking it. Variant B: no backdrop, so the tight range itself is the zoom |
-| Overlapping candidate rings not individually countable (GSE111151 KDM1A/TLK2 differ by 0.001 log2FC; GSE245601 TLK2/USP34/VEZF1 sit within 0.02) | Explicit draw order, thicker outlines, and a fixed horizontal spread of coincident points (below) |
+| Overlapping candidate rings not individually countable (GSE111151 KDM1A/TLK2 differ by 0.001 log2FC; GSE245601 TLK2/USP34/VEZF1 sit within 0.02) | Explicit draw order and thicker outlines; in A's zoom row a fixed, on-figure-disclosed horizontal spread; in B concentric rings at the true position with zero displacement (below) |
 | Three-line caption unreadable at poster size | One-line caption on the figure; everything else moved here |
 | Legend inside the header block | Legend strip below the panels |
 | Panel titles one or two lines, so header heights differed | Two-line titles for all four; accession beneath, smaller and lighter; GSE245601 stays "acute 12 h tamoxifen, per-tumour pseudobulk" |
@@ -124,18 +124,26 @@ at 1.30 inside; the tick labels ±1.5 are suppressed there so neighbouring
 panels' edge labels do not touch. Variant B's range is thus 11× tighter in x
 and 3.5× tighter in y than variant A's main panels.
 
-## Cosmetic offsets
+## Coincident candidates: two different treatments, one per variant
 
-Coincidence rule (`COINCIDENCE_TOL = 0.06`, `COINCIDENCE_STEP = 0.14`, in
-zoom/variant-B data units): candidates whose pairwise |Δx| and |Δy| are
-both below 0.06 are spread horizontally in fixed alphabetical order at 0.14
-log2FC intervals centred on the cluster's mean x. **y is never moved, so no
-point can change side of the threshold line** (test-enforced on the real
-data). Applied in the zoom row and in variant B, identically; the variant A
-main panels draw measured positions (their scale makes a 0.14 offset
-invisible, and they are not where counting happens). Two clusters exist:
+Two clusters of coincident candidates exist (GSE111151 KDM1A/TLK2 differ by
+0.001 log2FC; GSE245601 TLK2/USP34/VEZF1 sit within 0.02). Coincidence rule
+(`COINCIDENCE_TOL = 0.06` in zoom/variant-B data units, both axes).
 
-| Dataset | Cluster | Gene | measured x | displayed x |
+**Variant A (zoom row only): a fixed horizontal spread, disclosed on the
+figure.** Cluster members are drawn `COINCIDENCE_STEP = 0.14` log2FC apart
+in alphabetical order, centred on the cluster's mean x; **y is never moved,
+so no point can change side of the threshold line** (test-enforced). Five
+points are displaced; 0.14 is 0.85% of variant A's x range and invisible in
+the main panels, which draw measured positions. Because displacing a data
+point alters what the figure shows, the disclosure sits **in the legend
+strip of the figure itself**, not only here: *"Zoom row: candidates within
+0.06 log2FC of each other are drawn 0.14 apart horizontally so each can be
+counted (5 points; y unchanged; measured values in the manifest)."*
+(test-enforced to be present on A). Displacements are in
+`cosmetic_offsets.tsv`; measured values in `candidate_values_plotted.tsv`.
+
+| Dataset | Cluster | Gene | measured x | displayed x (A zoom row) |
 |---|---|---|---|---|
 | GSE111151 | KDM1A + TLK2 | KDM1A | 0.071 | 0.002 |
 | | | TLK2 | 0.073 | 0.142 |
@@ -143,12 +151,20 @@ invisible, and they are not where counting happens). Two clusters exist:
 | | | USP34 | −0.033 | −0.040 |
 | | | VEZF1 | −0.051 | 0.100 |
 
-**These five horizontal displacements are cosmetic only**; the measured
-values are in `candidate_values_plotted.tsv` and the displacements in
-`cosmetic_offsets.tsv`. Per the brief the statement lives here rather than
-in the one-line caption; if a reader of the figure alone should be told, a
-short footnote in the legend strip is the natural place, and I would add it
-on request.
+**Variant B: zero displacement.** On B's ±1.5 axis the same 0.14 step
+would be 9.3% of the range — three GSE245601 candidates that differ by 0.02
+would be drawn nearly a tenth of the axis apart, and a reader taking fold
+change off the axis could conclude they point in opposite directions. So
+in B nothing moves: coincident candidates are drawn as **concentric rings
+at their true shared position**, same centre and increasing radius
+(`CONCENTRIC_SIZES`, alphabetical order, largest drawn beneath so none is
+hidden). Every ring stays countable and no x is falsified. Tests assert
+that B applies zero displacement, that **plotted x equals the source
+log2FC exactly (`==`) for all sixteen candidate points**, that cluster
+members are drawn at their own measured centres with strictly increasing
+radius, and that no disclosure text is present on B because there is
+nothing to disclose. Candidate rings are drawn unclipped so a ring centred
+just above y = 0 keeps its lower arc.
 
 ## Text moved off the figure
 
@@ -160,7 +176,8 @@ on request.
 - Panel 3 (GSE240112) has a wide fold-change range from pseudobulk extremes
   at low expression.
 - No point is trimmed from view in any panel of either variant.
-- The cosmetic offset statement above.
+- (The offset disclosure for variant A is deliberately NOT moved off the
+  figure — see above.)
 
 ## Reproducibility
 
@@ -196,7 +213,7 @@ supplement or as a backup slide, and its zoom row is what B is.
 
 ## Tests
 
-`tests/test_poster_candidate_volcano_v2.py`: **17 passed** — gate passes on
+`tests/test_poster_candidate_volcano_v2.py`: **22 passed** — gate passes on
 all 16 values and fails loudly on a corrupted value; exactly 2 significant
 at an asserted 0.05; the four gene colours match the dict exactly; v2 does
 not import colours from v1 or the heatmap renderer; no hex outside the
@@ -205,14 +222,18 @@ pairs above ΔE 20 and the purple/light-blue pair above ΔL\* 25; shared axis
 limits identical across the four panels of each variant (main and zoom rows
 each); no candidate outside the visible range in either variant; coincidence
 rule spreads horizontally only, never changes threshold side, and matches
-the two documented clusters; both variants build in all three formats; PDF
+the two documented clusters; variant B applies zero displacement with
+plotted x == source log2FC for all 16 points, draws concentric rings of
+strictly increasing radius at each member's own centre, and carries no
+disclosure; variant A spreads 5 points and carries the disclosure text on
+the figure; both variants build in all three formats; PDF
 and PNG bytes reproducible; manifest covers both variants with distinct
 SHA-256s.
 
 Full suite (six known-hanging files excluded by name —
 `test_final_pharmacogenomics.py`, `test_independent_validation.py`,
 `test_post_audit_sensitivity.py`, `test_poster_exploration_v2.py`,
-`test_poster_exploration_v3.py`, `test_poster_figures.py`): **1,454 passed, 1 skipped, 0 failed** in a single process (7 m 40 s) — v1's 1,437 plus the 17 new tests. Running the suite re-renders non-byte-reproducible PDF/SVG figures under `results/figures/poster_*` (documented by commit `477c992`); those were reverted before committing. The v2 tests render only into pytest temporary directories.
+`test_poster_exploration_v3.py`, `test_poster_figures.py`): **1,459 passed, 1 skipped, 0 failed** in a single process (7 m 52 s) — v1's 1,437 plus the 22 new tests. Running the suite re-renders non-byte-reproducible PDF/SVG figures under `results/figures/poster_*` (documented by commit `477c992`); those were reverted before committing. The v2 tests render only into pytest temporary directories.
 
 ## Freeze verification
 
