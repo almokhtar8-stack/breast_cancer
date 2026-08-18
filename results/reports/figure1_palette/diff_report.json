@@ -1,0 +1,50 @@
+{
+  "status": "post_freeze_exploratory",
+  "compared": {
+    "baseline": "poster/final_figures/01_crispr_discovery.png",
+    "candidate": "results/figures/poster_crispr_v2/CRISPR_discovery_v2.png"
+  },
+  "colour_change": {
+    "KDM1A": {
+      "from": "#D55E00",
+      "to": "#D55E00",
+      "changed": false
+    },
+    "TLK2": {
+      "from": "#CC79A7",
+      "to": "#009E73",
+      "changed": true
+    },
+    "USP34": {
+      "from": "#0072B2",
+      "to": "#6A3D9A",
+      "changed": true
+    },
+    "VEZF1": {
+      "from": "#E69F00",
+      "to": "#56B4E9",
+      "changed": true
+    }
+  },
+  "structural_differences_outside_colour": {},
+  "colour_differences_as_expected": [
+    "hline_colors",
+    "ytick_colors"
+  ],
+  "gene_order_identical": true,
+  "axis_limits_identical": true,
+  "ticks_identical": true,
+  "text_identical": true,
+  "font_sizes_identical": true,
+  "figsize_identical": true,
+  "margins_identical": true,
+  "marker_and_line_geometry_identical": true,
+  "pixel_comparison": {
+    "same_shape": true,
+    "n_differing": 103019,
+    "pct_differing": 1.333,
+    "n_unexplained": 0,
+    "all_differences_explained_by_colour": true
+  },
+  "PASS": true
+}
