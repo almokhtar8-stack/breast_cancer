@@ -1,0 +1,2 @@
+analysis	feasibility_gate	per_cell_labels_publicly_obtainable	action_taken	why_no_proxy	n_public_sources_checked	probe_date	post_freeze_exploratory
+GSE245601 published-vs-reconstructed malignant-call concordance	FAIL	False	STOP -- no confusion matrix, kappa or per-tumour concordance produced; no proxy comparison attempted	reconstructing the authors' labels in order to compare against our reconstruction of the authors' labels would measure agreement between two runs of our own pipeline, not agreement with the paper	3	2026-08-18	True

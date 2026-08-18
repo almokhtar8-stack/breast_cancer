@@ -1,0 +1,626 @@
+{
+  "post_freeze_exploratory": true,
+  "probe_date": "2026-08-18",
+  "question": "Are the GSE245601 authors' per-cell Epi. Tumor / Epi. Nontumor labels publicly obtainable, keyed by barcode and sample?",
+  "geo": {
+    "series": "GSE245601",
+    "n_samples": 26,
+    "series_supplementary_files": [
+      "ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE245nnn/GSE245601/suppl/GSE245601_RAW.tar"
+    ],
+    "sample_supplementary_file_extensions": [
+      ".h5"
+    ],
+    "n_sample_supplementary_files": 26,
+    "any_cell_metadata_file": false,
+    "note": "GEO carries only Cell Ranger filtered feature-barcode matrices. A per-cell label table would appear here as a csv/tsv/rds supplementary file; none exists."
+  },
+  "paper_supplement": {
+    "pmc_id": "PMC10690085",
+    "source_api": "Europe PMC supplementaryFiles (open access REST)",
+    "files": [
+      "4894fig1.gif",
+      "4894fig1.jpg",
+      "4894fig2.gif",
+      "4894fig2.jpg",
+      "4894fig3.gif",
+      "4894fig3.jpg",
+      "4894fig4.gif",
+      "4894fig4.jpg",
+      "4894fig5.gif",
+      "4894fig5.jpg",
+      "ccr-23-1248_supplementary_figure_s1_suppfs1.pdf",
+      "ccr-23-1248_supplementary_figure_s2_suppfs2.pdf",
+      "ccr-23-1248_supplementary_figure_s3_suppfs3.pdf",
+      "ccr-23-1248_supplementary_figure_s4_suppfs4.pdf",
+      "ccr-23-1248_supplementary_figure_s5_suppfs5.pdf",
+      "ccr-23-1248_supplementary_figure_s6_suppfs6.pdf",
+      "ccr-23-1248_supplementary_table_s1_suppts1.docx",
+      "ccr-23-1248_supplementary_table_s2_suppts2.xlsx",
+      "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+      "ccr-23-1248_supplementary_table_s4_suppts4.xlsx",
+      "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+      "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+      "ccr-23-1248_supplementary_table_s7_suppts7.xlsx"
+    ],
+    "n_xlsx_sheets_scanned": 76,
+    "max_sheet_rows": 910,
+    "total_barcode_like_cells": 0,
+    "sheets": [
+      {
+        "file": "ccr-23-1248_supplementary_table_s2_suppts2.xlsx",
+        "sheet": "table of contents",
+        "n_rows": 9,
+        "n_cols": 2,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s2_suppts2.xlsx",
+        "sheet": "up",
+        "n_rows": 25,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s2_suppts2.xlsx",
+        "sheet": "up h",
+        "n_rows": 4,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s2_suppts2.xlsx",
+        "sheet": "up unc_lccc",
+        "n_rows": 18,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s2_suppts2.xlsx",
+        "sheet": "down",
+        "n_rows": 116,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s2_suppts2.xlsx",
+        "sheet": "down h",
+        "n_rows": 6,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s2_suppts2.xlsx",
+        "sheet": "down unc_lccc",
+        "n_rows": 90,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "table of contents",
+        "n_rows": 21,
+        "n_cols": 2,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "BEp up",
+        "n_rows": 115,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "BEp up h",
+        "n_rows": 13,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "BEp up unc_lccc",
+        "n_rows": 94,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "BEp down",
+        "n_rows": 77,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "BEp down h",
+        "n_rows": 4,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "BEp down unc_lccc",
+        "n_rows": 47,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp-prog up",
+        "n_rows": 286,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp-prog up h",
+        "n_rows": 17,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp-prog up unc_lccc",
+        "n_rows": 89,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp-prog down",
+        "n_rows": 537,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp-prog down h",
+        "n_rows": 4,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp-prog down unc_lccc",
+        "n_rows": 95,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp up",
+        "n_rows": 92,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp up h",
+        "n_rows": 5,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp up unc_lccc",
+        "n_rows": 30,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp down",
+        "n_rows": 140,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp down h",
+        "n_rows": 6,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s3_suppts3.xlsx",
+        "sheet": "LEp down unc_lccc",
+        "n_rows": 73,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s4_suppts4.xlsx",
+        "sheet": "table of contents",
+        "n_rows": 9,
+        "n_cols": 2,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s4_suppts4.xlsx",
+        "sheet": "up",
+        "n_rows": 91,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s4_suppts4.xlsx",
+        "sheet": "up h",
+        "n_rows": 6,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s4_suppts4.xlsx",
+        "sheet": "up unc_lccc",
+        "n_rows": 20,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s4_suppts4.xlsx",
+        "sheet": "down",
+        "n_rows": 111,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s4_suppts4.xlsx",
+        "sheet": "down h",
+        "n_rows": 6,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s4_suppts4.xlsx",
+        "sheet": "down unc_lccc",
+        "n_rows": 55,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+        "sheet": "table of contents",
+        "n_rows": 10,
+        "n_cols": 2,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+        "sheet": "up",
+        "n_rows": 406,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+        "sheet": "up h",
+        "n_rows": 11,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+        "sheet": "up unc_lccc",
+        "n_rows": 59,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+        "sheet": "down",
+        "n_rows": 429,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+        "sheet": "down h",
+        "n_rows": 4,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+        "sheet": "down unc_lccc",
+        "n_rows": 72,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s5_suppts5.xlsx",
+        "sheet": "scTAM-resistance-M",
+        "n_rows": 301,
+        "n_cols": 1,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "table of contents",
+        "n_rows": 15,
+        "n_cols": 2,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "fibroblasts up",
+        "n_rows": 57,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "fibroblasts up h",
+        "n_rows": 2,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "fibroblasts up unc_lccc",
+        "n_rows": 12,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "fibroblasts down",
+        "n_rows": 124,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "fibroblasts down h",
+        "n_rows": 3,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "fibroblasts down unc_lccc",
+        "n_rows": 22,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "macrophages up",
+        "n_rows": 19,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "macrophages up h",
+        "n_rows": 4,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "macrophages up unc_lccc",
+        "n_rows": 5,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "macrophages down",
+        "n_rows": 43,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "macrophages down h",
+        "n_rows": 5,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s6_suppts6.xlsx",
+        "sheet": "macrophages down unc_lccc",
+        "n_rows": 25,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "table of contents",
+        "n_rows": 24,
+        "n_cols": 2,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 3 up",
+        "n_rows": 604,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 3 up h",
+        "n_rows": 6,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 3 up unc_lccc",
+        "n_rows": 118,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 3 down",
+        "n_rows": 638,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 3 down h",
+        "n_rows": 10,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 3 down unc_lccc",
+        "n_rows": 66,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "cluster 3 resistance signature",
+        "n_rows": 301,
+        "n_cols": 1,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 12 up",
+        "n_rows": 532,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 12 up h",
+        "n_rows": 4,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 12 up unc_lccc",
+        "n_rows": 76,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 12 down",
+        "n_rows": 910,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 12 down h",
+        "n_rows": 10,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 12 down unc_lccc",
+        "n_rows": 75,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "cluster 12 resistance signature",
+        "n_rows": 301,
+        "n_cols": 1,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 19 up",
+        "n_rows": 419,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 19 up h",
+        "n_rows": 7,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 19 up unc_lccc",
+        "n_rows": 97,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 19 down",
+        "n_rows": 189,
+        "n_cols": 9,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 19 down h",
+        "n_rows": 10,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "Cluster 19 down unc_lccc",
+        "n_rows": 38,
+        "n_cols": 7,
+        "n_cells_matching_barcode": 0
+      },
+      {
+        "file": "ccr-23-1248_supplementary_table_s7_suppts7.xlsx",
+        "sheet": "cluster 19 resistance signature",
+        "n_rows": 262,
+        "n_cols": 1,
+        "n_cells_matching_barcode": 0
+      }
+    ]
+  },
+  "author_repo": {
+    "repo": "hyunsoo77/BC_tamoxifen_response",
+    "pinned_commit": "ceabf3f331c88f464e6a57b0ad1f9c500bedde85",
+    "current_head": "ceabf3f331c88f464e6a57b0ad1f9c500bedde85",
+    "head_matches_pinned_commit": true,
+    "n_commits_all_refs": 12,
+    "n_blobs_at_pinned_commit": 57,
+    "n_releases": 0,
+    "n_tags": 0,
+    "has_gitattributes_lfs_config": false,
+    "file_extensions_ever_committed": [
+      ".ipynb",
+      ".md",
+      ".png",
+      ".r"
+    ],
+    "n_paths_ever_committed": 58,
+    "notebook_barcode_like_matches": {
+      "figure1_01_umap.ipynb": 3,
+      "figure1_02_barplot.ipynb": 3,
+      "figure2_01_umap.ipynb": 0,
+      "figure2_02_dge.ipynb": 48,
+      "figure3_01_umap.ipynb": 0,
+      "figure3_02_boxplot.ipynb": 0,
+      "figure3_03_dge_pairs.ipynb": 0,
+      "figure4_01_umap.ipynb": 0,
+      "figure4_02_dge.ipynb": 0,
+      "figure5_01_umap.ipynb": 0,
+      "figure5_02_barplot.ipynb": 0,
+      "figure5_03_drug_effect.ipynb": 0,
+      "figure_s1_01_dge.ipynb": 3,
+      "figure_s2_01_barplot.ipynb": 0,
+      "figure_s2_02_dge.ipynb": 0
+    },
+    "max_notebook_barcode_matches": 48
+  },
+  "controlled_access_route": {
+    "accession": "phs003186.v1.p1",
+    "repository": "dbGaP",
+    "status": "not queried",
+    "note": "The paper's Data Availability statement routes processed scRNA-seq data here. Controlled access is a possible source, not a publicly available comparator."
+  }
+}

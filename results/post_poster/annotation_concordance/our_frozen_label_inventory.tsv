@@ -1,0 +1,21 @@
+patient	condition	malignant	non-malignant epithelial	n_cells	post_freeze_exploratory
+Tumor_01	Control	1	3333	3334	True
+Tumor_01	Tamoxifen	2	2772	2774	True
+Tumor_02	Control	134	221	355	True
+Tumor_02	Tamoxifen	183	142	325	True
+Tumor_03	Control	276	237	513	True
+Tumor_03	Tamoxifen	582	523	1105	True
+Tumor_04	Control	0	151	151	True
+Tumor_04	Tamoxifen	1	69	70	True
+Tumor_05	Control	22	2543	2565	True
+Tumor_05	Tamoxifen	12	2783	2795	True
+Tumor_06	Control	9	4524	4533	True
+Tumor_06	Tamoxifen	19	3403	3422	True
+Tumor_07	Control	80	280	360	True
+Tumor_07	Tamoxifen	146	300	446	True
+Tumor_08	Control	17	889	906	True
+Tumor_08	Tamoxifen	25	959	984	True
+Tumor_09	Control	48	1806	1854	True
+Tumor_09	Tamoxifen	119	1870	1989	True
+Tumor_10	Control	61	355	416	True
+Tumor_10	Tamoxifen	2	276	278	True
