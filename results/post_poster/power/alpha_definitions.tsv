@@ -1,0 +1,10 @@
+dataset_key	dataset	alpha_name	alpha	alpha_definition	n_genes_tested	n_genes_bh_fdr_le_0.05	post_freeze_exploratory
+gse118713	GSE118713	nominal_0.05	0.05	fixed nominal alpha = 0.05, per-gene type-I error	14757	4474	True
+gse118713	GSE118713	bonferroni_13	0.0038461538461538464	Bonferroni across the 13-candidate family, 0.05/13	14757	4474	True
+gse118713	GSE118713	observed_bh_threshold	0.01512778116206	largest nominal p-value that attained BH FDR <= 0.05 in this dataset; DESCRIPTIVE ONLY -- outcome-dependent, not a prospective design alpha, and not equivalent to FDR control	14757	4474	True
+gse111151	GSE111151	nominal_0.05	0.05	fixed nominal alpha = 0.05, per-gene type-I error	27108	42	True
+gse111151	GSE111151	bonferroni_13	0.0038461538461538464	Bonferroni across the 13-candidate family, 0.05/13	27108	42	True
+gse111151	GSE111151	observed_bh_threshold	7.52279464143052e-05	largest nominal p-value that attained BH FDR <= 0.05 in this dataset; DESCRIPTIVE ONLY -- outcome-dependent, not a prospective design alpha, and not equivalent to FDR control	27108	42	True
+gse240112	GSE240112	nominal_0.05	0.05	fixed nominal alpha = 0.05, per-gene type-I error	18428	5321	True
+gse240112	GSE240112	bonferroni_13	0.0038461538461538464	Bonferroni across the 13-candidate family, 0.05/13	18428	5321	True
+gse240112	GSE240112	observed_bh_threshold	0.0144284705853847	largest nominal p-value that attained BH FDR <= 0.05 in this dataset; DESCRIPTIVE ONLY -- outcome-dependent, not a prospective design alpha, and not equivalent to FDR control	18428	5321	True
