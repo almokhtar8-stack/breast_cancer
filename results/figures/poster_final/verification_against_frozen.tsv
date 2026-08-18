@@ -1,0 +1,88 @@
+figure	check	observed	expected	tolerance	match	gene	dataset	reference_fdr	extracted_fdr	fdr_tolerance	fdr_match	reference_log2fc	extracted_log2fc	log2fc_match
+F1_methods_workflow	n_genomewide_fitted	19103.0	19103.0	0.0	True									
+F1_methods_workflow	n_screen_hits	13.0	13.0	0.0	True									
+F1_methods_workflow	n_depmap_lines	11.0	11.0	0.0	True									
+F1_methods_workflow	n_network_nodes	47.0	47.0	0.0	True									
+F1_methods_workflow	n_network_edges	147.0	147.0	0.0	True									
+F2_screen_certainty	n_significant_hits	13.0	13.0	0.0	True									
+F2_screen_certainty	n_genomewide_fitted	19103.0	19103.0	0.0	True									
+F2_screen_certainty	KDM1A_effect_size	-2.1673356347994606	-2.167336	1e-06	True									
+F2_screen_certainty	KDM1A_fdr	0.00038498771264042166	0.000385	1e-06	True									
+F2_screen_certainty	TLK2_effect_size	-1.8481983037301877	-1.848198	1e-06	True									
+F2_screen_certainty	TLK2_fdr	0.0016758310698192377	0.001676	1e-06	True									
+F2_screen_certainty	VEZF1_effect_size	-1.6024453888335461	-1.602445	1e-06	True									
+F2_screen_certainty	VEZF1_fdr	0.03725756602297225	0.037258	1e-06	True									
+F2_screen_certainty	USP34_effect_size	-1.3912980676838433	-1.391298	1e-06	True									
+F2_screen_certainty	USP34_fdr	0.041685180362283594	0.041685	1e-06	True									
+F2_screen_certainty	max_fdr_among_hits	0.06918341751903241	0.0	0.1	True									
+F2_screen_certainty	max_effect_among_hits	-1.2245539921905229	-1.0	1.0	True									
+F2_screen_certainty	usp34_rank_by_effect	12.0	12.0	0.0	True									
+F3_candidate_corroboration						KDM1A	GSE118713	0.494	0.493845720601604	0.001	True		0.146667919066447	
+F3_candidate_corroboration						TLK2	GSE118713	0.675	0.674943903042664	0.001	True		-0.151752544851276	
+F3_candidate_corroboration						USP34	GSE118713	0.0073	0.0073136129571408	0.001	True	0.590	0.590437436807219	True
+F3_candidate_corroboration						VEZF1	GSE118713	0.238	0.237500391027449	0.001	True	0.427	0.426552278550176	True
+F3_candidate_corroboration						KDM1A	GSE111151	0.91	0.905930650706976	0.005	True		0.0713993613378379	
+F3_candidate_corroboration						TLK2	GSE111151	0.84	0.839733945674166	0.005	True		0.0727893622757189	
+F3_candidate_corroboration						USP34	GSE111151	0.63	0.632236473760328	0.005	True		0.161522475648414	
+F3_candidate_corroboration						VEZF1	GSE111151	0.61	0.607594477564463	0.005	True		-0.238235372712826	
+F3_candidate_corroboration						KDM1A	GSE240112	0.59	0.59163963287314	0.005	True		0.191941386609262	
+F3_candidate_corroboration						TLK2	GSE240112	0.88	0.882577720157556	0.005	True		0.0570763695102118	
+F3_candidate_corroboration						USP34	GSE240112	0.23	0.22750138874853	0.005	True		0.400106644327525	
+F3_candidate_corroboration						VEZF1	GSE240112	0.0195	0.0194899399382215	0.001	True		1.14940832913316	
+F3_candidate_corroboration						KDM1A	GSE245601	0.37	0.369442163215661	0.005	True		-0.215079883472444	
+F3_candidate_corroboration						TLK2	GSE245601	0.88	0.882198640375374	0.005	True		-0.0362993225303796	
+F3_candidate_corroboration						USP34	GSE245601	0.90	0.900549578140749	0.005	True		-0.0334650201061386	
+F3_candidate_corroboration						VEZF1	GSE245601	0.89	0.890005371824952	0.005	True		-0.0505827437413172	
+F3_candidate_corroboration	n_significant_of_16	2.0	2.0	0.0	True									
+F3_candidate_corroboration	n_candidate_dataset_cells	16.0	16.0	0.0	True									
+F3_candidate_corroboration	meta_primary_min_fdr	0.1002567454480901	0.100257	1e-05	True									
+F3_candidate_corroboration	meta_n_candidates_below_fdr_005	0.0	0.0	0.0	True									
+F3_candidate_corroboration	gse111151_median_mde80	0.6269175349091616	0.626918	1e-05	True									
+F3_candidate_corroboration	gse111151_n_candidates_tested	12.0	12.0	0.0	True									
+F4_programme_signal	n_values	20.0	20.0	0.0	True									
+F4_programme_signal	NES[Cell adhesion and motility|gse118713]	1.9779876141756056	1.977988	1e-06	True									
+F4_programme_signal	NES[Cell adhesion and motility|gse111151]	2.16611543772747	2.166115	1e-06	True									
+F4_programme_signal	NES[Cell adhesion and motility|gse240112]	1.5069747235971958	1.506975	1e-06	True									
+F4_programme_signal	NES[Cell adhesion and motility|gse245601]	-1.5593119122606791	-1.559312	1e-06	True									
+F4_programme_signal	NES[Oestrogen response (early)|gse118713]	-2.881806898734365	-2.881807	1e-06	True									
+F4_programme_signal	NES[Oestrogen response (early)|gse245601]	-2.070303953078644	-2.070304	1e-06	True									
+F4_programme_signal	EMT_positive_in_gse118713	1.0	1.0	0.0	True									
+F4_programme_signal	EMT_significant_in_gse118713	1.0	1.0	0.0	True									
+F4_programme_signal	EMT_positive_in_gse111151	1.0	1.0	0.0	True									
+F4_programme_signal	EMT_significant_in_gse111151	1.0	1.0	0.0	True									
+F4_programme_signal	EMT_positive_in_gse240112	1.0	1.0	0.0	True									
+F4_programme_signal	EMT_significant_in_gse240112	1.0	1.0	0.0	True									
+F4_programme_signal	EMT_negative_in_acute	1.0	1.0	0.0	True									
+F4_programme_signal	EMT_significant_in_acute	1.0	1.0	0.0	True									
+F4_programme_signal	ER_early_negative_in_all_four	4.0	4.0	0.0	True									
+F5_network_connectivity	n_nodes	47.0	47.0	0.0	True									
+F5_network_connectivity	n_edges	147.0	147.0	0.0	True									
+F5_network_connectivity	n_components	3.0	3.0	0.0	True									
+F5_network_connectivity	path_length	3.0	3.0	0.0	True									
+F5_network_connectivity	n_shortest_paths	4.0	4.0	0.0	True									
+F5_network_connectivity	vezf1_degree	0.0	0.0	0.0	True									
+F5_network_connectivity	every_route_via_single_bridge	1.0	1.0	0.0	True									
+F5_network_connectivity	every_route_middle_is_ubiquitin	1.0	1.0	0.0	True									
+F5_network_connectivity	n_distinct_middle_nodes	4.0	4.0	0.0	True									
+F6_baseline_dependency	TLK2_n_strongly_dependent	9.0	9.0	0.0	True									
+F6_baseline_dependency	TLK2_n_lines	11.0	11.0	0.0	True									
+F6_baseline_dependency	VEZF1_n_strongly_dependent	3.0	3.0	0.0	True									
+F6_baseline_dependency	VEZF1_n_lines	11.0	11.0	0.0	True									
+F6_baseline_dependency	KDM1A_n_strongly_dependent	0.0	0.0	0.0	True									
+F6_baseline_dependency	KDM1A_n_lines	11.0	11.0	0.0	True									
+F6_baseline_dependency	USP34_n_strongly_dependent	0.0	0.0	0.0	True									
+F6_baseline_dependency	USP34_n_lines	11.0	11.0	0.0	True									
+F6_baseline_dependency	all_four_genes_present	4.0	4.0	0.0	True									
+F7_reachability	KDM1A_has_experimental_structure	1.0	1.0	0.0	True									
+F7_reachability	TLK2_has_experimental_structure	1.0	1.0	0.0	True									
+F7_reachability	USP34_has_experimental_structure	1.0	1.0	0.0	True									
+F7_reachability	VEZF1_has_NO_experimental_structure	1.0	1.0	0.0	True									
+F7_reachability	KDM1A_has_selective_inhibitor	1.0	1.0	0.0	True									
+F7_reachability	TLK2_no_selective_inhibitor	1.0	1.0	0.0	True									
+F7_reachability	USP34_no_selective_inhibitor	1.0	1.0	0.0	True									
+F7_reachability	KDM1A_has_clinical_pharmacology	1.0	1.0	0.0	True									
+F7_reachability	TLK2_no_clinical_pharmacology	1.0	1.0	0.0	True									
+F7_reachability	USP34_no_clinical_pharmacology	1.0	1.0	0.0	True									
+F7_reachability	VEZF1_no_clinical_pharmacology	1.0	1.0	0.0	True									
+F7_reachability	n_genes_in_audit	4.0	4.0	0.0	True									
+F7_reachability	n_renders_committed	3.0	3.0	0.0	True									
