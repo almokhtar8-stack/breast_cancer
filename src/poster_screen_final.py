@@ -26,8 +26,9 @@ Two things were invisible and are now drawn:
      carries that distinction; EML5 and CITED2, displaced from the original
      frozen shortlist, are named in the note.
 
-Nothing here re-ranks, re-tests, or changes the pre-registered gate
-(FDR < 0.10 with a sensitising direction, PREANALYSIS.md Section 4).
+Nothing here re-ranks, re-tests, or changes the pre-specified gate
+(FDR < 0.10 with a sensitising direction, PREANALYSIS.md Section 4 --
+written and dated before results existed, but not a public preregistration).
 """
 
 from __future__ import annotations
@@ -105,7 +106,7 @@ def gate(hits, n_genomewide):
     for gene, (eff, fdr) in REFERENCE.items():
         checks.append((f"{gene}_effect_size", float(idx.loc[gene, "effect_size"]), eff, 1e-6))
         checks.append((f"{gene}_fdr", float(idx.loc[gene, "fdr"]), fdr, 1e-6))
-    # the pre-registered gate itself must hold for every plotted hit
+    # the pre-specified gate itself must hold for every plotted hit
     checks.append(("max_fdr_among_hits", float(hits["fdr"].max()), 0.0, SCREEN_FDR))
     checks.append(("max_effect_among_hits", float(hits["effect_size"].max()), -1.0, 1.0))
     # USP34's rank by effect is a claim made on the poster
@@ -130,7 +131,7 @@ def build(stub: Path):
     style_axes(ax, grid_axis="both")
     gate_y = -np.log10(SCREEN_FDR)
     ax.axhline(gate_y, color=NEUTRAL["rule"], linestyle="--", linewidth=1.4, zorder=2)
-    ax.text(0.985, gate_y + 0.05, f"pre-registered gate: FDR < {SCREEN_FDR:.2f}",
+    ax.text(0.985, gate_y + 0.05, f"pre-specified gate: FDR < {SCREEN_FDR:.2f}",
             fontsize=FONT["annot"], color=NEUTRAL["ink_2"], va="bottom", ha="right",
             transform=ax.get_yaxis_transform())
 
@@ -178,7 +179,7 @@ def build(stub: Path):
     headline(
         fig,
         "Effect size and certainty are different things, and the four\ncandidates were not chosen on effect size alone",
-        f"{len(hits)} of {n_genomewide:,} genes met the pre-registered gate. KDM1A and TLK2 are the most certain hits; USP34 sits 12th of 13 by effect size.\n"
+        f"{len(hits)} of {n_genomewide:,} genes met the pre-specified gate. KDM1A and TLK2 are the most certain hits; USP34 sits 12th of 13 by effect size.\n"
         "Marker shape shows how each candidate entered the set — the four did not come from one selection rule. EML5 and CITED2 were\n"
         "displaced from the original frozen shortlist by the same reinterpretation. Colour identifies the gene, never its rank.",
         key=FIGURE)

@@ -17,8 +17,8 @@ it rather than left in fine print:
     data. The analysis plan and its thresholds were dated before results
     existed, and the candidate list was fixed before the external datasets
     were opened. That is this project's strongest methodological claim.
-  * WHICH PARTS ARE PRE-REGISTERED AND WHICH ARE POST-FREEZE. The screen gate
-    and the candidate rule are pre-registered; the candidate reinterpretation
+  * WHICH PARTS ARE PRE-SPECIFIED AND WHICH ARE POST-FREEZE. The screen gate
+    and the candidate rule are pre-specified; the candidate reinterpretation
     that added KDM1A and TLK2, the network query, the meta-analysis and the
     power calculation all happened after the freeze. Drawing the freeze line
     without drawing what crosses it would imply the whole poster was
@@ -140,7 +140,7 @@ def build(stub: Path):
     ax.text(50.5, 65.2, "thresholds dated before any result existed · list fixed before\nthe external datasets were opened",
             ha="center", va="top", fontsize=FONT["note"] - 1, color=NEUTRAL["ink_2"],
             linespacing=1.3)
-    ax.text(24.0, 56.6, "PRE-REGISTERED", ha="center", va="bottom",
+    ax.text(24.0, 56.6, "PRE-SPECIFIED", ha="center", va="bottom",
             fontsize=FONT["note"] - 1, color=NEUTRAL["ink_muted"], fontweight="bold")
     ax.text(76.0, 56.6, "RUN AFTERWARDS, AGAINST THE FIXED LIST", ha="center", va="bottom",
             fontsize=FONT["note"] - 1, color=NEUTRAL["ink_muted"], fontweight="bold")
@@ -148,7 +148,7 @@ def build(stub: Path):
     # ---------- left of the line: the screen and the rule ----------
     _box(ax, 3, 40, 44, 14, "Genome-wide CRISPR knockout screen",
          f"{counts['n_genomewide']:,} genes · published data, reanalysed")
-    _box(ax, 3, 23, 44, 13, f"{counts['n_hits']} hits pass the pre-registered gate",
+    _box(ax, 3, 23, 44, 13, f"{counts['n_hits']} hits pass the pre-specified gate",
          f"false discovery rate < {SCREEN_FDR:.2f}, sensitising direction")
     _box(ax, 3, 5, 44, 14, "Four candidates carried forward",
          "USP34, VEZF1 by the frozen rule\nKDM1A, TLK2 added after external audit")
