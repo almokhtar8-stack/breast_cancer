@@ -1,0 +1,4 @@
+arm	datasets	se_inflation	description	post_freeze_exploratory
+all3	gse118713,gse111151,gse240112		all three datasets pooled as-is; mixes limma-on-log2(TPM+1) with edgeR-on-counts, and gives GSE118713 its face-value SE	True
+edger_only	gse111151,gse240112		GSE111151 + GSE240112 only; same DE engine and same NB log2 fold-change estimand, and simultaneously the 'without the pseudoreplicated dataset' arm	True
+all3_de3	gse118713,gse111151,gse240112	gse118713=1.732051	all three, with GSE118713's SE multiplied by sqrt(3) -- the cluster design effect at ICC = 1, i.e. treating its 3 replicates as 1 unit. A HEURISTIC STRESS TEST, not a corrected analysis: variance inflation cannot create the missing experimental units	True
