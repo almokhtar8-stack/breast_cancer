@@ -168,15 +168,15 @@ not fixed — changing `environment.yml` is outside this branch's scope.
 New tests: **77 passed** (`tests/test_post_poster_*.py`). Run together with the
 release-integrity and freeze-shortlist tests: **104 passed, 0 failed**.
 
-Wider suite (95 test files, run file by file): **77 files produced a result —
-1,175 passed, 1 skipped**. Six files produced no result because they hang
+Wider suite (95 test files, run file by file): **89 files produced a result —
+1,466 passed, 1 skipped**. Six files produced no result because they hang
 indefinitely in this environment and survive their own `timeout`, blocking any
 sequential run:
 
 ```
 test_final_pharmacogenomics.py   test_poster_exploration_v2.py
 test_independent_validation.py   test_poster_exploration_v3.py
-test_post_audit_sensitivity.py   test_poster_figures_bank.py
+test_post_audit_sensitivity.py   test_poster_figures.py
 ```
 
 This reproduces the limitation already recorded for the previous session, where
